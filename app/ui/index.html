@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>drone137 · inspection console</title>
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header><a class="brand" href="/">drone<span>137</span></a><span class="tag">LOCAL INSPECTION LAB</span></header>
+  <main>
+    <div class="heading"><div><p class="eyebrow">COURTYARD / TWO GATES</p><h1>Inspection console</h1></div><span id="mode" class="badge">Connecting…</span></div>
+    <div id="notice" role="status">Waiting for the local application.</div>
+    <section class="layout">
+      <div class="camera panel">
+        <div class="panel-label"><span>CAMERA</span><span id="view">—</span></div>
+        <img id="camera" alt="Current inspection camera frame">
+        <p id="camera-note">Frames refresh at up to 2 fps.</p>
+      </div>
+      <div class="panel mission">
+        <div class="panel-label">MISSION CONTROL</div>
+        <h2 id="state">Connecting</h2>
+        <dl><dt>Position · ENU metres</dt><dd id="position">—</dd><dt>Observation</dt><dd id="observation">—</dd><dt>Accepted action</dt><dd id="action">—</dd></dl>
+        <p id="reason">Start an inspection to collect evidence.</p>
+        <div class="controls"><button id="start">Start inspection</button><button id="pause" class="secondary">Pause</button><button id="land" class="danger">Land now</button></div>
+        <p class="hint">Pause holds for up to 10 seconds, then lands. Land stops the inspection and lands at the current position.</p>
+        <a id="report" hidden>Open local run report ↗</a>
+      </div>
+    </section>
+    <section class="panel gates"><span>VALIDATION GATES</span><div>Mac virtual acceptance <b>Pending</b></div><div>Lean memory budget <b>Unmeasured</b></div><div>Actual 8 GB Mac <b>Unverified</b></div><div>Hardware work <b>Blocked</b></div></section>
+    <footer>One aircraft. One local computer. Explicit evidence at every step.</footer>
+  </main>
+  <script src="/assets/app.js"></script>
+</body>
+</html>

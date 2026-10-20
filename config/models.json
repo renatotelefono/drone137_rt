@@ -1,0 +1,10 @@
+{
+  "repository": "Qwen/Qwen3-VL-2B-Instruct-GGUF",
+  "revision": null,
+  "licence": "Apache-2.0 (upstream model; verify downloaded revision)",
+  "files": [
+    {"name": "Qwen3VL-2B-Instruct-Q4_K_M.gguf", "sha256": null},
+    {"name": "mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf", "sha256": null}
+  ],
+  "status": "Metadata unavailable in cloud: huggingface.co proxy returned 403. download-model explicitly resolves a revision and LFS SHA256 values into a local manifest before any weight download. Runtime launch never resolves moving revisions."
+}

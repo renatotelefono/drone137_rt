@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "observation": {
+      "type": "string",
+      "enum": [
+        "open",
+        "closed",
+        "uncertain"
+      ]
+    },
+    "action": {
+      "type": "string",
+      "enum": [
+        "continue",
+        "recheck",
+        "hold",
+        "finish"
+      ]
+    },
+    "target_view": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reason": {
+      "type": "string",
+      "maxLength": 300
+    }
+  },
+  "required": [
+    "observation",
+    "action",
+    "target_view",
+    "reason"
+  ],
+  "additionalProperties": false
+}

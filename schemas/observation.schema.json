@@ -1,0 +1,96 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "episode_id": {
+      "type": "string"
+    },
+    "request_id": {
+      "type": "string"
+    },
+    "frame": {
+      "type": "object",
+      "required": [
+        "frame_id",
+        "episode_id",
+        "received_monotonic",
+        "sensor_time_s",
+        "timestamp_basis",
+        "width",
+        "height",
+        "camera_id"
+      ]
+    },
+    "image_file": {
+      "type": "string"
+    },
+    "deadline": {
+      "type": "number"
+    },
+    "generation": {
+      "type": "integer"
+    },
+    "target": {
+      "type": "string"
+    },
+    "view": {
+      "type": "string"
+    },
+    "allowed_views": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "allowed_actions": {
+      "type": "array",
+      "items": {
+        "enum": [
+          "continue",
+          "recheck",
+          "hold",
+          "finish"
+        ]
+      }
+    },
+    "telemetry": {
+      "type": "object",
+      "required": [
+        "position",
+        "speed",
+        "received_monotonic",
+        "healthy",
+        "in_air"
+      ]
+    },
+    "mission_state": {
+      "const": "observing"
+    },
+    "receipt_age_s": {
+      "type": "number"
+    },
+    "capture_age_s": {
+      "type": [
+        "number",
+        "null"
+      ]
+    }
+  },
+  "required": [
+    "episode_id",
+    "request_id",
+    "frame",
+    "image_file",
+    "deadline",
+    "generation",
+    "target",
+    "view",
+    "allowed_views",
+    "allowed_actions",
+    "telemetry",
+    "mission_state",
+    "receipt_age_s",
+    "capture_age_s"
+  ],
+  "additionalProperties": false
+}

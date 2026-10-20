@@ -1,0 +1,40 @@
+{
+  "profile": "lean-8gb",
+  "physical_enabled": false,
+  "frame_max_age_s": 1.0,
+  "inference_timeout_s": 6.0,
+  "hold_timeout_s": 10.0,
+  "mission_timeout_s": 180.0,
+  "telemetry_max_age_s": 2.0,
+  "command_timeout_s": 35.0,
+  "horizontal_tolerance_m": 0.5,
+  "vertical_tolerance_m": 0.3,
+  "settle_speed_m_s": 0.2,
+  "settle_duration_s": 1.0,
+  "speed_limit_m_s": 1.0,
+  "run_data_limit_bytes": 1073741824,
+  "model_context_tokens": 2048,
+  "model_max_tokens": 128,
+  "camera": {"width": 320, "height": 240, "fps": 2},
+  "memory_budget_gib": 5,
+  "system_reserve_gib": 10,
+  "frame": "ENU metres; x=east, y=north, z=up; navigation yaw degrees clockwise from north",
+  "volume": {"x": [-8, 8], "y": [-8, 8], "z": [0, 5]},
+  "waypoints": {
+    "pad": [0, 0, 2],
+    "gate_a_front": [-3, 3, 2],
+    "gate_a_side": [-5, 3, 2],
+    "gate_b_front": [3, 3, 2],
+    "gate_b_side": [5, 3, 2]
+  },
+  "edges": [
+    ["pad", "gate_a_front"],
+    ["gate_a_front", "gate_a_side"],
+    ["pad", "gate_b_front"],
+    ["gate_b_front", "gate_b_side"]
+  ],
+  "targets": [
+    {"name": "gate_a", "views": ["gate_a_front", "gate_a_side"]},
+    {"name": "gate_b", "views": ["gate_b_front", "gate_b_side"]}
+  ]
+}

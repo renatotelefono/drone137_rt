@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "profile": {
+      "const": "lean-8gb"
+    },
+    "physical_enabled": {
+      "const": false
+    },
+    "waypoints": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "array",
+        "items": {
+          "type": "number"
+        },
+        "minItems": 3,
+        "maxItems": 3
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "minItems": 2,
+        "maxItems": 2
+      }
+    },
+    "targets": {
+      "type": "array"
+    },
+    "volume": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "profile",
+    "physical_enabled",
+    "waypoints",
+    "edges",
+    "targets",
+    "volume"
+  ],
+  "additionalProperties": true
+}

@@ -1,0 +1,15 @@
+{
+  "package": "three",
+  "version": "0.180.0",
+  "shasum": "b930cabfb524f6d36bf63e874b4d866888b50487",
+  "tarball": "https://registry.npmjs.org/three/-/three-0.180.0.tgz",
+  "fileCount": 1117,
+  "integrity": "sha512-o+qycAMZrh+TsE01GqWUxUIKR1AL0S8pq7zDkYOQw8GqfX8b8VoCKYUoHbhiX5j+7hr8XsuHDVU6+gkQJQKg9w==",
+  "signatures": [
+    {
+      "sig": "MEUCIQCxVBVq6WmxV5hwuaHp0323ClGM7IB6lkpyYOvozSpc6wIgIcbY0Mv2Swb5u/XMnLgo9PrVf19K0nIqlfd53/v9Y00=",
+      "keyid": "SHA256:DhQ8wR5APBvFHLF/+Tc+AYvPOdTpcIDqOhxsBHRwC7U"
+    }
+  ],
+  "unpackedSize": 30764975
+}

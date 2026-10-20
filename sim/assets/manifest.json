@@ -1,0 +1,20 @@
+{
+  "provenance": "Original authored geometry and synthetic images; not simulator captures",
+  "assets": [
+    {
+      "path": "sim/courtyard.sdf",
+      "sha256": "8b0864263b9b209363a69eeab88c3e66ea79a71276318b74172d2a6ce17332e6",
+      "bytes": 7564
+    },
+    {
+      "path": "sim/assets/fixture-01.jpg",
+      "sha256": "b8d347722fea96d074b1b27f41cb89c44d27df5d80462993037544f1e352c3c4",
+      "bytes": 4678
+    },
+    {
+      "path": "sim/assets/fixture-02.jpg",
+      "sha256": "8feba7ee7b94645db97e6a668bacfff8ae45c1ac38a2bb8e670211d5564a73d7",
+      "bytes": 5861
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "application": "0.1.0",
+  "python": ">=3.11,<3.15",
+  "aiohttp": "3.14.4",
+  "mavsdk_python": "3.17.4",
+  "llama_cpp": {
+    "repository": "https://github.com/ggml-org/llama.cpp.git",
+    "commit": "b38960f52079e41f91863dd0905ec13432966b39",
+    "status": "candidate source pin; native build and vision validation pending"
+  },
+  "px4": {
+    "repository": "https://github.com/PX4/PX4-Autopilot.git",
+    "commit": "878877ad022109cc4af7fea566efa0692c43813c",
+    "status": "candidate source pin; native build, submodules and camera/control validation pending"
+  },
+  "gazebo": {
+    "release_family": "Harmonic",
+    "source": "PX4 pinned Tools/setup/macos/pixi.lock",
+    "status": "not installed"
+  },
+  "gates": {
+    "cloud_implementation": "portable_verified_native_pending",
+    "mac_virtual_acceptance": "unverified",
+    "lean_memory_budget": "unverified",
+    "actual_8gb_validation": "unverified",
+    "hardware_gate": "blocked"
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "host": "25eaecfa9f86",
+  "architecture": "x86_64",
+  "os": "Linux-6.18.55-x86_64-with-glibc2.41",
+  "suite": "smoke",
+  "mode": "fixture",
+  "episodes": [
+    {
+      "episode": "cd8a59553b42445f9495f91818a26fa8",
+      "state": "complete",
+      "error": null
+    },
+    {
+      "episode": "8fca3cd8cb5d43799720bfe6fff6ca6d",
+      "state": "complete",
+      "error": null
+    }
+  ],
+  "mac_virtual_acceptance": "unverified",
+  "lean_memory_budget": "unverified",
+  "actual_8gb_validation": "unverified",
+  "hardware_gate": "blocked",
+  "note": "Same-scene functional runs only; no held-out accuracy or failure-suite acceptance claim.",
+  "resources": [],
+  "provenance": {
+    "state": "idle",
+    "view": "pad",
+    "episode": "",
+    "telemetry": {
+      "position": [
+        0.0,
+        0.0,
+        0.0
+      ],
+      "speed": 0.0,
+      "received_monotonic": 1748.163642753,
+      "healthy": true,
+      "in_air": false
+    },
+    "decision": null,
+    "error": null,
+    "profile": "cloud-dev",
+    "mode": "fixture",
+    "policy": "scripted-fixture",
+    "real_inference": false,
+    "real_camera": false,
+    "real_flight_dynamics": false,
+    "physical_transport": false,
+    "capture_clock": "host_receipt_only",
+    "mac_virtual_acceptance": "unverified",
+    "lean_memory_budget": "unverified",
+    "actual_8gb_validation": "unverified",
+    "hardware_gate": "blocked",
+    "report": null
+  },
+  "elapsed_s": 28.22998057399991,
+  "completed": 2
+}

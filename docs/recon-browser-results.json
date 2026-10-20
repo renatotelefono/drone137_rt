@@ -1,0 +1,176 @@
+{
+  "browser": "154.0.8037.57",
+  "episode": "4df9f614a8ec45af93bd73d0e8873940",
+  "summary": {
+    "host": "25eaecfa9f86",
+    "os": "Linux",
+    "architecture": "x86_64",
+    "mode": "browser-kinematic-recon",
+    "seed": 137,
+    "policy": "scripted",
+    "real_inference": false,
+    "physical_transport": false,
+    "real_flight_dynamics": false,
+    "pose": "ideal simulated pose",
+    "altitude_m": 1.4,
+    "range_sensors": "ideal simulated planar lidar",
+    "mac_acceptance": "unverified",
+    "state": "complete",
+    "reason": "Returned home; reconnaissance complete",
+    "distance_m": 36.29875472507935,
+    "minimum_clearance_m": 0.7035009708752034,
+    "obstacle_stops": 0,
+    "observations": [
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "60e8b8dcc76742faab6f96fcd0ec70e6.jpg",
+        "pose": [
+          1.25,
+          1.25,
+          1.4,
+          0
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "a4ee8810c7b54df4abcb9f5ea47495c2.jpg",
+        "pose": [
+          3.38376072159178,
+          1.25,
+          1.4,
+          0
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "169772f4d3af4718a0b6c06ab662a1d9.jpg",
+        "pose": [
+          5.367085134020651,
+          1.25,
+          1.4,
+          0
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "98faad85f2344d9bbbed02b6a9de45cb.jpg",
+        "pose": [
+          5.25,
+          2.928334437978881,
+          1.4,
+          1.5707963267948966
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "572c4257dadd4b62b5cf2070a2120fb6.jpg",
+        "pose": [
+          3.25,
+          2.75,
+          1.4,
+          3.141592653589793
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "021c8e9b16774453961ba2cbf73435c4.jpg",
+        "pose": [
+          1.75,
+          3.407602006053602,
+          1.4,
+          1.5707963267948966
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "c6c638fa213048f6810316856c5449ff.jpg",
+        "pose": [
+          1.75,
+          5.552152393271053,
+          1.4,
+          1.5707963267948966
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "02c2f42095d5478186e8274971b732dd.jpg",
+        "pose": [
+          1.75,
+          7.695928541125655,
+          1.4,
+          1.5707963267948966
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "468ef5b42f0d479da077dacd6109cbee.jpg",
+        "pose": [
+          2.8944785401931146,
+          6.75,
+          1.4,
+          0
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "807a421da15b4da995412b5a4e2f3bad.jpg",
+        "pose": [
+          4.956900336964982,
+          6.75,
+          1.4,
+          0
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "b17fd839db254c7f82208bc4ed5258c8.jpg",
+        "pose": [
+          7.1014437522423695,
+          6.75,
+          1.4,
+          0
+        ]
+      },
+      {
+        "action": "continue",
+        "observation": "Scripted demo: no model perception performed.",
+        "image": "d90ba0cc6eff42a0afa445920aa63ed5.jpg",
+        "pose": [
+          8.871890007981197,
+          6.25,
+          1.4,
+          0
+        ]
+      }
+    ],
+    "observed_fraction": 0.84375,
+    "video": {
+      "chunks": 90,
+      "mime": "video/webm",
+      "complete": true
+    }
+  },
+  "decoded": {
+    "width": 320,
+    "height": 240
+  },
+  "sensor_failure": {
+    "episode": "354e8de92fbc4290ba277bde2a6649d2",
+    "state": "failed",
+    "reason": "Range sensors stale: motion stopped"
+  },
+  "page_errors": [],
+  "real_inference": false,
+  "model_download": "blocked: network proxy HTTP 403"
+}

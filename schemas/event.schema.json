@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "event": {
+      "type": "string"
+    },
+    "monotonic": {
+      "type": "number"
+    }
+  },
+  "required": [
+    "event",
+    "monotonic"
+  ],
+  "additionalProperties": true
+}

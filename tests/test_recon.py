@@ -120,18 +120,26 @@ class ReconTests(unittest.IsolatedAsyncioTestCase):
         from aiohttp.test_utils import TestServer
         from adapters.llama import LlamaBackend
         requests = []
+        actions = []
         async def completion(request):
             body = await request.json()
             requests.append(body)
-            action = 'look_left' if len(requests) == 1 else 'finish'
-            return web.json_response({'choices':[{'message':{'content':json.dumps({
-                'action':action,'observation':'Stub response for transport testing'})}}]})
+            if 'center' in body['response_format']['json_schema']['schema']['properties']:
+                value={'visible_evidence':'Stub response for transport testing','center':'uncertain'}
+            else:
+                action='look_left' if not actions else 'finish'
+                actions.append(action)
+                value={'action':action}
+            return web.json_response({'choices':[{'message':{'content':json.dumps(value)}}]})
         app = web.Application(); app.router.add_post('/v1/chat/completions', completion)
         async with TestServer(app) as server:
             backend = LlamaBackend(str(server.make_url('')).rstrip('/'))
             async def image(jpeg, prompt, schema):
                 return await backend.image(jpeg, prompt, schema, time.monotonic()+6)
+            async def text(prompt, schema):
+                return await backend.text(prompt, schema, time.monotonic()+6)
             self.recon.manager.image = image
+            self.recon.manager.text = text
             r = self.recon
             try:
                 await r.start('qwen','test')
@@ -140,10 +148,10 @@ class ReconTests(unittest.IsolatedAsyncioTestCase):
                     r.camera(r.episode,'test',r.ticket,JPEG)
                     await asyncio.sleep(.12)
                 self.assertEqual(r.state, 'complete')
-                self.assertEqual(len(requests), 2)
+                self.assertEqual(len(requests), 4)
                 self.assertEqual(r.observations[0]['action'], 'look_left')
                 self.assertNotEqual(r.observations[0]['pose'][3],r.observations[1]['pose'][3])
-                self.assertTrue(requests[0]['messages'][0]['content'][1]['image_url']['url'].startswith('data:image/jpeg;base64,'))
+                self.assertTrue(requests[0]['messages'][0]['content'][0]['image_url']['url'].startswith('data:image/jpeg;base64,'))
                 self.assertEqual(requests[0]['max_tokens'],128)
             finally:
                 await backend.close()

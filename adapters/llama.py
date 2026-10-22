@@ -54,17 +54,35 @@ class LlamaBackend:
                 raise RuntimeError(f"llama-server health returned {response.status}")
 
     async def infer(self, observation):
-        prompt = (
-            "Inspect the visible gate. Classify open, closed or uncertain. "
-            "Return only the specified JSON object. Use recheck for unclear images "
-            "only if an alternative view is allowed; otherwise continue or finish. "
-            f"Allowed actions: {list(observation.allowed_actions)}. "
-            f"Alternative views: {list(observation.allowed_views)}. "
-            "target_view must be null except for recheck. Keep reason brief."
-        )
-        return await self.image(observation.frame.jpeg, prompt, DECISION_SCHEMA, observation.deadline)
+        from app.perception import PROMPT, SCHEMA, parse
+        visual = parse(await self.image(observation.frame.jpeg, PROMPT, SCHEMA, observation.deadline))
+        label = {'open_space': 'open', 'solid_surface': 'closed', 'uncertain': 'uncertain'}[visual['center']]
+        action, target = 'continue', None
+        if label == 'uncertain' and 'recheck' in observation.allowed_actions and observation.allowed_views:
+            action, target = 'recheck', observation.allowed_views[0]
+        elif action not in observation.allowed_actions:
+            action = next((a for a in ('finish', 'hold') if a in observation.allowed_actions), None)
+            if action is None:
+                raise ValueError('No supported inspection action available')
+        return json.dumps({'observation': label, 'action': action, 'target_view': target,
+                           'reason': visual['visible_evidence']})
 
-    async def image(self, jpeg, prompt, schema, deadline):
+    async def image(self, jpeg, prompt, schema, deadline, reference=None, max_tokens=128):
+        content = []
+        for data in ([reference, jpeg] if reference is not None else [jpeg]):
+            if len(data) > 200_000:
+                raise ValueError('Image exceeds size limit')
+            content.append({'type': 'image_url', 'image_url': {
+                'url': 'data:image/jpeg;base64,'+base64.b64encode(data).decode()}})
+        content.append({'type': 'text', 'text': prompt})
+        return await self._complete(content, schema, deadline, max_tokens=max_tokens)
+
+    async def text(self, prompt, schema, deadline):
+        return await self._complete([{'type': 'text', 'text': prompt}], schema, deadline)
+
+    async def _complete(self, content, schema, deadline, max_tokens=128):
+        if type(max_tokens) is not int or not 1 <= max_tokens <= 384:
+            raise ValueError('Output budget must be from 1 through 384 tokens')
         if self.busy or self.quarantined:
             raise RuntimeError("inference busy/quarantined; restart the owned server after timeout")
         self.busy = True
@@ -72,14 +90,8 @@ class LlamaBackend:
             session = await self._session()
             body = {
                 "model": "local",
-                "messages": [{"role": "user", "content": [
-                    {"type": "text", "text": prompt},
-                    {"type": "image_url", "image_url": {
-                        "url": "data:image/jpeg;base64," +
-                        base64.b64encode(jpeg).decode()
-                    }},
-                ]}],
-                "max_tokens": 128, "temperature": 0,
+                "messages": [{"role": "user", "content": content}],
+                "max_tokens": max_tokens, "temperature": 0, "cache_prompt": False,
                 "response_format": {"type": "json_schema", "json_schema": {
                     "name": "inspection", "strict": True, "schema": schema}},
             }
@@ -98,7 +110,10 @@ class LlamaBackend:
                         if len(data) > 65536:
                             raise ValueError("oversized inference HTTP response")
                     result = json.loads(data)
-                    raw = result["choices"][0]["message"]["content"]
+                    choice = result["choices"][0]
+                    if choice.get('finish_reason', 'stop') != 'stop':
+                        raise ValueError('Incomplete model response; decision rejected')
+                    raw = choice["message"]["content"]
                     if not isinstance(raw, str):
                         raise ValueError("model returned non-text content")
                     return raw

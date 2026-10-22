@@ -6,17 +6,17 @@
   "llama_cpp": {
     "repository": "https://github.com/ggml-org/llama.cpp.git",
     "commit": "b38960f52079e41f91863dd0905ec13432966b39",
-    "status": "candidate source pin; native build and vision validation pending"
+    "status": "built with Metal and used for actual Qwen patrols on M4 macOS 15.6; lean/detail camera profiles pass 32 synthetic center cases; full object-caption accuracy remains pending"
   },
   "px4": {
     "repository": "https://github.com/PX4/PX4-Autopilot.git",
     "commit": "878877ad022109cc4af7fea566efa0692c43813c",
-    "status": "candidate source pin; native build, submodules and camera/control validation pending"
+    "status": "SITL compiled on M4; dense indoor flight experiment uses PX4/Gazebo dynamics and Three.js camera; dashboard remains kinematic; physical transfer unqualified"
   },
   "gazebo": {
     "release_family": "Harmonic",
     "source": "PX4 pinned Tools/setup/macos/pixi.lock",
-    "status": "not installed"
+    "status": "Harmonic 8.10.0 installed via pinned Pixi lock; native camera exercised on M4"
   },
   "gates": {
     "cloud_implementation": "portable_verified_native_pending",
@@ -24,5 +24,58 @@
     "lean_memory_budget": "unverified",
     "actual_8gb_validation": "unverified",
     "hardware_gate": "blocked"
+  },
+  "model": {
+    "repository": "Qwen/Qwen3-VL-2B-Instruct-GGUF",
+    "revision": "52d6c8ffea26cc873ac5ad116f8631268d7eb503",
+    "files": [
+      {
+        "name": "Qwen3VL-2B-Instruct-Q4_K_M.gguf",
+        "sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+        "size": 1107409952
+      },
+      {
+        "name": "mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf",
+        "sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+        "size": 445053216
+      }
+    ]
+  },
+  "perception": {
+    "version": "center-evidence-v2",
+    "scope": "Camera-profile-specific center appearance and separate bounded policy; workshop adds full-image object descriptions. No physical-clearance claim.",
+    "detail_version": "center-objects-v1",
+    "survey_version": "object-survey-v1"
+  },
+  "reliability": {
+    "protocol": "config/reliability.json",
+    "domains": [
+      "workshop",
+      "warehouse",
+      "perimeter",
+      "flat_field",
+      "hillside"
+    ],
+    "real_world_qualified": false,
+    "real_image_smoke": "11/12 required object names; 5/6 images; one missed bottle group; proxy data only",
+    "source": "docs/reliability-validation.json"
+  },
+  "mission_control": {
+    "version": "virtual-fleet-v1",
+    "interface": "/control",
+    "aircraft": 2,
+    "concurrent_flight": false,
+    "planner": "local Qwen bounded task interpretation + deterministic viewpoint assignment",
+    "scope": "Indoor sequential virtual dispatch; inspection area is not a transit geofence",
+    "validation": "docs/mission-control-validation.json"
+  },
+  "native_flight_experiment": {
+    "version": "dense-native-flight-v2",
+    "validation": "docs/native-flight-validation.json",
+    "physics_step_s": 0.004,
+    "props": 120,
+    "camera": "Three.js attached to Gazebo body pose",
+    "controller": "PX4 estimated local pose + bounded offboard setpoints",
+    "physical_transport": false
   }
 }

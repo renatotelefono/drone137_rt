@@ -1,4 +1,11 @@
-# Current objective: autonomous visual reconnaissance in a confined space
+# Current objective: reliable autonomous visual reconnaissance
+
+The requested deployment scope now includes **indoor workshops, warehouses,
+building perimeters, flat fields and hillsides**. Establish reliability for each
+domain independently using the [reliability protocol](reliability-protocol.md).
+Indoor reconnaissance remains the first implementation path. None of the five
+domains is qualified for physical deployment; outdoor terrain and flight behavior
+are not implemented by the current room simulator.
 
 The user's clarified first objective is to let one drone autonomously look around
 a confined space, respond to objects and obstacles, and gather video information.
@@ -37,13 +44,13 @@ or producing a classification for every object.
 
 | Capability | Required behavior | Current state |
 | --- | --- | --- |
-| Rendered environment | Seeded enclosed scenes, obstacles, onboard camera and operator view | Implemented: vendored Three.js, seeded single rooms and both camera views |
+| Rendered environment | Seeded enclosed scenes, obstacles, onboard camera and operator view | Implemented: seeded rooms, warehouse, connected rooms and detailed workshop with 720p camera |
 | Position and geometry | Estimate pose and nearby free/occupied space; track uncertainty and sensor freshness | Ideal pose and planar range sensing implemented; real estimation/noise/uncertainty missing |
 | Exploration | Select reachable viewpoints that reveal unseen areas, with finite mission and return budgets | Observed-grid exploration and bounded return implemented in browser sandbox |
 | Route planning | Clearance-aware paths, complete-segment collision checks and replanning when a passage is blocked | Observed-grid BFS, obstacle inflation and braking supervision implemented; full 3D planning missing |
-| Object response | Use image observations to request useful additional views or adjust inspection priorities | Qwen image/action interface implemented; actual weights/inference still unverified |
+| Object response | Use image observations to request useful additional views or adjust inspection priorities | Actual local Qwen tested; workshop adds whole-image object surveys, with broader accuracy still pending |
 | Video recording | Bounded, timestamped video segments tied to pose, observations and mission events | Browser video, JPEG observations and receipt/pose events implemented; exact exposure sync missing |
-| Flight execution | Follow validated local routes and handle navigation/link failure in confined conditions | Native integration unverified; current adapter targets global waypoints |
+| Flight execution | Follow validated local routes and handle navigation/link failure in confined conditions | Native Qwen gate flight passed; indoor planner still uses kinematics |
 
 A vision-language model can interpret scenes and suggest what deserves another
 look. Collision avoidance and position control need timely geometric sensing and
@@ -95,6 +102,13 @@ frame or claiming the existing JPEG recorder already records video.
 
 ## Acceptance evidence
 
+The executable offline evaluator now freezes data/model/pipeline hashes, keeps
+site-separated splits, groups adjacent frames into encounters, records errors and
+tracks reused held-out sites. It grades labelled visual facts separately from
+navigation. The initial public real-camera smoke test exposed a missing object;
+it does not supply independent target-site or target-camera evidence. See
+`reliability-validation.json` and the collection protocol for the remaining gates.
+
 Use repeatable held-out seeds and report successful and failed episodes. Measure
 reachable-space/view coverage, unseen regions, clearance violations/collisions,
 route length, redundant revisits, interventions, recording continuity and
@@ -106,6 +120,6 @@ Test sensor loss, localization uncertainty, unavailable return paths, exhausted
 mission/storage budgets and operator overrides. Distinguish ideal-sensor tests,
 rendered-model tests, flight-dynamics tests and eventual physical evidence.
 The initial scripted browser workflow is exercised on Linux (see validation.md).
-Actual Qwen, Mac resource, localization, camera-coverage and physical-flight
-acceptance gates remain unverified. Map-observed fraction in the current GUI is
+Actual Qwen has passed bounded local tests (see validation.md). Sustained Mac
+resources, localization, camera-coverage and physical-flight acceptance remain open. Map-observed fraction in the current GUI is
 range-sensor coverage, not a camera coverage metric.

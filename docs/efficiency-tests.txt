@@ -1,0 +1,7 @@
+..............................................................Application heartbeat expired; disconnecting owned SDK.
+.................................................Executing <Task finished name='Task-540' coro=<ReconTests.test_route_randomized_obstacle_safety() done, defined at /Users/klauskopper/.codex/worktrees/9a64/drone137/tests/test_recon.py:97> result=None created at /opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py:100> took 1.028 seconds
+......................
+----------------------------------------------------------------------
+Ran 133 tests in 19.298s
+
+OK

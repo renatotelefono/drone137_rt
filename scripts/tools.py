@@ -96,20 +96,27 @@ def install_runtime():
 def install_sim():
     native_mac()
     space_guard(BUILD, 25)
-    if not shutil.which("brew"):
-        raise RuntimeError("Install/review Homebrew separately; this installer will not bootstrap a package manager")
+    for command in ('pixi', 'pkg-config', 'cmake', 'ninja'):
+        if not shutil.which(command):
+            raise RuntimeError(f'Missing {command}; install Pixi, pkgconf, CMake and Ninja before native simulation')
     BUILD.mkdir(parents=True, exist_ok=True)
     path = BUILD / "PX4-Autopilot"
     pinned_checkout("px4", path)
-    run(["git", "-C", path, "submodule", "update", "--init", "--recursive"])
-    print("Running pinned PX4 macOS setup: installs native build tools, locked pixi Gazebo, and XQuartz.", flush=True)
-    run(["bash", path / "Tools/setup/macos.sh", "--sim-tools"], cwd=path)
+    # Fetch the selected simulator assets. PX4's CMake targets initialize their
+    # own pinned build submodules; unrelated hardware/legacy simulators are not needed.
+    run(['git', '-C', path, 'submodule', 'update', '--init', '--recursive', 'Tools/simulation/gz'])
+    run(['pixi', 'install', '--locked', '--manifest-path', path/'Tools/setup/macos/pixi.toml'])
+    if not (path/'.venv/bin/python').is_file():
+        run([sys.executable, '-m', 'venv', path/'.venv'])
+    run([path/'.venv/bin/python', '-m', 'pip', 'install', '-r', path/'Tools/setup/requirements.txt'])
     run([sys.executable, "-m", "pip", "install", "--require-hashes", "-r", ROOT / "requirements-sim.lock"])
-    # No simulator launch during build. Keep the app's venv separate.
-    run(["bash", "-c", 'source "$1/.venv/bin/activate"; exec make -j2 px4_sitl', "_", path], cwd=path)
-    run(["bash", "-c",
-         'source "$1/.venv/bin/activate"; cmake -S "$2/sim/bridge" -B "$3" && cmake --build "$3" -j2',
-         "_", path, ROOT, BUILD / "image-bridge"])
+    # No simulator launch or system-wide compiler linking during installation.
+    environment = ROOT/'scripts/with-sim.sh'
+    target = path/'build/px4_sitl_default'
+    run([environment, 'cmake', '-S', path, '-B', target, '-G', 'Ninja', '-DCONFIG=px4_sitl_default'])
+    run([environment, 'cmake', '--build', target, '-j', '2'])
+    run([environment, 'cmake', '-S', ROOT/'sim/bridge', '-B', BUILD/'image-bridge'])
+    run([environment, 'cmake', '--build', BUILD/'image-bridge', '-j', '2'])
     run([sys.executable, "-m", "sim.prepare", "--px4", path])
     installed_record("px4", path)
 

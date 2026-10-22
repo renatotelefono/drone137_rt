@@ -1,0 +1,76 @@
+test_enu_global_axes_and_absolute_altitude (test_contracts.Contracts.test_enu_global_axes_and_absolute_altitude) ... ok
+test_envelope_validation (test_contracts.Contracts.test_envelope_validation) ... ok
+test_latest_slot_replaces_without_queue (test_contracts.Contracts.test_latest_slot_replaces_without_queue) ... ok
+test_mission_rejects_physical_mode_and_out_of_volume_waypoints (test_contracts.Contracts.test_mission_rejects_physical_mode_and_out_of_volume_waypoints) ... ok
+test_no_coordinate_payload (test_contracts.Contracts.test_no_coordinate_payload) ... ok
+test_strict_json (test_contracts.Contracts.test_strict_json) ... ok
+test_missing_and_unmatched_observations_cannot_pass (test_evaluation.NativeEvaluationTests.test_missing_and_unmatched_observations_cannot_pass) ... ok
+test_native_accuracy_is_required_separately_from_route_completion (test_evaluation.NativeEvaluationTests.test_native_accuracy_is_required_separately_from_route_completion) ... ok
+test_camera_loss_during_route_cannot_authorize_decisions (test_executor.Missions.test_camera_loss_during_route_cannot_authorize_decisions) ... ok
+test_command_acknowledgement_is_not_arrival (test_executor.Missions.test_command_acknowledgement_is_not_arrival) ... ok
+test_complete_route_rechecks_recording_and_repeatability (test_executor.Missions.test_complete_route_rechecks_recording_and_repeatability) ... ok
+test_disk_full_does_not_prevent_landing (test_executor.Missions.test_disk_full_does_not_prevent_landing) ... ok
+test_double_start_rejected (test_executor.Missions.test_double_start_rejected) ... ok
+test_drift_during_inference_rejects_an_otherwise_valid_decision (test_executor.Missions.test_drift_during_inference_rejects_an_otherwise_valid_decision) ... ok
+test_health_failure_preempts_model (test_executor.Missions.test_health_failure_preempts_model) ... ok
+test_inference_timeout_recovers_and_records_failure (test_executor.Missions.test_inference_timeout_recovers_and_records_failure) ... ok
+test_malformed_decision_rejected (test_executor.Missions.test_malformed_decision_rejected) ... ok
+test_model_finish_returns_to_pad (test_executor.Missions.test_model_finish_returns_to_pad) ... ok
+test_operator_land_cancels_inference_and_lands_here (test_executor.Missions.test_operator_land_cancels_inference_and_lands_here) ... ok
+test_pause_expires_and_never_accepts_late_decision (test_executor.Missions.test_pause_expires_and_never_accepts_late_decision) ... ok
+test_stale_camera_blocks_takeoff (test_executor.Missions.test_stale_camera_blocks_takeoff) ... ok
+test_existing_evidence_counts_towards_cap (test_executor.Storage.test_existing_evidence_counts_towards_cap) ... ok
+test_concurrent_request_rejected (test_integration_contracts.LlamaHTTP.test_concurrent_request_rejected) ... ok
+test_real_http_contract_mock_model (test_integration_contracts.LlamaHTTP.test_real_http_contract_mock_model) ... ok
+test_remote_endpoint_rejected (test_integration_contracts.LlamaHTTP.test_remote_endpoint_rejected) ... ok
+test_timeout_quarantines_and_prevents_second_request (test_integration_contracts.LlamaHTTP.test_timeout_quarantines_and_prevents_second_request) ... ok
+test_token_limit_response_is_rejected_even_if_json_parses (test_integration_contracts.LlamaHTTP.test_token_limit_response_is_rejected_even_if_json_parses) ... ok
+test_http_operator_routes_and_host_protection (test_integration_contracts.LocalAPI.test_http_operator_routes_and_host_protection) ... ok
+test_cleanup_owned_group_keeps_unrelated_process (test_integration_contracts.Processes.test_cleanup_owned_group_keeps_unrelated_process) ... ok
+test_dead_child_is_unhealthy (test_integration_contracts.Processes.test_dead_child_is_unhealthy) ... ok
+test_independent_heartbeat_detects_unresponsive_app (test_integration_contracts.Processes.test_independent_heartbeat_detects_unresponsive_app) ... Application heartbeat expired; disconnecting owned SDK.
+ok
+test_native_log_output_has_hard_cap (test_integration_contracts.Processes.test_native_log_output_has_hard_cap) ... ok
+test_bad_resume_range_rejected_preserves_partial (test_model_store.Downloads.test_bad_resume_range_rejected_preserves_partial) ... ok
+test_corrupt_download_never_installed (test_model_store.Downloads.test_corrupt_download_never_installed) ... ok
+test_missing_hash_and_revision_fail_closed (test_model_store.Downloads.test_missing_hash_and_revision_fail_closed) ... ok
+test_missing_license_cannot_assume_apache (test_model_store.Downloads.test_missing_license_cannot_assume_apache) ... ok
+test_missing_license_uses_pinned_card_declaration (test_model_store.Downloads.test_missing_license_uses_pinned_card_declaration) ... ok
+test_resumes_and_verifies_exact_pair (test_model_store.Downloads.test_resumes_and_verifies_exact_pair) ... ok
+test_space_and_concurrent_install_blocked (test_model_store.Downloads.test_space_and_concurrent_install_blocked) ... ok
+test_verification_detects_tampering (test_model_store.Downloads.test_verification_detects_tampering) ... ok
+test_oversized_input_rejected_before_allocation (test_native_adapters.CameraProtocol.test_oversized_input_rejected_before_allocation) ... ok
+test_sensor_clock_preserved_separately_from_receipt_clock (test_native_adapters.CameraProtocol.test_sensor_clock_preserved_separately_from_receipt_clock) ... ok
+test_live_listener_rejected_but_closed_connection_can_restart (test_native_adapters.LocalPortContract.test_live_listener_rejected_but_closed_connection_can_restart) ... ok
+test_native_api_translation_and_stream_lifecycle_with_stub (test_native_adapters.MavsdkContract.test_native_api_translation_and_stream_lifecycle_with_stub) ... ok
+test_range_geometry_and_observed_map_are_separate (test_patrol.MappingAndReports.test_range_geometry_and_observed_map_are_separate) ... ok
+test_report_escapes_model_text_and_links_only_valid_evidence (test_patrol.MappingAndReports.test_report_escapes_model_text_and_links_only_valid_evidence) ... ok
+test_baseline_is_completed_matching_local_vision_patrol (test_patrol.PatrolTests.test_baseline_is_completed_matching_local_vision_patrol) ... ok
+test_camera_timestamp_rejects_future_nan_and_wrong_episode (test_patrol.PatrolTests.test_camera_timestamp_rejects_future_nan_and_wrong_episode) ... ok
+test_model_cannot_finish_patrol_from_one_empty_view (test_patrol.PatrolTests.test_model_cannot_finish_patrol_from_one_empty_view) ... ok
+test_change_comparison_does_not_claim_whole_scene_unchanged (test_perception.PerceptionTests.test_change_comparison_does_not_claim_whole_scene_unchanged) ... ok
+test_comparison_requires_matching_viewpoints (test_perception.PerceptionTests.test_comparison_requires_matching_viewpoints) ... ok
+test_operator_pause_cancels_second_stage_policy (test_perception.PerceptionTests.test_operator_pause_cancels_second_stage_policy) ... ok
+test_policy_rejects_duplicates_and_unavailable_actions (test_perception.PerceptionTests.test_policy_rejects_duplicates_and_unavailable_actions) ... ok
+test_report_exposes_obstruction_finding_and_uncertainty (test_perception.PerceptionTests.test_report_exposes_obstruction_finding_and_uncertainty) ... ok
+test_strict_visual_evidence_contract (test_perception.PerceptionTests.test_strict_visual_evidence_contract) ... ok
+test_browser_loss_deadline (test_recon.ReconTests.test_browser_loss_deadline) ... ok
+test_camera_and_sensor_failure_stop_inference_independently (test_recon.ReconTests.test_camera_and_sensor_failure_stop_inference_independently) ... ok
+test_decision_rejects_unbounded_actions (test_recon.ReconTests.test_decision_rejects_unbounded_actions) ... ok
+test_forward_obstacle_stops_before_motion (test_recon.ReconTests.test_forward_obstacle_stops_before_motion) ... ok
+test_local_http_vision_changes_view_and_finishes (test_recon.ReconTests.test_local_http_vision_changes_view_and_finishes) ... ok
+test_model_unavailable_does_not_fall_back (test_recon.ReconTests.test_model_unavailable_does_not_fall_back) ... ok
+test_planner_only_uses_observed_map (test_recon.ReconTests.test_planner_only_uses_observed_map) ... ok
+test_route_randomized_obstacle_safety (test_recon.ReconTests.test_route_randomized_obstacle_safety) ... Executing <Task finished name='Task-386' coro=<ReconTests.test_route_randomized_obstacle_safety() done, defined at /Users/klauskopper/.codex/worktrees/9a64/drone137/tests/test_recon.py:97> result=None created at /opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py:100> took 0.972 seconds
+ok
+test_seeded_room_reproducible_and_not_constant (test_recon.ReconTests.test_seeded_room_reproducible_and_not_constant) ... ok
+test_video_sequence_and_final_report (test_recon.ReconTests.test_video_sequence_and_final_report) ... ok
+test_wrong_camera_token_is_not_used_for_decision (test_recon.ReconTests.test_wrong_camera_token_is_not_used_for_decision) ... ok
+test_courtyard_is_local_and_scenarios_change_geometry (test_tooling.Tooling.test_courtyard_is_local_and_scenarios_change_geometry) ... ok
+test_disk_guard_accounts_for_peak_and_system_reserve (test_tooling.Tooling.test_disk_guard_accounts_for_peak_and_system_reserve) ... ok
+test_model_preparation_reuses_outputs_and_preserves_user_edits (test_tooling.Tooling.test_model_preparation_reuses_outputs_and_preserves_user_edits) ... ok
+
+----------------------------------------------------------------------
+Ran 69 tests in 16.558s
+
+OK

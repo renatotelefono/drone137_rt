@@ -1,0 +1,10 @@
+/Users/klauskopper/.codex/worktrees/9a64/drone137/tests/test_hardware_controls.py:7: FutureWarning: The 'mavsdk' package has been renamed to 'mavsdk-grpc'. This is the last release of the gRPC wrapper under the 'mavsdk' name: that name now refers to the native MAVSDK binding, which has a different API.
+  To carry on with this API, install 'mavsdk-grpc' and use 'import mavsdk_grpc as mavsdk'. The code is identical, development continues there (including releases for MAVSDK v4), and it installs under a separate import name so it cannot collide with the native binding.
+  To freeze instead, pin 'mavsdk<4' (no further updates).
+  To migrate, see https://mavsdk.mavlink.io/main/en/python/migration.html
+  from mavsdk.param import ParamError, ParamResult
+.......................................
+----------------------------------------------------------------------
+Ran 39 tests in 11.179s
+
+OK

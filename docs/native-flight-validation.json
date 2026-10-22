@@ -1,0 +1,86 @@
+{
+  "date": "2026-10-21",
+  "protocol": "dense-native-flight-v2",
+  "real_inference": true,
+  "native_simulated_flight": true,
+  "physical_transport": false,
+  "scenario_props": 120,
+  "baseline_props": 12,
+  "complexity_ratio": 10,
+  "latest_runs": 8,
+  "total_retained_attempts": 10,
+  "summary": {
+    "qwen": {
+      "correct": 2,
+      "cases": 4,
+      "landed": 4,
+      "false_location_claims": 2,
+      "mean_decision_s": 0.3124034314995307,
+      "mean_vision_s": 2.1574957141435465,
+      "wall_time_s": 357.7279543330078,
+      "distance_m": 83.75017712678888,
+      "sampled_peak_gib": 2.3888499215245247
+    },
+    "qwen+laya": {
+      "correct": 2,
+      "cases": 4,
+      "landed": 4,
+      "false_location_claims": 2,
+      "mean_decision_s": 0.0949384881439203,
+      "mean_vision_s": 2.156571354357376,
+      "wall_time_s": 355.07182016699517,
+      "distance_m": 83.60474328153849,
+      "sampled_peak_gib": 3.336681552231312
+    }
+  },
+  "all_latest_flights_returned_and_landed": true,
+  "total_latest_distance_m": 167.35492040832736,
+  "envelope_violations": 0,
+  "minimum_center_clearance_m": 0.5106733329858609,
+  "estimated_position_rmse_range_m": [
+    0.07149234999050037,
+    0.07822667908554949
+  ],
+  "simulation_to_wall_time_range": [
+    0.9888959667304791,
+    0.9900640972071706
+  ],
+  "doorway_crossing_runs": 2,
+  "reported_location_error_range_on_correct_jobs_m": [
+    0.05625442982573601,
+    0.34646248929781165
+  ],
+  "actual_8gb_hardware": "unverified; measured on a 16 GiB M4 Mac",
+  "flight_fidelity": "Generic x500 dynamics and synthetic optics/wind; no calibrated real-aircraft agreement; simulated GNSS indoors",
+  "perception_acceptance": "failed; both supervisors accepted red canisters in absent and far-room cases",
+  "tests": {
+    "passed": 117,
+    "failed": 0,
+    "source": "native-flight-tests.txt"
+  },
+  "raw_report": ".local/validation/dense-native-review/results.json",
+  "raw_sha256": "96cf58dbccb2bee3851315a82d08b1b552c1ff5926fd30fe9f923fa85f57ebd2",
+  "source_reports": [
+    {
+      "path": "dense-native-evaluation-v2/results.json",
+      "sha256": "6333f96e90721af11810c725bc5303c9af51dab76f41a617584a158a4577044c",
+      "version": "dense-native-flight-v1",
+      "errors": [
+        "RuntimeError(\"RuntimeError: RuntimeError('Simulator truth stale')\")"
+      ]
+    },
+    {
+      "path": "dense-native-evaluation-v3/results.json",
+      "sha256": "3675a1f78fa67e299c16330d197088e64178bc3744488cc76a9b81e50a7a170a",
+      "version": "dense-native-flight-v2",
+      "errors": []
+    }
+  ],
+  "browser_validation": {
+    "videos_load_and_seek": 8,
+    "js_errors": 0,
+    "desktop_overflow": false,
+    "mobile_overflow": false
+  },
+  "indexed_videos_verified": 10
+}

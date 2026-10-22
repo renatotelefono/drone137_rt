@@ -1,0 +1,42 @@
+{
+  "date": "2026-10-22",
+  "status": "Software camera-path integration and camera-only compilation passed; aircraft is an unbuilt engineering design.",
+  "physical_enabled": false,
+  "camera_contract_tests": {
+    "command": ".venv/bin/python -m unittest discover -s tests -p 'test_esp32_camera.py' -v",
+    "passed": true,
+    "tests": 12,
+    "duration_seconds": 0.698,
+    "environment": "Local loopback fixture camera and model stub; loopback socket access required an approved sandbox escalation.",
+    "scope": "JPEG transport and model-interface pixel forwarding, metadata, stale/error handling, reboot, episode isolation, limits, recording."
+  },
+  "firmware_compile": {
+    "passed": true,
+    "arduino_cli_version": "1.5.2-rc.1",
+    "esp32_core": "3.3.12",
+    "fqbn": "esp32:esp32:XIAO_ESP32S3:PSRAM=opi",
+    "command": "arduino-cli compile --fqbn esp32:esp32:XIAO_ESP32S3:PSRAM=opi hardware/esp32/camera_bench",
+    "program_storage_bytes": 955754,
+    "program_storage_limit_bytes": 3342336,
+    "static_globals_bytes": 56336,
+    "static_ram_limit_bytes": 327680,
+    "scope": "Camera-only sketch with example network settings; compiled but not flashed. Static compiler figures do not establish runtime memory use or flight-loop timing."
+  },
+  "unverified": [
+    "Physical camera streaming, focus and wireless latency",
+    "Real local-model inference and recognition accuracy using this camera",
+    "Actual 8 GB ground-computer memory envelope",
+    "PCB layout and electrical load/stall/thermal tests",
+    "OpenSCAD rendering, printed fit, mass and thrust",
+    "Flight firmware port and control adapter",
+    "Position estimation and autonomous flight",
+    "Complete delivered cost below $50"
+  ],
+  "source_sha256": {
+    "adapters/esp32_camera.py": "c937f11d2b1943782b637277bea07d781ec7e8619ce9ed250c661f404e8465ac",
+    "scripts/esp32_camera_bench.py": "375f58dd174b6e489dafaf5c1df856b037c874b838c0b844f287498cf8228fbb",
+    "tests/test_esp32_camera.py": "085f2fa177446b1ac59494660bf8cd7794ac3d81504a10f10acda761d8eef211",
+    "hardware/esp32/camera_bench/camera_bench.ino": "833c3a4ac1deec9fb3991c5adb8d1137e618e33077f70133180a104cd7c86e1c",
+    "hardware/esp32/camera_bench/config.example.h": "eaab61ec2cd9aa916d6a9e1e790b7fb152bd32dfe1df34ce109a438db6edacc5"
+  }
+}

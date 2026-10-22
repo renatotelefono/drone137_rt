@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "purpose": "Proposed engineering acceptance for visual inspection; never a flight authorization",
+  "domains": {
+    "workshop": {"label": "Indoor workshop", "conditions": ["nominal", "clutter", "low_light", "glare", "motion_blur", "occlusion", "moving_person"], "flight_gaps": ["local positioning without GPS", "confined clearance", "positioning and camera loss recovery"]},
+    "warehouse": {"label": "Warehouse", "conditions": ["nominal", "repetitive_aisles", "low_light", "glare", "motion_blur", "occlusion", "moving_vehicle"], "flight_gaps": ["local positioning in repetitive aisles", "moving traffic", "link loss and return route"]},
+    "perimeter": {"label": "Building perimeter", "conditions": ["nominal", "backlight", "shadow_transition", "reflective_surface", "thin_obstacle", "moving_person"], "flight_gaps": ["wind near structures", "positioning degradation near buildings", "thin obstacles and return clearance"]},
+    "flat_field": {"label": "Flat field", "conditions": ["nominal", "low_texture", "backlight", "long_distance", "moving_vegetation", "motion_blur"], "flight_gaps": ["wind", "range and communications", "height above ground", "return energy margin"]},
+    "hillside": {"label": "Hillside field", "conditions": ["nominal", "slope", "crest_occlusion", "shadow_transition", "moving_vegetation", "long_distance"], "flight_gaps": ["terrain following in 3D", "slope and crest clearance", "wind", "return path above terrain"]}
+  },
+  "perception_gate": {
+    "min_sites": 3,
+    "min_encounters": 60,
+    "min_blocked_encounters": 300,
+    "min_clear_encounters": 60,
+    "min_uncertain_encounters": 60,
+    "min_encounters_per_condition": 10,
+    "max_false_clear_upper_95": 0.01,
+    "min_center_accuracy": 0.95,
+    "min_required_object_recall": 0.90,
+    "min_uncertainty_action_rate": 0.95,
+    "max_inspection_p95_s": 6.0
+  }
+}

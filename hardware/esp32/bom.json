@@ -1,0 +1,195 @@
+{
+  "project": "drone137 ESP32 indoor vision quad",
+  "revision": "A",
+  "date": "2026-10-22",
+  "objective": "Low-cost lightweight quadcopter streams live vision to the local drone137 harness and ground model; all AI remains on the ground.",
+  "status": "Engineering build package plus camera-only firmware and ground receiver. Not an assembled, flight-ready or fully sourced kit.",
+  "parts_budget_goal_usd": 50,
+  "basic_estimate_usd": "48.50",
+  "navigation_estimate_usd": "69.00",
+  "price_status": "Only camera and MTF-02P are manufacturer listings; other rows are allowances, not verified quotations. Sub-$50 procurement is unverified.",
+  "mass_status": "Component allowances only. Target 60-85 g with battery and navigation pack; final mass and thrust margin must be measured.",
+  "basic_parts": [
+    {
+      "id": "camera",
+      "part": "XIAO ESP32-S3 Sense with supplied camera and antenna",
+      "quantity": 1,
+      "unit_usd": 13.9,
+      "price_basis": "listed manufacturer price",
+      "notes": "Camera fitted by supplier may be OV3660 or OV5640; record sensor PID and focus result.",
+      "source": "https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html",
+      "unit_mass_g": 7
+    },
+    {
+      "id": "imu",
+      "part": "MPU6050 breakout, 3.3 V logic",
+      "quantity": 1,
+      "unit_usd": 2.5,
+      "price_basis": "allowance",
+      "notes": "Verify genuine sensor, board pull-ups and supply pin; 3.3 V-compatible I2C required.",
+      "source": "https://docs.espressif.com/projects/espressif-esp-drone/en/latest/hardware.html",
+      "unit_mass_g": 2
+    },
+    {
+      "id": "motors",
+      "part": "8520 3.7 V brushed motors, matched CW/CCW pair sets",
+      "quantity": 4,
+      "unit_usd": 3.0,
+      "price_basis": "allowance",
+      "notes": "8.5 x 20 mm body, matching 1 mm prop shaft; exact winding/shaft SKU and thrust must be verified.",
+      "source": "https://www.dronaaviation.com/hardware/parts",
+      "unit_mass_g": 5
+    },
+    {
+      "id": "props",
+      "part": "55 mm propellers, matched to motors",
+      "quantity": 4,
+      "unit_usd": 0.5,
+      "price_basis": "allowance",
+      "notes": "Two CW and two CCW, shaft fit to be confirmed.",
+      "source": "https://www.dronaaviation.com/hardware/parts",
+      "unit_mass_g": 0.5
+    },
+    {
+      "id": "frame",
+      "part": "100 mm motor-diagonal frame with guards and 8.5 mm holders",
+      "quantity": 1,
+      "unit_usd": 5.0,
+      "price_basis": "allowance",
+      "notes": "Parametric frame.scad is an unprinted prototype design; filament/fabrication allowance excludes labour.",
+      "source": null,
+      "unit_mass_g": 12
+    },
+    {
+      "id": "battery",
+      "part": "1S 450-600 mAh high-discharge LiPo with matched connector",
+      "quantity": 1,
+      "unit_usd": 6.0,
+      "price_basis": "allowance",
+      "notes": "4.2 V maximum; require measured current capability and sag margin, not only an advertised C rating.",
+      "source": null,
+      "unit_mass_g": 16
+    },
+    {
+      "id": "mosfets",
+      "part": "AO3400A N-channel MOSFET",
+      "quantity": 4,
+      "unit_usd": 0.25,
+      "price_basis": "allowance",
+      "notes": "Candidate low-side drivers. Bench thermal and stall-current tests required; no claim that package current rating is continuous board capability.",
+      "source": "https://www.aosmd.com/products/mosfets/low-voltage-mosfets-12v-30v/ao3400a",
+      "unit_mass_g": 0.1
+    },
+    {
+      "id": "diodes",
+      "part": "SS34 Schottky flyback diode",
+      "quantity": 4,
+      "unit_usd": 0.15,
+      "price_basis": "allowance",
+      "notes": "Candidate 3 A class clamp; select supplier datasheet and validate pulse/thermal stress.",
+      "source": null,
+      "unit_mass_g": 0.15
+    },
+    {
+      "id": "gates",
+      "part": "100 ohm gate resistors and 10 kohm gate pulldowns",
+      "quantity": 8,
+      "unit_usd": 0.025,
+      "price_basis": "allowance",
+      "notes": "Four of each; keep motors off while processor resets.",
+      "source": null,
+      "unit_mass_g": 0.025
+    },
+    {
+      "id": "caps",
+      "part": "Motor suppression and power decoupling capacitors",
+      "quantity": 1,
+      "unit_usd": 0.7,
+      "price_basis": "allowance",
+      "notes": "4 x 100 nF at motor terminals; 470 uF >=6.3 V at battery branch plus 47 uF and 100 nF near electronics. Confirm regulator stability.",
+      "source": null,
+      "unit_mass_g": 1
+    },
+    {
+      "id": "carrier",
+      "part": "Carrier PCB, IMU mounting and low-profile connectors",
+      "quantity": 1,
+      "unit_usd": 3.0,
+      "price_basis": "allowance",
+      "notes": "Electrical connection specification supplied; routed PCB, Gerbers and assembly quote are not supplied.",
+      "source": null,
+      "unit_mass_g": 3
+    },
+    {
+      "id": "wire",
+      "part": "Battery/motor wiring, strap, camera mount and fasteners",
+      "quantity": 1,
+      "unit_usd": 1.5,
+      "price_basis": "allowance",
+      "notes": "Short rated wires and rigid forward-facing camera mount; no full-height pin headers in flight assembly.",
+      "source": null,
+      "unit_mass_g": 3
+    },
+    {
+      "id": "voltage",
+      "part": "Battery divider: two 100 kohm resistors and 100 nF filter",
+      "quantity": 1,
+      "unit_usd": 0.1,
+      "price_basis": "allowance",
+      "notes": "VBAT through 100k to ADC, 100k from ADC to GND; filter to GND, calibrate with meter.",
+      "source": null,
+      "unit_mass_g": 0.1
+    }
+  ],
+  "navigation_additions": [
+    {
+      "part": "MTF-02P optical flow and downward range sensor",
+      "quantity": 1,
+      "unit_usd": 16.5,
+      "price_basis": "listed manufacturer price",
+      "source": "https://store.micoair.com/product/mtf-02p/",
+      "unit_mass_g": 1.5,
+      "notes": "UART sensor driver and estimator integration with the selected ESP firmware are required."
+    },
+    {
+      "part": "1S-to-5V regulated sensor supply",
+      "quantity": 1,
+      "unit_usd": 3.0,
+      "price_basis": "allowance",
+      "unit_mass_g": 2,
+      "notes": "For MTF-02P only; 5 V output, at least 200 mA after transients. Do not connect to XIAO BAT pad."
+    },
+    {
+      "part": "Downward sensor mount and cable",
+      "quantity": 1,
+      "unit_usd": 1.0,
+      "price_basis": "allowance",
+      "unit_mass_g": 1,
+      "notes": "Clear floor view and measured sensor orientation."
+    }
+  ],
+  "not_included": [
+    "Tax and shipping",
+    "Assembly labour",
+    "Carrier PCB design and tooling",
+    "Firmware development",
+    "Ground PC and local Wi-Fi network",
+    "USB data cable and 1S charger",
+    "Independent RC receiver/transmitter",
+    "Prepared-room markers or external tracking",
+    "Wall/forward obstacle sensors",
+    "Spare batteries and motors"
+  ],
+  "functional_limits": {
+    "basic": "Camera and stabilization development hardware; no demonstrated position hold or autonomous room search.",
+    "navigation": "Adds local floor-relative sensing; requires a sensor driver, estimator and position reference. Not global room mapping or wall detection."
+  },
+  "flight_firmware_status": "ESP-Drone is a candidate basis, not a drop-in image for this carrier. The supplied Arduino camera image holds motor gates low and cannot fly.",
+  "sources": {
+    "camera_pins": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/",
+    "camera_examples": "https://wiki.seeedstudio.com/xiao_esp32s3_camera_usage/",
+    "flight_reference": "https://github.com/espressif/esp-drone",
+    "flow": "https://micoair.com/optical_range_sensor_mtf-02p/",
+    "camera_driver": "https://github.com/espressif/esp32-camera"
+  }
+}

@@ -11,21 +11,24 @@ class MavsdkDrone:
     The launcher owns mavsdk_server, bound to udpin://127.0.0.1:14540.
     Physical transports are deliberately absent.
     """
-    def __init__(self, port=50051, speed_limit=1):
+    def __init__(self, port=50051, speed_limit=1, local_position=False):
         from mavsdk import System
         self.system = System(mavsdk_server_address="127.0.0.1", port=port)
         self.speed_limit = speed_limit
+        self.local_position = local_position
         self.home = None
         self.pose = None
         self.healthy = False
         self.health_at = 0
+        self.latest_health = None
         self.in_air = False
         self.air_at = 0
         self.tasks = []
 
-    async def connect(self):
-        async with asyncio.timeout(30):
+    async def connect(self, on_connected=None):
+        async with asyncio.timeout(90):
             await self.system.connect()
+        if on_connected:await on_connected()
 
         async def position():
             async for value in self.system.telemetry.position_velocity_ned():
@@ -36,7 +39,8 @@ class MavsdkDrone:
 
         async def health():
             async for value in self.system.telemetry.health():
-                self.healthy = value.is_global_position_ok and value.is_home_position_ok
+                self.latest_health = value
+                self.healthy = value.is_local_position_ok if self.local_position else value.is_global_position_ok and value.is_home_position_ok
                 self.health_at = time.monotonic()
 
         async def home():
@@ -52,7 +56,7 @@ class MavsdkDrone:
 
         self.tasks = [asyncio.create_task(fn()) for fn in (position, health, home, airborne)]
         async with asyncio.timeout(30):
-            while self.home is None or not self.telemetry().healthy:
+            while (self.home is None and not self.local_position) or not self.telemetry().healthy:
                 for task in self.tasks:
                     if task.done():
                         task.result()
@@ -60,7 +64,7 @@ class MavsdkDrone:
                 await asyncio.sleep(.1)
         if math.dist(self.pose[0], (0, 0, 0)) > 1:
             raise RuntimeError("SITL must start on the configured origin/pad")
-        await self.system.action.set_maximum_speed(self.speed_limit)
+        await self.system.action.set_current_speed(self.speed_limit)
 
     def telemetry(self):
         if self.pose is None:

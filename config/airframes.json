@@ -1,0 +1,206 @@
+[
+  {
+    "id": "reference-quad",
+    "name": "Reference quadcopter \u00b7 provisional",
+    "kind": "quad-x",
+    "airframe": {
+      "mass_kg": 2.0643076923076924,
+      "inertia_xx": 0.02166666666666667,
+      "inertia_yy": 0.02166666666666667,
+      "inertia_zz": 0.04,
+      "geometry_xy_scale": 1.0,
+      "motor_constant": 8.54858e-06,
+      "moment_constant": 0.016,
+      "motor_time_up_s": 0.0125,
+      "motor_time_down_s": 0.025,
+      "max_rotor_rad_s": 1000.0,
+      "rotor_drag": 8.06428e-05,
+      "rotor_radius_m": 0.12,
+      "body_radius_m": 0.38
+    },
+    "limits": {
+      "speed_m_s": 0.6,
+      "acceleration_m_s2": 0.8,
+      "clearance_margin_m": 0.18,
+      "mission_seconds": 300
+    },
+    "camera": {
+      "width": 960,
+      "height": 540,
+      "fx": 722.1478033602424,
+      "fy": 722.1478033602424,
+      "cx": 480.0,
+      "cy": 270.0,
+      "distortion": [
+        -0.06,
+        0.015,
+        0.001,
+        -0.001,
+        0.0
+      ],
+      "pitch_degrees": -10.0,
+      "offset_flu_m": [
+        0.12,
+        0,
+        0.02
+      ],
+      "exposure_ms": 8.0,
+      "rolling_shutter_ms": 12.0,
+      "latency_ms": 130.0,
+      "jitter_ms": 25.0,
+      "drop_probability": 0.025,
+      "burst_frames": 2,
+      "jpeg_quality": 0.72
+    },
+    "sensors": {
+      "range_m": 4.0,
+      "range_noise_m": 0.01,
+      "range_dropout": 0.01,
+      "position_noise_m": 0.015,
+      "drift_m_per_s": 0.0001,
+      "position_delay_ms": 50.0,
+      "max_position_sigma_m": 0.15
+    },
+    "evidence": {
+      "status": "provisional",
+      "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+      "files": []
+    }
+  },
+  {
+    "id": "light-quad",
+    "name": "Light quadcopter \u00b7 provisional",
+    "kind": "quad-x",
+    "airframe": {
+      "mass_kg": 1.25,
+      "inertia_xx": 0.008396681075172656,
+      "inertia_yy": 0.008396681075172656,
+      "inertia_zz": 0.015501565061857209,
+      "geometry_xy_scale": 0.8,
+      "motor_constant": 5.176420666269191e-06,
+      "moment_constant": 0.016,
+      "motor_time_up_s": 0.0125,
+      "motor_time_down_s": 0.025,
+      "max_rotor_rad_s": 1000.0,
+      "rotor_drag": 8.06428e-05,
+      "rotor_radius_m": 0.096,
+      "body_radius_m": 0.31
+    },
+    "limits": {
+      "speed_m_s": 0.6,
+      "acceleration_m_s2": 0.8,
+      "clearance_margin_m": 0.18,
+      "mission_seconds": 300
+    },
+    "camera": {
+      "width": 960,
+      "height": 540,
+      "fx": 722.1478033602424,
+      "fy": 722.1478033602424,
+      "cx": 480.0,
+      "cy": 270.0,
+      "distortion": [
+        -0.06,
+        0.015,
+        0.001,
+        -0.001,
+        0.0
+      ],
+      "pitch_degrees": -10.0,
+      "offset_flu_m": [
+        0.12,
+        0,
+        0.02
+      ],
+      "exposure_ms": 8.0,
+      "rolling_shutter_ms": 12.0,
+      "latency_ms": 130.0,
+      "jitter_ms": 25.0,
+      "drop_probability": 0.025,
+      "burst_frames": 2,
+      "jpeg_quality": 0.72
+    },
+    "sensors": {
+      "range_m": 4.0,
+      "range_noise_m": 0.01,
+      "range_dropout": 0.01,
+      "position_noise_m": 0.015,
+      "drift_m_per_s": 0.0001,
+      "position_delay_ms": 50.0,
+      "max_position_sigma_m": 0.15
+    },
+    "evidence": {
+      "status": "provisional",
+      "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+      "files": []
+    }
+  },
+  {
+    "id": "payload-quad",
+    "name": "Payload quadcopter \u00b7 provisional",
+    "kind": "quad-x",
+    "airframe": {
+      "mass_kg": 2.7,
+      "inertia_xx": 0.03747806118646595,
+      "inertia_yy": 0.03747806118646595,
+      "inertia_zz": 0.06919026680578327,
+      "geometry_xy_scale": 1.15,
+      "motor_constant": 1.1181068639141453e-05,
+      "moment_constant": 0.016,
+      "motor_time_up_s": 0.025,
+      "motor_time_down_s": 0.045,
+      "max_rotor_rad_s": 1000.0,
+      "rotor_drag": 8.06428e-05,
+      "rotor_radius_m": 0.13799999999999998,
+      "body_radius_m": 0.44
+    },
+    "limits": {
+      "speed_m_s": 0.45,
+      "acceleration_m_s2": 0.8,
+      "clearance_margin_m": 0.18,
+      "mission_seconds": 300
+    },
+    "camera": {
+      "width": 960,
+      "height": 540,
+      "fx": 722.1478033602424,
+      "fy": 722.1478033602424,
+      "cx": 480.0,
+      "cy": 270.0,
+      "distortion": [
+        -0.06,
+        0.015,
+        0.001,
+        -0.001,
+        0.0
+      ],
+      "pitch_degrees": -10.0,
+      "offset_flu_m": [
+        0.12,
+        0,
+        0.02
+      ],
+      "exposure_ms": 8.0,
+      "rolling_shutter_ms": 12.0,
+      "latency_ms": 130.0,
+      "jitter_ms": 25.0,
+      "drop_probability": 0.025,
+      "burst_frames": 2,
+      "jpeg_quality": 0.72
+    },
+    "sensors": {
+      "range_m": 4.0,
+      "range_noise_m": 0.01,
+      "range_dropout": 0.01,
+      "position_noise_m": 0.015,
+      "drift_m_per_s": 0.0001,
+      "position_delay_ms": 50.0,
+      "max_position_sigma_m": 0.15
+    },
+    "evidence": {
+      "status": "provisional",
+      "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+      "files": []
+    }
+  }
+]

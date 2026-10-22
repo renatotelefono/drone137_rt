@@ -23,11 +23,12 @@ class LlamaHTTP(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.requests=[]
         self.delay=0
+        self.finish_reason='stop'
         async def handler(request):
             self.requests.append(await request.json())
             await asyncio.sleep(self.delay)
-            return web.json_response({"choices":[{"message":{"content":
-                '{"observation":"open","action":"continue","target_view":null,"reason":"contract fixture"}'}}]})
+            return web.json_response({"choices":[{"finish_reason":self.finish_reason,"message":{"content":
+                '{"visible_evidence":"An opening","center":"open_space"}'}}]})
         app=web.Application()
         app.router.add_post("/v1/chat/completions",handler)
         self.runner=web.AppRunner(app)
@@ -47,9 +48,20 @@ class LlamaHTTP(unittest.IsolatedAsyncioTestCase):
         request=self.requests[0]
         self.assertEqual(request["max_tokens"],128)
         content=request["messages"][0]["content"]
-        self.assertTrue(content[1]["image_url"]["url"].startswith("data:image/jpeg;base64,"))
+        self.assertTrue(content[0]["image_url"]["url"].startswith("data:image/jpeg;base64,"))
         self.assertNotIn("fixture-01",json.dumps(request))
         self.assertEqual(request["response_format"]["type"],"json_schema")
+
+    async def test_token_limit_response_is_rejected_even_if_json_parses(self):
+        self.finish_reason='length'
+        with self.assertRaisesRegex(ValueError, 'Incomplete model response'):
+            await self.backend.infer(observation())
+
+    async def test_detailed_description_budget_remains_bounded(self):
+        await self.backend.image(b'pixels','Describe',{},time.monotonic()+1,max_tokens=384)
+        self.assertEqual(self.requests[-1]['max_tokens'],384)
+        with self.assertRaises(ValueError):
+            await self.backend.image(b'pixels','Describe',{},time.monotonic()+1,max_tokens=385)
 
     async def test_timeout_quarantines_and_prevents_second_request(self):
         self.delay=.3

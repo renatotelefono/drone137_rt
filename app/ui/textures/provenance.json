@@ -1,0 +1,27 @@
+{
+  "asset": "Concrete Floor 02",
+  "author": "Rob Tuytel / Poly Haven",
+  "license": "CC0-1.0",
+  "license_url": "https://polyhaven.com/license",
+  "asset_url": "https://polyhaven.com/a/concrete_floor_02",
+  "files": [
+    {
+      "file": "concrete_floor_02_diff_1k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_floor_02/concrete_floor_02_diff_1k.jpg",
+      "sha256": "6db84a6d87dc50508b9d134d6fbd2b7e876b8081a5f43a118a249ca18de73af5",
+      "bytes": 776097
+    },
+    {
+      "file": "concrete_floor_02_nor_gl_1k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_floor_02/concrete_floor_02_nor_gl_1k.jpg",
+      "sha256": "fcda391b57a816d646ae15544688be53790478da5cd48dbe514b3c6901415e61",
+      "bytes": 192757
+    },
+    {
+      "file": "concrete_floor_02_rough_1k.jpg",
+      "source": "https://dl.polyhaven.org/file/ph-assets/Textures/jpg/1k/concrete_floor_02/concrete_floor_02_rough_1k.jpg",
+      "sha256": "c7f026a611b7859903c61ec7fd4574944157223e9e7796413dd6e2a66eaeac7a",
+      "bytes": 318550
+    }
+  ]
+}

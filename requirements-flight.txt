@@ -1,0 +1,5 @@
+-r requirements-localization.txt
+# Same pinned gRPC SDK API as the existing native simulator.
+mavsdk==3.17.4
+grpcio==1.84.0
+protobuf==7.36.2

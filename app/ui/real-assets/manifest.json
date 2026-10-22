@@ -1,0 +1,325 @@
+{
+  "version": "polyhaven-workshop-v1",
+  "license": "CC0-1.0",
+  "license_url": "https://polyhaven.com/license",
+  "assets": {
+    "korean_fire_extinguisher_01": {
+      "name": "Korean Fire Extinguisher 01",
+      "authors": {
+        "UM JOORIN": "All"
+      },
+      "source": "https://polyhaven.com/a/korean_fire_extinguisher_01",
+      "entry": "korean_fire_extinguisher_01/korean_fire_extinguisher_01_1k.gltf",
+      "kind": "gltf",
+      "source_dimensions_mm": [
+        279.957577586174,
+        367.44324862957,
+        659.2507164176169
+      ],
+      "triangles": 9913,
+      "resolution": "1k",
+      "api_files_hash": "bf286ac62105374e5c583367e80ce77dcbe6881c",
+      "raw_bounds_xyz": {
+        "min": [
+          -0.1399787813425064,
+          -3.978568940965488e-08,
+          -0.12324045598506927
+        ],
+        "max": [
+          0.1399787962436676,
+          0.6592506766319275,
+          0.24420279264450073
+        ]
+      },
+      "unit_scale_to_m": 1.0,
+      "size_xyz_m": [
+        0.279957577586174,
+        0.6592507164176169,
+        0.36744324862957
+      ]
+    },
+    "industrial_storage_cart": {
+      "name": "Industrial Storage Cart",
+      "authors": {
+        "Jule Bielitz": "All"
+      },
+      "source": "https://polyhaven.com/a/industrial_storage_cart",
+      "entry": "industrial_storage_cart/industrial_storage_cart_1k.gltf",
+      "kind": "gltf",
+      "source_dimensions_mm": [
+        1603.3486723899841,
+        1102.7454733848572,
+        1377.3844093084335
+      ],
+      "triangles": 18902,
+      "resolution": "1k",
+      "api_files_hash": "1885782cd204ad6fed4d96111bd713aee14fd4bf",
+      "raw_bounds_xyz": {
+        "min": [
+          -0.8016743063926697,
+          0.0023205429315567017,
+          -0.5513727068901062
+        ],
+        "max": [
+          0.8016743659973145,
+          1.3797049522399902,
+          0.551372766494751
+        ]
+      },
+      "unit_scale_to_m": 1.0,
+      "size_xyz_m": [
+        1.6033486723899841,
+        1.3773844093084335,
+        1.1027454733848572
+      ]
+    },
+    "wooden_crate_01": {
+      "name": "Wooden Crate 01",
+      "authors": {
+        "James Ray Cock": "All"
+      },
+      "source": "https://polyhaven.com/a/wooden_crate_01",
+      "entry": "wooden_crate_01/wooden_crate_01_1k.gltf",
+      "kind": "gltf",
+      "source_dimensions_mm": [
+        825.2729177474976,
+        408.9537411928177,
+        349.6182831004262
+      ],
+      "triangles": 6576,
+      "resolution": "1k",
+      "api_files_hash": "1ac5d053ce4c72e3fbb4c3065e7979522bf1908e",
+      "raw_bounds_xyz": {
+        "min": [
+          -0.4126364588737488,
+          -0.00793334562331438,
+          -0.1961396187543869
+        ],
+        "max": [
+          0.4126364588737488,
+          0.3416849374771118,
+          0.2128141224384308
+        ]
+      },
+      "unit_scale_to_m": 1.0,
+      "size_xyz_m": [
+        0.8252729177474976,
+        0.3496182831004262,
+        0.4089537411928177
+      ]
+    },
+    "steel_frame_shelves_01": {
+      "name": "Steel Frame Shelves 01",
+      "authors": {
+        "James Ray Cock": "All"
+      },
+      "source": "https://polyhaven.com/a/steel_frame_shelves_01",
+      "entry": "steel_frame_shelves_01/steel_frame_shelves_01_1k.gltf",
+      "kind": "gltf",
+      "source_dimensions_mm": [
+        1097.4148511886597,
+        502.1176338195801,
+        2140.5010361922905
+      ],
+      "triangles": 4348,
+      "resolution": "1k",
+      "api_files_hash": "07b34991c01f75c3bfe85923ba649bc40de1dd17",
+      "raw_bounds_xyz": {
+        "min": [
+          -5.48686408996582,
+          -0.010678904131054878,
+          -2.510587692260742
+        ],
+        "max": [
+          5.487281322479248,
+          21.39432716369629,
+          2.510587692260742
+        ]
+      },
+      "unit_scale_to_m": 0.10000002006117423,
+      "size_xyz_m": [
+        1.09741476139875,
+        2.1405010361922905,
+        0.5021176391828227
+      ]
+    },
+    "industrial_workshop_foundry": {
+      "name": "Industrial Workshop Foundry",
+      "authors": {
+        "Dimitrios Savva": "Photography",
+        "Jarod Guest": "Processing"
+      },
+      "source": "https://polyhaven.com/a/industrial_workshop_foundry",
+      "entry": "industrial_workshop_foundry/industrial_workshop_foundry_1k.hdr",
+      "kind": "hdr",
+      "source_dimensions_mm": null,
+      "triangles": null,
+      "resolution": "1k",
+      "api_files_hash": "3353c78f743e53a70c8228eab121a0f52f27a9dd"
+    }
+  },
+  "files": {
+    "korean_fire_extinguisher_01/korean_fire_extinguisher_01_1k.gltf": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_1k.gltf",
+      "bytes": 7450,
+      "sha256": "565f9e41909165c2bead24b722746e29ba55e8eb5e541f61fe0d1ef7e66d2ecf",
+      "upstream_md5": "842e3c682b1bd286ba90af70848a0fbf"
+    },
+    "korean_fire_extinguisher_01/textures/korean_fire_extinguisher_01_paper_nor_gl_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_paper_nor_gl_1k.jpg",
+      "bytes": 267306,
+      "sha256": "caaa26dd438e827e994c69605091d58ecc6a152813ece776cc561e0b24a8433a",
+      "upstream_md5": "a168897334529d98a67df80a486076ed"
+    },
+    "korean_fire_extinguisher_01/textures/korean_fire_extinguisher_01_paper_diff_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_paper_diff_1k.jpg",
+      "bytes": 161849,
+      "sha256": "2d56948aa72a9bad6133db3e6b17fa0df1a56cdf25db4b7e21e6ceb21999a038",
+      "upstream_md5": "bfe0fd9be862d04df812e7d3fb6d2c29"
+    },
+    "korean_fire_extinguisher_01/textures/korean_fire_extinguisher_01_body_nor_gl_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_body_nor_gl_1k.jpg",
+      "bytes": 95607,
+      "sha256": "b6ba7a7cafa04557c93dc63b44260b635863f0a95f8ba1445b75758dac3443d3",
+      "upstream_md5": "684dc2f34e0673fd5ecdb71a87366031"
+    },
+    "korean_fire_extinguisher_01/textures/korean_fire_extinguisher_01_paper_arm_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_paper_arm_1k.jpg",
+      "bytes": 221117,
+      "sha256": "542b45184bb0ea66cdd2f180792148c45d45862a12f1ac341f798e53029015b9",
+      "upstream_md5": "4d30630a842d22459188b53848538fd1"
+    },
+    "korean_fire_extinguisher_01/textures/korean_fire_extinguisher_01_glass_diff_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_glass_diff_1k.jpg",
+      "bytes": 150097,
+      "sha256": "ca7e49959126aa51e2d4ab440aeb9f7ff17a8a6d025b116f6327f2343ee041af",
+      "upstream_md5": "15c48dd9f2a9b11647f5212179bc0d30"
+    },
+    "korean_fire_extinguisher_01/textures/korean_fire_extinguisher_01_glass_nor_gl_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_glass_nor_gl_1k.jpg",
+      "bytes": 36344,
+      "sha256": "3b299c54cb9b6f72d4f79e6ecd2f8cfcc618292c87881de1d17892b5ca668896",
+      "upstream_md5": "1da8b9a645f7e0940ea9505879d8f489"
+    },
+    "korean_fire_extinguisher_01/textures/korean_fire_extinguisher_01_glass_arm_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_glass_arm_1k.jpg",
+      "bytes": 61925,
+      "sha256": "412712fddc3654d801949889f78c9ee92d8855624a1fe1057be29a38e766bda0",
+      "upstream_md5": "377ae0f369cfa52b2589f36f6d4a3be4"
+    },
+    "korean_fire_extinguisher_01/korean_fire_extinguisher_01.bin": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/korean_fire_extinguisher_01/korean_fire_extinguisher_01.bin",
+      "bytes": 279480,
+      "sha256": "a460dd65b63477bb641196d77393258af0c8a6e2a64728156cb45d92658c86bd",
+      "upstream_md5": "e4b0452f70679815817e0b6f87ba5e52"
+    },
+    "korean_fire_extinguisher_01/textures/korean_fire_extinguisher_01_body_diff_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_body_diff_1k.jpg",
+      "bytes": 127270,
+      "sha256": "2d874513cfb6d7485b67e936ee32e7af14992da6a5eedf980dbdfc32a2119987",
+      "upstream_md5": "5e893385064d90ba8bef74a9625409ef"
+    },
+    "korean_fire_extinguisher_01/textures/korean_fire_extinguisher_01_body_arm_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/korean_fire_extinguisher_01/korean_fire_extinguisher_01_body_arm_1k.jpg",
+      "bytes": 209865,
+      "sha256": "2c8fa0a85d5acc5f4e784ecefd8bfd16e1aafd112e553bfcece0c81c9b129eea",
+      "upstream_md5": "e4367435179d89d78d4c8f14fe6f2ee9"
+    },
+    "industrial_storage_cart/industrial_storage_cart_1k.gltf": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/industrial_storage_cart/industrial_storage_cart_1k.gltf",
+      "bytes": 2878,
+      "sha256": "f420b66b2e56513542b9598f038eb5f5ce120746735997807e58552049884043",
+      "upstream_md5": "00a94d9dff97c2c18c7c37764f812d6c"
+    },
+    "industrial_storage_cart/textures/industrial_storage_cart_nor_gl_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/industrial_storage_cart/industrial_storage_cart_nor_gl_1k.jpg",
+      "bytes": 567119,
+      "sha256": "a4fcd4309516e6005b5f3636399bd801df72fc75986831fad9cc5c31b737070a",
+      "upstream_md5": "818d963a7e4ca6a0d7b0309f80ffa745"
+    },
+    "industrial_storage_cart/textures/industrial_storage_cart_diff_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/industrial_storage_cart/industrial_storage_cart_diff_1k.jpg",
+      "bytes": 553691,
+      "sha256": "7e779d7f7385307ebb332aec41bafff10c21972aaf92382f30cacb16957e7d37",
+      "upstream_md5": "ed9ac3076458572e50418a76b8742e9f"
+    },
+    "industrial_storage_cart/textures/industrial_storage_cart_arm_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/industrial_storage_cart/industrial_storage_cart_arm_1k.jpg",
+      "bytes": 849352,
+      "sha256": "956ee8d02021aba0b5fdbf393029b0aaabd7d29076caa3a5678e394f79adcca1",
+      "upstream_md5": "89546cd4242734559608d0ce8584bd46"
+    },
+    "industrial_storage_cart/industrial_storage_cart.bin": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/industrial_storage_cart/industrial_storage_cart.bin",
+      "bytes": 664580,
+      "sha256": "ae46bc3aceda8234515054b3b4595db14e7eb72148100b5c2cafe1de7393410c",
+      "upstream_md5": "22c80526ee820188a193b4ea0b91fc2f"
+    },
+    "wooden_crate_01/wooden_crate_01_1k.gltf": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/wooden_crate_01/wooden_crate_01_1k.gltf",
+      "bytes": 5612,
+      "sha256": "fd9c6073acfc671e12b64666053f2805ae33aff5d3dbbcfe5c97c08c06644927",
+      "upstream_md5": "33df4d2ae00186d4b64e878466c9e22e"
+    },
+    "wooden_crate_01/textures/wooden_crate_01_diff_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_crate_01/wooden_crate_01_diff_1k.jpg",
+      "bytes": 711292,
+      "sha256": "16653f4abaf4c1d9bca94bde3bd8c54d0ea9a5298d1648abcf57de1f7ecc34cc",
+      "upstream_md5": "266e0462d06e77c5745f66e89820544f"
+    },
+    "wooden_crate_01/textures/wooden_crate_01_nor_gl_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_crate_01/wooden_crate_01_nor_gl_1k.jpg",
+      "bytes": 594076,
+      "sha256": "f4ea44c7dc1686123d337039cb713d74e8a2dbc6d1bd2beeac276d06f5df3fab",
+      "upstream_md5": "e31626a1fcf6f7062c2ffd9fc982b942"
+    },
+    "wooden_crate_01/wooden_crate_01.bin": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/wooden_crate_01/wooden_crate_01.bin",
+      "bytes": 189408,
+      "sha256": "85f381f8035f7a6f2f3b848640894c6d3333b261946dd8a338c0fe19e0bea21e",
+      "upstream_md5": "8318f76b0c24b5538ce23051dbcb79a0"
+    },
+    "wooden_crate_01/textures/wooden_crate_01_arm_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/wooden_crate_01/wooden_crate_01_arm_1k.jpg",
+      "bytes": 776699,
+      "sha256": "cd0b031c3924905e16ffd78ead062c2cc274148c4104d09635310097738b4679",
+      "upstream_md5": "67c4aeb1154af98f95516b21ef62291c"
+    },
+    "steel_frame_shelves_01/steel_frame_shelves_01_1k.gltf": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/1k/steel_frame_shelves_01/steel_frame_shelves_01_1k.gltf",
+      "bytes": 2766,
+      "sha256": "4eff8994825d654e337f8dc425e959ed6add7f4773188c87ba64402d9edd9842",
+      "upstream_md5": "36c93aa3e2757523e3f6336d628033ff"
+    },
+    "steel_frame_shelves_01/textures/steel_frame_shelves_01_diff_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/steel_frame_shelves_01/steel_frame_shelves_01_diff_1k.jpg",
+      "bytes": 477882,
+      "sha256": "85e205b334e15e05bec9b02be1258da6ab949ae908aa57e0bee6b94ba45b4415",
+      "upstream_md5": "65520a03f0caf855bcb74a7842a0f937"
+    },
+    "steel_frame_shelves_01/textures/steel_frame_shelves_01_nor_gl_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/steel_frame_shelves_01/steel_frame_shelves_01_nor_gl_1k.jpg",
+      "bytes": 318836,
+      "sha256": "2a67ed7dd4f53c3e225396e6381992b768fe58b5261be703d540678e366e46ed",
+      "upstream_md5": "a87fd3930fc88524d1f43c23e2725fc0"
+    },
+    "steel_frame_shelves_01/textures/steel_frame_shelves_01_arm_1k.jpg": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/jpg/1k/steel_frame_shelves_01/steel_frame_shelves_01_arm_1k.jpg",
+      "bytes": 655560,
+      "sha256": "858629eeaa8f68ddb4fc1a813afe6ed988ded3d6d49184ec45a14611760f0bb3",
+      "upstream_md5": "2adddc4cd4dc2be76c171791bb5338cd"
+    },
+    "steel_frame_shelves_01/steel_frame_shelves_01.bin": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/Models/gltf/8k/steel_frame_shelves_01/steel_frame_shelves_01.bin",
+      "bytes": 142312,
+      "sha256": "306d7e72d12a5d3047b8a189f8d0add51075eaf7f51f935286fda4e1c16dd066",
+      "upstream_md5": "5728ceb7ff0d9b0b5ba5e7ef970aced9"
+    },
+    "industrial_workshop_foundry/industrial_workshop_foundry_1k.hdr": {
+      "url": "https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/industrial_workshop_foundry_1k.hdr",
+      "bytes": 1701301,
+      "sha256": "3ee689931f2b1a661e1c8d101539cdd82a8546655813c1fdcd26ab6f248aa54f",
+      "upstream_md5": "d65e13e0b4aff7fd0a2fa32a7c0fd4e3"
+    }
+  }
+}

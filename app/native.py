@@ -7,6 +7,7 @@ from pathlib import Path
 from adapters.llama import LlamaBackend
 from scripts.tools import DATA, BUILD, ROOT, digest, native_mac
 import json
+import xml.etree.ElementTree as ET
 
 
 def model_paths():
@@ -25,6 +26,9 @@ def model_paths():
 
 def unused_port(port):
     with socket.socket() as sock:
+        # Match the server's reuse semantics: a recently closed connection in
+        # TIME_WAIT is not an active service. A live listener still blocks bind.
+        sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         try:
             sock.bind(("127.0.0.1", port))
         except OSError as exc:
@@ -38,7 +42,8 @@ async def start_model(owned):
     binary = BUILD / "llama.cpp/build/bin/llama-server"
     await owned.spawn("llama", [str(binary), "-m", str(model), "--mmproj", str(projector),
                                "--host", "127.0.0.1", "--port", "8081",
-                               "-c", "2048", "-np", "1", "-ngl", "99"],
+                               "-c", "2048", "-np", "1", "-ngl", "99", "-t", "2",
+                               "--cache-ram", "0", "--no-cache-prompt"],
                       DATA / "logs/llama.log")
     backend = LlamaBackend(timeout=2)
     try:
@@ -79,11 +84,27 @@ async def start_native(owned, policy):
     environment = dict(os.environ)
     environment.update({
         "PX4_GZ_WORLD": "courtyard", "HEADLESS": "1",
+        "PX4_GZ_STANDALONE": "1", "PX4_GZ_MODEL_NAME": "x500_mono_cam_0",
+        "PX4_GZ_NO_FOLLOW": "1", "GZ_IP": "127.0.0.1",
+        "PX4_SIM_MODEL": "gz_x500_mono_cam",
         "GZ_SIM_RESOURCE_PATH": f"{DATA / 'sim/models'}:{DATA / 'sim/worlds'}:{px4 / 'Tools/simulation/gz/models'}",
+        "GZ_SIM_SYSTEM_PLUGIN_PATH": str(px4/'build/px4_sitl_default/src/modules/simulation/gz_plugins'),
     })
-    await owned.spawn("px4", ["bash", "-c",
-                            'source "$1/.venv/bin/activate"; exec make px4_sitl gz_x500_mono_cam',
-                            "_", str(px4)], DATA / "logs/px4.log", cwd=px4, env=environment)
+    # PX4's generated gz_env.sh hard-codes its upstream world/model directories.
+    # Launch our own world and named vehicle, then attach PX4 in standalone mode.
+    # This keeps generated assets local and avoids editing upstream source.
+    tree = ET.parse(DATA/'sim/worlds/courtyard.sdf')
+    include = ET.SubElement(tree.find('world'), 'include')
+    ET.SubElement(include, 'uri').text = (DATA/'sim/models/x500_mono_cam/model.sdf').as_uri()
+    ET.SubElement(include, 'name').text = 'x500_mono_cam_0'
+    ET.SubElement(include, 'pose').text = '0 0 .3 0 0 0'
+    native_world = DATA/'sim/worlds/courtyard-vehicle.sdf'
+    tree.write(native_world)
+    await owned.spawn('gazebo', [str(ROOT/'scripts/with-sim.sh'), 'gz', 'sim', '-r', '-s', str(native_world)],
+                      DATA/'logs/gazebo.log', env=environment)
+    await owned.spawn("px4", [str(ROOT/'scripts/with-sim.sh'),
+                            str(px4/'build/px4_sitl_default/bin/px4'), '-d'],
+                            DATA / "logs/px4.log", cwd=px4, env=environment)
     await owned.spawn("mavsdk", [str(sdk), "-p", "50051", "udpin://127.0.0.1:14540"],
                       DATA / "logs/mavsdk.log")
     return bridge, "/drone137/camera"

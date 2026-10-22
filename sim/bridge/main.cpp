@@ -1,4 +1,4 @@
-// Apache-2.0. Bounded RGB image -> JPEG bridge. Native build pending Mac validation.
+// Apache-2.0. Bounded RGB image -> JPEG bridge for the native Gazebo camera.
 #include <gz/transport/Node.hh>
 #include <gz/msgs/image.pb.h>
 #include <jpeglib.h>

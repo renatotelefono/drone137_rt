@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>drone137 · Mission control</title><link rel="stylesheet" href="/assets/mission-control.css"></head>
+<body>
+<header><a class="brand" href="/control"><span class="brand-mark">137</span> drone137 <span class="divider">/</span> <span>Mission control</span></a>
+<nav><span class="virtual-tag">VIRTUAL OPERATIONS</span><a href="/">Recon lab ↗</a></nav></header>
+<main>
+<div class="page-heading"><div><p class="eyebrow">LOCAL AUTONOMY / OPERATIONS DESK</p><h1>Give the fleet a mission.</h1><p class="subheading">Choose where to inspect. Tell the model what to look for. Review the evidence.</p></div>
+<div class="model-health"><span id="model-dot" class="dot"></span><div><b id="model-state">Connecting…</b><small>Qwen3-VL · local inference</small></div><button id="model-start">Start model</button></div></div>
+<div id="error" role="alert" hidden></div>
+<div class="workspace">
+<aside class="composer panel"><div class="panel-heading"><h2>Mission brief</h2><span class="step">01 — PLAN</span></div>
+<label class="field">Environment<select id="scenario"><option value="realism">Camera realism bay</option><option value="workshop">Detailed workshop</option><option value="warehouse">Warehouse aisle</option><option value="rooms">Connected rooms</option></select></label>
+<div class="pair"><label class="field">Scene<select id="variant"><option value="baseline">Baseline</option><option value="changed">Obstructed passage</option></select></label><label class="field">Seed<input id="seed" type="number" min="0" max="2147483647" value="619"></label></div>
+<label class="field">Camera conditions<select id="condition"><option value="nominal">Nominal</option><option value="dim">Low light</option><option value="glare">Glare</option><option value="motion">Blur / shift</option></select></label>
+<button id="site-load" class="quiet wide">Load / reset virtual site</button>
+<div class="section-label">INSPECTION AREA <span id="area-size">120 m²</span></div>
+<div class="segmented" aria-label="Inspection area presets"><button data-area="all" class="selected">Whole site</button><button data-area="west">West bay</button><button data-area="east">East bay</button></div>
+<p class="hint">Or drag a rectangle on the map. Only the viewpoints inside it are assigned.</p>
+<details><summary>Area coordinates · metres</summary><div class="coordinates"><label>Min X<input id="x0" type="number" min="0" max="12" step="0.25" value="0"></label><label>Min Y<input id="y0" type="number" min="0" max="10" step="0.25" value="0"></label><label>Max X<input id="x1" type="number" min="0" max="12" step="0.25" value="12"></label><label>Max Y<input id="y1" type="number" min="0" max="10" step="0.25" value="10"></label></div></details>
+<label class="field brief-label">What should the fleet do?<textarea id="instruction" maxlength="600" rows="4">Patrol the selected area. Describe visible objects and flag anything blocking the passage.</textarea></label>
+<div class="examples"><button data-brief="Inventory visible objects in the selected area, focusing on bottles, boxes and equipment.">Inventory</button><button data-brief="Inspect the central doorway for obstructions.">Check passage</button><button data-brief="Patrol the area and compare the camera views with the previous matching patrol for changes.">Check changes</button></div>
+<fieldset><legend>Assign aircraft</legend><a href="/airframes" target="_blank" rel="noopener">Aircraft profiles &amp; camera settings ↗</a><label class="aircraft-option"><input type="checkbox" name="drone" value="drone-01" checked><span class="aircraft-color scout-one"></span>Scout 01</label><label class="aircraft-option"><input type="checkbox" name="drone" value="drone-02" checked><span class="aircraft-color scout-two"></span>Scout 02</label></fieldset>
+<button id="plan" class="primary wide">Generate plan with Qwen <span>→</span></button>
+<p id="plan-hint" class="hint">The model interprets your brief. You review the assignments before dispatch.</p>
+</aside>
+<div class="operations">
+<section class="panel mission-status"><div><span class="eyebrow">MISSION STATUS</span><h2 id="mission-state">Ready to plan</h2><p id="mission-reason">Select an area and generate your first mission.</p></div><div class="mission-actions"><button id="return" disabled>Return active drone</button><button id="stop" class="danger" disabled>Stop all</button></div></section>
+<div class="map-fleet">
+<section class="panel map-panel"><div class="panel-heading"><h2>Site overview <small>12 × 10 m</small></h2><span id="view-count" class="pill">6 viewpoints</span></div>
+<div class="map-wrap"><svg id="site-map" viewBox="0 0 720 600" role="img" aria-label="Site map. Drag to select an inspection area; coordinate inputs are available in Mission brief."><g id="map-content"></g></svg><div class="map-key"><span><i class="legend-area"></i>Inspection area</span><span><i class="legend-point"></i>Viewpoint</span><span>Operator map · simulated ground truth</span></div></div>
+<div class="map-footer"><span id="selection-label">Whole site selected</span><span>Transit may leave selection</span></div></section>
+<section class="panel fleet-panel"><div class="panel-heading"><h2>Fleet</h2><span class="pill">2 aircraft</span></div><div class="airspace-note"><span class="dot amber"></span><span>Shared airspace<br><b>One aircraft at a time</b></span></div><div id="fleet-cards"></div><p class="hint">Queued aircraft remain docked outside the flight volume. A failed or incomplete flight stops the queue.</p></section>
+</div>
+<section id="plan-review" class="panel plan-review" hidden><div class="panel-heading"><h2>Review mission plan</h2><span class="step">02 — DISPATCH</span></div><p id="plan-summary"></p><div id="assignments"></div><p id="plan-note" class="hint"></p><button id="launch" class="primary">Launch reviewed mission →</button></section>
+<section class="camera-section"><div class="section-heading"><h2>Aircraft cameras</h2><span>Live rendered feeds · 720p in realism bay</span></div><div class="camera-grid"><div class="panel camera-card"><div class="panel-heading"><h3><span class="aircraft-color scout-one"></span>Scout 01</h3><span id="camera-01-state" class="pill">Loading</span></div><iframe id="camera-01" title="Scout 01 onboard camera" allow="fullscreen"></iframe></div><div class="panel camera-card"><div class="panel-heading"><h3><span class="aircraft-color scout-two"></span>Scout 02</h3><span id="camera-02-state" class="pill">Loading</span></div><iframe id="camera-02" title="Scout 02 onboard camera" allow="fullscreen"></iframe></div></div></section>
+<section class="panel"><div class="panel-heading"><h2>Findings & evidence</h2><a id="mission-report" hidden target="_blank" rel="noopener">Open fleet report ↗</a></div><p class="hint">Model descriptions are observations to review against the image and video. Viewpoint completion does not measure full visual coverage.</p><div id="findings" aria-live="polite"><p class="empty">Camera observations will appear here during the mission.</p></div></section>
+<section class="panel"><div class="panel-heading"><h2>Recent aircraft reports</h2><button id="refresh-history" class="quiet">Refresh</button></div><div id="history"></div></section>
+</div></div>
+<footer>Kinematic simulation · ideal pose and planar range sensing · fixed 1.4 m altitude · no physical connection. Shared evidence storage: 1 GiB. Keep this dashboard open while flying and saving video.</footer>
+</main><script type="module" src="/assets/mission-control.js"></script></body></html>

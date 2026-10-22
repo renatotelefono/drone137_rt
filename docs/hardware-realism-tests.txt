@@ -1,0 +1,12 @@
+/Users/klauskopper/.codex/worktrees/9a64/drone137/tests/test_hardware_controls.py:7: FutureWarning: The 'mavsdk' package has been renamed to 'mavsdk-grpc'. This is the last release of the gRPC wrapper under the 'mavsdk' name: that name now refers to the native MAVSDK binding, which has a different API.
+  To carry on with this API, install 'mavsdk-grpc' and use 'import mavsdk_grpc as mavsdk'. The code is identical, development continues there (including releases for MAVSDK v4), and it installs under a separate import name so it cannot collide with the native binding.
+  To freeze instead, pin 'mavsdk<4' (no further updates).
+  To migrate, see https://mavsdk.mavlink.io/main/en/python/migration.html
+  from mavsdk.param import ParamError, ParamResult
+...............................................................................Application heartbeat expired; disconnecting owned SDK.
+.................................................Executing <Task finished name='Task-589' coro=<ReconTests.test_route_randomized_obstacle_safety() done, defined at /Users/klauskopper/.codex/worktrees/9a64/drone137/tests/test_recon.py:97> result=None created at /opt/homebrew/Cellar/python@3.12/3.12.13_2/Frameworks/Python.framework/Versions/3.12/lib/python3.12/asyncio/runners.py:100> took 1.007 seconds
+......................
+----------------------------------------------------------------------
+Ran 150 tests in 28.711s
+
+OK

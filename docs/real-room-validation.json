@@ -1,0 +1,230 @@
+{
+  "hard_suite": {
+    "planned_runs": 8,
+    "completed_runs": 8,
+    "task_correct": 5,
+    "individual_runs_meeting_flight_and_task_gates": 5,
+    "qualified_passes": 5,
+    "pass_rate": 0.625,
+    "all_pass": false,
+    "false_location_claims": 1,
+    "memory_ok": true,
+    "per_run_deadline_s": 300,
+    "interpretation": "Observed performance on a frozen synthetic suite. Not a real-world reliability estimate. Absent cases require a completed search with no location claim; unresolved does not prove absence.",
+    "full_suite_qualified": false
+  },
+  "memory": {
+    "metric": "sum of macOS process physical footprints",
+    "interval_s": 0.2,
+    "budget_gib": 5.0,
+    "sampled_peak_gib": 3.4401819184422493,
+    "sampled_peak_rss_gib": 3.48345947265625,
+    "sampled_peak_guard_gib": 3.48345947265625,
+    "guard_metric": "Larger of summed RSS and summed physical footprints; RSS can double-count shared pages.",
+    "budget_exceeded": false,
+    "measurement_error": null,
+    "host_memory_gib": 16.0,
+    "actual_8gb_hardware": false,
+    "scope": "Evaluator, Laya if loaded, one browser camera including GPU/helpers, Node, simulator server and Qwen. Excludes unrelated applications and user browser tabs. Sampling is not an OS-enforced RAM limit.",
+    "host_swap_start_bytes": 4458414080,
+    "host_swap_end_bytes": 4441636864
+  },
+  "runs": [
+    {
+      "case": "hard-west-dim-present",
+      "outcome": "unresolved",
+      "landed": true,
+      "error": null,
+      "score": {
+        "truth_xy_m": [
+          4.8,
+          8.65
+        ],
+        "error_m": null,
+        "false_location_claim": false,
+        "correct": false
+      },
+      "supervisor_calls": 3,
+      "wall_time_s": 122.85854983300669
+    },
+    {
+      "case": "hard-west-dim-absent",
+      "outcome": "unresolved",
+      "landed": true,
+      "error": null,
+      "score": {
+        "truth_xy_m": null,
+        "error_m": null,
+        "false_location_claim": false,
+        "correct": true
+      },
+      "supervisor_calls": 3,
+      "wall_time_s": 122.78495620800823
+    },
+    {
+      "case": "hard-east-glare-present",
+      "outcome": "unresolved",
+      "landed": true,
+      "error": null,
+      "score": {
+        "truth_xy_m": [
+          10.2,
+          6.55
+        ],
+        "error_m": null,
+        "false_location_claim": false,
+        "correct": false
+      },
+      "supervisor_calls": 4,
+      "wall_time_s": 133.96368112500932
+    },
+    {
+      "case": "hard-east-glare-absent",
+      "outcome": "unresolved",
+      "landed": true,
+      "error": null,
+      "score": {
+        "truth_xy_m": null,
+        "error_m": null,
+        "false_location_claim": false,
+        "correct": true
+      },
+      "supervisor_calls": 2,
+      "wall_time_s": 118.87357191700721
+    },
+    {
+      "case": "hard-west-occluded-present",
+      "outcome": "found",
+      "landed": true,
+      "error": null,
+      "score": {
+        "truth_xy_m": [
+          4.8,
+          8.5
+        ],
+        "error_m": 0.05508009250133857,
+        "false_location_claim": false,
+        "correct": true
+      },
+      "supervisor_calls": 2,
+      "wall_time_s": 86.49226100000669
+    },
+    {
+      "case": "hard-west-occluded-absent",
+      "outcome": "unresolved",
+      "landed": true,
+      "error": null,
+      "score": {
+        "truth_xy_m": null,
+        "error_m": null,
+        "false_location_claim": false,
+        "correct": true
+      },
+      "supervisor_calls": 3,
+      "wall_time_s": 121.89369454099506
+    },
+    {
+      "case": "hard-east-motion-present",
+      "outcome": "found",
+      "landed": true,
+      "error": null,
+      "score": {
+        "truth_xy_m": [
+          10.15,
+          6.35
+        ],
+        "error_m": 5.934352182471376,
+        "false_location_claim": true,
+        "correct": false
+      },
+      "supervisor_calls": 2,
+      "wall_time_s": 115.86731870799849
+    },
+    {
+      "case": "hard-east-motion-absent",
+      "outcome": "unresolved",
+      "landed": true,
+      "error": null,
+      "score": {
+        "truth_xy_m": null,
+        "error_m": null,
+        "false_location_claim": false,
+        "correct": true
+      },
+      "supervisor_calls": 4,
+      "wall_time_s": 136.09500991599634
+    }
+  ],
+  "laya_choices": 23,
+  "mean_laya_choice_s": 0.1490283732596056,
+  "reference_diagnostic": {
+    "parts": {
+      "planned": 25,
+      "executed": 25,
+      "correct": 15,
+      "false_accepts": 4,
+      "false_rejections": 6,
+      "mean_latency_s": 1.0536774882796454
+    },
+    "reference": {
+      "planned": 25,
+      "executed": 25,
+      "correct": 13,
+      "false_accepts": 12,
+      "false_rejections": 0,
+      "mean_latency_s": 1.2714909233624347
+    }
+  },
+  "integrity": [
+    {
+      "experiment": "laya-identity-baseline-v1",
+      "frozen_sources": 85,
+      "frames_verified": 9,
+      "crops_verified": 7,
+      "frame_age_range_ms": [
+        16.008377075195312,
+        103.11174392700195
+      ],
+      "max_dropped_frames": 0,
+      "all_source_and_image_hashes_valid": true
+    },
+    {
+      "experiment": "laya-hard-v1",
+      "frozen_sources": 85,
+      "frames_verified": 52,
+      "crops_verified": 42,
+      "frame_age_range_ms": [
+        123.82268905639648,
+        275.30646324157715
+      ],
+      "max_dropped_frames": 215,
+      "all_source_and_image_hashes_valid": true
+    }
+  ],
+  "browser_validation": {
+    "episodes": 12,
+    "videos": 11,
+    "seek_durations_s": [
+      74.861,
+      104.158,
+      52.18,
+      109.775,
+      110.042,
+      122.194,
+      105.943,
+      72.593,
+      107.927,
+      102.811,
+      124.262
+    ],
+    "frames": 61,
+    "diagnosticImages": 26,
+    "errors": [],
+    "desktop_overflow": false,
+    "mobile_overflow": false
+  },
+  "software_tests": {
+    "passed": 127,
+    "evidence": "docs/real-room-tests.txt"
+  }
+}

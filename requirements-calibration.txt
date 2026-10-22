@@ -1,0 +1,4 @@
+# Offline tools only; these are not imported by the operating application.
+opencv-python-headless==4.13.0.92
+numpy==2.2.6
+pillow==12.1.0

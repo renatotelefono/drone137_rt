@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-22",
+  "source_sha256": "3160c1695a5abcf0dc53a830f2c32758431023d9326312100aff404a29e0afcb",
+  "models": 5,
+  "passed": [
+    "Five unique costed designs",
+    "Every parts allowance below $50",
+    "Camera, battery, motor drivers and guards in each BOM",
+    "Nominal adjacent guard separation and prop radial clearance",
+    "SQLite integrity and round-trip BOM totals",
+    "Physical and simulation use disabled"
+  ],
+  "not_tested": [
+    "Supplier checkout totals",
+    "OpenSCAD compilation and print fit",
+    "Mass, thrust, control timing or physical flight",
+    "Real camera/model performance",
+    "8 GB memory usage",
+    "Positioning or autonomous task completion"
+  ],
+  "totals": {
+    "micro-90": "$34.58",
+    "scout-110": "$41.58",
+    "guard-110": "$45.08",
+    "height-110": "$47.98",
+    "split-110": "$49.57"
+  }
+}

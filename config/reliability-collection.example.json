@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "dataset_id": "replace-with-your-dataset-version",
+  "scope": "Replace metadata and labels after independent review; this example is not evidence",
+  "cases": [
+    {
+      "id": "workshop-site01-encounter01-frame01",
+      "input": "replace-with-local-clip.mp4",
+      "time_s": 2.0,
+      "source_kind": "target_camera",
+      "domain": "workshop",
+      "site_id": "replace-with-physical-site-id",
+      "encounter_id": "replace-with-encounter-id-shared-by-neighboring-frames",
+      "camera_id": "replace-with-camera-lens-and-settings",
+      "perception_profile": "detail",
+      "split": "development",
+      "conditions": ["nominal"],
+      "provenance": "Replace with collection date, source filename and capture details",
+      "annotation": {
+        "reviewer": "replace-with-actual-reviewer",
+        "reviewer_kind": "human",
+        "center": null,
+        "required_objects": [["replace with a visible object name", "accepted synonym"]],
+        "notes": "Replace with independently checked labels before inference. A null center is ungraded."
+      }
+    }
+  ]
+}

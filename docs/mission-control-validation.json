@@ -1,0 +1,277 @@
+{
+  "date_utc": "2026-10-21T06:33:35.248588+00:00",
+  "host": "macOS-15.6-arm64-arm-64bit",
+  "model": "Qwen3-VL-2B-Instruct Q4_K_M + Q8_0 projector / llama.cpp Metal",
+  "browser": "155.0.8059.85",
+  "scene": {
+    "scenario": "realism",
+    "seed": 619,
+    "variant": "baseline",
+    "condition": "nominal"
+  },
+  "real_inference": true,
+  "real_flight_dynamics": false,
+  "physical_transport": false,
+  "concurrent_flight": false,
+  "automated_tests": {
+    "passed": 105,
+    "failed": 0,
+    "output": "docs/mission-control-tests.txt"
+  },
+  "intent": {
+    "passed": 8,
+    "total": 8,
+    "cases": [
+      {
+        "instruction": "Inspect the central doorway for obstructions.",
+        "expected": "passage",
+        "actual": {
+          "objective": "passage",
+          "focus": "central doorway",
+          "summary": "Check for obstructions in the central doorway."
+        },
+        "passed": true,
+        "latency_s": 0.639853041000606
+      },
+      {
+        "instruction": "Is anything blocking the passage?",
+        "expected": "passage",
+        "actual": {
+          "objective": "passage",
+          "focus": "doorway or passage",
+          "summary": "Check for obstructions in the passage"
+        },
+        "passed": true,
+        "latency_s": 0.6514753750016098
+      },
+      {
+        "instruction": "Inventory visible objects in the selected area, focusing on bottles, boxes and equipment.",
+        "expected": "inventory",
+        "actual": {
+          "objective": "inventory",
+          "focus": "bottles, boxes and equipment",
+          "summary": "Inspect visible objects in the selected area, focusing on bottles, boxes, and equipment."
+        },
+        "passed": true,
+        "latency_s": 0.792780165997101
+      },
+      {
+        "instruction": "Patrol the selected area. Describe visible objects and flag anything blocking the passage.",
+        "expected": "inventory",
+        "actual": {
+          "objective": "inventory",
+          "focus": "visible objects",
+          "summary": "Patrol the area, describe objects, and flag obstructions."
+        },
+        "passed": true,
+        "latency_s": 0.6741582079994259
+      },
+      {
+        "instruction": "Patrol the area and compare the camera views with the previous matching patrol for changes.",
+        "expected": "changes",
+        "actual": {
+          "objective": "changes",
+          "focus": "camera views",
+          "summary": "Compare previous camera views for changes during patrol."
+        },
+        "passed": true,
+        "latency_s": 0.6303231670026435
+      },
+      {
+        "instruction": "What changed since the last patrol?",
+        "expected": "changes",
+        "actual": {
+          "objective": "changes",
+          "focus": "last patrol",
+          "summary": "Compare current and previous inspection views to identify changes."
+        },
+        "passed": true,
+        "latency_s": 0.6365190419965074
+      },
+      {
+        "instruction": "Deliver a parcel to the hillside outside.",
+        "expected": "unsupported",
+        "actual": {
+          "objective": "unsupported",
+          "focus": "",
+          "summary": "Deliver a parcel to the hillside outside."
+        },
+        "passed": true,
+        "latency_s": 0.595248834004451
+      },
+      {
+        "instruction": "Fly to coordinates 100, 200.",
+        "expected": "unsupported",
+        "actual": {
+          "objective": "unsupported",
+          "focus": "",
+          "summary": "Fly to specified coordinates for indoor virtual camera inspection."
+        },
+        "passed": true,
+        "latency_s": 0.5983548749936745
+      }
+    ],
+    "scope": "Development prompts, not a broad language-understanding evaluation",
+    "retained_failure": ".local/validation/mission-control-intent-v1-failed.json"
+  },
+  "fleet_mission": {
+    "id": "8045bdf41b654562ba395e34112fc1e2",
+    "state": "complete",
+    "duration_s": 156.3879199028015,
+    "peak_aircraft_in_flight": 1,
+    "jobs": [
+      {
+        "drone_id": "drone-01",
+        "points": [
+          "entry",
+          "stock-rack",
+          "passage"
+        ],
+        "state": "complete",
+        "episode": "be3726d565b0450b9c6562f1dbeea552",
+        "reason": "Returned home; reconnaissance complete",
+        "observations": 3,
+        "distance_m": 18.73185553855316,
+        "video_complete": true,
+        "report_page": "/reports/be3726d565b0450b9c6562f1dbeea552/report.html"
+      },
+      {
+        "drone_id": "drone-02",
+        "points": [
+          "equipment",
+          "far-room",
+          "seating"
+        ],
+        "state": "complete",
+        "episode": "7a4824f13cd1435f90514acdc9a707d2",
+        "reason": "Returned home; reconnaissance complete",
+        "observations": 3,
+        "distance_m": 31.746227548474025,
+        "video_complete": true,
+        "report_page": "/reports/7a4824f13cd1435f90514acdc9a707d2/report.html"
+      }
+    ],
+    "report_page": "/reports/8045bdf41b654562ba395e34112fc1e2/report.html"
+  },
+  "operator_stop": {
+    "mission": "12ceefcc3d6c40d5a8cb55cdfbd903f2",
+    "queued_flight_cancelled": true,
+    "reset_required_verified": true
+  },
+  "ui": {
+    "map_drag_passed": true,
+    "completed_observation_previews": true,
+    "desktop_viewport": [
+      1560,
+      1100
+    ],
+    "mobile_viewport": [
+      390,
+      844
+    ],
+    "mobile_overflow": false,
+    "javascript_errors": []
+  },
+  "aircraft_runs": [
+    {
+      "episode": "be3726d565b0450b9c6562f1dbeea552",
+      "state": "complete",
+      "duration_s": 62.0223530420044,
+      "distance_m": 18.73185553855316,
+      "minimum_clearance_m": 0.4394748678530697,
+      "obstacle_stops": 2,
+      "inspection_points": [
+        "entry",
+        "stock-rack",
+        "passage"
+      ],
+      "video": {
+        "chunks": 60,
+        "mime": "video/webm",
+        "complete": true
+      },
+      "decoded_video": {
+        "width": 1280,
+        "height": 720
+      },
+      "observations": [
+        {
+          "view": "entry",
+          "summary": "A warehouse scene with a table holding several bottles, a red cabinet, and shelves with boxes, viewed from a low angle.",
+          "latency_s": 4.581226291003986
+        },
+        {
+          "view": "stock-rack",
+          "summary": "A warehouse shelving unit with boxes labeled 'HANDLE WITH CARE' and 'PARTS', a gray container, and a red object on the floor.",
+          "latency_s": 4.886757207998016
+        },
+        {
+          "view": "passage",
+          "summary": "The image shows a warehouse-like area with two blue barrels on a wooden pallet, a yellow hand truck with a box, and an orange traffic cone on the floor. The scene is viewed from inside a doorway, with the floor appearing to be concrete.",
+          "latency_s": 5.01537120899593
+        }
+      ]
+    },
+    {
+      "episode": "7a4824f13cd1435f90514acdc9a707d2",
+      "state": "complete",
+      "duration_s": 93.89875920900522,
+      "distance_m": 31.746227548474025,
+      "minimum_clearance_m": 0.44088998498344284,
+      "obstacle_stops": 4,
+      "inspection_points": [
+        "equipment",
+        "far-room",
+        "seating"
+      ],
+      "video": {
+        "chunks": 91,
+        "mime": "video/webm",
+        "complete": true
+      },
+      "decoded_video": {
+        "width": 1280,
+        "height": 720
+      },
+      "observations": [
+        {
+          "view": "equipment",
+          "summary": "The image shows two blue barrels on wooden pallets in a corner, with a traffic cone partially visible on the left.",
+          "latency_s": 5.017237374995602
+        },
+        {
+          "view": "far-room",
+          "summary": "A workspace with a computer displaying 'SYSTEM READY', a red toolbox, a blue box, a white mug, a bottle, and a coiled cable on a table.",
+          "latency_s": 5.130299374999595
+        },
+        {
+          "view": "seating",
+          "summary": "The image shows a workspace with a chair, a potted plant, a table, and a red toolbox. The scene is simple and lacks bottles or equipment as described in the topic.",
+          "latency_s": 4.9144994169982965
+        }
+      ]
+    }
+  ],
+  "source_sha256": {
+    "app/fleet.py": "cfad22ecc04b9d3c08f529e6e1685a32e6495e18e0527c472ecd0eef30dfae2c",
+    "app/recon.py": "1daf0da5ac8d887a18f89933abcad023927c79f1b8b614f8fd1dc4fedcd54c1f",
+    "app/recon_server.py": "ca79aa4b2559978c8c051461ae5810399db8fc295316fa74c224d6789a89e3d2",
+    "app/server.py": "f56f717606eae93499e09cf9f53bbf0c214310fcc79567027a343b4b18ea545f",
+    "app/perception.py": "cd842502e16ff24fe1ed6aadba936fd00af660206c42e043f44f1dcf7958131d",
+    "app/reports.py": "15e1ca68b5eadc926954a33f37e429aacd7ca99119fc3b00e13a986cd6e45508",
+    "app/ui/mission-control.html": "edd43cc7e2dd8056375e27a424d17e7557bf99810520d73cbb7c07680a47f038",
+    "app/ui/mission-control.css": "3bbbac2d9c134451deba970f364fa21a794008a371ad592dd13344ffd26e72bf",
+    "app/ui/mission-control.js": "c0a092d1968765b41d6c9eb524d86ad08a0626f0bf055edad7284bb1d76c4fb8",
+    "app/ui/recon.js": "3ebd2017c0697f98a12434b52f677deea526c970e73fcc5e6e8622180a31e9f6",
+    "app/ui/recon.css": "eee2cd956f26e58830feefcd5bbcb72e052377994f7660f35ffac6e3852a9595",
+    "scripts/check-mission-control.cjs": "98f8bfee48086b697ab8d8c278141f5751d85fa0ab94376cd48453c2218ed57e"
+  },
+  "full_local_evidence": ".local/validation/mission-control-live.json",
+  "limits": [
+    "One known synthetic indoor site, ideal pose and range sensing, fixed altitude",
+    "Area bounds inspection viewpoints only; transit can leave it",
+    "Sequential dispatch; no peer-collision or concurrent-aircraft validation",
+    "Model observations were recorded; full-caption precision is unmeasured",
+    "No real-world domain or physical-drone qualification"
+  ]
+}

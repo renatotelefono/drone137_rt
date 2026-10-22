@@ -1,0 +1,1606 @@
+{
+  "date": "2026-10-21",
+  "host": "macOS-15.6-arm64-arm-64bit",
+  "host_ram_gib": 16,
+  "target_ram_gib": 8,
+  "physical_transport": false,
+  "regression": {
+    "tests": 150,
+    "passed": true,
+    "path": ".local/validation/hardware-regression-v3.txt",
+    "sha256": "a056c3cde06cf5ef3187ef867e9edf0a9383f323c6f80e8f56cb416c8195eb0b"
+  },
+  "profile_ui_and_projection": {
+    "path": ".local/validation/hardware-ui-v1/results.json",
+    "sha256": "c57fa81e7062bfdd739f37b81652ff7bb2056c7c6e2e80c966afb855b918d176",
+    "passed": true,
+    "errors": [],
+    "overflow": false,
+    "profile_created": true,
+    "assignment_persisted": true,
+    "optics": {
+      "markers": 12,
+      "maximum_error_px": 0.40282222514670396
+    }
+  },
+  "review_ui": {
+    "path": ".local/validation/realism-hardware-review-v2/ui-check.json",
+    "sha256": "900cab4275819867b1649e448173a3567df337573d9ef9bdc8ed1a5d95951a4a",
+    "passed": true,
+    "episodes": 10,
+    "errors": [],
+    "overflow": false,
+    "video": {
+      "width": 960,
+      "height": 540,
+      "duration": 252.838,
+      "seek": 126.419
+    }
+  },
+  "camera_calibration_fixture": {
+    "path": ".local/validation/calibration-fixture-v1/result.json",
+    "sha256": "89f86fdfa6f9e4e74eb2d9db155e430a4cbd3e86f697d2cfeee69c96c4773f1f",
+    "version": 1,
+    "camera_id": "synthetic-calibration-fixture",
+    "source_kind": "synthetic-fixture",
+    "intrinsics": {
+      "width": 960,
+      "height": 540,
+      "fx": 800.306244788066,
+      "fy": 790.3050251853696,
+      "cx": 470.41902556638433,
+      "cy": 264.559239037338,
+      "distortion": [
+        -0.004717407103042994,
+        0.08242962100646223,
+        -0.00027748658408868244,
+        -0.0002586479270108306,
+        -0.19304530493718486
+      ]
+    },
+    "fit_reprojection_rms_px": 0.10072569005442841,
+    "reserved_reprojection_rms_px": [
+      0.04499701038002968,
+      0.17676465213298798,
+      0.18862563371658325,
+      0.07155267149209976
+    ],
+    "reserved_gate_px": 0.4,
+    "passed": true,
+    "opencv": "4.13.0",
+    "limitations": "Intrinsics only at these settings. Mount/timing/exposure require separate measurement; reserved poses are fitted, intrinsics are frozen."
+  },
+  "room_camera_fixture": {
+    "path": ".local/validation/room-camera-v1/result.json",
+    "sha256": "0d955e14d004de932d7d13b0539e22a0b3895938a629db9a311798be662a87e4",
+    "source_kind": "synthetic-fixture",
+    "physical_agreement_verified": false
+  },
+  "reference_flight_bringup": {
+    "path": ".local/validation/hardware-smoke-v7/results.json",
+    "sha256": "516e99299877c66e81ff1a7cd5381cd620496735f387cc799280f4ff9d4709f9",
+    "real_inference": false,
+    "qualification": null,
+    "errors": [],
+    "changed_sources": [],
+    "full_suite_selected": false,
+    "memory": {
+      "qwen": {
+        "sampled_peak_gib": 2.508418530225754,
+        "sampled_peak_guard_gib": 3.2512359619140625,
+        "budget_exceeded": false,
+        "measurement_error": null
+      }
+    },
+    "runs": [
+      {
+        "case": "hard-west-dim-present-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "flight-smoke",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": [
+            4.8,
+            8.65
+          ],
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": false
+        },
+        "flight": {
+          "samples": 714,
+          "distance_m": 18.466435798413325,
+          "minimum_truth_center_clearance_m": 0.6795226163238839,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.027594637177309752,
+          "max_speed_m_s": 0.8014655229410103,
+          "inspection_tracking_rmse_m": 0.05098880629532748,
+          "simulation_to_wall_time_ratio": 0.9904604443954298,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [],
+        "wall_time_s": 103.84064816699538
+      }
+    ]
+  },
+  "full_model_challenge": {
+    "path": ".local/validation/realism-hardware-v3/results.json",
+    "sha256": "9477c40ee944309a8784f1b56dc51dbc6c0f79039204ca6b965a502f993f9796",
+    "real_inference": true,
+    "qualification": {
+      "planned_runs": 8,
+      "completed_runs": 8,
+      "task_correct": 4,
+      "individual_runs_meeting_flight_and_task_gates": 4,
+      "qualified_passes": 4,
+      "pass_rate": 0.5,
+      "all_pass": false,
+      "false_location_claims": 1,
+      "memory_ok": true,
+      "per_run_deadline_s": 300,
+      "interpretation": "Observed performance on a frozen synthetic suite. Not a real-world reliability estimate. Absent cases require a completed search with no location claim; unresolved does not prove absence.",
+      "full_suite_qualified": false
+    },
+    "errors": [],
+    "changed_sources": [],
+    "full_suite_selected": true,
+    "memory": {
+      "qwen+laya": {
+        "sampled_peak_gib": 3.718366041779518,
+        "sampled_peak_guard_gib": 3.718366041779518,
+        "budget_exceeded": false,
+        "measurement_error": null
+      }
+    },
+    "runs": [
+      {
+        "case": "realism-west-dim-present-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "unresolved",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": [
+            4.8,
+            8.65
+          ],
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": false
+        },
+        "flight": {
+          "samples": 1915,
+          "distance_m": 43.737041377572176,
+          "minimum_truth_center_clearance_m": 0.582368780343125,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.029346367293446425,
+          "max_speed_m_s": 0.800928502571429,
+          "inspection_tracking_rmse_m": 0.05961251154266034,
+          "simulation_to_wall_time_ratio": 0.99039987114243,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [],
+        "wall_time_s": 265.63013716701244
+      },
+      {
+        "case": "realism-west-dim-absent-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "unresolved",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": null,
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": true
+        },
+        "flight": {
+          "samples": 1690,
+          "distance_m": 39.465196951288476,
+          "minimum_truth_center_clearance_m": 0.6104328978215285,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.028692386797033398,
+          "max_speed_m_s": 0.805435897747674,
+          "inspection_tracking_rmse_m": 0.07292446410721623,
+          "simulation_to_wall_time_ratio": 0.9903527732814451,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [],
+        "wall_time_s": 236.84330637499806
+      },
+      {
+        "case": "realism-east-glare-present-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "failed",
+        "landed": false,
+        "error": "RuntimeError: Insufficient observed clearance around aircraft",
+        "score": {
+          "truth_xy_m": [
+            10.2,
+            6.55
+          ],
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": false
+        },
+        "flight": {
+          "samples": 287,
+          "distance_m": 5.464678913384901,
+          "minimum_truth_center_clearance_m": 0.6895752775661724,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.025551733932611405,
+          "max_speed_m_s": 0.8098511833990575,
+          "inspection_tracking_rmse_m": null,
+          "simulation_to_wall_time_ratio": 0.992576819341061,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [],
+        "wall_time_s": 57.19972158400924
+      },
+      {
+        "case": "realism-east-glare-absent-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "unresolved",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": null,
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": true
+        },
+        "flight": {
+          "samples": 1758,
+          "distance_m": 40.18076657222507,
+          "minimum_truth_center_clearance_m": 0.58728952003176,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.02917750839186345,
+          "max_speed_m_s": 0.8075156701122274,
+          "inspection_tracking_rmse_m": 0.06360546644318492,
+          "simulation_to_wall_time_ratio": 0.9909869355907995,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [],
+        "wall_time_s": 245.86445408400323
+      },
+      {
+        "case": "realism-west-occluded-present-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "failed",
+        "landed": false,
+        "error": "ParamError: TIMEOUT: 'Timeout'; origin: set_param_float(); params: ('MPC_XY_VEL_MAX', 0.65)",
+        "score": {
+          "truth_xy_m": [
+            4.8,
+            8.5
+          ],
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": false
+        },
+        "flight": {
+          "samples": 0,
+          "distance_m": 0,
+          "minimum_truth_center_clearance_m": null,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": null,
+          "max_speed_m_s": null,
+          "inspection_tracking_rmse_m": null,
+          "simulation_to_wall_time_ratio": null,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [],
+        "wall_time_s": 14.12580004100164
+      },
+      {
+        "case": "realism-west-occluded-absent-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "unresolved",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": null,
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": true
+        },
+        "flight": {
+          "samples": 1673,
+          "distance_m": 38.660798105487345,
+          "minimum_truth_center_clearance_m": 0.610395174132699,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.02998167603438278,
+          "max_speed_m_s": 0.807508156467764,
+          "inspection_tracking_rmse_m": 0.058642855252723745,
+          "simulation_to_wall_time_ratio": 0.9909458285431096,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [],
+        "wall_time_s": 233.79328879198874
+      },
+      {
+        "case": "realism-east-motion-present-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "found",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": [
+            10.15,
+            6.35
+          ],
+          "error_m": 5.947181173015706,
+          "false_location_claim": true,
+          "correct": false
+        },
+        "flight": {
+          "samples": 1365,
+          "distance_m": 33.03090277353968,
+          "minimum_truth_center_clearance_m": 0.589790671154887,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.028442099825652344,
+          "max_speed_m_s": 0.8077901965913389,
+          "inspection_tracking_rmse_m": 0.053640618599127866,
+          "simulation_to_wall_time_ratio": 0.9909412769391152,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [],
+        "wall_time_s": 193.39825254199968
+      },
+      {
+        "case": "realism-east-motion-absent-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "unresolved",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": null,
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": true
+        },
+        "flight": {
+          "samples": 1529,
+          "distance_m": 35.64501636957674,
+          "minimum_truth_center_clearance_m": 0.6155047511601293,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.029093888296610363,
+          "max_speed_m_s": 0.8085597838846806,
+          "inspection_tracking_rmse_m": 0.057691381962771834,
+          "simulation_to_wall_time_ratio": 0.9901347936270859,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [
+          {
+            "event": "hold",
+            "time": 85759.813226458,
+            "reason": "Range/position freshness or clearance"
+          },
+          {
+            "event": "resume",
+            "time": 85760.125414333
+          }
+        ],
+        "wall_time_s": 214.71207533399865
+      }
+    ]
+  },
+  "alternate_profiles": {
+    "path": ".local/validation/hardware-profile-flights-v1/results.json",
+    "sha256": "b319c4837e1218d1befe7bc4ab8d9c182cdf4e4a58b7b1ad1981b90dc90af754",
+    "real_inference": false,
+    "qualification": null,
+    "errors": [],
+    "changed_sources": [],
+    "full_suite_selected": false,
+    "memory": {
+      "qwen": {
+        "sampled_peak_gib": 2.5182910338044167,
+        "sampled_peak_guard_gib": 3.2569732666015625,
+        "budget_exceeded": false,
+        "measurement_error": null
+      }
+    },
+    "runs": [
+      {
+        "case": "realism-east-motion-present-light-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.31,
+              "geometry_xy_scale": 0.8,
+              "inertia_xx": 0.008396681075172656,
+              "inertia_yy": 0.008396681075172656,
+              "inertia_zz": 0.015501565061857209,
+              "mass_kg": 1.25,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 5.176420666269191e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.096
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "light-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Light quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "5fff775a4055d25ff6896d686653218627d6612009a809098c72569edf53f2f5",
+          "created_at": 1792608033.9669409
+        },
+        "outcome": "flight-smoke",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": [
+            10.15,
+            6.35
+          ],
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": false
+        },
+        "flight": {
+          "samples": 777,
+          "distance_m": 17.54644786602103,
+          "minimum_truth_center_clearance_m": 0.6261561494256559,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.31,
+          "estimated_position_rmse_m": 0.02664988763502609,
+          "max_speed_m_s": 0.7600697454066778,
+          "inspection_tracking_rmse_m": 0.11418865940782996,
+          "simulation_to_wall_time_ratio": 0.9898985586808512,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [
+          {
+            "event": "fault-start",
+            "sensor": "odometry",
+            "airborne_seconds": 12.008539292000933,
+            "time": 86150.581878375
+          },
+          {
+            "event": "hold",
+            "time": 86150.890743458,
+            "reason": "Range/position freshness or clearance"
+          },
+          {
+            "event": "fault-end",
+            "sensor": "odometry",
+            "airborne_seconds": 12.634917000003043,
+            "time": 86151.208244875
+          },
+          {
+            "event": "resume",
+            "time": 86151.296836916
+          }
+        ],
+        "wall_time_s": 112.27236599999014
+      },
+      {
+        "case": "realism-east-motion-present-payload-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.44,
+              "geometry_xy_scale": 1.15,
+              "inertia_xx": 0.03747806118646595,
+              "inertia_yy": 0.03747806118646595,
+              "inertia_zz": 0.06919026680578327,
+              "mass_kg": 2.7,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 1.1181068639141453e-05,
+              "motor_time_down_s": 0.045,
+              "motor_time_up_s": 0.025,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.13799999999999998
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "payload-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.45
+            },
+            "name": "Payload quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "d4a03e75f99b65eb3d79d2b4a38e7a2e62f05d54b78537dd8a620c87a1184659",
+          "created_at": 1792608033.967459
+        },
+        "outcome": "flight-smoke",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": [
+            10.15,
+            6.35
+          ],
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": false
+        },
+        "flight": {
+          "samples": 764,
+          "distance_m": 17.576129710693344,
+          "minimum_truth_center_clearance_m": 0.8142729629096398,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.44,
+          "estimated_position_rmse_m": 0.02477905867559649,
+          "max_speed_m_s": 0.8511612753312884,
+          "inspection_tracking_rmse_m": 0.12772242337952328,
+          "simulation_to_wall_time_ratio": 0.9907028354479777,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [
+          {
+            "event": "fault-start",
+            "sensor": "odometry",
+            "airborne_seconds": 12.037381625006674,
+            "time": 86263.251380333
+          },
+          {
+            "event": "hold",
+            "time": 86263.585618041,
+            "reason": "Range/position freshness or clearance"
+          },
+          {
+            "event": "fault-end",
+            "sensor": "odometry",
+            "airborne_seconds": 12.611228125009802,
+            "time": 86263.825223083
+          },
+          {
+            "event": "resume",
+            "time": 86263.886586458
+          }
+        ],
+        "wall_time_s": 111.60595858399756
+      }
+    ]
+  },
+  "limitations": [
+    "All aircraft/camera/sensor profiles are provisional, without measured physical agreement.",
+    "Synthetic odometry is generated from physics truth; image-derived VIO/SLAM is not implemented.",
+    "Range sensor uses conservative vertical columns; rolling shutter/exposure are first-order rotational approximations.",
+    "Reconstruction/calibration validation uses synthetic fixtures; no real-room capture or flight log was provided.",
+    "Native multi-profile comparisons are sequential; dashboard fleet remains kinematic and only pins hardware metadata.",
+    "Actual 8 GiB hardware and simultaneous native aircraft are untested.",
+    "The full challenge failed acceptance. Corrective reruns are development diagnostics, not replacement scores."
+  ],
+  "corrective_diagnostics": {
+    "path": ".local/validation/hardware-control-retest-v1/results.json",
+    "sha256": "ea5fa74cefaf9662ce3dca243423a80ee285b23ea0a42079a2ed9dc85b4504a2",
+    "real_inference": true,
+    "qualification": {
+      "planned_runs": 2,
+      "completed_runs": 2,
+      "task_correct": 0,
+      "individual_runs_meeting_flight_and_task_gates": 0,
+      "qualified_passes": 0,
+      "pass_rate": 0.0,
+      "all_pass": false,
+      "false_location_claims": 1,
+      "memory_ok": true,
+      "per_run_deadline_s": 300,
+      "interpretation": "Observed performance on a frozen synthetic suite. Not a real-world reliability estimate. Absent cases require a completed search with no location claim; unresolved does not prove absence.",
+      "full_suite_qualified": false
+    },
+    "errors": [],
+    "changed_sources": [],
+    "full_suite_selected": false,
+    "memory": {
+      "qwen+laya": {
+        "sampled_peak_gib": 3.6118285059928894,
+        "sampled_peak_guard_gib": 3.6118285059928894,
+        "budget_exceeded": false,
+        "measurement_error": null
+      }
+    },
+    "runs": [
+      {
+        "case": "realism-east-glare-present-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "found",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": [
+            10.2,
+            6.55
+          ],
+          "error_m": 6.148158550755445,
+          "false_location_claim": true,
+          "correct": false,
+          "evaluated": true
+        },
+        "flight": {
+          "samples": 1404,
+          "distance_m": 35.552976922036066,
+          "minimum_truth_center_clearance_m": 0.7620850970830505,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.02991251107067364,
+          "max_speed_m_s": 0.8105114677632395,
+          "inspection_tracking_rmse_m": 0.06801346207337541,
+          "simulation_to_wall_time_ratio": 0.9910272463879745,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [],
+        "wall_time_s": 197.71551075000025
+      },
+      {
+        "case": "realism-west-occluded-present-reference-quad-r1",
+        "hardware": {
+          "profile": {
+            "airframe": {
+              "body_radius_m": 0.38,
+              "geometry_xy_scale": 1.0,
+              "inertia_xx": 0.02166666666666667,
+              "inertia_yy": 0.02166666666666667,
+              "inertia_zz": 0.04,
+              "mass_kg": 2.0643076923076924,
+              "max_rotor_rad_s": 1000.0,
+              "moment_constant": 0.016,
+              "motor_constant": 8.54858e-06,
+              "motor_time_down_s": 0.025,
+              "motor_time_up_s": 0.0125,
+              "rotor_drag": 8.06428e-05,
+              "rotor_radius_m": 0.12
+            },
+            "camera": {
+              "burst_frames": 2,
+              "cx": 480.0,
+              "cy": 270.0,
+              "distortion": [
+                -0.06,
+                0.015,
+                0.001,
+                -0.001,
+                0.0
+              ],
+              "drop_probability": 0.025,
+              "exposure_ms": 8.0,
+              "fx": 722.1478033602424,
+              "fy": 722.1478033602424,
+              "height": 540,
+              "jitter_ms": 25.0,
+              "jpeg_quality": 0.72,
+              "latency_ms": 130.0,
+              "offset_flu_m": [
+                0.12,
+                0,
+                0.02
+              ],
+              "pitch_degrees": -10.0,
+              "rolling_shutter_ms": 12.0,
+              "width": 960
+            },
+            "evidence": {
+              "files": [],
+              "notes": "Generic PX4 x500 quad-X reference plus synthetic camera/range/odometry assumptions. No measured camera, real-room reconstruction or airframe calibration supplied. All variations are hypotheses, not named commercial drone specifications.",
+              "status": "provisional"
+            },
+            "id": "reference-quad",
+            "kind": "quad-x",
+            "limits": {
+              "acceleration_m_s2": 0.8,
+              "clearance_margin_m": 0.18,
+              "mission_seconds": 300,
+              "speed_m_s": 0.6
+            },
+            "name": "Reference quadcopter \u00b7 provisional",
+            "sensors": {
+              "drift_m_per_s": 0.0001,
+              "max_position_sigma_m": 0.15,
+              "position_delay_ms": 50.0,
+              "position_noise_m": 0.015,
+              "range_dropout": 0.01,
+              "range_m": 4.0,
+              "range_noise_m": 0.01
+            }
+          },
+          "revision": 1,
+          "sha256": "8662abf0b8a5019ac7f77ff8ff70f9086d11d6e1c1289730e9685fb290e07765",
+          "created_at": 1792608033.9663281
+        },
+        "outcome": "unresolved",
+        "landed": true,
+        "error": null,
+        "score": {
+          "truth_xy_m": [
+            4.8,
+            8.5
+          ],
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": false,
+          "evaluated": true
+        },
+        "flight": {
+          "samples": 1615,
+          "distance_m": 40.358151640489254,
+          "minimum_truth_center_clearance_m": 0.7436574780036932,
+          "envelope_violations": 0,
+          "vehicle_envelope_radius_m": 0.38,
+          "estimated_position_rmse_m": 0.03022360005745306,
+          "max_speed_m_s": 0.8106316599538315,
+          "inspection_tracking_rmse_m": 0.06824079520959032,
+          "simulation_to_wall_time_ratio": 0.9903305291608538,
+          "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+          "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+        },
+        "sensor_events": [
+          {
+            "event": "fault-start",
+            "sensor": "range",
+            "airborne_seconds": 10.126872791006463,
+            "time": 86633.124684333
+          },
+          {
+            "event": "hold",
+            "time": 86633.394328583,
+            "reason": "Range/position freshness or clearance"
+          },
+          {
+            "event": "fault-end",
+            "sensor": "range",
+            "airborne_seconds": 10.837654750008369,
+            "time": 86633.83546075
+          },
+          {
+            "event": "resume",
+            "time": 86633.898309666
+          }
+        ],
+        "wall_time_s": 226.81888495800376
+      }
+    ]
+  },
+  "runtime_ready": {
+    "app_url": "http://127.0.0.1:8137/control",
+    "profiles_url": "http://127.0.0.1:8137/airframes",
+    "model": "Qwen3-VL-2B-Instruct Q4_K_M",
+    "ready": true,
+    "profiles": [
+      "reference-quad@1",
+      "light-quad@1",
+      "payload-quad@1"
+    ]
+  }
+}

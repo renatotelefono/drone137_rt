@@ -4,6 +4,7 @@ import json
 import os
 import re
 import signal
+import time
 from pathlib import Path
 
 from aiohttp import web
@@ -88,7 +89,7 @@ async def serve(args):
             print(json.dumps({"event": "app_listening", "port": args.port, "mode": "browser-kinematic-recon"}), flush=True)
             if args.open_browser:
                 import webbrowser
-                webbrowser.open(f"http://127.0.0.1:{args.port}")
+                webbrowser.open(f"http://127.0.0.1:{args.port}/control")
             done = asyncio.Event()
             for sig in (signal.SIGINT, signal.SIGTERM):
                 asyncio.get_running_loop().add_signal_handler(sig, done.set)
@@ -112,6 +113,17 @@ async def serve(args):
             policy = QwenPolicy(LlamaBackend()) if args.policy == "qwen" else ScriptedPolicy()
         await camera.start()
         await drone.connect()
+        if args.mode == 'sim':
+            # Discovery of a topic alone does not prove that rendering or the
+            # bridge works. Require a fresh native frame before offering Start.
+            async with asyncio.timeout(15):
+                while True:
+                    if camera.error:
+                        raise RuntimeError(f'Native camera unavailable: {camera.error}')
+                    frame = camera.latest()
+                    if frame and 0 <= time.monotonic()-frame.received_monotonic <= 1:
+                        break
+                    await asyncio.sleep(.1)
         if args.mode == "sim" and args.policy == "qwen":
             await policy.backend.health()
         provenance = {

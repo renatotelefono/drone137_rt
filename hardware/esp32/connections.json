@@ -1,0 +1,79 @@
+{
+  "status": "proposed carrier net assignment, not a routed PCB or verified assembly",
+  "pin_source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/",
+  "pins": [
+    {
+      "function": "M1 front right CW",
+      "xiao_pin": "D0",
+      "gpio": 1,
+      "connection": "100 ohm -> gate Q1; 10k gate-to-GND"
+    },
+    {
+      "function": "M2 rear right CCW",
+      "xiao_pin": "D1",
+      "gpio": 2,
+      "connection": "100 ohm -> gate Q2; 10k gate-to-GND"
+    },
+    {
+      "function": "M3 rear left CW",
+      "xiao_pin": "D3",
+      "gpio": 4,
+      "connection": "100 ohm -> gate Q3; 10k gate-to-GND"
+    },
+    {
+      "function": "M4 front left CCW",
+      "xiao_pin": "D8",
+      "gpio": 7,
+      "connection": "100 ohm -> gate Q4; 10k gate-to-GND; SD disabled"
+    },
+    {
+      "function": "IMU SDA",
+      "xiao_pin": "D4",
+      "gpio": 5,
+      "connection": "MPU6050 SDA, 3.3 V logic"
+    },
+    {
+      "function": "IMU SCL",
+      "xiao_pin": "D5",
+      "gpio": 6,
+      "connection": "MPU6050 SCL, 3.3 V logic"
+    },
+    {
+      "function": "IMU interrupt",
+      "xiao_pin": "D9",
+      "gpio": 8,
+      "connection": "MPU6050 INT; SD disabled"
+    },
+    {
+      "function": "Battery voltage",
+      "xiao_pin": "D10",
+      "gpio": 9,
+      "connection": "Filtered 1:2 divider; SD disabled"
+    },
+    {
+      "function": "Flow sensor RX",
+      "xiao_pin": "D6",
+      "gpio": 43,
+      "connection": "ESP TX -> sensor RX, 3.3 V UART logic"
+    },
+    {
+      "function": "Flow sensor TX",
+      "xiao_pin": "D7",
+      "gpio": 44,
+      "connection": "Sensor TX -> ESP RX, 3.3 V UART logic"
+    }
+  ],
+  "reserved": {
+    "GPIO3": "strapping pin, not assigned",
+    "GPIO21": "onboard LED / SD CS; leave unused",
+    "GPIO41_42": "microphone, do not reuse in revision A"
+  },
+  "notes": [
+    "No microSD card installed; SD and microphone software disabled. Record on ground PC.",
+    "XIAO Sense native camera pins remain as documented by Seeed.",
+    "Sensor 5 V power is separate from 3.3 V UART logic.",
+    "Battery feeds motors directly and XIAO BAT input on separate branches with common ground.",
+    "Disconnect flight battery and motors for first USB camera bring-up.",
+    "Motor geometry/order and IMU axes require explicit mapping in any future flight firmware."
+  ]
+}

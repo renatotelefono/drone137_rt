@@ -1,0 +1,723 @@
+{
+  "date": "2026-10-20",
+  "host": "Apple M4 / 16 GiB / macOS 15.6 / Python 3.12.13",
+  "real_inference": true,
+  "physical_transport": false,
+  "perception_version": "center-evidence-v2",
+  "tests": {
+    "passed": 69,
+    "elapsed_s": 16.558,
+    "log": "perception-tests.txt"
+  },
+  "image_runs": [
+    {
+      "version": "center-evidence-v2",
+      "order_seed": 137,
+      "correct": 30,
+      "total": 30,
+      "false_clear": 0,
+      "passed": true,
+      "scope": "Synthetic center appearance only; not general object recognition or physical clearance",
+      "latency_s": {
+        "min": 0.912808834000316,
+        "median": 1.036721478999425,
+        "max": 1.1818550000007235
+      }
+    },
+    {
+      "version": "center-evidence-v2",
+      "order_seed": 901,
+      "correct": 30,
+      "total": 30,
+      "false_clear": 0,
+      "passed": true,
+      "scope": "Synthetic center appearance only; not general object recognition or physical clearance",
+      "latency_s": {
+        "min": 0.9409619170000951,
+        "median": 1.044432186999984,
+        "max": 1.1979245000002265
+      }
+    }
+  ],
+  "image_cases": [
+    {
+      "id": "view-02-changed",
+      "split": "held_out",
+      "image_sha256": "ad563baf3a62399743c6c8951f965fd2772d8ec5294111a8178fd16bc5e39362",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "brown rectangular shape with horizontal line, appears to be a solid object",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-00-changed",
+      "split": "held_out",
+      "image_sha256": "54f96c4ec21c754805ec7655560ed835e45d2cc02b1ff5cb63b7e76600ae7d89",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "A gray rectangular object with a brown horizontal line, possibly a door or panel, in the center of the image.",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-06-changed",
+      "split": "held_out",
+      "image_sha256": "ff5faa5e00db139bb01bc7bf16e36870e18f55d511b6776720b5c2954d9c42c9",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "A gray rectangular object with a brown horizontal bar, viewed from the center of a room with a wall and a door.",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-09-changed",
+      "split": "held_out",
+      "image_sha256": "1d3cbabae73191cbd78c7a41d470330577127e43e8aedd8550e10a33d6210a7b",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "central gray block with horizontal brown bar, surrounded by dark panels and openings",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-10-baseline",
+      "split": "held_out",
+      "image_sha256": "7bbf0765b7487e2ad8987576d26be63cc72d74c1501351f34fb31b13b80f1ce5",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows open space with floor, walls, and a circular blue object in center",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "gate-open",
+      "split": "regression",
+      "image_sha256": "b8d347722fea96d074b1b27f41cb89c44d27df5d80462993037544f1e352c3c4",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central opening with dark green interior, brown door partially open, two vertical supports, path leading to it, green ground, light blue sky",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-05-baseline",
+      "split": "held_out",
+      "image_sha256": "697976ee3ca7c7164f99251f42e043439f222399a2ee634c4e7f04d690c5d9bb",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows open space with floor grid and a circular blue light",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-10-changed",
+      "split": "held_out",
+      "image_sha256": "971e20fe9486917289fe7518b57831e058c2ede7096de285360927ef21213f2e",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "A brown rectangular object with a horizontal dark stripe, centered in a gray space.",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "native-gate-closed",
+      "split": "regression",
+      "image_sha256": "40b826d38d363e55009f2336ddd8964ac3bb5db872a415502fd5b27b8ad349b9",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "A dark brown rectangular panel with a black frame, centered in a light gray background with a green floor.",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-05-changed",
+      "split": "held_out",
+      "image_sha256": "de525ba88fb2b75fe7702ff02bb20d040eb80fd8ce836736cd862739f7a841ab",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "central brown box in a dark room with a horizontal line",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-07-baseline",
+      "split": "held_out",
+      "image_sha256": "06b706fc10d85621ebe7fc77feceaeb10daeab982b8d4a14e86a0e7ea0e0f48d",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows open space with a circular blue object on floor, no solid objects blocking view",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-00-baseline",
+      "split": "held_out",
+      "image_sha256": "342b7066c3e505cfe45a1b67304d2649540b9dc1406763e4ba9ca84a0948860a",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows open space with a dark rectangle above and a brown object on the left",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-09-baseline",
+      "split": "held_out",
+      "image_sha256": "f7c892e77e683d02cc9ce31618bc549e0a66699cbdc511d95d8d0f5f63beac45",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "two dark doors open to a central space with a brown object in the middle",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "gate-closed",
+      "split": "regression",
+      "image_sha256": "8feba7ee7b94645db97e6a668bacfff8ae45c1ac38a2bb8e670211d5564a73d7",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "A brown wooden gate with vertical slats, centered in a wall, with a green ground and light blue sky.",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-11-baseline",
+      "split": "held_out",
+      "image_sha256": "81ac99a0dddaa6e2a701f7051b942c9f90e0cabe7271328659134d352070b342",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows open space with a circular blue object on floor, no solid objects blocking view",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "passage-clear",
+      "split": "regression",
+      "image_sha256": "660b3439135f9f65000d7fc2d15625beb27c8ab73579098404123047ac3be5f9",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "A gray floor with a grid pattern, a central circular blue light, and a brown box in the background.",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-04-baseline",
+      "split": "held_out",
+      "image_sha256": "7e77798f1f39d2093b6a57fa96c926073eb4b5a3f3c9cf8761c03d9830807130",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows a gray floor with a blue circle, a dark rectangular shape above, and a green box on the left.",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-11-changed",
+      "split": "held_out",
+      "image_sha256": "b3cffac7aa438436917555aa9b36c6106e6fbfdc103a0c8e67ab220cb2efd3d4",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "central third of image shows brown box with horizontal line, surrounded by walls and a dark door",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-08-changed",
+      "split": "held_out",
+      "image_sha256": "e922192526a71132fb014c81927af231add9eff4f06001edc1194216b7ca1f6d",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "A brown rectangular object with a horizontal line, centered in a gray background.",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-08-baseline",
+      "split": "held_out",
+      "image_sha256": "8ceac97ddf159c1b799f0e811aea735ad528908933b5e422e1e2ce55f60e95cd",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows open space with floor grid and a dark rectangle above",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-02-baseline",
+      "split": "held_out",
+      "image_sha256": "ada6b7951da7e24240290e9c2496481e680f96b57e906b7664770eedf0d2f0a7",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows open space with floor grid, no objects or walls blocking view",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-01-baseline",
+      "split": "held_out",
+      "image_sha256": "b340107301a86dcb33a3d02795421e0b8f3c8b75eaeda07285b389ffadb33504",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "A gray floor with a blue circle, two doors, and a green object in the center.",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-04-changed",
+      "split": "held_out",
+      "image_sha256": "b2776cbd7711d9685e1892188b724df3245a0dc81d8727a09469c82e966b690f",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "A brown rectangular object with a horizontal dark stripe, centered in a gray space.",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-03-baseline",
+      "split": "held_out",
+      "image_sha256": "2388078ec149b9027f18641421ed17ac5e962251fc087593b75942c1b9c1d14d",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows open space with a blue circle on floor, no solid objects blocking view",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "native-gate-open",
+      "split": "regression",
+      "image_sha256": "5995c99cee7d430429df863e4b4f02034e7cee87f03e0910af9bf5d2b69e0152",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "black frame structure with brown panel on left, open space to right",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-06-baseline",
+      "split": "held_out",
+      "image_sha256": "17142be421fa1a9dcb5fb9779dc55cd5eb30383dc6f1573967484c9b162eddd4",
+      "expected": "open_space",
+      "perception": {
+        "visible_evidence": "central third of image shows a gray floor with a circular blue dot, and a dark rectangular shape above it",
+        "center": "open_space",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "passage-blocked",
+      "split": "regression",
+      "image_sha256": "4c70ae47f7271874104b661055d8c8939f0f1f5b19d4d2bf240fc41e240e9a5c",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "central gray box with horizontal brown bar, surrounded by dark walls and openings",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-01-changed",
+      "split": "held_out",
+      "image_sha256": "4cf494141f2b3d4f8081f874b754a64abc3c95ca279f819cdadea8bde6ac5465",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "two brown rectangular shapes stacked vertically in a dark room with a horizontal line between them",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-07-changed",
+      "split": "held_out",
+      "image_sha256": "cf1bc875e31815c7b50133a114bf38f1bd17c340fd49980672cf0fd8667f9f83",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "central brown panel with horizontal line, surrounded by dark walls and floor",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    },
+    {
+      "id": "view-03-changed",
+      "split": "held_out",
+      "image_sha256": "78ae364bd2aa57f5ca6700e3e17d4f4f83ff7cb770caf20ff5ea287701293433",
+      "expected": "solid_surface",
+      "perception": {
+        "visible_evidence": "central gray object with brown horizontal bar, appears to be a solid panel",
+        "center": "solid_surface",
+        "version": "center-evidence-v2"
+      },
+      "action": "continue",
+      "correct": true
+    }
+  ],
+  "browser_patrols": [
+    {
+      "episode": "68139c3132bb4646b8c5b5c2ffdaf439",
+      "scenario": "rooms",
+      "seed": 9107,
+      "variant": "baseline",
+      "state": "complete",
+      "reason": "Returned home; reconnaissance complete",
+      "unreached": [],
+      "video": {
+        "chunks": 56,
+        "mime": "video/webm",
+        "complete": true
+      },
+      "observations": [
+        {
+          "view": "entry",
+          "observation": "central third shows a gray wall, a blue door, and a wooden door with a circular light on the floor",
+          "perception": {
+            "visible_evidence": "central third shows a gray wall, a blue door, and a wooden door with a circular light on the floor",
+            "center": "open_space",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "same_center_class",
+            "previous_center": "open_space",
+            "current_center": "open_space",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 2.0483072500010167
+        },
+        {
+          "view": "passage",
+          "observation": "central third of image shows a gray floor with a circular blue mark, a brown box on a wall, and a dark rectangular area above.",
+          "perception": {
+            "visible_evidence": "central third of image shows a gray floor with a circular blue mark, a brown box on a wall, and a dark rectangular area above.",
+            "center": "open_space",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "same_center_class",
+            "previous_center": "open_space",
+            "current_center": "open_space",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 2.1660600830000476
+        },
+        {
+          "view": "far-room",
+          "observation": "A dark, rectangular object with three horizontal divisions in the center of the image.",
+          "perception": {
+            "visible_evidence": "A dark, rectangular object with three horizontal divisions in the center of the image.",
+            "center": "solid_surface",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "same_center_class",
+            "previous_center": "solid_surface",
+            "current_center": "solid_surface",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 1.8147662499995931
+        }
+      ]
+    },
+    {
+      "episode": "c553beeb1ed8460c8d78b6c18216d462",
+      "scenario": "rooms",
+      "seed": 9107,
+      "variant": "changed",
+      "state": "partial",
+      "reason": "Returned home; some inspection points were not reached",
+      "unreached": [
+        "far-room"
+      ],
+      "video": {
+        "chunks": 115,
+        "mime": "video/webm",
+        "complete": true
+      },
+      "observations": [
+        {
+          "view": "entry",
+          "observation": "central third shows a gray box with brown bands, a wall, and a circular blue light on the floor",
+          "perception": {
+            "visible_evidence": "central third shows a gray box with brown bands, a wall, and a circular blue light on the floor",
+            "center": "solid_surface",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "new_obstruction",
+            "previous_center": "open_space",
+            "current_center": "solid_surface",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 1.135906083000009
+        },
+        {
+          "view": "passage",
+          "observation": "A gray rectangular object with a brown horizontal bar in the center, viewed from the front.",
+          "perception": {
+            "visible_evidence": "A gray rectangular object with a brown horizontal bar in the center, viewed from the front.",
+            "center": "solid_surface",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "new_obstruction",
+            "previous_center": "open_space",
+            "current_center": "solid_surface",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 1.0368283330008126
+        }
+      ]
+    },
+    {
+      "episode": "ecd9663bfd194191b370b7e26c54fb27",
+      "scenario": "warehouse",
+      "seed": 137,
+      "variant": "baseline",
+      "state": "complete",
+      "reason": "Returned home; reconnaissance complete",
+      "unreached": [],
+      "video": {
+        "chunks": 57,
+        "mime": "video/webm",
+        "complete": true
+      },
+      "observations": [
+        {
+          "view": "entry",
+          "observation": "central third of image shows a dark room with a blue circular object on the floor, a wall, and a door in the background.",
+          "perception": {
+            "visible_evidence": "central third of image shows a dark room with a blue circular object on the floor, a wall, and a door in the background.",
+            "center": "open_space",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "same_center_class",
+            "previous_center": "open_space",
+            "current_center": "open_space",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 2.15403654200054
+        },
+        {
+          "view": "passage",
+          "observation": "A gray floor with a grid pattern, a central circular blue object, and two open doors on either side.",
+          "perception": {
+            "visible_evidence": "A gray floor with a grid pattern, a central circular blue object, and two open doors on either side.",
+            "center": "open_space",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "same_center_class",
+            "previous_center": "open_space",
+            "current_center": "open_space",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 2.0434217499987426
+        },
+        {
+          "view": "far-room",
+          "observation": "central third shows a dark, rectangular object with three horizontal divisions, resembling a cabinet or shelving unit.",
+          "perception": {
+            "visible_evidence": "central third shows a dark, rectangular object with three horizontal divisions, resembling a cabinet or shelving unit.",
+            "center": "solid_surface",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "same_center_class",
+            "previous_center": "solid_surface",
+            "current_center": "solid_surface",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 1.9885715000000346
+        }
+      ]
+    },
+    {
+      "episode": "3b263acec4e34dd18c685739686c17a7",
+      "scenario": "warehouse",
+      "seed": 137,
+      "variant": "changed",
+      "state": "partial",
+      "reason": "Returned home; some inspection points were not reached",
+      "unreached": [
+        "far-room"
+      ],
+      "video": {
+        "chunks": 116,
+        "mime": "video/webm",
+        "complete": true
+      },
+      "observations": [
+        {
+          "view": "entry",
+          "observation": "central third shows a gray cube with a blue circle on floor, surrounded by dark walls and a grid floor",
+          "perception": {
+            "visible_evidence": "central third shows a gray cube with a blue circle on floor, surrounded by dark walls and a grid floor",
+            "center": "solid_surface",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "new_obstruction",
+            "previous_center": "open_space",
+            "current_center": "solid_surface",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 1.1215697079987876
+        },
+        {
+          "view": "passage",
+          "observation": "central gray panel with brown horizontal bar, surrounded by dark walls and open sides",
+          "perception": {
+            "visible_evidence": "central gray panel with brown horizontal bar, surrounded by dark walls and open sides",
+            "center": "solid_surface",
+            "version": "center-evidence-v2"
+          },
+          "change": {
+            "status": "new_obstruction",
+            "previous_center": "open_space",
+            "current_center": "solid_surface",
+            "basis": "two independently classified images; center appearance only"
+          },
+          "latency_s": 1.0081365830010327
+        }
+      ]
+    }
+  ],
+  "native": {
+    "episode": "63d67435d42149f9be59f10f8fedcd34",
+    "passed": true,
+    "elapsed_s": 45.02371870800016,
+    "real_camera": true,
+    "real_flight_dynamics": true,
+    "in_air": false,
+    "observations": [
+      {
+        "target": "gate_a",
+        "view": "gate_a_front",
+        "image": ".local/data/runs/63d67435d42149f9be59f10f8fedcd34/c00106678c3648ae8832d3a20747307b.jpg",
+        "expected": "open",
+        "observed": "open",
+        "reason": "A gray frame structure with a brown panel on the left, forming an opening in the center.",
+        "correct": true
+      },
+      {
+        "target": "gate_b",
+        "view": "gate_b_front",
+        "image": ".local/data/runs/63d67435d42149f9be59f10f8fedcd34/aefa788193cb4ef9accb8e71a17df979.jpg",
+        "expected": "closed",
+        "observed": "closed",
+        "reason": "A brown rectangular panel in a frame, with a dark shape above it, on a light background.",
+        "correct": true
+      }
+    ]
+  },
+  "retained_failures": {
+    "prior_model_failures": "mac-validation.json",
+    "native_open_gate_episode": "e2509f7fb7a94c4191735e6fcaf1134b",
+    "native_observed": [
+      "closed",
+      "closed"
+    ],
+    "native_expected": [
+      "open",
+      "closed"
+    ],
+    "prompt_probes": ".local/validation/probe-native.json"
+  },
+  "scope": "Synthetic central-view appearance and bounded patrol actions; selected JPEGs from video, not continuous video understanding. Indoor recon remains ideal kinematics; native flight is a separate global-waypoint gate route. No real-drone acceptance.",
+  "model": {
+    "repository": "Qwen/Qwen3-VL-2B-Instruct-GGUF",
+    "revision": "52d6c8ffea26cc873ac5ad116f8631268d7eb503",
+    "files": [
+      {
+        "name": "Qwen3VL-2B-Instruct-Q4_K_M.gguf",
+        "sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+        "size": 1107409952
+      },
+      {
+        "name": "mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf",
+        "sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+        "size": 445053216
+      }
+    ]
+  },
+  "perception_source_sha256": "ae5dcecb71a4fde0ddf926c27a3f60bbb8686bde4516d3c59213e633cad2f8ea"
+}

@@ -6,3 +6,16 @@ __pycache__/
 runs/
 dist/
 .pytest_cache/
+
+# Downloaded local AI model weights; keep model metadata and download scripts.
+*.gguf
+*.safetensors
+*.onnx
+*.pt
+*.pth
+*.ckpt
+pytorch_model*.bin
+model-*-of-*.bin
+
+# Local camera network credentials; never include in build packages.
+hardware/esp32/camera_bench/config.h

@@ -1,0 +1,399 @@
+{
+  "version": "object-localization-v1",
+  "real_inference": true,
+  "physical_transport": false,
+  "real_flight_dynamics": false,
+  "host": "macOS-15.6-arm64-arm-64bit",
+  "target": "red fire extinguisher with a black hose and operating handle",
+  "scope": "Development experiment, one authored room; not statistical proof or real-world qualification.",
+  "completed": true,
+  "errors": [],
+  "packages": {
+    "laya-mlx": "0.5.0",
+    "mlx": "0.32.4",
+    "aiohttp": "3.14.4",
+    "psutil": "7.2.2"
+  },
+  "qwen_server_command": [
+    "/Users/klauskopper/.codex/worktrees/9a64/drone137/.local/build/llama.cpp/build/bin/llama-server",
+    "-m",
+    "/Users/klauskopper/.codex/worktrees/9a64/drone137/.local/data/models/Qwen3VL-2B-Instruct-Q4_K_M.gguf",
+    "--mmproj",
+    "/Users/klauskopper/.codex/worktrees/9a64/drone137/.local/data/models/mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf",
+    "--host",
+    "127.0.0.1",
+    "--port",
+    "8081",
+    "-c",
+    "2048",
+    "-np",
+    "1",
+    "--cache-ram",
+    "0",
+    "--no-cache-prompt",
+    "-ngl",
+    "99",
+    "--threads",
+    "2"
+  ],
+  "source_hashes": {
+    "app/localization.py": "c7982fcb15047d8e53a07ea5d70d8d669e46dade62ad86b5ee444c260c778e5e",
+    "scripts/localization_scenarios.py": "175d9620a6f6ee453146a5592f557888c1784a0bff7fad336080b45942415f00",
+    "scripts/localization-camera.cjs": "826f902194b62712957b96b62b7973e5fdcb5095344737d92f41884322e53082",
+    "scripts/evaluate_localization.py": "21de583df3f75acde0c244e25f19e450a918fa5aca866ca8407bf941b5f13cf5",
+    "scripts/memory_watch.py": "e32f768a3b2f9b74ea0280ccf0ba2b11a25b5dc9c9ed32c0bc6f964af873dd34"
+  },
+  "date": "2026-10-21",
+  "report": ".local/validation/localization-evaluation-cache-bounded/report.html",
+  "raw_results_sha256": "62698fd10f6fd9c029226ca7bcedd1490933d2edb2921415714c4c4bd4b3e5b7",
+  "arms": {
+    "qwen": {
+      "correct": 4,
+      "total": 5,
+      "target_present_localized": 4,
+      "false_location_claims": 1,
+      "rejected_actions": 0,
+      "mean_decision_s": 0.31799770027808133,
+      "memory_peak_gib": 1.8870784714818,
+      "total_search_s": 95.47595987499517,
+      "total_vision_s": 78.60952104498574,
+      "total_decision_s": 11.447917210010928,
+      "observations": 36,
+      "memory": {
+        "metric": "sum of macOS process physical footprints",
+        "interval_s": 0.2,
+        "budget_gib": 5.0,
+        "sampled_peak_gib": 1.8870784714818,
+        "budget_exceeded": false,
+        "measurement_error": null,
+        "host_memory_gib": 16.0,
+        "actual_8gb_hardware": false,
+        "scope": "Evaluator, Laya if loaded, one browser camera including GPU/helpers, Node, simulator server and Qwen. Excludes unrelated applications and user browser tabs. Sampling is not an OS-enforced RAM limit.",
+        "host_swap_start_bytes": 5591072768,
+        "host_swap_end_bytes": 5582684160
+      },
+      "cases": [
+        {
+          "id": "north-clutter",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              4.4,
+              8.9
+            ],
+            "localization_error_m": 0.004267196580342369,
+            "tolerance_m": 0.75,
+            "false_location_claim": false,
+            "correct": true,
+            "absent_case_note": null
+          },
+          "location": {
+            "xy_m": [
+              4.400765209244064,
+              8.904198025901312
+            ],
+            "baseline_m": 0.6500000000000001,
+            "intersection_angle_degrees": 11.704576179206814,
+            "source_views": [
+              "view-2",
+              "view-2-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        },
+        {
+          "id": "east-clutter",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              10.1,
+              6.4
+            ],
+            "localization_error_m": 0.12210745933381308,
+            "tolerance_m": 0.75,
+            "false_location_claim": false,
+            "correct": true,
+            "absent_case_note": null
+          },
+          "location": {
+            "xy_m": [
+              9.994944053048075,
+              6.337762715073735
+            ],
+            "baseline_m": 0.6500000000000001,
+            "intersection_angle_degrees": 17.479944626654852,
+            "source_views": [
+              "view-4",
+              "view-4-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        },
+        {
+          "id": "west-low-light",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              1.0,
+              7.3
+            ],
+            "localization_error_m": 0.04436572830116247,
+            "tolerance_m": 0.75,
+            "false_location_claim": false,
+            "correct": true,
+            "absent_case_note": null
+          },
+          "location": {
+            "xy_m": [
+              0.9729031801074628,
+              7.3351294776420595
+            ],
+            "baseline_m": 0.6500000000000002,
+            "intersection_angle_degrees": 12.420357414214406,
+            "source_views": [
+              "view-1",
+              "view-1-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        },
+        {
+          "id": "north-motion-blur",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              4.4,
+              8.9
+            ],
+            "localization_error_m": 0.044737130572555,
+            "tolerance_m": 0.75,
+            "false_location_claim": false,
+            "correct": true,
+            "absent_case_note": null
+          },
+          "location": {
+            "xy_m": [
+              4.39994645998269,
+              8.855262901464977
+            ],
+            "baseline_m": 0.6500000000000001,
+            "intersection_angle_degrees": 11.885023851848558,
+            "source_views": [
+              "view-2",
+              "view-2-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        },
+        {
+          "id": "target-absent",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": null,
+            "localization_error_m": null,
+            "tolerance_m": 0.75,
+            "false_location_claim": true,
+            "correct": false,
+            "absent_case_note": "Unresolved is an honest non-detection, not proof that the room is empty."
+          },
+          "location": {
+            "xy_m": [
+              9.960813221157828,
+              9.709797984322396
+            ],
+            "baseline_m": 0.6500000000000001,
+            "intersection_angle_degrees": 6.819997978169539,
+            "source_views": [
+              "view-4",
+              "view-4-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        }
+      ]
+    },
+    "qwen+laya": {
+      "correct": 4,
+      "total": 5,
+      "target_present_localized": 4,
+      "false_location_claims": 1,
+      "rejected_actions": 0,
+      "mean_decision_s": 0.05910712383330166,
+      "memory_peak_gib": 2.9967945516109467,
+      "total_search_s": 87.68368020901107,
+      "total_vision_s": 80.18651183297334,
+      "total_decision_s": 2.1278564579988597,
+      "observations": 36,
+      "memory": {
+        "metric": "sum of macOS process physical footprints",
+        "interval_s": 0.2,
+        "budget_gib": 5.0,
+        "sampled_peak_gib": 2.9967945516109467,
+        "budget_exceeded": false,
+        "measurement_error": null,
+        "host_memory_gib": 16.0,
+        "actual_8gb_hardware": false,
+        "scope": "Evaluator, Laya if loaded, one browser camera including GPU/helpers, Node, simulator server and Qwen. Excludes unrelated applications and user browser tabs. Sampling is not an OS-enforced RAM limit.",
+        "host_swap_start_bytes": 5582684160,
+        "host_swap_end_bytes": 5540741120
+      },
+      "cases": [
+        {
+          "id": "north-clutter",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              4.4,
+              8.9
+            ],
+            "localization_error_m": 0.004267196580342369,
+            "tolerance_m": 0.75,
+            "false_location_claim": false,
+            "correct": true,
+            "absent_case_note": null
+          },
+          "location": {
+            "xy_m": [
+              4.400765209244064,
+              8.904198025901312
+            ],
+            "baseline_m": 0.6500000000000001,
+            "intersection_angle_degrees": 11.704576179206814,
+            "source_views": [
+              "view-2",
+              "view-2-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        },
+        {
+          "id": "east-clutter",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              10.1,
+              6.4
+            ],
+            "localization_error_m": 0.12210745933381308,
+            "tolerance_m": 0.75,
+            "false_location_claim": false,
+            "correct": true,
+            "absent_case_note": null
+          },
+          "location": {
+            "xy_m": [
+              9.994944053048075,
+              6.337762715073735
+            ],
+            "baseline_m": 0.6500000000000001,
+            "intersection_angle_degrees": 17.479944626654852,
+            "source_views": [
+              "view-4",
+              "view-4-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        },
+        {
+          "id": "west-low-light",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              1.0,
+              7.3
+            ],
+            "localization_error_m": 0.04436572830116247,
+            "tolerance_m": 0.75,
+            "false_location_claim": false,
+            "correct": true,
+            "absent_case_note": null
+          },
+          "location": {
+            "xy_m": [
+              0.9729031801074628,
+              7.3351294776420595
+            ],
+            "baseline_m": 0.6500000000000002,
+            "intersection_angle_degrees": 12.420357414214406,
+            "source_views": [
+              "view-1",
+              "view-1-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        },
+        {
+          "id": "north-motion-blur",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              4.4,
+              8.9
+            ],
+            "localization_error_m": 0.044737130572555,
+            "tolerance_m": 0.75,
+            "false_location_claim": false,
+            "correct": true,
+            "absent_case_note": null
+          },
+          "location": {
+            "xy_m": [
+              4.39994645998269,
+              8.855262901464977
+            ],
+            "baseline_m": 0.6500000000000001,
+            "intersection_angle_degrees": 11.885023851848558,
+            "source_views": [
+              "view-2",
+              "view-2-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        },
+        {
+          "id": "target-absent",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": null,
+            "localization_error_m": null,
+            "tolerance_m": 0.75,
+            "false_location_claim": true,
+            "correct": false,
+            "absent_case_note": "Unresolved is an honest non-detection, not proof that the room is empty."
+          },
+          "location": {
+            "xy_m": [
+              9.960813221157828,
+              9.709797984322396
+            ],
+            "baseline_m": 0.6500000000000001,
+            "intersection_angle_degrees": 6.819997978169539,
+            "source_views": [
+              "view-4",
+              "view-4-confirm"
+            ],
+            "method": "two model-predicted image boxes and ideal camera poses; no object depth or scene geometry"
+          }
+        }
+      ]
+    }
+  },
+  "decision_speedup": 5.380023246858065,
+  "search_time_reduction_fraction": 0.08161509636757125,
+  "interpretation": "Laya improves decision latency, not accuracy in these five cases. Both report a false target on a toolbox in the absent-target room. This is not reliable real-world localization or 8 GiB hardware qualification.",
+  "retained_failures": [
+    ".local/validation/localization-dev-qwen-v1",
+    ".local/validation/localization-dev-laya-v1",
+    ".local/validation/localization-evaluation-v2",
+    ".local/validation/localization-evaluation-v2-final"
+  ],
+  "diagnostic": ".local/validation/localization-evaluation-cache-bounded/decision-diagnostic.json",
+  "diagnostic_interpretation": "Reversing choice order did not fix the main errors for either original supervisor. Explicit JSON formatting plus reversed order changed the Qwen toolbox decision in one probe. This is a post-evaluation diagnostic, not another validated mission result.",
+  "automated_tests": {
+    "passed": 111,
+    "failed": 0,
+    "evidence": "docs/localization-tests.txt"
+  },
+  "browser_validation": ".local/validation/localization-evaluation-cache-bounded/browser-validation.json",
+  "report_url": "http://127.0.0.1:8140/report.html"
+}

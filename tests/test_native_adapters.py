@@ -1,6 +1,7 @@
 """Isolated adapter contracts. No Gazebo, MAVSDK server or aircraft exercised."""
 import asyncio
 import json
+import socket
 import struct
 import sys
 import time
@@ -11,7 +12,24 @@ from unittest.mock import patch
 from adapters.camera import GazeboCamera
 from adapters.mavsdk_drone import MavsdkDrone
 from app.contracts import enu_to_global
+from app.native import unused_port
 from test_executor import eventually
+
+
+class LocalPortContract(unittest.TestCase):
+    def test_live_listener_rejected_but_closed_connection_can_restart(self):
+        with socket.socket() as listener:
+            listener.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            listener.bind(('127.0.0.1', 0))
+            port = listener.getsockname()[1]
+            listener.listen()
+            with self.assertRaises(RuntimeError):
+                unused_port(port)
+            with socket.create_connection(('127.0.0.1', port)) as client:
+                connection, _ = listener.accept()
+                connection.close()
+                self.assertEqual(client.recv(1), b'')
+        unused_port(port)
 
 
 class CameraProtocol(unittest.IsolatedAsyncioTestCase):
@@ -50,7 +68,7 @@ class MavsdkContract(unittest.IsolatedAsyncioTestCase):
         air=False
 
         class Action:
-            async def set_maximum_speed(self,speed): calls.append(("speed",speed))
+            async def set_current_speed(self,speed): calls.append(("speed",speed))
             async def goto_location(self,*position): calls.append(("goto",*position))
             async def set_takeoff_altitude(self,height): calls.append(("height",height))
             async def arm(self): calls.append(("arm",))

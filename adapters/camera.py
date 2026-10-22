@@ -3,6 +3,7 @@ import uuid
 import time
 import json
 import struct
+import os
 
 from adapters.fixtures import LatestFrameBuffer
 from app.contracts import Frame
@@ -81,7 +82,8 @@ class GazeboCamera(GStreamerCamera):
 
     async def start(self):
         self.process = await asyncio.create_subprocess_exec(
-            str(self.binary), self.topic, stdout=asyncio.subprocess.PIPE)
+            str(self.binary), self.topic, stdout=asyncio.subprocess.PIPE,
+            env={**os.environ, 'GZ_IP': '127.0.0.1'})
         self.task = asyncio.create_task(self._read())
 
     async def _read(self):

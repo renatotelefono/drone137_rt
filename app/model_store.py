@@ -7,6 +7,7 @@ import re
 import shutil
 import threading
 import urllib.request
+import urllib.error
 from pathlib import Path
 
 REPOSITORY = "Qwen/Qwen3-VL-2B-Instruct-GGUF"
@@ -104,6 +105,11 @@ class ModelStore:
                 raise RuntimeError(f"Missing or corrupt model file: {item['name']}")
         if not (self.directory / "LICENSE").is_file():
             raise RuntimeError("Model licence missing; run Download / resume")
+        provenance = self.directory/'license-source.json'
+        if provenance.exists():
+            source = json.loads(provenance.read_text())
+            if source.get('revision') != manifest['revision'] or source.get('sha256') != sha256(self.directory/'LICENSE'):
+                raise RuntimeError('Model licence provenance or checksum mismatch')
         self.verified = True
         self.progress.update(stage="verified", file=None)
         return [self.directory / name for name in FILES]
@@ -178,13 +184,30 @@ class ModelStore:
             partial.replace(target)
         licence = self.directory / "LICENSE"
         if not licence.exists():
-            with self._open(f"{self.base_url}/{REPOSITORY}/resolve/{manifest['revision']}/LICENSE") as response:
-                content = response.read(100_001)
+            url = f"{self.base_url}/{REPOSITORY}/resolve/{manifest['revision']}/LICENSE"
+            source = {'revision': manifest['revision'], 'source': url}
+            try:
+                with self._open(url) as response:
+                    content = response.read(100_001)
+            except urllib.error.HTTPError as exc:
+                if exc.code != 404:
+                    raise
+                # Official GGUF repos may declare an SPDX licence in their model
+                # card without shipping a LICENSE. Check the pinned revision,
+                # never infer a licence from a different model or a moving branch.
+                url = f"{self.base_url}/api/models/{REPOSITORY}/revision/{manifest['revision']}"
+                with self._open(url) as response:
+                    metadata = json.loads(response.read(2_000_001))
+                if metadata.get('sha') != manifest['revision'] or metadata.get('cardData', {}).get('license') != 'apache-2.0':
+                    raise RuntimeError('Missing LICENSE and no pinned Apache-2.0 model-card declaration')
+                content = (Path(__file__).resolve().parents[1]/'LICENSE').read_bytes()
+                source.update(source=url, declaration='apache-2.0', text_source='bundled standard Apache-2.0 text')
             if not 100 <= len(content) <= 100_000:
                 raise RuntimeError("Unexpected model licence response")
             temporary = licence.with_suffix(".tmp")
             temporary.write_bytes(content)
             temporary.replace(licence)
+            atomic_json(self.directory/'license-source.json', {**source, 'sha256': hashlib.sha256(content).hexdigest()})
         return self.verify()
 
     def reset_partials(self):

@@ -1,0 +1,491 @@
+{
+  "scope": "Four known live synthetic development missions; not held-out or real-world qualification",
+  "host_memory_gib": 16,
+  "application_budget_gib": 5,
+  "preflight": {
+    "results": ".local/validation/rotor-flight-check-v2/results.json",
+    "sha256": "724068ea6985dbe19162a1690488dc7051237d81eb0b94b2e02bb8e91156cacf",
+    "physical_checks": {
+      "checks": {
+        "four_connected_physical_rotors": true,
+        "rotors_spinning_in_correct_directions": true,
+        "lift_off_over_one_metre": true,
+        "stable_inspection_hover": true,
+        "landed": true
+      },
+      "all_pass": true,
+      "total_mass_kg": 2.0643076923076924,
+      "inspection_samples": 25,
+      "fresh_rotor_samples": 25,
+      "rotor_equivalent_rad_s": [
+        {
+          "min": 768.6202734660001,
+          "max": 770.290925406,
+          "mean": 769.17543949472
+        },
+        {
+          "min": 769.2796109239999,
+          "max": 771.382521723,
+          "mean": 769.85109458672
+        },
+        {
+          "min": 767.067304931,
+          "max": 768.9909808919999,
+          "mean": 767.81369568052
+        },
+        {
+          "min": 770.612205736,
+          "max": 772.6509126409999,
+          "mean": 771.16974106932
+        }
+      ],
+      "maximum_model_altitude_m": 1.30199109993,
+      "hover_tracking_rmse_m": 0.026558741649087707,
+      "maximum_hover_tilt_degrees": 1.3672851607163374,
+      "measurement": "Gazebo joint velocities multiplied by the SDF rotor slowdown factor; actual simulated joints, not commanded motor speeds.",
+      "limitations": "Generic rigid-body, motor and collision models. No physical airframe calibration or propeller flex/propwash validation."
+    }
+  },
+  "comparison": {
+    "qwen": {
+      "summary": {
+        "attempted": 4,
+        "planned": 4,
+        "positive_found": 1,
+        "positive_planned": 2,
+        "missed_or_incorrect_targets": 1,
+        "negative_correct": 1,
+        "negative_planned": 2,
+        "false_location_claims": 1,
+        "flight_physics_pass": 4,
+        "task_correct": 2,
+        "mean_camera_decision_latency_s": 3.16808633329371,
+        "mean_mission_wall_s": 214.71591330200317,
+        "peak_application_gib": 3.4094696044921875,
+        "accepted": false,
+        "errors": []
+      },
+      "results": ".local/validation/vision-flight-comparison-v1/qwen/results.json",
+      "sha256": "c7a5fb89940d0e8d721ca08108949c5a9122121483a80bae99e314a372f8da62",
+      "protocol_sha256": "cbd2af43bd517e91000b55a36dfa6f08b97a9ebcd9ebf3195505532999549d54",
+      "changed_sources": [],
+      "cases": [
+        {
+          "id": "realism-east-glare-present-reference-quad-r1",
+          "outcome": "unresolved",
+          "score": {
+            "truth_xy_m": [
+              10.2,
+              6.55
+            ],
+            "error_m": null,
+            "false_location_claim": false,
+            "correct": false,
+            "evaluated": true
+          },
+          "seconds": 252.6645634160086,
+          "physical_checks_pass": true
+        },
+        {
+          "id": "realism-east-glare-absent-reference-quad-r1",
+          "outcome": "unresolved",
+          "score": {
+            "truth_xy_m": null,
+            "error_m": null,
+            "false_location_claim": false,
+            "correct": true,
+            "evaluated": true
+          },
+          "seconds": 237.04464679199737,
+          "physical_checks_pass": true
+        },
+        {
+          "id": "realism-west-occluded-present-reference-quad-r1",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              4.8,
+              8.5
+            ],
+            "error_m": 0.11774730715346937,
+            "false_location_claim": false,
+            "correct": true,
+            "evaluated": true
+          },
+          "seconds": 155.39294125000015,
+          "physical_checks_pass": true
+        },
+        {
+          "id": "realism-west-occluded-absent-reference-quad-r1",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": null,
+            "error_m": null,
+            "false_location_claim": true,
+            "correct": false,
+            "evaluated": true
+          },
+          "seconds": 213.76150175000657,
+          "physical_checks_pass": true
+        }
+      ]
+    },
+    "qwen+florence": {
+      "summary": {
+        "attempted": 4,
+        "planned": 4,
+        "positive_found": 1,
+        "positive_planned": 2,
+        "missed_or_incorrect_targets": 1,
+        "negative_correct": 2,
+        "negative_planned": 2,
+        "false_location_claims": 0,
+        "flight_physics_pass": 4,
+        "task_correct": 3,
+        "mean_camera_decision_latency_s": 3.843332661963359,
+        "mean_mission_wall_s": 232.6703660314961,
+        "peak_application_gib": 4.468610405921936,
+        "accepted": false,
+        "errors": []
+      },
+      "results": ".local/validation/vision-flight-comparison-v1/qwen-florence/results.json",
+      "sha256": "fb857fe4fd74993f9883a1c749c705932a7fe94e15323e3f7a9802237c844eeb",
+      "protocol_sha256": "cbd2af43bd517e91000b55a36dfa6f08b97a9ebcd9ebf3195505532999549d54",
+      "changed_sources": [],
+      "cases": [
+        {
+          "id": "realism-east-glare-present-reference-quad-r1",
+          "outcome": "found",
+          "score": {
+            "truth_xy_m": [
+              10.2,
+              6.55
+            ],
+            "error_m": 0.05504853559868279,
+            "false_location_claim": false,
+            "correct": true,
+            "evaluated": true
+          },
+          "seconds": 237.48042216699105,
+          "physical_checks_pass": true
+        },
+        {
+          "id": "realism-east-glare-absent-reference-quad-r1",
+          "outcome": "unresolved",
+          "score": {
+            "truth_xy_m": null,
+            "error_m": null,
+            "false_location_claim": false,
+            "correct": true,
+            "evaluated": true
+          },
+          "seconds": 250.29629716699128,
+          "physical_checks_pass": true
+        },
+        {
+          "id": "realism-west-occluded-present-reference-quad-r1",
+          "outcome": "unresolved",
+          "score": {
+            "truth_xy_m": [
+              4.8,
+              8.5
+            ],
+            "error_m": null,
+            "false_location_claim": false,
+            "correct": false,
+            "evaluated": true
+          },
+          "seconds": 238.0948492919997,
+          "physical_checks_pass": true
+        },
+        {
+          "id": "realism-west-occluded-absent-reference-quad-r1",
+          "outcome": "unresolved",
+          "score": {
+            "truth_xy_m": null,
+            "error_m": null,
+            "false_location_claim": false,
+            "correct": true,
+            "evaluated": true
+          },
+          "seconds": 204.8098955000023,
+          "physical_checks_pass": true
+        }
+      ]
+    },
+    "qwen+smolvlm": {
+      "summary": {
+        "attempted": 4,
+        "planned": 4,
+        "positive_found": 0,
+        "positive_planned": 2,
+        "missed_or_incorrect_targets": 2,
+        "negative_correct": 2,
+        "negative_planned": 2,
+        "false_location_claims": 0,
+        "flight_physics_pass": 4,
+        "task_correct": 2,
+        "mean_camera_decision_latency_s": 3.5778489232383435,
+        "mean_mission_wall_s": 227.06665569775214,
+        "peak_application_gib": 4.897595934569836,
+        "accepted": false,
+        "errors": []
+      },
+      "results": ".local/validation/smol-sdpa-flights-v1/results.json",
+      "sha256": "8a0acde06039dcedfe5c897ffc5cdbede85f03f6eb6c603fe94e7f39099ddcc8",
+      "protocol_sha256": "cbd2af43bd517e91000b55a36dfa6f08b97a9ebcd9ebf3195505532999549d54",
+      "changed_sources": [],
+      "cases": [
+        {
+          "id": "realism-east-glare-present-reference-quad-r1",
+          "outcome": "unresolved",
+          "score": {
+            "truth_xy_m": [
+              10.2,
+              6.55
+            ],
+            "error_m": null,
+            "false_location_claim": false,
+            "correct": false,
+            "evaluated": true
+          },
+          "seconds": 246.3533703330031,
+          "physical_checks_pass": true
+        },
+        {
+          "id": "realism-east-glare-absent-reference-quad-r1",
+          "outcome": "unresolved",
+          "score": {
+            "truth_xy_m": null,
+            "error_m": null,
+            "false_location_claim": false,
+            "correct": true,
+            "evaluated": true
+          },
+          "seconds": 232.19901183299953,
+          "physical_checks_pass": true
+        },
+        {
+          "id": "realism-west-occluded-present-reference-quad-r1",
+          "outcome": "unresolved",
+          "score": {
+            "truth_xy_m": [
+              4.8,
+              8.5
+            ],
+            "error_m": null,
+            "false_location_claim": false,
+            "correct": false,
+            "evaluated": true
+          },
+          "seconds": 224.89915425000072,
+          "physical_checks_pass": true
+        },
+        {
+          "id": "realism-west-occluded-absent-reference-quad-r1",
+          "outcome": "unresolved",
+          "score": {
+            "truth_xy_m": null,
+            "error_m": null,
+            "false_location_claim": false,
+            "correct": true,
+            "evaluated": true
+          },
+          "seconds": 204.8150863750052,
+          "physical_checks_pass": true
+        }
+      ]
+    }
+  },
+  "attempts": [
+    {
+      "configuration": "qwen+smolvlm eager attention",
+      "results": ".local/validation/vision-flight-comparison-v1/qwen-smolvlm/results.json",
+      "sha256": "bc24640878eccbe928630c4e16ff7923055d1175599b2e6595016d9b1905c8ee",
+      "summary": {
+        "attempted": 1,
+        "planned": 4,
+        "positive_found": 0,
+        "positive_planned": 2,
+        "missed_or_incorrect_targets": 2,
+        "negative_correct": 0,
+        "negative_planned": 2,
+        "false_location_claims": 0,
+        "flight_physics_pass": 0,
+        "task_correct": 0,
+        "mean_camera_decision_latency_s": 4.8460453196700355,
+        "mean_mission_wall_s": 157.57380612500128,
+        "peak_application_gib": 5.026823088526726,
+        "accepted": false,
+        "errors": [
+          "MemoryError('Application exceeded the 5 GiB experiment budget; run stopped')"
+        ]
+      }
+    },
+    {
+      "configuration": "Florence with initial active inspection trigger",
+      "results": ".local/validation/florence-active-flights-v1/results.json",
+      "sha256": "f429579c255d41b9d290da93c24aa42918922b4c38d72154f30b4212d95e6659",
+      "summary": {
+        "attempted": 4,
+        "planned": 4,
+        "positive_found": 1,
+        "positive_planned": 2,
+        "missed_or_incorrect_targets": 1,
+        "negative_correct": 2,
+        "negative_planned": 2,
+        "false_location_claims": 0,
+        "flight_physics_pass": 4,
+        "task_correct": 3,
+        "mean_camera_decision_latency_s": 4.072439503904661,
+        "mean_mission_wall_s": 260.0016108857526,
+        "peak_application_gib": 4.4975413382053375,
+        "accepted": false,
+        "errors": []
+      }
+    },
+    {
+      "configuration": "Florence with uncertainty trigger and centred views",
+      "results": ".local/validation/florence-active-flights-v2/results.json",
+      "sha256": "3a37d0bfbc9f9c5fd076684c92494c80ebf9480a4da257e8b31c3df3a2e770ed",
+      "summary": {
+        "attempted": 4,
+        "planned": 4,
+        "positive_found": 1,
+        "positive_planned": 2,
+        "missed_or_incorrect_targets": 1,
+        "negative_correct": 2,
+        "negative_planned": 2,
+        "false_location_claims": 0,
+        "flight_physics_pass": 4,
+        "task_correct": 3,
+        "mean_camera_decision_latency_s": 3.8986004417650597,
+        "mean_mission_wall_s": 247.96909845849586,
+        "peak_application_gib": 4.547223329544067,
+        "accepted": false,
+        "errors": []
+      }
+    },
+    {
+      "configuration": "Florence with elevated local inspection views",
+      "results": ".local/validation/florence-active-flights-v3/results.json",
+      "sha256": "09e2d04aaefeec9f92692f52f4068beb91b22efb7109eba716686202ee6afabe",
+      "summary": {
+        "attempted": 4,
+        "planned": 4,
+        "positive_found": 1,
+        "positive_planned": 2,
+        "missed_or_incorrect_targets": 1,
+        "negative_correct": 2,
+        "negative_planned": 2,
+        "false_location_claims": 0,
+        "flight_physics_pass": 4,
+        "task_correct": 3,
+        "mean_camera_decision_latency_s": 3.9136316953463393,
+        "mean_mission_wall_s": 253.03682103100073,
+        "peak_application_gib": 4.545972242951393,
+        "accepted": false,
+        "errors": []
+      }
+    }
+  ],
+  "follow_up": {
+    "policy": "active-v2",
+    "status": "complete",
+    "results": ".local/validation/florence-active-flights-v4/results.json",
+    "sha256": "5a8bd8c5946e4a602c8a759288d165abf5b657bbd7564525e8bbc15a40e81b43",
+    "summary": {
+      "attempted": 4,
+      "planned": 4,
+      "positive_found": 1,
+      "positive_planned": 2,
+      "missed_or_incorrect_targets": 1,
+      "negative_correct": 2,
+      "negative_planned": 2,
+      "false_location_claims": 0,
+      "flight_physics_pass": 4,
+      "task_correct": 3,
+      "mean_camera_decision_latency_s": 3.945666984469426,
+      "mean_mission_wall_s": 254.6266698440013,
+      "peak_application_gib": 4.533489927649498,
+      "accepted": false,
+      "errors": []
+    },
+    "qualification": {
+      "planned_runs": 4,
+      "completed_runs": 4,
+      "task_correct": 3,
+      "individual_runs_meeting_flight_and_task_gates": 3,
+      "qualified_passes": 3,
+      "pass_rate": 0.75,
+      "all_pass": false,
+      "false_location_claims": 0,
+      "memory_ok": true,
+      "per_run_deadline_s": 300,
+      "interpretation": "Observed performance on a frozen synthetic suite. Not a real-world reliability estimate. Absent cases require a completed search with no location claim; unresolved does not prove absence.",
+      "full_suite_qualified": false
+    },
+    "cases": [
+      {
+        "id": "realism-east-glare-present-reference-quad-r1",
+        "outcome": "found",
+        "score": {
+          "truth_xy_m": [
+            10.2,
+            6.55
+          ],
+          "error_m": 0.09923624765245817,
+          "false_location_claim": false,
+          "correct": true,
+          "evaluated": true
+        },
+        "seconds": 251.21525375000783,
+        "physical_checks_pass": true
+      },
+      {
+        "id": "realism-east-glare-absent-reference-quad-r1",
+        "outcome": "unresolved",
+        "score": {
+          "truth_xy_m": null,
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": true,
+          "evaluated": true
+        },
+        "seconds": 246.35517229200923,
+        "physical_checks_pass": true
+      },
+      {
+        "id": "realism-west-occluded-present-reference-quad-r1",
+        "outcome": "unresolved",
+        "score": {
+          "truth_xy_m": [
+            4.8,
+            8.5
+          ],
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": false,
+          "evaluated": true
+        },
+        "seconds": 284.8466727089981,
+        "physical_checks_pass": true
+      },
+      {
+        "id": "realism-west-occluded-absent-reference-quad-r1",
+        "outcome": "unresolved",
+        "score": {
+          "truth_xy_m": null,
+          "error_m": null,
+          "false_location_claim": false,
+          "correct": true,
+          "evaluated": true
+        },
+        "seconds": 236.08958062499005,
+        "physical_checks_pass": true
+      }
+    ]
+  },
+  "review": "http://127.0.0.1:8142/vision-flight-review-v2/report.html",
+  "case_equality_verified": true
+}

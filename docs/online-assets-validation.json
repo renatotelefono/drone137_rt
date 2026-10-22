@@ -1,0 +1,205 @@
+{
+  "qualification": {
+    "planned_runs": 8,
+    "completed_runs": 8,
+    "task_correct": 6,
+    "individual_runs_meeting_flight_and_task_gates": 6,
+    "qualified_passes": 6,
+    "pass_rate": 0.75,
+    "all_pass": false,
+    "false_location_claims": 1,
+    "memory_ok": true,
+    "per_run_deadline_s": 300,
+    "interpretation": "Observed performance on a frozen synthetic suite. Not a real-world reliability estimate. Absent cases require a completed search with no location claim; unresolved does not prove absence.",
+    "full_suite_qualified": false
+  },
+  "asset_files": 27,
+  "asset_bytes": 9831674,
+  "asset_manifest_sha256": "f0b0655d18ac7e084333061304cc1524914f56e060ef989fee1525a0ca96fac1",
+  "integrity": {
+    "sources": 138,
+    "frames": 51,
+    "crops": 40,
+    "errors": [],
+    "protocol_sha256": "ce72b61bd12d427331a1e7f0e620f69b67d0e2d3ca29214d6cd4a6bcd24f31c3"
+  },
+  "memory": {
+    "metric": "sum of macOS process physical footprints",
+    "interval_s": 0.2,
+    "budget_gib": 5.0,
+    "sampled_peak_gib": 3.543972223997116,
+    "sampled_peak_rss_gib": 3.41558837890625,
+    "sampled_peak_guard_gib": 3.543972223997116,
+    "guard_metric": "Larger of summed RSS and summed physical footprints; RSS can double-count shared pages.",
+    "budget_exceeded": false,
+    "measurement_error": null,
+    "host_memory_gib": 16.0,
+    "actual_8gb_hardware": false,
+    "scope": "Evaluator, Laya if loaded, one browser camera including GPU/helpers, Node, simulator server and Qwen. Excludes unrelated applications and user browser tabs. Sampling is not an OS-enforced RAM limit.",
+    "host_swap_start_bytes": 4374528000,
+    "host_swap_end_bytes": 4366139392
+  },
+  "flight": {
+    "landed": 8,
+    "envelope_violations": 0,
+    "distance_m": 209.5957548274829,
+    "sim_wall_ratio_range": [
+      0.9887202522416504,
+      0.9905067787658571
+    ]
+  },
+  "model": {
+    "supervisor_calls": 22,
+    "full_frame_requests": 51,
+    "crop_requests": 40,
+    "mean_full_frame_latency_s": 2.19757395835397
+  },
+  "camera": {
+    "frame_age_range_ms": [
+      121.01936340332031,
+      270.3697681427002
+    ],
+    "max_dropped_frames": 178
+  },
+  "cases": [
+    {
+      "case": "hard-west-dim-present",
+      "outcome": "unresolved",
+      "truth_xy_m": [
+        4.8,
+        8.65
+      ],
+      "error_m": null,
+      "false_location_claim": false,
+      "correct": false,
+      "seconds": 131.2777938329964,
+      "laya_calls": 4
+    },
+    {
+      "case": "hard-west-dim-absent",
+      "outcome": "unresolved",
+      "truth_xy_m": null,
+      "error_m": null,
+      "false_location_claim": false,
+      "correct": true,
+      "seconds": 131.97199849999743,
+      "laya_calls": 4
+    },
+    {
+      "case": "hard-east-glare-present",
+      "outcome": "found",
+      "truth_xy_m": [
+        10.2,
+        6.55
+      ],
+      "error_m": 0.05149485729611832,
+      "false_location_claim": false,
+      "correct": true,
+      "seconds": 129.0320818330074,
+      "laya_calls": 3
+    },
+    {
+      "case": "hard-east-glare-absent",
+      "outcome": "unresolved",
+      "truth_xy_m": null,
+      "error_m": null,
+      "false_location_claim": false,
+      "correct": true,
+      "seconds": 127.91378399998939,
+      "laya_calls": 3
+    },
+    {
+      "case": "hard-west-occluded-present",
+      "outcome": "found",
+      "truth_xy_m": [
+        4.8,
+        8.5
+      ],
+      "error_m": 0.12400893287005027,
+      "false_location_claim": false,
+      "correct": true,
+      "seconds": 85.42059545801021,
+      "laya_calls": 2
+    },
+    {
+      "case": "hard-west-occluded-absent",
+      "outcome": "unresolved",
+      "truth_xy_m": null,
+      "error_m": null,
+      "false_location_claim": false,
+      "correct": true,
+      "seconds": 111.715984459006,
+      "laya_calls": 2
+    },
+    {
+      "case": "hard-east-motion-present",
+      "outcome": "found",
+      "truth_xy_m": [
+        10.15,
+        6.35
+      ],
+      "error_m": 6.056163321167229,
+      "false_location_claim": true,
+      "correct": false,
+      "seconds": 113.90655283301021,
+      "laya_calls": 2
+    },
+    {
+      "case": "hard-east-motion-absent",
+      "outcome": "unresolved",
+      "truth_xy_m": null,
+      "error_m": null,
+      "false_location_claim": false,
+      "correct": true,
+      "seconds": 119.80950375000248,
+      "laya_calls": 2
+    }
+  ],
+  "tests": {
+    "count": 130,
+    "passed": true
+  },
+  "render_audit": {
+    "rooms": 8,
+    "fixed_views": 32,
+    "passed": true
+  },
+  "browser_review": {
+    "episodes": 16,
+    "videos": 16,
+    "frames": 103,
+    "crops": 82,
+    "expected": {
+      "episodes": 16,
+      "videos": 16,
+      "frames": 103,
+      "crops": 82
+    },
+    "seek_durations_s": [
+      119.094,
+      119.111,
+      117.096,
+      116.028,
+      71.379,
+      99.68,
+      100.777,
+      106.878,
+      109.775,
+      110.042,
+      122.194,
+      105.943,
+      72.593,
+      107.927,
+      102.811,
+      124.262
+    ],
+    "errors": [],
+    "desktop_overflow": false,
+    "mobile_overflow": false
+  },
+  "cleanup": {
+    "flight_workers_remaining": 0,
+    "camera_port_closed": true,
+    "normal_model": "2B ready, app idle"
+  }
+}

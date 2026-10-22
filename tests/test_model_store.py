@@ -16,17 +16,22 @@ class Downloads(unittest.TestCase):
         self.contents = {FILES[0]: b'model'*1000, FILES[1]: b'projector'*500, 'LICENSE': b'licence '*100}
         self.ranges = []
         self.bad_range = self.corrupt = False
+        self.no_license = False
+        self.declared_license = 'apache-2.0'
         test = self
         class Handler(BaseHTTPRequestHandler):
             def log_message(self, *args): pass
             def do_GET(self):
                 if self.path.startswith('/api/'):
-                    data = json.dumps({'sha': 'a'*40, 'siblings': [{'rfilename': n, 'lfs': {
+                    data = json.dumps({'sha': 'a'*40, 'cardData': {'license': test.declared_license}, 'siblings': [{'rfilename': n, 'lfs': {
                         'size': len(test.contents[n]), 'sha256': hashlib.sha256(test.contents[n]).hexdigest()}}
                         for n in FILES]}).encode()
                     self.send_response(200)
                 else:
                     name = self.path.rsplit('/',1)[-1]
+                    if name == 'LICENSE' and test.no_license:
+                        self.send_error(404)
+                        return
                     data = test.contents[name]
                     if test.corrupt and name in FILES: data = b'X'*len(data)
                     value = self.headers.get('Range')
@@ -91,3 +96,20 @@ class Downloads(unittest.TestCase):
         path.write_bytes(b'X'*path.stat().st_size)
         with self.assertRaisesRegex(RuntimeError, 'corrupt'): self.store.verify()
         self.assertFalse(self.store.verified)
+
+    def test_missing_license_uses_pinned_card_declaration(self):
+        self.no_license = True
+        self.store.download()
+        source = json.loads((self.store.directory/'license-source.json').read_text())
+        self.assertIn('/revision/'+'a'*40, source['source'])
+        self.assertEqual(source['declaration'], 'apache-2.0')
+        (self.store.directory/'LICENSE').write_text('tampered')
+        with self.assertRaisesRegex(RuntimeError, 'licence provenance'):
+            self.store.verify()
+
+    def test_missing_license_cannot_assume_apache(self):
+        self.no_license = True
+        self.declared_license = 'other'
+        with self.assertRaisesRegex(RuntimeError, 'no pinned Apache'):
+            self.store.download()
+        self.assertFalse((self.store.directory/'LICENSE').exists())

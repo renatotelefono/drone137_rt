@@ -1,0 +1,673 @@
+{
+  "created_utc": "2026-10-21T05:48:20.582427+00:00",
+  "scope": "Virtual indoor development tests only; one authored site; actual local Qwen inference; kinematic flight; no physical transport.",
+  "real_world_qualified": false,
+  "automated_tests": {
+    "passed": 93,
+    "log": "docs/realism-tests.txt"
+  },
+  "vision": {
+    "report": ".local/validation/realism-qwen-final/report.json",
+    "sha256": "da3f470d18469e81308625731ea1c336b34d9884f30a30fc96d52bd2daf4dfde",
+    "summary": {
+      "cases": 28,
+      "evaluated": 28,
+      "sites": 1,
+      "encounters": 4,
+      "case_checks_passed": 28,
+      "encounters_all_checks_passed": 4,
+      "errors_or_missing": 0,
+      "center_labeled_cases": 8,
+      "center_accuracy": 1.0,
+      "center_encounter_accuracy": 1.0,
+      "blocked_encounters": 4,
+      "false_clear_encounters": 0,
+      "false_clear_upper_95_if_independent": 0.5271291954984121,
+      "clear_encounters": 4,
+      "uncertain_encounters": 0,
+      "uncertainty_action_rate": null,
+      "uncertainty_encounter_action_rate": null,
+      "required_objects_found": 36,
+      "required_objects_total": 36,
+      "required_object_recall": 1.0,
+      "required_object_encounter_recall": 1.0,
+      "inspection_p95_s": 4.909912165996502,
+      "condition_encounters": {
+        "dim": 1,
+        "glare": 1,
+        "motion": 1,
+        "nominal": 1
+      },
+      "caption_precision": null
+    },
+    "fingerprint": {
+      "manifest_sha256": "7217476b1aa8790bfeacbc7122e5f716be191daf2256816afb807fbada642c21",
+      "model_sha256": "33f0b7a9fce46d9059a35a83fbb0626220fcb762915533d56fc4c3fa37893df3",
+      "pipeline": {
+        "app/perception.py": "4c83bff67351a713505b69c405a95e2d74ec4f7a62083649adf3f2a5cdd513b9",
+        "adapters/llama.py": "37e1abf03435d974c84f87721fbbfb18d2e6073540433d1b9459e8fd77c45358",
+        "app/reliability.py": "cf650a92a445c8c55f8afa79da718325eef8e925ee29cc14d921682ce558f1b8",
+        "app/model_manager.py": "1ad2c8f8c92186121850fd09be2a06987fb14748fb1eae9e1c7a0f0a96d0f57f",
+        "config/models.json": "53b6be0fafcd8d5afe6c004d0214ef7dca4fb9f515beac249065c89110c71ba5",
+        "config/lean-8gb.json": "1ff77cbb21697eb2aea42f040c35bae17fe6aaa1ad851494c8cc851443e6c90b",
+        "scripts/evaluate_reliability.py": "adfd646a32df390461691f0da2e6612260b254a510a9d8d042c7ddbe044b8413",
+        "config/reliability.json": "8440fdd59aa6d07ef9b4845615663b0760462006ca9a7989c421834d4d3a3dd0",
+        "requirements.lock": "053f437d66703dc862361c912f116be722c2f50badbfc8c4d43672e70584149f"
+      },
+      "images": {
+        "nominal-bottles-baseline": "f09bcf98fb70a96a734c13524d776d897c8b45ac6dcc13dac53da6e5c9dc9d56",
+        "nominal-bench-baseline": "dbdf1cb7fc6a27e21a4cf758240ebaf4b14b9d7ea26d0a496cec46feead25b19",
+        "nominal-chair-baseline": "724194c3da6ca9e263e1b8fc45ef7dd04f6c3b197ed441bfdc58c8eb8642f1cb",
+        "nominal-cone-baseline": "cce4fc877adcb19424746f7fceb7bdee9c0c84d1f374ffc05c93520bd3297345",
+        "nominal-stock-baseline": "9810dcdc8f4305db2d4e339a55b4b6ec51a91e6b75e2641caf4bb0248293ce6d",
+        "nominal-passage-baseline": "6e9841943e104bc997f9792b75790aef73a283c826890dcde14fd43ffb93af69",
+        "nominal-passage-changed": "015f90f2121fb3e53283567db6ef2a6b2f0739b25d630caea4ae2930cdc9d065",
+        "dim-bottles-baseline": "0906b48269163d8e1ba653b6a7486b56f9627024eacc185cccac40cba7a894ba",
+        "dim-bench-baseline": "5c75bc39dc44c3ae363c552e016f18d13fd87926a41f81964412dc43a6694b92",
+        "dim-chair-baseline": "c9494e5d2211a6ddcb987d54cc1af6df0abc29573d856ab32fdc6621d14e4a6f",
+        "dim-cone-baseline": "6589475cd6694daeedadb67145fac0b445d30e25d25a5b2e443f4dbf95b643a6",
+        "dim-stock-baseline": "319702136d3a320e4d7bd9b4716aaa2331616becb7dbf965ece397baecb86136",
+        "dim-passage-baseline": "793519fb2a6b189fa4dd86e0451eb4efd8f9bce8d651be05f66c90a1f7b535a1",
+        "dim-passage-changed": "6f01dc50f0125924f04574cb29cb6a86321e37b9f3e2b49fc8c0b6c862f87675",
+        "glare-bottles-baseline": "803a21ac77163c0d419b4173ec14b0d01459777180c925fd0b974fda722fad09",
+        "glare-bench-baseline": "06d04b867ba2bbb19e3b02832935270dc4545e5222ee4a40cb2f55a5e155d034",
+        "glare-chair-baseline": "24395ffbc8594f4152fa5f36620d8d0ae4743594885899577176dfa041f895c3",
+        "glare-cone-baseline": "845a6231c777522d33d8652609e745fca26b6f7853bc0801a5dc18078e11d72a",
+        "glare-stock-baseline": "2eb00db4230860566c26e2167eea1997d9cff330943730ca4769c524d45d749a",
+        "glare-passage-baseline": "6b38afb86687c5338dc9220efad8afc381dd26765533cd858eaeed056cb1bb71",
+        "glare-passage-changed": "a33e7d927226da071a0a32c0503a78aa28e4b1880cfae2f0aac1224521960149",
+        "motion-bottles-baseline": "0aff01b9c24977bed9b981bc536eaf826eecd9af5c7171607b97a27fc163533d",
+        "motion-bench-baseline": "e22c9dae4f1772bfbadd542f3d57a50341143648d2ef11fe5be49832f954191b",
+        "motion-chair-baseline": "f2d18e9ec2d808b9af9ebc124e51f670ff20eedcdd1bd3a9b25781fc4bb8c18c",
+        "motion-cone-baseline": "9a4eb70691d2dab063845d1a7b8c595588685d194e97cc5f1729934f0d28157d",
+        "motion-stock-baseline": "61a5fee748531d8f338d94a6757675b3d16173a7745e4396175729c277c53cde",
+        "motion-passage-baseline": "8cc4f650044771ef66588f793db9561e2ff3caf2239ebd4d3f9aaf00c2bfc2b7",
+        "motion-passage-changed": "cbf1f0f63ecdaae3cd172a33dc5b1c90c2b67e62fa0543179b934089d0248829"
+      }
+    }
+  },
+  "patrols": {
+    "report": ".local/browser-test/patrol-nominal-qwen-realism-619-1792561172123.json",
+    "sha256": "bc70898b2ec91d43c6f18d7151f4b0592185a008d7d7ac4da581102322b60935",
+    "integration_passed": true,
+    "runs": [
+      {
+        "episode": "993602780ec4409caf335e8a3abcd8f2",
+        "scenario": "realism",
+        "variant": "baseline",
+        "seed": 619,
+        "condition": "nominal",
+        "state": "complete",
+        "duration_s": 118.36522308399435,
+        "distance_m": 36.773520841931756,
+        "minimum_clearance_m": 0.4274944614667708,
+        "unreached": [],
+        "camera": {
+          "id": "inspection-720p",
+          "width": 1280,
+          "height": 720,
+          "snapshot_width": 960,
+          "snapshot_height": 540,
+          "vertical_fov": 41,
+          "fps": 15,
+          "bitrate": 2500000,
+          "reference": "Synthetic lens/exposure/noise/blur; not calibrated to hardware",
+          "effects": {
+            "exposure": 1,
+            "blur": 0.25,
+            "noise": 0.004,
+            "vignette": 0.18,
+            "distortion": -0.025,
+            "glare": 0,
+            "jitter": 0.0005
+          },
+          "condition": "nominal",
+          "jpeg_quality": 0.82,
+          "pitch_degrees": -10
+        },
+        "video": {
+          "chunks": 115,
+          "mime": "video/webm",
+          "complete": true
+        },
+        "decoded_video": {
+          "width": 1280,
+          "height": 720
+        },
+        "observations": [
+          {
+            "action": "continue",
+            "observation": "A stack of boxes on a shelf in the center of the image.",
+            "image": "b30fb64d102342f98da5845a1cb9a578.jpg",
+            "pose": [
+              2.25,
+              1.25,
+              1.4,
+              1.5707963267948966
+            ],
+            "view": "entry",
+            "received_monotonic": 36256.789701333,
+            "elapsed_s": 2.8651876669973717,
+            "video_time_s": 2.855,
+            "comparison": null,
+            "perception": {
+              "visible_evidence": "A stack of boxes on a shelf in the center of the image.",
+              "center": "solid_surface",
+              "version": "center-objects-v1"
+            },
+            "change": null,
+            "survey": {
+              "summary": "A warehouse scene with a table, bottles, shelves, and a red cabinet.",
+              "objects": [
+                "table",
+                "bottles",
+                "shelves",
+                "cabinet"
+              ],
+              "uncertainty": "The text on the sign is unclear.",
+              "version": "object-survey-v1"
+            },
+            "comparison_note": null,
+            "latency_s": 4.329204333000234
+          },
+          {
+            "action": "continue",
+            "observation": "A stack of boxes on a metal shelving unit, with a label indicating 'HANDLE WITH CARE' and 'PARTS' on the boxes.",
+            "image": "5bdcfbc491a5402683ec7b0a49049608.jpg",
+            "pose": [
+              2.25,
+              4.25,
+              1.4,
+              1.5707963267948966
+            ],
+            "view": "stock-rack",
+            "received_monotonic": 36285.286730875,
+            "elapsed_s": 31.3622172089963,
+            "video_time_s": 31.35460000000149,
+            "comparison": null,
+            "perception": {
+              "visible_evidence": "A stack of boxes on a metal shelving unit, with a label indicating 'HANDLE WITH CARE' and 'PARTS' on the boxes.",
+              "center": "solid_surface",
+              "version": "center-objects-v1"
+            },
+            "change": null,
+            "survey": {
+              "summary": "A warehouse shelving unit with labeled boxes, a fire extinguisher, and a gray container.",
+              "objects": [
+                "Shelving unit",
+                "Box",
+                "Fire extinguisher",
+                "Container"
+              ],
+              "uncertainty": "The label on the box is unclear.",
+              "version": "object-survey-v1"
+            },
+            "comparison_note": null,
+            "latency_s": 4.561113832998672
+          },
+          {
+            "action": "continue",
+            "observation": "A large object is not visible through the central doorway. The doorway is clear of any large objects.",
+            "image": "03b62b78205545aeadf5cc3d1accc6fb.jpg",
+            "pose": [
+              3.25,
+              4.25,
+              1.4,
+              0
+            ],
+            "view": "passage",
+            "received_monotonic": 36292.804305125,
+            "elapsed_s": 38.879791458995896,
+            "video_time_s": 38.85470000000298,
+            "comparison": null,
+            "perception": {
+              "visible_evidence": "A large object is not visible through the central doorway. The doorway is clear of any large objects.",
+              "center": "open_space",
+              "version": "passage-evidence-v1",
+              "inspection_task": "passage"
+            },
+            "change": null,
+            "survey": {
+              "summary": "A view from inside a warehouse, showing two blue barrels on a wooden pallet, a yellow hand truck with a box, and an orange and white traffic cone on the floor.",
+              "objects": [
+                "Barrels",
+                "Wooden Pallet",
+                "Hand Truck",
+                "Traffic Cone"
+              ],
+              "uncertainty": "",
+              "version": "object-survey-v1"
+            },
+            "comparison_note": null,
+            "latency_s": 4.577633290995436
+          },
+          {
+            "action": "continue",
+            "observation": "The center of the image contains two blue barrels placed on wooden pallets. The background is a plain wall, and the floor is textured. There is no visible opening or gap in the center of the image.",
+            "image": "883d6a1deca84d6e9b748b5918704045.jpg",
+            "pose": [
+              8.25,
+              4.25,
+              1.4,
+              -0.8
+            ],
+            "view": "equipment",
+            "received_monotonic": 36312.302540583,
+            "elapsed_s": 58.37802691699471,
+            "video_time_s": 58.3545,
+            "comparison": null,
+            "perception": {
+              "visible_evidence": "The center of the image contains two blue barrels placed on wooden pallets. The background is a plain wall, and the floor is textured. There is no visible opening or gap in the center of the image.",
+              "center": "solid_surface",
+              "version": "center-objects-v1"
+            },
+            "change": null,
+            "survey": {
+              "summary": "Two blue barrels on wooden pallets in a corner, with a traffic cone partially visible on the left.",
+              "objects": [
+                "Barrel",
+                "Barrel",
+                "Pallet",
+                "Traffic cone"
+              ],
+              "uncertainty": "",
+              "version": "object-survey-v1"
+            },
+            "comparison_note": null,
+            "latency_s": 4.681077750006807
+          },
+          {
+            "action": "continue",
+            "observation": "A computer monitor displaying 'SYSTEM READY' on a screen, with a keyboard, mouse, and a red toolbox on a desk. The monitor is centered in the image.",
+            "image": "71aa3e6840894f7b89a5e43753a603ec.jpg",
+            "pose": [
+              8.25,
+              4.25,
+              1.4,
+              1.5707963267948966
+            ],
+            "view": "far-room",
+            "received_monotonic": 36317.8015035,
+            "elapsed_s": 63.87698983399605,
+            "video_time_s": 63.85440000000596,
+            "comparison": null,
+            "perception": {
+              "visible_evidence": "A computer monitor displaying 'SYSTEM READY' on a screen, with a keyboard, mouse, and a red toolbox on a desk. The monitor is centered in the image.",
+              "center": "solid_surface",
+              "version": "center-objects-v1"
+            },
+            "change": null,
+            "survey": {
+              "summary": "A computer desk with a monitor displaying 'SYSTEM READY', a red toolbox, a keyboard, a cup, and a bottle on the right side.",
+              "objects": [
+                "Monitor",
+                "Toolbox",
+                "Keyboard",
+                "Cup"
+              ],
+              "uncertainty": "The location of the water bottle is unclear.",
+              "version": "object-survey-v1"
+            },
+            "comparison_note": null,
+            "latency_s": 4.772153875004733
+          },
+          {
+            "action": "continue",
+            "observation": "A purple office chair with a round back and black armrests is positioned in the center of the image.",
+            "image": "955595be403c47ef838578d1614416ff.jpg",
+            "pose": [
+              9.25,
+              5.25,
+              1.4,
+              1.0819439724671487
+            ],
+            "view": "seating",
+            "received_monotonic": 36327.801306208,
+            "elapsed_s": 73.87679254199611,
+            "video_time_s": 73.8545,
+            "comparison": null,
+            "perception": {
+              "visible_evidence": "A purple office chair with a round back and black armrests is positioned in the center of the image.",
+              "center": "solid_surface",
+              "version": "center-objects-v1"
+            },
+            "change": null,
+            "survey": {
+              "summary": "A simple office scene with a chair, potted plant, table, and toolbox.",
+              "objects": [
+                "Chair",
+                "Potted Plant",
+                "Table",
+                "Toolbox"
+              ],
+              "uncertainty": "",
+              "version": "object-survey-v1"
+            },
+            "comparison_note": null,
+            "latency_s": 4.316344874998322
+          }
+        ]
+      },
+      {
+        "episode": "46091fc0163b434d8e216a84ead8acca",
+        "scenario": "realism",
+        "variant": "changed",
+        "seed": 619,
+        "condition": "nominal",
+        "state": "partial",
+        "duration_s": 119.72252045800269,
+        "distance_m": 43.62063358337847,
+        "minimum_clearance_m": 0.347662131525773,
+        "unreached": [
+          "equipment",
+          "far-room",
+          "seating"
+        ],
+        "camera": {
+          "id": "inspection-720p",
+          "width": 1280,
+          "height": 720,
+          "snapshot_width": 960,
+          "snapshot_height": 540,
+          "vertical_fov": 41,
+          "fps": 15,
+          "bitrate": 2500000,
+          "reference": "Synthetic lens/exposure/noise/blur; not calibrated to hardware",
+          "effects": {
+            "exposure": 1,
+            "blur": 0.25,
+            "noise": 0.004,
+            "vignette": 0.18,
+            "distortion": -0.025,
+            "glare": 0,
+            "jitter": 0.0005
+          },
+          "condition": "nominal",
+          "jpeg_quality": 0.82,
+          "pitch_degrees": -10
+        },
+        "video": {
+          "chunks": 116,
+          "mime": "video/webm",
+          "complete": true
+        },
+        "decoded_video": {
+          "width": 1280,
+          "height": 720
+        },
+        "observations": [
+          {
+            "action": "continue",
+            "observation": "A stack of boxes on a shelf in the center of the image.",
+            "image": "3035c9f0e3ce46dba2a3cf608b8db5c0.jpg",
+            "pose": [
+              2.25,
+              1.25,
+              1.4,
+              1.5707963267948966
+            ],
+            "view": "entry",
+            "received_monotonic": 36376.7988025,
+            "elapsed_s": 2.9731312500007334,
+            "video_time_s": 2.95079999999702,
+            "comparison": {
+              "episode": "993602780ec4409caf335e8a3abcd8f2",
+              "image": "b30fb64d102342f98da5845a1cb9a578.jpg"
+            },
+            "perception": {
+              "visible_evidence": "A stack of boxes on a shelf in the center of the image.",
+              "center": "solid_surface",
+              "version": "center-objects-v1"
+            },
+            "change": {
+              "status": "same_center_class",
+              "previous_center": "solid_surface",
+              "current_center": "solid_surface",
+              "basis": "two independently classified images; center appearance only"
+            },
+            "survey": {
+              "summary": "A warehouse scene with a table, bottles, shelves, and a red cabinet.",
+              "objects": [
+                "table",
+                "bottles",
+                "shelves",
+                "cabinet"
+              ],
+              "uncertainty": "The text on the sign is unclear.",
+              "version": "object-survey-v1"
+            },
+            "comparison_note": null,
+            "latency_s": 4.308719874999952
+          },
+          {
+            "action": "continue",
+            "observation": "A stack of boxes on a metal shelving unit, with a label indicating 'HANDLE WITH CARE' and 'PARTS' on the boxes.",
+            "image": "3d5b37749aa3454989c51b1cb88a36fd.jpg",
+            "pose": [
+              2.25,
+              4.25,
+              1.4,
+              1.5707963267948966
+            ],
+            "view": "stock-rack",
+            "received_monotonic": 36405.7988905,
+            "elapsed_s": 31.97321925000142,
+            "video_time_s": 31.95179999999702,
+            "comparison": {
+              "episode": "993602780ec4409caf335e8a3abcd8f2",
+              "image": "5bdcfbc491a5402683ec7b0a49049608.jpg"
+            },
+            "perception": {
+              "visible_evidence": "A stack of boxes on a metal shelving unit, with a label indicating 'HANDLE WITH CARE' and 'PARTS' on the boxes.",
+              "center": "solid_surface",
+              "version": "center-objects-v1"
+            },
+            "change": {
+              "status": "same_center_class",
+              "previous_center": "solid_surface",
+              "current_center": "solid_surface",
+              "basis": "two independently classified images; center appearance only"
+            },
+            "survey": {
+              "summary": "A warehouse shelving unit with labeled boxes, a fire extinguisher, and a gray container.",
+              "objects": [
+                "Shelving unit",
+                "Box",
+                "Fire extinguisher",
+                "Container"
+              ],
+              "uncertainty": "The label on the box is unclear.",
+              "version": "object-survey-v1"
+            },
+            "comparison_note": null,
+            "latency_s": 4.6143265000064275
+          },
+          {
+            "action": "continue",
+            "observation": "A large stack of cardboard boxes blocks the central doorway.",
+            "image": "8d0d14432f1c41bc8fff2317b0c9ea17.jpg",
+            "pose": [
+              3.25,
+              4.25,
+              1.4,
+              0
+            ],
+            "view": "passage",
+            "received_monotonic": 36413.303318791,
+            "elapsed_s": 39.47764754099626,
+            "video_time_s": 39.452,
+            "comparison": {
+              "episode": "993602780ec4409caf335e8a3abcd8f2",
+              "image": "03b62b78205545aeadf5cc3d1accc6fb.jpg"
+            },
+            "perception": {
+              "visible_evidence": "A large stack of cardboard boxes blocks the central doorway.",
+              "center": "solid_surface",
+              "version": "passage-evidence-v1",
+              "inspection_task": "passage"
+            },
+            "change": {
+              "status": "new_obstruction",
+              "previous_center": "open_space",
+              "current_center": "solid_surface",
+              "basis": "two independently classified images; center appearance only"
+            },
+            "survey": {
+              "summary": "A close-up view of stacked cardboard boxes in a warehouse-like setting, with a cone and a blue container partially visible in the background.",
+              "objects": [
+                "Cardboard boxes",
+                "Orange and white traffic cone",
+                "Blue container",
+                "Grey wall"
+              ],
+              "uncertainty": "The location of the black object is unclear.",
+              "version": "object-survey-v1"
+            },
+            "comparison_note": null,
+            "latency_s": 4.501474332995713
+          }
+        ]
+      }
+    ],
+    "playback_checks": [
+      {
+        "episode": "993602780ec4409caf335e8a3abcd8f2",
+        "width": 1280,
+        "height": 720,
+        "time": 2.866711,
+        "duration": null,
+        "ready": 4
+      },
+      {
+        "episode": "46091fc0163b434d8e216a84ead8acca",
+        "width": 1280,
+        "height": 720,
+        "time": 2.962033,
+        "duration": null,
+        "ready": 4
+      }
+    ],
+    "scope": "These two UI patrols exercise the occupancy-evidence and home-approach fixes. The subsequently added recorded-path fallback is covered by the release geometry suite and unit tests."
+  },
+  "geometry": {
+    "suite": "recon-geometry",
+    "host": "macOS-15.6-arm64-arm-64bit",
+    "real_inference": false,
+    "rendered_camera": false,
+    "real_flight_dynamics": false,
+    "physical_transport": false,
+    "hardware_gate": "blocked",
+    "episodes": 104,
+    "returned": 104,
+    "clearance_violations": 0,
+    "failures": 0,
+    "passed": true
+  },
+  "geometry_report": ".local/validation/realism-navigation-release.json",
+  "geometry_sha256": "66fbe5537bc82de912352c54de780a7748d0b7603c84c3b1e0a8729e2b7823a1",
+  "preserved_diagnostics": [
+    {
+      "path": ".local/validation/realism-qwen-v1/report.json",
+      "sha256": "b74d559fb7062899f1908acea34baa8d1bfa6f7e2d60dd8b4bcf39b4385c0b91",
+      "summary": {
+        "cases": 28,
+        "evaluated": 28,
+        "sites": 1,
+        "encounters": 4,
+        "case_checks_passed": 25,
+        "encounters_all_checks_passed": 1,
+        "errors_or_missing": 0,
+        "center_labeled_cases": 8,
+        "center_accuracy": 0.625,
+        "center_encounter_accuracy": 0.25,
+        "blocked_encounters": 4,
+        "false_clear_encounters": 0,
+        "false_clear_upper_95_if_independent": 0.5271291954984121,
+        "clear_encounters": 4,
+        "uncertain_encounters": 0,
+        "uncertainty_action_rate": null,
+        "uncertainty_encounter_action_rate": null,
+        "required_objects_found": 36,
+        "required_objects_total": 36,
+        "required_object_recall": 1.0,
+        "required_object_encounter_recall": 1.0,
+        "inspection_p95_s": 4.891126750000694,
+        "condition_encounters": {
+          "dim": 1,
+          "glare": 1,
+          "motion": 1,
+          "nominal": 1
+        },
+        "caption_precision": null
+      }
+    },
+    {
+      "path": ".local/validation/realism-qwen-v2/report.json",
+      "sha256": "f875deaa747df0b2bf8b76214e51b5bf8f0d384943478986dac198790efb7489",
+      "summary": {
+        "cases": 28,
+        "evaluated": 28,
+        "sites": 1,
+        "encounters": 4,
+        "case_checks_passed": 27,
+        "encounters_all_checks_passed": 3,
+        "errors_or_missing": 0,
+        "center_labeled_cases": 8,
+        "center_accuracy": 0.875,
+        "center_encounter_accuracy": 0.75,
+        "blocked_encounters": 4,
+        "false_clear_encounters": 1,
+        "false_clear_upper_95_if_independent": null,
+        "clear_encounters": 4,
+        "uncertain_encounters": 0,
+        "uncertainty_action_rate": null,
+        "uncertainty_encounter_action_rate": null,
+        "required_objects_found": 36,
+        "required_objects_total": 36,
+        "required_object_recall": 1.0,
+        "required_object_encounter_recall": 1.0,
+        "inspection_p95_s": 5.21737445799954,
+        "condition_encounters": {
+          "dim": 1,
+          "glare": 1,
+          "motion": 1,
+          "nominal": 1
+        },
+        "caption_precision": null
+      }
+    },
+    {
+      "path": ".local/validation/realism-center-regression-v3.json",
+      "sha256": "4d37907b825f8a918e60294dd13b3fc975bb8fd1eabeaad7aed22e8cb6f283d0",
+      "correct": 38,
+      "total": 40,
+      "false_clear": 2,
+      "scope_correction": "All reused images are regression data, regardless of the older evaluator split label."
+    },
+    {
+      "path": ".local/validation/realism-center-crop-v1.json",
+      "sha256": "3d5f2d41f477db0b22cdb05013b5e0ce1ad9dcf58d621b5f8b53839611648ab0",
+      "correct": 35,
+      "total": 40,
+      "false_clear": 0,
+      "scope_correction": "All reused images are regression data, regardless of the older evaluator split label."
+    }
+  ],
+  "failed_live_patrol": "4323c1a0693649d9aad825161357e047",
+  "limits": [
+    "One virtual site and agent-authored object-name references; not unseen real sites",
+    "Full caption precision, object localization and physical camera calibration unmeasured",
+    "Camera stress is deterministic synthetic image processing, not measured sensor noise or rolling shutter",
+    "Ideal position/ranges and fixed 1.4 m altitude; indoor PX4 dynamics and real drone testing remain pending",
+    "The public real-photo missed-bottles case remains unresolved"
+  ],
+  "runtime_sources": {
+    "app/recon.py": "d9833ee89f96aa57b76a661fea26d5f9811653269aed4475a6f76df42bc0c41c",
+    "app/navigation.py": "007a95d1dd5bc5a4cc82495c08540bd3e23a6a9c811cc3a24aa38b4d80da821e",
+    "app/perception.py": "4c83bff67351a713505b69c405a95e2d74ec4f7a62083649adf3f2a5cdd513b9",
+    "sim/recon_world.py": "a450df07da32e8490da6309b20850fdce4ac944a8d71ad53c54839eec71912db",
+    "app/ui/recon.js": "eac891aa0ddd047627171ba7124bb640beef9a3ea446d51ba6523b148a470312",
+    "app/ui/scene-realism.js": "5499c65d5dce5712849bfd757988bef68558bf3d32d2d4dea4d5f315614532ee",
+    "app/ui/camera-effects.js": "9f0cfe524ee6c0a702ece33030481d29e5d4bb6b07ae363f8bb9edfcbd03ded2"
+  }
+}

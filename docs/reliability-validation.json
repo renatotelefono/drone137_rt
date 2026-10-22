@@ -1,0 +1,805 @@
+{
+  "date": "2026-10-20",
+  "host": "Apple M4 / 16 GiB / macOS 15.6",
+  "real_inference": true,
+  "physical_transport": false,
+  "real_world_qualified": false,
+  "tests": {
+    "passed": 86,
+    "seconds": 16.424,
+    "log": "reliability-tests.txt"
+  },
+  "scope": "Six public real-camera preview frames. New to this project test; model pretraining exposure unknown. Indoor proxy, not target-site/camera or flight evidence.",
+  "summary": {
+    "cases": 6,
+    "evaluated": 6,
+    "sites": 1,
+    "encounters": 6,
+    "case_checks_passed": 5,
+    "encounters_all_checks_passed": 5,
+    "errors_or_missing": 0,
+    "center_labeled_cases": 0,
+    "center_accuracy": null,
+    "center_encounter_accuracy": null,
+    "blocked_encounters": 0,
+    "false_clear_encounters": 0,
+    "false_clear_upper_95_if_independent": null,
+    "clear_encounters": 0,
+    "uncertain_encounters": 0,
+    "uncertainty_action_rate": null,
+    "uncertainty_encounter_action_rate": null,
+    "required_objects_found": 11,
+    "required_objects_total": 12,
+    "required_object_recall": 0.9166666666666666,
+    "required_object_encounter_recall": 0.9166666666666666,
+    "inspection_p95_s": 3.6309982080056216,
+    "condition_encounters": {
+      "motion_blur": 1,
+      "nominal": 5
+    },
+    "caption_precision": null
+  },
+  "cases": [
+    {
+      "id": "freiburg1_desk",
+      "source_kind": "public_real",
+      "domain": "indoor_proxy",
+      "site_id": "tum-location-unverified",
+      "encounter_id": "freiburg1_desk",
+      "camera_id": "TUM Kinect/Asus RGB preview",
+      "perception_profile": "detail",
+      "split": "development",
+      "conditions": [
+        "nominal"
+      ],
+      "provenance": "https://cvg.cit.tum.de/rgbd/dataset/freiburg1/rgbd_dataset_freiburg1_desk-rgb.png ; TUM RGB-D benchmark, Sturm et al. (2012), CC BY 4.0",
+      "annotation": {
+        "reviewer": "Codex visual review before Qwen inference, 2026-10-20",
+        "reviewer_kind": "agent",
+        "center": null,
+        "required_objects": [
+          [
+            "monitor",
+            "monitors",
+            "screen",
+            "screens"
+          ],
+          [
+            "keyboard",
+            "keyboards"
+          ]
+        ],
+        "notes": "Two salient visible objects only. Center clearance and complete inventory are unlabelled. Not independent human ground truth. Acquisition series are not verified independent sites; conservatively grouped together."
+      },
+      "path": "images/freiburg1_desk.jpg",
+      "image_sha256": "6faf0af8d629ce4b11dd63c6b9b680e2685f3121bbb0aad498eb64d6ce692046",
+      "source_sha256": "5dbdd530cd1165fc5cdd875613f87666c67df84645a585dd1745cb18e5982533",
+      "width": 640,
+      "height": 480,
+      "source_width": 640,
+      "source_height": 480
+    },
+    {
+      "id": "freiburg1_room",
+      "source_kind": "public_real",
+      "domain": "indoor_proxy",
+      "site_id": "tum-location-unverified",
+      "encounter_id": "freiburg1_room",
+      "camera_id": "TUM Kinect/Asus RGB preview",
+      "perception_profile": "detail",
+      "split": "development",
+      "conditions": [
+        "nominal"
+      ],
+      "provenance": "https://cvg.cit.tum.de/rgbd/dataset/freiburg1/rgbd_dataset_freiburg1_room-rgb.png ; TUM RGB-D benchmark, Sturm et al. (2012), CC BY 4.0",
+      "annotation": {
+        "reviewer": "Codex visual review before Qwen inference, 2026-10-20",
+        "reviewer_kind": "agent",
+        "center": null,
+        "required_objects": [
+          [
+            "laptop"
+          ],
+          [
+            "monitor",
+            "monitors"
+          ]
+        ],
+        "notes": "Two salient visible objects only. Center clearance and complete inventory are unlabelled. Not independent human ground truth. Acquisition series are not verified independent sites; conservatively grouped together."
+      },
+      "path": "images/freiburg1_room.jpg",
+      "image_sha256": "90fbb54a15277d5892a6fd46da889e31bf8ad8982f9a1df36f300bbc06dd48ff",
+      "source_sha256": "94afe78f6c0efac7e2f268392a8014c7f5da3b763524eb098cd44265dded94c2",
+      "width": 640,
+      "height": 480,
+      "source_width": 640,
+      "source_height": 480
+    },
+    {
+      "id": "freiburg2_desk",
+      "source_kind": "public_real",
+      "domain": "indoor_proxy",
+      "site_id": "tum-location-unverified",
+      "encounter_id": "freiburg2_desk",
+      "camera_id": "TUM Kinect/Asus RGB preview",
+      "perception_profile": "detail",
+      "split": "development",
+      "conditions": [
+        "nominal"
+      ],
+      "provenance": "https://cvg.cit.tum.de/rgbd/dataset/freiburg2/rgbd_dataset_freiburg2_desk-rgb.png ; TUM RGB-D benchmark, Sturm et al. (2012), CC BY 4.0",
+      "annotation": {
+        "reviewer": "Codex visual review before Qwen inference, 2026-10-20",
+        "reviewer_kind": "agent",
+        "center": null,
+        "required_objects": [
+          [
+            "monitor",
+            "screen"
+          ],
+          [
+            "keyboard"
+          ]
+        ],
+        "notes": "Two salient visible objects only. Center clearance and complete inventory are unlabelled. Not independent human ground truth. Acquisition series are not verified independent sites; conservatively grouped together."
+      },
+      "path": "images/freiburg2_desk.jpg",
+      "image_sha256": "5e22b7ca5709e5e0cf9d6529334c57c4116082c6a4c43ad03c816934f3d59ac7",
+      "source_sha256": "19a37c42b247b44d9b63d25ee763ac4e4e589dc666ee065eb96014953ed860ab",
+      "width": 640,
+      "height": 480,
+      "source_width": 640,
+      "source_height": 480
+    },
+    {
+      "id": "freiburg2_large_no_loop",
+      "source_kind": "public_real",
+      "domain": "indoor_proxy",
+      "site_id": "tum-location-unverified",
+      "encounter_id": "freiburg2_large_no_loop",
+      "camera_id": "TUM Kinect/Asus RGB preview",
+      "perception_profile": "detail",
+      "split": "development",
+      "conditions": [
+        "motion_blur"
+      ],
+      "provenance": "https://cvg.cit.tum.de/rgbd/dataset/freiburg2/rgbd_dataset_freiburg2_large_no_loop-rgb.png ; TUM RGB-D benchmark, Sturm et al. (2012), CC BY 4.0",
+      "annotation": {
+        "reviewer": "Codex visual review before Qwen inference, 2026-10-20",
+        "reviewer_kind": "agent",
+        "center": null,
+        "required_objects": [
+          [
+            "tripod"
+          ],
+          [
+            "fire extinguisher"
+          ]
+        ],
+        "notes": "Two salient visible objects only. Center clearance and complete inventory are unlabelled. Not independent human ground truth. Acquisition series are not verified independent sites; conservatively grouped together."
+      },
+      "path": "images/freiburg2_large_no_loop.jpg",
+      "image_sha256": "2311091799f6b028559484d1187d3227537a57ebd4f8620afa92e79e127809f9",
+      "source_sha256": "b868bb3b88d883745839260387467b47702505a30a65fc11910efe906a113bc8",
+      "width": 640,
+      "height": 480,
+      "source_width": 640,
+      "source_height": 480
+    },
+    {
+      "id": "freiburg2_pioneer_slam",
+      "source_kind": "public_real",
+      "domain": "indoor_proxy",
+      "site_id": "tum-location-unverified",
+      "encounter_id": "freiburg2_pioneer_slam",
+      "camera_id": "TUM Kinect/Asus RGB preview",
+      "perception_profile": "detail",
+      "split": "development",
+      "conditions": [
+        "nominal"
+      ],
+      "provenance": "https://cvg.cit.tum.de/rgbd/dataset/freiburg2/rgbd_dataset_freiburg2_pioneer_slam-rgb.png ; TUM RGB-D benchmark, Sturm et al. (2012), CC BY 4.0",
+      "annotation": {
+        "reviewer": "Codex visual review before Qwen inference, 2026-10-20",
+        "reviewer_kind": "agent",
+        "center": null,
+        "required_objects": [
+          [
+            "checkerboard",
+            "checker board",
+            "chessboard",
+            "checkered board"
+          ],
+          [
+            "cabinet",
+            "drawers",
+            "drawer"
+          ]
+        ],
+        "notes": "Two salient visible objects only. Center clearance and complete inventory are unlabelled. Not independent human ground truth. Acquisition series are not verified independent sites; conservatively grouped together."
+      },
+      "path": "images/freiburg2_pioneer_slam.jpg",
+      "image_sha256": "19c595ccf87250990b6cfe86f918a3202087e8631fe142a0c97bd634cef41227",
+      "source_sha256": "1dde58eb29f0e08645f00d3554228bbe9fda69616772ae095e840fce2be4b7e3",
+      "width": 640,
+      "height": 480,
+      "source_width": 640,
+      "source_height": 480
+    },
+    {
+      "id": "freiburg3_long_office_household",
+      "source_kind": "public_real",
+      "domain": "indoor_proxy",
+      "site_id": "tum-location-unverified",
+      "encounter_id": "freiburg3_long_office_household",
+      "camera_id": "TUM Kinect/Asus RGB preview",
+      "perception_profile": "detail",
+      "split": "development",
+      "conditions": [
+        "nominal"
+      ],
+      "provenance": "https://cvg.cit.tum.de/rgbd/dataset/freiburg3/rgbd_dataset_freiburg3_long_office_household-rgb.png ; TUM RGB-D benchmark, Sturm et al. (2012), CC BY 4.0",
+      "annotation": {
+        "reviewer": "Codex visual review before Qwen inference, 2026-10-20",
+        "reviewer_kind": "agent",
+        "center": null,
+        "required_objects": [
+          [
+            "chair",
+            "chairs"
+          ],
+          [
+            "bottle",
+            "bottles"
+          ]
+        ],
+        "notes": "Two salient visible objects only. Center clearance and complete inventory are unlabelled. Not independent human ground truth. Acquisition series are not verified independent sites; conservatively grouped together."
+      },
+      "path": "images/freiburg3_long_office_household.jpg",
+      "image_sha256": "3eb0abf5229340ca6ed7855ca08c61f2e2500fe4f04787f6c96b9d1e016bae63",
+      "source_sha256": "a84f24b35cfa73f3180d63a6f6068cbae637ff5c3612c8ef05882ce3979607cc",
+      "width": 640,
+      "height": 480,
+      "source_width": 640,
+      "source_height": 480
+    }
+  ],
+  "results": [
+    {
+      "id": "freiburg2_pioneer_slam",
+      "image_sha256": "19c595ccf87250990b6cfe86f918a3202087e8631fe142a0c97bd634cef41227",
+      "perception": {
+        "visible_evidence": "A large white and black checkered board is leaning against a wall. It is positioned in the center of the image, and it appears to be a solid surface.",
+        "center": "solid_surface",
+        "version": "center-objects-v1"
+      },
+      "action": "continue",
+      "survey": {
+        "summary": "A camera setup is positioned on a tripod next to a large checkered board in a workshop-like environment.",
+        "objects": [
+          "Camera",
+          "Tripod",
+          "Checkered Board",
+          "Cabinet"
+        ],
+        "uncertainty": "The exact model of the camera and the condition of the tripod are not clearly visible.",
+        "version": "object-survey-v1"
+      },
+      "latency_s": 3.6309982080056216,
+      "checks": {
+        "center_correct": null,
+        "false_clear": false,
+        "required_objects_found": 2,
+        "required_objects_total": 2,
+        "object_matches": [
+          true,
+          true
+        ],
+        "uncertainty_action_correct": null,
+        "passed": true
+      }
+    },
+    {
+      "id": "freiburg1_desk",
+      "image_sha256": "6faf0af8d629ce4b11dd63c6b9b680e2685f3121bbb0aad498eb64d6ce692046",
+      "perception": {
+        "visible_evidence": "a computer monitor with a black screen, a keyboard, a mouse, and a stack of papers on a desk",
+        "center": "open_space",
+        "version": "center-objects-v1"
+      },
+      "action": "continue",
+      "survey": {
+        "summary": "A desk setup with two monitors, a keyboard, a mouse, and some papers on a white desk.",
+        "objects": [
+          "Monitor",
+          "Keyboard",
+          "Mouse",
+          "Book"
+        ],
+        "uncertainty": "The camera's position and angle are unclear, and the exact location of the book is not fully visible.",
+        "version": "object-survey-v1"
+      },
+      "latency_s": 3.4505898330025957,
+      "checks": {
+        "center_correct": null,
+        "false_clear": false,
+        "required_objects_found": 2,
+        "required_objects_total": 2,
+        "object_matches": [
+          true,
+          true
+        ],
+        "uncertainty_action_correct": null,
+        "passed": true
+      }
+    },
+    {
+      "id": "freiburg3_long_office_household",
+      "image_sha256": "3eb0abf5229340ca6ed7855ca08c61f2e2500fe4f04787f6c96b9d1e016bae63",
+      "perception": {
+        "visible_evidence": "a white desk with various items including a globe, bottles, a yellow dice, a book, and a red toy airplane",
+        "center": "open_space",
+        "version": "center-objects-v1"
+      },
+      "action": "continue",
+      "survey": {
+        "summary": "A workspace setup with a desk, office chairs, and various items on a table.",
+        "objects": [
+          "desk",
+          "chair",
+          "globe",
+          "book"
+        ],
+        "uncertainty": "The location of the small white object on the table is unclear.",
+        "version": "object-survey-v1"
+      },
+      "latency_s": 3.348519667000801,
+      "checks": {
+        "center_correct": null,
+        "false_clear": false,
+        "required_objects_found": 1,
+        "required_objects_total": 2,
+        "object_matches": [
+          true,
+          false
+        ],
+        "uncertainty_action_correct": null,
+        "passed": false
+      }
+    },
+    {
+      "id": "freiburg1_room",
+      "image_sha256": "90fbb54a15277d5892a6fd46da889e31bf8ad8982f9a1df36f300bbc06dd48ff",
+      "perception": {
+        "visible_evidence": "A laptop computer with a screen displaying a white background, placed on a white desk. The laptop is open and has a black keyboard. There are various cables and electronic devices around it, including",
+        "center": "open_space",
+        "version": "center-objects-v1"
+      },
+      "action": "continue",
+      "survey": {
+        "summary": "A cluttered office desk with a laptop, monitor, keyboard, and various cables.",
+        "objects": [
+          "laptop",
+          "monitor",
+          "keyboard",
+          "cables"
+        ],
+        "uncertainty": "The location of the camera is unclear.",
+        "version": "object-survey-v1"
+      },
+      "latency_s": 3.452908834005939,
+      "checks": {
+        "center_correct": null,
+        "false_clear": false,
+        "required_objects_found": 2,
+        "required_objects_total": 2,
+        "object_matches": [
+          true,
+          true
+        ],
+        "uncertainty_action_correct": null,
+        "passed": true
+      }
+    },
+    {
+      "id": "freiburg2_desk",
+      "image_sha256": "5e22b7ca5709e5e0cf9d6529334c57c4116082c6a4c43ad03c816934f3d59ac7",
+      "perception": {
+        "visible_evidence": "a stack of boxes",
+        "center": "open_space",
+        "version": "center-objects-v1"
+      },
+      "action": "continue",
+      "survey": {
+        "summary": "A desk setup with a computer, keyboard, mouse, and various office items.",
+        "objects": [
+          "monitor",
+          "keyboard",
+          "mouse",
+          "telephone"
+        ],
+        "uncertainty": "The location of the camera is unclear.",
+        "version": "object-survey-v1"
+      },
+      "latency_s": 2.945142707998457,
+      "checks": {
+        "center_correct": null,
+        "false_clear": false,
+        "required_objects_found": 2,
+        "required_objects_total": 2,
+        "object_matches": [
+          true,
+          true
+        ],
+        "uncertainty_action_correct": null,
+        "passed": true
+      }
+    },
+    {
+      "id": "freiburg2_large_no_loop",
+      "image_sha256": "2311091799f6b028559484d1187d3227537a57ebd4f8620afa92e79e127809f9",
+      "perception": {
+        "visible_evidence": "A black tripod with a camera mounted on top, positioned in the center of the image.",
+        "center": "solid_surface",
+        "version": "center-objects-v1"
+      },
+      "action": "continue",
+      "survey": {
+        "summary": "A camera mounted on a tripod in a cluttered indoor space with a fire extinguisher and a wall-mounted fixture.",
+        "objects": [
+          "Camera",
+          "Tripod",
+          "Fire Extinguisher",
+          "Wall-mounted Fixture"
+        ],
+        "uncertainty": "The location of the wall-mounted fixture is unclear.",
+        "version": "object-survey-v1"
+      },
+      "latency_s": 3.3127488329992048,
+      "checks": {
+        "center_correct": null,
+        "false_clear": false,
+        "required_objects_found": 2,
+        "required_objects_total": 2,
+        "object_matches": [
+          true,
+          true
+        ],
+        "uncertainty_action_correct": null,
+        "passed": true
+      }
+    }
+  ],
+  "fingerprint": {
+    "manifest_sha256": "fe5ce57afdd877d8247a1d22ea5ab667f15eb92515888f39264504ce3b0af0a0",
+    "model_sha256": "33f0b7a9fce46d9059a35a83fbb0626220fcb762915533d56fc4c3fa37893df3",
+    "pipeline": {
+      "app/perception.py": "782104bfde84e9c2783422ebbe166ffee44b0cf83a44041fe066608b6a2a490e",
+      "adapters/llama.py": "37e1abf03435d974c84f87721fbbfb18d2e6073540433d1b9459e8fd77c45358",
+      "app/reliability.py": "9a699ec8fcdc2deb62d6fcfd4b059ab0d58c26424c21f5d4010867b53c712981",
+      "app/model_manager.py": "1ad2c8f8c92186121850fd09be2a06987fb14748fb1eae9e1c7a0f0a96d0f57f",
+      "config/models.json": "53b6be0fafcd8d5afe6c004d0214ef7dca4fb9f515beac249065c89110c71ba5",
+      "config/lean-8gb.json": "1ff77cbb21697eb2aea42f040c35bae17fe6aaa1ad851494c8cc851443e6c90b",
+      "scripts/evaluate_reliability.py": "fddb3824550b1731a309ab876497fa0d6f7c1e5ba5f9825b0679c006f6ec8624",
+      "config/reliability.json": "8440fdd59aa6d07ef9b4845615663b0760462006ca9a7989c421834d4d3a3dd0"
+    },
+    "images": {
+      "freiburg1_desk": "6faf0af8d629ce4b11dd63c6b9b680e2685f3121bbb0aad498eb64d6ce692046",
+      "freiburg1_room": "90fbb54a15277d5892a6fd46da889e31bf8ad8982f9a1df36f300bbc06dd48ff",
+      "freiburg2_desk": "5e22b7ca5709e5e0cf9d6529334c57c4116082c6a4c43ad03c816934f3d59ac7",
+      "freiburg2_large_no_loop": "2311091799f6b028559484d1187d3227537a57ebd4f8620afa92e79e127809f9",
+      "freiburg2_pioneer_slam": "19c595ccf87250990b6cfe86f918a3202087e8631fe142a0c97bd634cef41227",
+      "freiburg3_long_office_household": "3eb0abf5229340ca6ed7855ca08c61f2e2500fe4f04787f6c96b9d1e016bae63"
+    }
+  },
+  "domains": {
+    "workshop": {
+      "label": "Indoor workshop",
+      "metrics": {
+        "cases": 0,
+        "evaluated": 0,
+        "sites": 0,
+        "encounters": 0,
+        "case_checks_passed": 0,
+        "encounters_all_checks_passed": 0,
+        "errors_or_missing": 0,
+        "center_labeled_cases": 0,
+        "center_accuracy": null,
+        "center_encounter_accuracy": null,
+        "blocked_encounters": 0,
+        "false_clear_encounters": 0,
+        "false_clear_upper_95_if_independent": null,
+        "clear_encounters": 0,
+        "uncertain_encounters": 0,
+        "uncertainty_action_rate": null,
+        "uncertainty_encounter_action_rate": null,
+        "required_objects_found": 0,
+        "required_objects_total": 0,
+        "required_object_recall": null,
+        "required_object_encounter_recall": null,
+        "inspection_p95_s": null,
+        "condition_encounters": {},
+        "caption_precision": null
+      },
+      "perception_check_status": "insufficient_or_failed",
+      "reasons": [
+        "sites: 0 / 3 required",
+        "encounters: 0 / 60 required",
+        "blocked_encounters: 0 / 300 required",
+        "clear_encounters: 0 / 60 required",
+        "uncertain_encounters: 0 / 60 required",
+        "center_encounter_accuracy: insufficient or below target",
+        "required_object_encounter_recall: insufficient or below target",
+        "uncertainty_encounter_action_rate: insufficient or below target",
+        "False-clear evidence does not meet the proposed bound",
+        "Inspection latency not established or exceeds target",
+        "Missing condition coverage: nominal, clutter, low_light, glare, motion_blur, occlusion, moving_person"
+      ],
+      "real_world_qualified": false,
+      "remaining_reviews": [
+        "Independent full-caption factual audit",
+        "Sampling independence and site separation",
+        "Camera-visible mission coverage and report usefulness",
+        "Repeated PX4 dynamics and recovery tests",
+        "Supervised physical evidence with the intended aircraft and sensors",
+        "local positioning without GPS",
+        "confined clearance",
+        "positioning and camera loss recovery"
+      ]
+    },
+    "warehouse": {
+      "label": "Warehouse",
+      "metrics": {
+        "cases": 0,
+        "evaluated": 0,
+        "sites": 0,
+        "encounters": 0,
+        "case_checks_passed": 0,
+        "encounters_all_checks_passed": 0,
+        "errors_or_missing": 0,
+        "center_labeled_cases": 0,
+        "center_accuracy": null,
+        "center_encounter_accuracy": null,
+        "blocked_encounters": 0,
+        "false_clear_encounters": 0,
+        "false_clear_upper_95_if_independent": null,
+        "clear_encounters": 0,
+        "uncertain_encounters": 0,
+        "uncertainty_action_rate": null,
+        "uncertainty_encounter_action_rate": null,
+        "required_objects_found": 0,
+        "required_objects_total": 0,
+        "required_object_recall": null,
+        "required_object_encounter_recall": null,
+        "inspection_p95_s": null,
+        "condition_encounters": {},
+        "caption_precision": null
+      },
+      "perception_check_status": "insufficient_or_failed",
+      "reasons": [
+        "sites: 0 / 3 required",
+        "encounters: 0 / 60 required",
+        "blocked_encounters: 0 / 300 required",
+        "clear_encounters: 0 / 60 required",
+        "uncertain_encounters: 0 / 60 required",
+        "center_encounter_accuracy: insufficient or below target",
+        "required_object_encounter_recall: insufficient or below target",
+        "uncertainty_encounter_action_rate: insufficient or below target",
+        "False-clear evidence does not meet the proposed bound",
+        "Inspection latency not established or exceeds target",
+        "Missing condition coverage: nominal, repetitive_aisles, low_light, glare, motion_blur, occlusion, moving_vehicle"
+      ],
+      "real_world_qualified": false,
+      "remaining_reviews": [
+        "Independent full-caption factual audit",
+        "Sampling independence and site separation",
+        "Camera-visible mission coverage and report usefulness",
+        "Repeated PX4 dynamics and recovery tests",
+        "Supervised physical evidence with the intended aircraft and sensors",
+        "local positioning in repetitive aisles",
+        "moving traffic",
+        "link loss and return route"
+      ]
+    },
+    "perimeter": {
+      "label": "Building perimeter",
+      "metrics": {
+        "cases": 0,
+        "evaluated": 0,
+        "sites": 0,
+        "encounters": 0,
+        "case_checks_passed": 0,
+        "encounters_all_checks_passed": 0,
+        "errors_or_missing": 0,
+        "center_labeled_cases": 0,
+        "center_accuracy": null,
+        "center_encounter_accuracy": null,
+        "blocked_encounters": 0,
+        "false_clear_encounters": 0,
+        "false_clear_upper_95_if_independent": null,
+        "clear_encounters": 0,
+        "uncertain_encounters": 0,
+        "uncertainty_action_rate": null,
+        "uncertainty_encounter_action_rate": null,
+        "required_objects_found": 0,
+        "required_objects_total": 0,
+        "required_object_recall": null,
+        "required_object_encounter_recall": null,
+        "inspection_p95_s": null,
+        "condition_encounters": {},
+        "caption_precision": null
+      },
+      "perception_check_status": "insufficient_or_failed",
+      "reasons": [
+        "sites: 0 / 3 required",
+        "encounters: 0 / 60 required",
+        "blocked_encounters: 0 / 300 required",
+        "clear_encounters: 0 / 60 required",
+        "uncertain_encounters: 0 / 60 required",
+        "center_encounter_accuracy: insufficient or below target",
+        "required_object_encounter_recall: insufficient or below target",
+        "uncertainty_encounter_action_rate: insufficient or below target",
+        "False-clear evidence does not meet the proposed bound",
+        "Inspection latency not established or exceeds target",
+        "Missing condition coverage: nominal, backlight, shadow_transition, reflective_surface, thin_obstacle, moving_person"
+      ],
+      "real_world_qualified": false,
+      "remaining_reviews": [
+        "Independent full-caption factual audit",
+        "Sampling independence and site separation",
+        "Camera-visible mission coverage and report usefulness",
+        "Repeated PX4 dynamics and recovery tests",
+        "Supervised physical evidence with the intended aircraft and sensors",
+        "wind near structures",
+        "positioning degradation near buildings",
+        "thin obstacles and return clearance"
+      ]
+    },
+    "flat_field": {
+      "label": "Flat field",
+      "metrics": {
+        "cases": 0,
+        "evaluated": 0,
+        "sites": 0,
+        "encounters": 0,
+        "case_checks_passed": 0,
+        "encounters_all_checks_passed": 0,
+        "errors_or_missing": 0,
+        "center_labeled_cases": 0,
+        "center_accuracy": null,
+        "center_encounter_accuracy": null,
+        "blocked_encounters": 0,
+        "false_clear_encounters": 0,
+        "false_clear_upper_95_if_independent": null,
+        "clear_encounters": 0,
+        "uncertain_encounters": 0,
+        "uncertainty_action_rate": null,
+        "uncertainty_encounter_action_rate": null,
+        "required_objects_found": 0,
+        "required_objects_total": 0,
+        "required_object_recall": null,
+        "required_object_encounter_recall": null,
+        "inspection_p95_s": null,
+        "condition_encounters": {},
+        "caption_precision": null
+      },
+      "perception_check_status": "insufficient_or_failed",
+      "reasons": [
+        "sites: 0 / 3 required",
+        "encounters: 0 / 60 required",
+        "blocked_encounters: 0 / 300 required",
+        "clear_encounters: 0 / 60 required",
+        "uncertain_encounters: 0 / 60 required",
+        "center_encounter_accuracy: insufficient or below target",
+        "required_object_encounter_recall: insufficient or below target",
+        "uncertainty_encounter_action_rate: insufficient or below target",
+        "False-clear evidence does not meet the proposed bound",
+        "Inspection latency not established or exceeds target",
+        "Missing condition coverage: nominal, low_texture, backlight, long_distance, moving_vegetation, motion_blur"
+      ],
+      "real_world_qualified": false,
+      "remaining_reviews": [
+        "Independent full-caption factual audit",
+        "Sampling independence and site separation",
+        "Camera-visible mission coverage and report usefulness",
+        "Repeated PX4 dynamics and recovery tests",
+        "Supervised physical evidence with the intended aircraft and sensors",
+        "wind",
+        "range and communications",
+        "height above ground",
+        "return energy margin"
+      ]
+    },
+    "hillside": {
+      "label": "Hillside field",
+      "metrics": {
+        "cases": 0,
+        "evaluated": 0,
+        "sites": 0,
+        "encounters": 0,
+        "case_checks_passed": 0,
+        "encounters_all_checks_passed": 0,
+        "errors_or_missing": 0,
+        "center_labeled_cases": 0,
+        "center_accuracy": null,
+        "center_encounter_accuracy": null,
+        "blocked_encounters": 0,
+        "false_clear_encounters": 0,
+        "false_clear_upper_95_if_independent": null,
+        "clear_encounters": 0,
+        "uncertain_encounters": 0,
+        "uncertainty_action_rate": null,
+        "uncertainty_encounter_action_rate": null,
+        "required_objects_found": 0,
+        "required_objects_total": 0,
+        "required_object_recall": null,
+        "required_object_encounter_recall": null,
+        "inspection_p95_s": null,
+        "condition_encounters": {},
+        "caption_precision": null
+      },
+      "perception_check_status": "insufficient_or_failed",
+      "reasons": [
+        "sites: 0 / 3 required",
+        "encounters: 0 / 60 required",
+        "blocked_encounters: 0 / 300 required",
+        "clear_encounters: 0 / 60 required",
+        "uncertain_encounters: 0 / 60 required",
+        "center_encounter_accuracy: insufficient or below target",
+        "required_object_encounter_recall: insufficient or below target",
+        "uncertainty_encounter_action_rate: insufficient or below target",
+        "False-clear evidence does not meet the proposed bound",
+        "Inspection latency not established or exceeds target",
+        "Missing condition coverage: nominal, slope, crest_occlusion, shadow_transition, moving_vegetation, long_distance"
+      ],
+      "real_world_qualified": false,
+      "remaining_reviews": [
+        "Independent full-caption factual audit",
+        "Sampling independence and site separation",
+        "Camera-visible mission coverage and report usefulness",
+        "Repeated PX4 dynamics and recovery tests",
+        "Supervised physical evidence with the intended aircraft and sensors",
+        "terrain following in 3D",
+        "slope and crest clearance",
+        "wind",
+        "return path above terrain"
+      ]
+    }
+  },
+  "report": ".local/validation/reliability-real-grouped-v1/report.html",
+  "first_attempt": {
+    "report": ".local/validation/reliability-real-v1/report.json",
+    "object_names_found": 11,
+    "object_names_total": 12,
+    "case_checks_passed": 5,
+    "cases": 6,
+    "note": "Initial metadata grouped by acquisition series, not verified physical site. Preserved; final replay conservatively groups all preview frames as one unverified location."
+  },
+  "replay": true,
+  "replay_note": "Same six inputs and unchanged production prompts. Repeated observations are not new independent evidence. One missed bottle group persists.",
+  "video_import": {
+    "source": "e8924a1ca5ed49a1b2c38845f8240f1d/onboard.webm",
+    "requested_time_s": 55,
+    "decoded_time_s": 55,
+    "width": 960,
+    "height": 540,
+    "manifest": ".local/validation/reliability-video-prepared-v2/manifest.json",
+    "result": "Decoded image visually checked; production workshop monitor visible. Handles WebM missing duration metadata."
+  },
+  "limits": [
+    "Only six public preview images, one conservatively grouped unverified location.",
+    "Labels reviewed by Codex before Qwen, not independent humans.",
+    "No labelled center-clearance cases; false-clear rate is unmeasured, not zero.",
+    "Object-name checks do not grade full captions or report completeness.",
+    "No target-site camera data, outdoor validation, PX4 indoor patrol or physical flight.",
+    "Inference prompts unchanged; no tuning on test outputs.",
+    "Local exposure tracking cannot audit other machines or model pretraining."
+  ],
+  "review_page": ".local/validation/reliability-real-grouped-v1/review.html",
+  "report_ui": {
+    "images": 6,
+    "domains": 5,
+    "browser_errors": 0,
+    "note": "Presentation-only re-render; underlying report and pipeline snapshot preserved."
+  }
+}

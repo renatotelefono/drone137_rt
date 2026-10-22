@@ -1,0 +1,284 @@
+{
+  "project": "drone137 cost-first micro quadcopter",
+  "revision": 2,
+  "date": "2026-10-21",
+  "currency": "USD",
+  "status": "Engineering proposal only; not a matched, quoted, assembled or flight-validated kit.",
+  "user_priority": "Under $200 aircraft parts; lightweight; AI on ground computer with 8 GB maximum RAM target.",
+  "ai_location": "Ground computer only. Pi Zero 2 W performs video encoding and serial/network bridging.",
+  "cost_target_status": "Unverified design-to-cost ceilings. Discounts and lower-price compatible suppliers have not been secured. No claimed batch size or production quote.",
+  "prototype_status": "Mix of manufacturer listings and procurement allowances; referenced frame and motor offers are out of stock.",
+  "aircraft_items": [
+    {
+      "id": "frame",
+      "item": "150 mm / 3.5 inch frame",
+      "quantity": 1,
+      "prototype_unit_usd": 25,
+      "target_unit_usd": 15,
+      "unit_mass_g": 26,
+      "price_basis": "allowance",
+      "basis": "Crux35 reference: $24.99 listing, out of stock; exact compatible frame unselected.",
+      "sources": [
+        "frame",
+        "frame_price"
+      ]
+    },
+    {
+      "id": "guards",
+      "item": "Four propeller guards",
+      "quantity": 1,
+      "prototype_unit_usd": 10,
+      "target_unit_usd": 8,
+      "unit_mass_g": 20,
+      "price_basis": "allowance",
+      "basis": "Custom or compatible purchased guards; material only, fit and stiffness unvalidated.",
+      "sources": []
+    },
+    {
+      "id": "fc",
+      "item": "MicoAir743v2-AIO-35A",
+      "quantity": 1,
+      "prototype_unit_usd": 64.99,
+      "target_unit_usd": 50,
+      "unit_mass_g": 10,
+      "price_basis": "manufacturer_listing",
+      "basis": "Complete FC and four ESC channels; target requires a $14.99 reduction, no quote.",
+      "sources": [
+        "fc_store",
+        "fc_manual"
+      ]
+    },
+    {
+      "id": "motors",
+      "item": "EX1404 3500KV motors",
+      "quantity": 4,
+      "prototype_unit_usd": 12,
+      "target_unit_usd": 7,
+      "unit_mass_g": 8.7,
+      "price_basis": "allowance",
+      "basis": "Reference listing $11.99 each is out of stock; $12 is an allowance, not an available offer.",
+      "sources": [
+        "motor",
+        "motor_price"
+      ]
+    },
+    {
+      "id": "props",
+      "item": "HQProp T3.5X2X3 propeller set",
+      "quantity": 1,
+      "prototype_unit_usd": 4,
+      "target_unit_usd": 3,
+      "unit_mass_g": 4,
+      "price_basis": "allowance",
+      "basis": "Two CW and two CCW; selected propulsion family, exact delivered package to confirm.",
+      "sources": [
+        "propulsion"
+      ]
+    },
+    {
+      "id": "pi",
+      "item": "Pi Zero 2 W",
+      "quantity": 1,
+      "prototype_unit_usd": 15,
+      "target_unit_usd": 15,
+      "unit_mass_g": 12,
+      "price_basis": "manufacturer_starting_price",
+      "basis": "Camera encoder and MAVLink bridge only; board mass is an estimate.",
+      "sources": [
+        "pi"
+      ]
+    },
+    {
+      "id": "camera",
+      "item": "Arducam B0390 IMX219 camera",
+      "quantity": 1,
+      "prototype_unit_usd": 9.99,
+      "target_unit_usd": 9.99,
+      "unit_mass_g": 4,
+      "price_basis": "manufacturer_listing",
+      "basis": "Listed sale price; fixed focus visible light, mass allowance. Camera cables vary by package.",
+      "sources": [
+        "camera"
+      ]
+    },
+    {
+      "id": "flow",
+      "item": "MTF-02P flow and downward range",
+      "quantity": 1,
+      "prototype_unit_usd": 16.5,
+      "target_unit_usd": 14,
+      "unit_mass_g": 1.5,
+      "price_basis": "manufacturer_listing",
+      "basis": "Target requires an unquoted discount; not wall sensing or global localization.",
+      "sources": [
+        "flow_store",
+        "flow_manual"
+      ]
+    },
+    {
+      "id": "battery",
+      "item": "4S 650-750 mAh LiPo battery",
+      "quantity": 1,
+      "prototype_unit_usd": 18,
+      "target_unit_usd": 12,
+      "unit_mass_g": 75,
+      "price_basis": "allowance",
+      "basis": "Exact pack, continuous current rating and mass remain unselected.",
+      "sources": [
+        "propulsion"
+      ]
+    },
+    {
+      "id": "receiver",
+      "item": "ExpressLRS serial receiver",
+      "quantity": 1,
+      "prototype_unit_usd": 15,
+      "target_unit_usd": 10,
+      "unit_mass_g": 2,
+      "price_basis": "allowance",
+      "basis": "CRSF output; exact receiver and regional radio configuration unselected.",
+      "sources": []
+    },
+    {
+      "id": "regulator",
+      "item": "Dedicated 5V 3A regulator",
+      "quantity": 1,
+      "prototype_unit_usd": 6,
+      "target_unit_usd": 4,
+      "unit_mass_g": 5,
+      "price_basis": "allowance",
+      "basis": "Must cover fully charged 4S input and measured transients.",
+      "sources": []
+    },
+    {
+      "id": "storage",
+      "item": "Pi microSD plus FC log microSD",
+      "quantity": 1,
+      "prototype_unit_usd": 8,
+      "target_unit_usd": 5,
+      "unit_mass_g": 1,
+      "price_basis": "allowance",
+      "basis": "Two cards; sustained recording reliability to be tested.",
+      "sources": []
+    },
+    {
+      "id": "ffc",
+      "item": "Camera ribbon / connector contingency",
+      "quantity": 1,
+      "prototype_unit_usd": 2,
+      "target_unit_usd": 1,
+      "unit_mass_g": 1,
+      "price_basis": "allowance",
+      "basis": "Confirm correct pin count and contact orientation for exact B0390 and Zero revision.",
+      "sources": []
+    },
+    {
+      "id": "hardware",
+      "item": "Wiring, capacitor, mounts, straps, fasteners",
+      "quantity": 1,
+      "prototype_unit_usd": 12,
+      "target_unit_usd": 8,
+      "unit_mass_g": 18,
+      "price_basis": "allowance",
+      "basis": "Includes FC grommet sleeves, Pi/camera mount and landing feet. No tooling or labour.",
+      "sources": []
+    },
+    {
+      "id": "buzzer",
+      "item": "Buzzer",
+      "quantity": 1,
+      "prototype_unit_usd": 2,
+      "target_unit_usd": 2,
+      "unit_mass_g": 2,
+      "price_basis": "allowance",
+      "basis": "Compatible with the flight controller buzzer output.",
+      "sources": []
+    }
+  ],
+  "mass_status": "Mixed manufacturer component masses and engineering allowances. Budget is not a weighed assembly; provisional total range 230-280 g with one battery and guards.",
+  "shared_ground_items": [
+    {
+      "item": "RadioMaster Pocket ELRS transmitter",
+      "quantity": 1,
+      "unit_budget": 71.5,
+      "basis": "Manufacturer ELRS variant price; transmitter batteries separate.",
+      "source": "radio"
+    },
+    {
+      "item": "Transmitter batteries",
+      "quantity": 1,
+      "unit_budget": 10,
+      "basis": "Allowance."
+    },
+    {
+      "item": "4S-capable balance charger including mains supply",
+      "quantity": 1,
+      "unit_budget": 60,
+      "basis": "Allowance."
+    },
+    {
+      "item": "Local Wi-Fi access point",
+      "quantity": 1,
+      "unit_budget": 30,
+      "basis": "Allowance."
+    },
+    {
+      "item": "Printed measured localization markers for prepared test bay",
+      "quantity": 1,
+      "unit_budget": 10,
+      "basis": "Material allowance only; software integration and installation labour excluded."
+    }
+  ],
+  "initial_spares": [
+    {
+      "item": "Second flight battery",
+      "quantity": 1,
+      "unit_budget": 18,
+      "basis": "Allowance."
+    },
+    {
+      "item": "Spare propeller set",
+      "quantity": 1,
+      "unit_budget": 4,
+      "basis": "Allowance."
+    }
+  ],
+  "optional_outdoor_items": [
+    {
+      "item": "GNSS and external compass plus mount/cable",
+      "quantity": 1,
+      "unit_budget": 23,
+      "basis": "$18 module plus $5 mount/cable allowances. Family listed $13.99-$17.99; exact variant and driver to validate.",
+      "source": "gnss",
+      "mass_allowance_g": 12
+    }
+  ],
+  "exclusions": [
+    "Existing ground computer",
+    "Tax and shipping",
+    "Assembly labour and test labour",
+    "Software engineering",
+    "Tools and test fixtures",
+    "Custom frame/guard tooling or CAD engineering",
+    "Validated unfamiliar-room localization and obstacle coverage",
+    "Certification and commercial overhead",
+    "Contingency beyond the separate figures in the document"
+  ],
+  "sources": {
+    "fc_store": "https://store.micoair.com/product/micoair743v2-aio-35a/",
+    "fc_manual": "https://micoair.cn/en/docs/flight-controller/micoair743-aio-series/micoair743v2-aio-35a-manual",
+    "frame": "https://www.happymodel.cn/index.php/2021/07/20/crux35-crux35-hd-3-5inch-fpv-racer-drone-frame-kit/",
+    "frame_price": "https://www.getfpv.com/multi-rotor-frames/3-quad-frames/3-quad-replacement-parts/happymodel-crux35-freestyle-racing-frame-kit.html",
+    "motor": "https://www.happymodel.cn/index.php/2021/01/07/happymodel-ex1404-kv2750-kv3500-kv4800-brushless-motor/",
+    "motor_price": "https://store.fractalengineering.net/product/hm-ex1404-3500kv/",
+    "propulsion": "https://www.happymodel.cn/wp-content/uploads/2023/02/Crux35-Crux35HD-DJI-and-Crux35-HDZERO-FPV-Racer-Drone-ELRS-V2-manual.pdf",
+    "pi": "https://www.raspberrypi.com/products/raspberry-pi-zero-2-w/",
+    "camera": "https://www.arducam.com/90524.html",
+    "camera_software": "https://www.raspberrypi.com/documentation/computers/camera_software.html",
+    "flow_store": "https://store.micoair.com/product/mtf-02p/",
+    "flow_manual": "https://micoair.com/optical_range_sensor_mtf-02p/",
+    "offboard": "https://docs.px4.io/main/en/flight_modes/offboard",
+    "radio": "https://radiomasterrc.com/products/pocket-radio-controller-m2",
+    "gnss": "https://store.micoair.com/product/m9-m10-gps-module/"
+  }
+}

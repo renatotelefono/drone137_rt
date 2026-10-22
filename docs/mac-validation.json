@@ -1,0 +1,303 @@
+{
+  "date": "2026-10-20",
+  "host": "macOS-15.6-arm64-arm-64bit",
+  "memory_gib": 16,
+  "chip": "Apple M4",
+  "source_fingerprint": "71814945dda95d9a17648f2795ecda495b7f090626484dc1043916fe9aee5c67",
+  "source_state": "uncommitted implementation; fingerprint of application/adapters/sim/scripts/tests",
+  "automated_tests": {
+    "passed": 59,
+    "failures": 0,
+    "skips": 0,
+    "duration_s": 16.369,
+    "log": "mac-portable-tests.txt"
+  },
+  "geometry": {
+    "suite": "recon-geometry",
+    "host": "macOS-15.6-arm64-arm-64bit",
+    "real_inference": false,
+    "rendered_camera": false,
+    "real_flight_dynamics": false,
+    "physical_transport": false,
+    "hardware_gate": "blocked",
+    "episodes": 104,
+    "returned": 104,
+    "clearance_violations": 0,
+    "failures": 0,
+    "passed": true
+  },
+  "browser": {
+    "policy": "qwen",
+    "real_inference": true,
+    "real_flight_dynamics": false,
+    "errors": [],
+    "browser": "155.0.8059.85",
+    "integration_passed": true,
+    "perception_scoring": "Inspect recorded images and descriptions; integration success does not grade recognition accuracy."
+  },
+  "patrols": [
+    {
+      "episode": "0c1e9aa73dc6479c814860e6bf5d9a27",
+      "state": "complete",
+      "reason": "Returned home; reconnaissance complete",
+      "scenario": "warehouse",
+      "variant": "baseline",
+      "seed": 137,
+      "policy": "qwen",
+      "duration_s": 57.09816950000004,
+      "distance_m": 20.75205235351553,
+      "unreached": [],
+      "video": {
+        "chunks": 54,
+        "mime": "video/webm",
+        "complete": true
+      },
+      "baseline_episode": "11b53f34c6fd4314b7a6ef28d91e4eed",
+      "minimum_clearance_m": 0.5700000000000001,
+      "obstacle_stops": 0,
+      "observations": [
+        {
+          "action": "continue",
+          "observation": "There is no clear change between the first and second image. The scene is identical, with the same walls, floor, and objects. The view is unobstructed, and no new or changed objects are visible. The patrol is proceeding along the same path, and there are no immediate dangers.",
+          "image": "32feb428708f4cf386a21c1615ea6387.jpg",
+          "pose": [
+            2.171502714622233,
+            1.25,
+            1.4,
+            0.6
+          ],
+          "view": "entry",
+          "received_monotonic": 6322.787510958,
+          "elapsed_s": 2.844718291999925,
+          "video_time_s": 2.8265,
+          "comparison": {
+            "episode": "11b53f34c6fd4314b7a6ef28d91e4eed",
+            "image": "60f5fdf3c9a343f995b46d48ef1af22e.jpg"
+          },
+          "latency_s": 1.7613987089998773
+        },
+        {
+          "action": "continue",
+          "observation": "There is no clear change between the first and second image. The scene is identical, with the same view of the doorway, the stacked orange box, and the floor grid. The position of the blue circular object is unchanged. There are no new objects or obstructions visible, and the view is unobstructed.",
+          "image": "aecad8f146d34ba59ea23d2b87cef2dd.jpg",
+          "pose": [
+            4.25,
+            4.172846354679202,
+            1.4,
+            0
+          ],
+          "view": "passage",
+          "received_monotonic": 6339.28489125,
+          "elapsed_s": 19.34209858400027,
+          "video_time_s": 19.32560000000056,
+          "comparison": {
+            "episode": "11b53f34c6fd4314b7a6ef28d91e4eed",
+            "image": "9740637a54db427e8d70cac86d1bd46f.jpg"
+          },
+          "latency_s": 1.8420782499997586
+        },
+        {
+          "action": "continue",
+          "observation": "There is no clear change between the first and second image. The scene is identical, showing a dark, enclosed space with a four-tiered shelving unit in the center, a tiled floor, and walls on both sides. The view is unobstructed, and no new or changed objects are visible.",
+          "image": "e2df2040bd6a4a438dbbb7f9dc4c35a9.jpg",
+          "pose": [
+            8.20189365258005,
+            4.25,
+            1.4,
+            1.5707963267948966
+          ],
+          "view": "far-room",
+          "received_monotonic": 6351.303470458,
+          "elapsed_s": 31.360677792000388,
+          "video_time_s": 31.32710000000056,
+          "comparison": {
+            "episode": "11b53f34c6fd4314b7a6ef28d91e4eed",
+            "image": "01e4749b909b478eace6d33dc938be15.jpg"
+          },
+          "latency_s": 1.632093750000422
+        }
+      ]
+    },
+    {
+      "episode": "8e876049042946428ee80444a4f9d7ea",
+      "state": "partial",
+      "reason": "Returned home; some inspection points were not reached",
+      "scenario": "warehouse",
+      "variant": "changed",
+      "seed": 137,
+      "policy": "qwen",
+      "duration_s": 120.34692658400036,
+      "distance_m": 47.644284581312434,
+      "unreached": [
+        "far-room"
+      ],
+      "video": {
+        "chunks": 114,
+        "mime": "video/webm",
+        "complete": true
+      },
+      "baseline_episode": "0c1e9aa73dc6479c814860e6bf5d9a27",
+      "minimum_clearance_m": 0.5700000000000001,
+      "obstacle_stops": 0,
+      "observations": [
+        {
+          "action": "continue",
+          "observation": "The scene shows a continuation of the patrol path. The visible objects are consistent with the previous view, with no clear change. The floor has a circular blue marker, and there are dark walls and a wooden structure on the right. The only change is the appearance of a new object: a grey, box-like,",
+          "image": "65f152c2f7ce4c0cb362d5b61f71010d.jpg",
+          "pose": [
+            2.2052922476365655,
+            1.25,
+            1.4,
+            0.6
+          ],
+          "view": "entry",
+          "received_monotonic": 6381.30270475,
+          "elapsed_s": 2.8592900840003495,
+          "video_time_s": 2.8331000000005586,
+          "comparison": {
+            "episode": "0c1e9aa73dc6479c814860e6bf5d9a27",
+            "image": "32feb428708f4cf386a21c1615ea6387.jpg"
+          },
+          "latency_s": 1.7727755000005345
+        },
+        {
+          "action": "look_left",
+          "observation": "The view is now to the left of the previous patrol. The left wall is a plain wall with a vertical line of light, possibly from a sensor or a light source. There is no clear change from the previous view.",
+          "image": "f13eda3eb45d43ef970c232a92171adb.jpg",
+          "pose": [
+            4.25,
+            4.17269829730876,
+            1.4,
+            0
+          ],
+          "view": "passage",
+          "received_monotonic": 6397.801686708,
+          "elapsed_s": 19.358272041999953,
+          "video_time_s": 19.3325,
+          "comparison": {
+            "episode": "0c1e9aa73dc6479c814860e6bf5d9a27",
+            "image": "aecad8f146d34ba59ea23d2b87cef2dd.jpg"
+          },
+          "latency_s": 1.6203146669995476
+        },
+        {
+          "action": "continue",
+          "observation": "The view shows a room with a dark wall on the left, a light-colored tiled floor, and a wooden cabinet with three drawers in the center. The cabinet is positioned against the wall. There are no visible obstructions, and the view is clear of any immediate danger. The next inspection point is to the 'e",
+          "image": "93763f9bfadf45e89010c40e4d6afb87.jpg",
+          "pose": [
+            4.25,
+            4.17269829730876,
+            1.4,
+            1.5707963267948966
+          ],
+          "view": "passage:look_left",
+          "received_monotonic": 6399.802102541,
+          "elapsed_s": 21.358687875000214,
+          "video_time_s": 21.331700000000186,
+          "comparison": null,
+          "latency_s": 1.8587237080000705
+        }
+      ]
+    }
+  ],
+  "vision_check": {
+    "passed": false,
+    "results": [
+      {
+        "expected": "open",
+        "observed": "open",
+        "raw": "{\n  \"observation\": \"open\",\n  \"action\": \"continue\",\n  \"target_view\": null,\n  \"reason\": \"The gate is depicted as open, with the door swung to the right, revealing a dark interior. The path in front of the gate is visible, suggesting the gate is not fully closed.\"\n}",
+        "latency_s": 1.273583499999404,
+        "correct": true
+      },
+      {
+        "expected": "closed",
+        "observed": "open",
+        "raw": "{\n  \"observation\": \"open\",\n  \"action\": \"continue\",\n  \"target_view\": null,\n  \"reason\": \"The gate is depicted as open, with the vertical slats of the gate visible and the top of the gate raised, indicating it is not closed.\"\n}",
+        "latency_s": 1.0651222080005027,
+        "correct": false
+      }
+    ],
+    "real_inference": true,
+    "images": "synthetic paired images",
+    "host": "macOS-15.6-arm64-arm-64bit",
+    "actual_8gb_validation": "unverified"
+  },
+  "perception_acceptance": "failed: closed gate classified open and changed-passage blocker missed",
+  "native_flight": {
+    "result": {
+      "state": "complete",
+      "view": "pad",
+      "episode": "4ec072dfc7ec4bd3bef3100061968620",
+      "telemetry": {
+        "position": [
+          0.03645656630396843,
+          0.01509918924421072,
+          -0.061126708984375
+        ],
+        "speed": 0.01524258560128816,
+        "received_monotonic": 6295.309318916,
+        "healthy": true,
+        "in_air": false
+      },
+      "decision": {
+        "observation": "uncertain",
+        "action": "continue",
+        "target_view": null,
+        "reason": "Deterministic integration policy; no image inference performed."
+      },
+      "error": null,
+      "profile": "lean-8gb",
+      "mode": "sim",
+      "policy": "scripted-fixture",
+      "real_inference": false,
+      "real_camera": true,
+      "real_flight_dynamics": true,
+      "physical_transport": false,
+      "capture_clock": "sensor_simulation",
+      "mac_virtual_acceptance": "unverified",
+      "lean_memory_budget": "unverified",
+      "actual_8gb_validation": "unverified",
+      "hardware_gate": "blocked",
+      "report": "/reports/4ec072dfc7ec4bd3bef3100061968620/summary.json"
+    },
+    "summary": {
+      "host": "Klauss-Mac-mini.local",
+      "os": "Darwin",
+      "architecture": "arm64",
+      "profile": "lean-8gb",
+      "mode": "sim",
+      "policy": "scripted-fixture",
+      "real_inference": false,
+      "real_camera": true,
+      "real_flight_dynamics": true,
+      "physical_transport": false,
+      "capture_clock": "sensor_simulation",
+      "mac_virtual_acceptance": "unverified",
+      "lean_memory_budget": "unverified",
+      "actual_8gb_validation": "unverified",
+      "hardware_gate": "blocked",
+      "state": "complete",
+      "route_completed": true,
+      "autonomous_success": false,
+      "error": null
+    },
+    "elapsed_s": 61.13239199999953,
+    "note": "Legacy gate route with scripted policy; not indoor recon or model-driven native acceptance"
+  },
+  "resources": {
+    "scope": "Short snapshot while model, Chrome patrol and idle Gazebo/PX4 were running; not sustained or 8 GiB acceptance",
+    "metric": "Summed process RSS is not physical footprint; shared pages may be counted more than once",
+    "peak_summed_rss_gib": 2.8029022216796875
+  },
+  "resource_swap_first": "vm.swapusage: total = 3072.00M  used = 1822.19M  free = 1249.81M  (encrypted)",
+  "resource_swap_last": "vm.swapusage: total = 3072.00M  used = 2030.94M  free = 1041.06M  (encrypted)",
+  "physical_transport": false,
+  "hardware_gate": "blocked",
+  "actual_8gb_validation": "unverified",
+  "native_startup": {
+    "native_startup_passed": true,
+    "state": "idle",
+    "frame_bytes": 3323
+  }
+}

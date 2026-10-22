@@ -5,6 +5,7 @@ import shutil
 import sys
 import time
 import uuid
+import os
 
 from adapters.llama import LlamaBackend, DECISION_SCHEMA
 from app.model_store import ModelStore
@@ -32,6 +33,7 @@ class ModelManager:
                     and self.state == "ready")
 
     def status(self):
+        process=self.owned.processes.get('llama')
         return {
             "name": "Qwen3-VL-2B-Instruct · Q4_K_M + Q8_0 projector",
             "state": self.state if self.state != "ready" or self.ready else "unavailable",
@@ -42,6 +44,7 @@ class ModelManager:
                      "native_metal_candidate": platform.system() == "Darwin" and platform.machine() == "arm64",
                      "cmake": bool(shutil.which("cmake")), "compiler": bool(shutil.which("clang"))},
             "vision_check": self.check_result, "acceptance": "unverified",
+            "app_pid":os.getpid(),"model_pid":process.pid if process and process.returncode is None else None,
         }
 
     def submit(self, name):
@@ -100,6 +103,9 @@ class ModelManager:
         await self.owned.spawn("llama", [
             str(self.binary), "-m", str(model), "--mmproj", str(projector),
             "--host", "127.0.0.1", "--port", "8081", "-c", "2048", "-np", "1",
+            # The server otherwise retains idle prompt states in an 8 GiB cache,
+            # even though our requests disable prompt reuse. Inspections are stateless.
+            "--cache-ram", "0", "--no-cache-prompt",
             "-ngl", "99" if metal else "0", "--threads", "2",
         ], DATA / "logs/llama.log")
         self.backend = LlamaBackend(timeout=6)
@@ -122,31 +128,40 @@ class ModelManager:
             await self.owned.stop("llama")
         self.state = "stopped"
 
-    async def image(self, jpeg, prompt, schema, timeout=6):
+    async def image(self, jpeg, prompt, schema, timeout=6, reference=None, max_tokens=128):
         if not self.ready:
             raise RuntimeError("Local model is not ready; download, verify and start it first")
         try:
-            return await self.backend.image(jpeg, prompt, schema, time.monotonic()+timeout)
+            return await self.backend.image(jpeg, prompt, schema, time.monotonic()+timeout,
+                                            reference=reference, max_tokens=max_tokens)
         except BaseException:
             if self.backend and self.backend.quarantined:
                 self.state = "restart_required"
             raise
 
+    async def text(self, prompt, schema, timeout=6):
+        if not self.ready:
+            raise RuntimeError('Local model is not ready')
+        try:
+            return await self.backend.text(prompt, schema, time.monotonic()+timeout)
+        except BaseException:
+            if self.backend and self.backend.quarantined:
+                self.state = 'restart_required'
+            raise
+
     async def check(self):
+        from app.perception import inspect, VERSION
         self.check_result = None
         results = []
-        prompt = ("Inspect the gate in this image. Return JSON with observation open, closed or uncertain, "
-                  "action continue, target_view null, and a short reason.")
-        for index, expected in ((1, "open"), (2, "closed")):
-            jpeg = (ROOT / f"sim/assets/fixture-{index:02d}.jpg").read_bytes()
+        for index, expected in ((1, 'open'), (2, 'closed')):
+            jpeg = (ROOT / f'sim/assets/fixture-{index:02d}.jpg').read_bytes()
             started = time.monotonic()
-            raw = await self.image(jpeg, prompt, DECISION_SCHEMA)
-            from app.contracts import Decision
-            decision = Decision.parse(raw)
-            results.append({"expected": expected, "observed": decision.observation, "raw": raw,
-                            "latency_s": time.monotonic()-started, "correct": decision.observation == expected})
+            visual = await inspect(self.image, jpeg)
+            observed = {'open_space': 'open', 'solid_surface': 'closed', 'uncertain': 'uncertain'}[visual['center']]
+            results.append({'expected': expected, 'observed': observed, 'perception': visual,
+                            'latency_s': time.monotonic()-started, 'correct': observed == expected})
         self.check_result = {"passed": all(r["correct"] for r in results), "results": results,
-                             "real_inference": True, "images": "synthetic paired images",
+                             "real_inference": True, "images": "synthetic paired images", "perception_version": VERSION,
                              "host": platform.platform(), "actual_8gb_validation": "unverified"}
         from app.recorder import RunRecorder
         recorder = RunRecorder(DATA/"runs", uuid.uuid4().hex, 1024**3,

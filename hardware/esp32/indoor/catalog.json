@@ -1,0 +1,549 @@
+{
+  "schema_version": 1,
+  "date": "2026-10-22",
+  "currency": "USD",
+  "budget_ceiling_cents": 5000,
+  "price_scope": "Per-aircraft parts consumed, with one battery, camera and guards. Not a delivered cart total or production quote.",
+  "exclusions": [
+    "Tax and shipping",
+    "Labour, firmware and PCB engineering",
+    "PCB tooling and minimum-order surplus",
+    "Ground computer and Wi-Fi access point",
+    "USB cable, charger and test fixtures",
+    "Independent RC link",
+    "Prepared-room localization markers or external tracking",
+    "Spares"
+  ],
+  "common_parts": [
+    {
+      "id": "camera",
+      "part": "XIAO ESP32-S3 Sense with supplied camera and antenna",
+      "quantity": 1,
+      "unit_cents": 1399,
+      "price_basis": "manufacturer listing",
+      "source": "sense",
+      "notes": ""
+    },
+    {
+      "id": "imu",
+      "part": "MPU6050 breakout with 3.3 V I2C",
+      "quantity": 1,
+      "unit_cents": 250,
+      "price_basis": "unquoted allowance",
+      "source": null,
+      "notes": "Exact supplier/board and sensor identity still required."
+    },
+    {
+      "id": "mosfet",
+      "part": "AO3400A MOSFET",
+      "quantity": 4,
+      "unit_cents": 25,
+      "price_basis": "unquoted allowance",
+      "source": null,
+      "notes": "Loaded/stall current and PCB thermal qualification outstanding."
+    },
+    {
+      "id": "diode",
+      "part": "SS34 flyback diode",
+      "quantity": 4,
+      "unit_cents": 15,
+      "price_basis": "unquoted allowance",
+      "source": null,
+      "notes": ""
+    },
+    {
+      "id": "gate_r",
+      "part": "100 ohm gate resistor",
+      "quantity": 4,
+      "unit_cents": 2,
+      "price_basis": "unquoted allowance",
+      "source": null,
+      "notes": ""
+    },
+    {
+      "id": "pulldown",
+      "part": "10 kohm gate pulldown",
+      "quantity": 4,
+      "unit_cents": 3,
+      "price_basis": "unquoted allowance",
+      "source": null,
+      "notes": ""
+    },
+    {
+      "id": "capacitors",
+      "part": "4 x 100 nF motor suppression; 470 uF, 47 uF and 100 nF supply capacitors",
+      "quantity": 1,
+      "unit_cents": 70,
+      "price_basis": "unquoted allowance",
+      "source": null,
+      "notes": ""
+    },
+    {
+      "id": "battery_sense",
+      "part": "2 x 100 kohm divider plus 100 nF ADC filter",
+      "quantity": 1,
+      "unit_cents": 10,
+      "price_basis": "unquoted allowance",
+      "source": null,
+      "notes": ""
+    },
+    {
+      "id": "carrier",
+      "part": "Carrier PCB, IMU mount and low-profile connectors",
+      "quantity": 1,
+      "unit_cents": 300,
+      "price_basis": "unquoted allowance",
+      "source": null,
+      "notes": "Per-aircraft material allowance; PCB design, tooling, minimum order and assembly labour excluded. No routed PCB supplied."
+    },
+    {
+      "id": "wiring",
+      "part": "Wires, battery connector, camera mount, strap and fasteners",
+      "quantity": 1,
+      "unit_cents": 150,
+      "price_basis": "unquoted allowance",
+      "source": null,
+      "notes": ""
+    }
+  ],
+  "models": [
+    {
+      "id": "micro-90",
+      "name": "D137 Micro 90",
+      "role": "Small prepared-room vision experiments; lowest mass target.",
+      "revision": 1,
+      "status": "design-candidate",
+      "physical_enabled": false,
+      "simulation_ready": false,
+      "geometry": {
+        "motor_diagonal_mm": 90,
+        "prop_diameter_mm": 55,
+        "motor_bore_mm": 7.1,
+        "motor_length_mm": 20,
+        "guard_radial_clearance_mm": 1.5,
+        "guard_wall_mm": 1.2,
+        "upper_hoops": false
+      },
+      "mass_target_g": [
+        45,
+        60
+      ],
+      "frame_mass_target_g": 8,
+      "battery_capacity_mah": 350,
+      "architecture": "single",
+      "camera": {
+        "board": "XIAO ESP32-S3 Sense",
+        "orientation": "forward",
+        "transport": "HTTP JPEG /capture",
+        "width": 640,
+        "height": 480,
+        "sampling_fps": 5,
+        "model_inference": "ground computer only"
+      },
+      "positioning": "Prepared-room reference required; onboard video alone does not establish metric position. Marker pose or external tracking must be implemented and validated.",
+      "autonomy_verified": false,
+      "flight_time_minutes": null,
+      "notes": [
+        "Least payload margin; reject if 720 propulsion cannot lift the measured assembly with reserve."
+      ],
+      "parts": [
+        {
+          "id": "propulsion",
+          "part": "Four 720 motors plus four matched 55 mm CW/CCW propellers",
+          "quantity": 1,
+          "unit_cents": 399,
+          "price_basis": "retailer listing",
+          "source": "motors",
+          "notes": "Specification source: 720; treat listed low current/no-load RPM as no evidence of loaded thrust."
+        },
+        {
+          "id": "frame",
+          "part": "Printed frame with motor holders and guards",
+          "quantity": 1,
+          "unit_cents": 300,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Unprinted CAD concept; fabrication price and mass unverified."
+        },
+        {
+          "id": "battery",
+          "part": "1S standard LiPo 350 mAh, 4.2 V maximum, high-discharge",
+          "quantity": 1,
+          "unit_cents": 400,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Exact pack and connector must be sourced and tested for loaded current/sag. Do not substitute a 4.35 V charge profile."
+        }
+      ]
+    },
+    {
+      "id": "scout-110",
+      "name": "D137 Scout 110",
+      "role": "First general-purpose indoor prototype; forward object search in a prepared room.",
+      "revision": 1,
+      "status": "design-candidate",
+      "physical_enabled": false,
+      "simulation_ready": false,
+      "geometry": {
+        "motor_diagonal_mm": 110,
+        "prop_diameter_mm": 65,
+        "motor_bore_mm": 8.6,
+        "motor_length_mm": 20,
+        "guard_radial_clearance_mm": 1.5,
+        "guard_wall_mm": 1.2,
+        "upper_hoops": false
+      },
+      "mass_target_g": [
+        60,
+        75
+      ],
+      "frame_mass_target_g": 12,
+      "battery_capacity_mah": 500,
+      "architecture": "single",
+      "camera": {
+        "board": "XIAO ESP32-S3 Sense",
+        "orientation": "forward",
+        "transport": "HTTP JPEG /capture",
+        "width": 640,
+        "height": 480,
+        "sampling_fps": 5,
+        "model_inference": "ground computer only"
+      },
+      "positioning": "Prepared-room reference required; onboard video alone does not establish metric position. Marker pose or external tracking must be implemented and validated.",
+      "autonomy_verified": false,
+      "flight_time_minutes": null,
+      "notes": [
+        "Recommended first build because it has the largest useful budget margin among 8520 variants."
+      ],
+      "parts": [
+        {
+          "id": "propulsion",
+          "part": "Four 8520 motors plus four matched 65 mm CW/CCW propellers",
+          "quantity": 1,
+          "unit_cents": 899,
+          "price_basis": "retailer non-sale reference",
+          "source": "motors",
+          "notes": "Specification source: 8520; treat listed low current/no-load RPM as no evidence of loaded thrust."
+        },
+        {
+          "id": "frame",
+          "part": "Printed frame with motor holders and guards",
+          "quantity": 1,
+          "unit_cents": 400,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Unprinted CAD concept; fabrication price and mass unverified."
+        },
+        {
+          "id": "battery",
+          "part": "1S standard LiPo 500 mAh, 4.2 V maximum, high-discharge",
+          "quantity": 1,
+          "unit_cents": 500,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Exact pack and connector must be sourced and tested for loaded current/sag. Do not substitute a 4.35 V charge profile."
+        }
+      ]
+    },
+    {
+      "id": "guard-110",
+      "name": "D137 Guard 110",
+      "role": "Controlled workbench trials with upper propeller shielding.",
+      "revision": 1,
+      "status": "design-candidate",
+      "physical_enabled": false,
+      "simulation_ready": false,
+      "geometry": {
+        "motor_diagonal_mm": 110,
+        "prop_diameter_mm": 65,
+        "motor_bore_mm": 8.6,
+        "motor_length_mm": 20,
+        "guard_radial_clearance_mm": 1.5,
+        "guard_wall_mm": 1.2,
+        "upper_hoops": true
+      },
+      "mass_target_g": [
+        70,
+        90
+      ],
+      "frame_mass_target_g": 20,
+      "battery_capacity_mah": 550,
+      "architecture": "single",
+      "camera": {
+        "board": "XIAO ESP32-S3 Sense",
+        "orientation": "forward",
+        "transport": "HTTP JPEG /capture",
+        "width": 640,
+        "height": 480,
+        "sampling_fps": 5,
+        "model_inference": "ground computer only"
+      },
+      "positioning": "Prepared-room reference required; onboard video alone does not establish metric position. Marker pose or external tracking must be implemented and validated.",
+      "autonomy_verified": false,
+      "flight_time_minutes": null,
+      "notes": [
+        "Upper hoops add weight and can disturb airflow. They do not establish crashworthiness, human-contact safety or wall-following capability."
+      ],
+      "parts": [
+        {
+          "id": "propulsion",
+          "part": "Four 8520 motors plus four matched 65 mm CW/CCW propellers",
+          "quantity": 1,
+          "unit_cents": 899,
+          "price_basis": "retailer non-sale reference",
+          "source": "motors",
+          "notes": "Specification source: 8520; treat listed low current/no-load RPM as no evidence of loaded thrust."
+        },
+        {
+          "id": "frame",
+          "part": "Printed frame with motor holders and guards plus upper guard hoops",
+          "quantity": 1,
+          "unit_cents": 700,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Unprinted CAD concept; fabrication price and mass unverified."
+        },
+        {
+          "id": "battery",
+          "part": "1S standard LiPo 550 mAh, 4.2 V maximum, high-discharge",
+          "quantity": 1,
+          "unit_cents": 550,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Exact pack and connector must be sourced and tested for loaded current/sag. Do not substitute a 4.35 V charge profile."
+        }
+      ]
+    },
+    {
+      "id": "height-110",
+      "name": "D137 Height 110",
+      "role": "Low-height inspection trials using measured downward distance.",
+      "revision": 1,
+      "status": "design-candidate",
+      "physical_enabled": false,
+      "simulation_ready": false,
+      "geometry": {
+        "motor_diagonal_mm": 110,
+        "prop_diameter_mm": 65,
+        "motor_bore_mm": 8.6,
+        "motor_length_mm": 20,
+        "guard_radial_clearance_mm": 1.5,
+        "guard_wall_mm": 1.2,
+        "upper_hoops": false
+      },
+      "mass_target_g": [
+        62,
+        78
+      ],
+      "frame_mass_target_g": 12,
+      "battery_capacity_mah": 500,
+      "architecture": "single",
+      "camera": {
+        "board": "XIAO ESP32-S3 Sense",
+        "orientation": "forward",
+        "transport": "HTTP JPEG /capture",
+        "width": 640,
+        "height": 480,
+        "sampling_fps": 5,
+        "model_inference": "ground computer only"
+      },
+      "positioning": "Prepared-room reference required; onboard video alone does not establish metric position. Marker pose or external tracking must be implemented and validated.",
+      "autonomy_verified": false,
+      "flight_time_minutes": null,
+      "notes": [
+        "Range must be fused with attitude and IMU; suggested first test height 0.3\u20131.0 m after sensor characterization. No XY hold, optical flow or wall sensing is included."
+      ],
+      "parts": [
+        {
+          "id": "propulsion",
+          "part": "Four 8520 motors plus four matched 65 mm CW/CCW propellers",
+          "quantity": 1,
+          "unit_cents": 899,
+          "price_basis": "retailer non-sale reference",
+          "source": "motors",
+          "notes": "Specification source: 8520; treat listed low current/no-load RPM as no evidence of loaded thrust."
+        },
+        {
+          "id": "frame",
+          "part": "Printed frame with motor holders and guards",
+          "quantity": 1,
+          "unit_cents": 400,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Unprinted CAD concept; fabrication price and mass unverified."
+        },
+        {
+          "id": "battery",
+          "part": "1S standard LiPo 500 mAh, 4.2 V maximum, high-discharge",
+          "quantity": 1,
+          "unit_cents": 500,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Exact pack and connector must be sourced and tested for loaded current/sag. Do not substitute a 4.35 V charge profile."
+        },
+        {
+          "id": "range",
+          "part": "VL53L0X breakout 102081",
+          "quantity": 1,
+          "unit_cents": 590,
+          "price_basis": "supplier listing subject to requote",
+          "source": "range",
+          "notes": ""
+        },
+        {
+          "id": "range_mount",
+          "part": "Downward range-sensor mount and short cable",
+          "quantity": 1,
+          "unit_cents": 50,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": ""
+        }
+      ]
+    },
+    {
+      "id": "split-110",
+      "name": "D137 Split 110",
+      "role": "Separate stabilization timing from camera and Wi-Fi workload.",
+      "revision": 1,
+      "status": "design-candidate",
+      "physical_enabled": false,
+      "simulation_ready": false,
+      "geometry": {
+        "motor_diagonal_mm": 110,
+        "prop_diameter_mm": 65,
+        "motor_bore_mm": 8.6,
+        "motor_length_mm": 20,
+        "guard_radial_clearance_mm": 1.5,
+        "guard_wall_mm": 1.2,
+        "upper_hoops": false
+      },
+      "mass_target_g": [
+        65,
+        83
+      ],
+      "frame_mass_target_g": 12,
+      "battery_capacity_mah": 500,
+      "architecture": "dual",
+      "camera": {
+        "board": "XIAO ESP32-S3 Sense",
+        "orientation": "forward",
+        "transport": "HTTP JPEG /capture",
+        "width": 640,
+        "height": 480,
+        "sampling_fps": 5,
+        "model_inference": "ground computer only"
+      },
+      "positioning": "Prepared-room reference required; onboard video alone does not establish metric position. Marker pose or external tracking must be implemented and validated.",
+      "autonomy_verified": false,
+      "flight_time_minutes": null,
+      "notes": [
+        "Camera XIAO handles Wi-Fi/video; flight XIAO owns IMU, motor drivers, battery sense and command expiry. UART bridge/control firmware is not yet implemented.",
+        "Both boards use separate BAT power branches. Never connect both onboard USB chargers to the same battery; remove the flight battery for USB programming and use one external charger.",
+        "Only $0.43 remains below the $50 allowance ceiling; one quote overrun can break the target."
+      ],
+      "parts": [
+        {
+          "id": "propulsion",
+          "part": "Four 8520 motors plus four matched 65 mm CW/CCW propellers",
+          "quantity": 1,
+          "unit_cents": 899,
+          "price_basis": "retailer non-sale reference",
+          "source": "motors",
+          "notes": "Specification source: 8520; treat listed low current/no-load RPM as no evidence of loaded thrust."
+        },
+        {
+          "id": "frame",
+          "part": "Printed frame with motor holders and guards",
+          "quantity": 1,
+          "unit_cents": 400,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Unprinted CAD concept; fabrication price and mass unverified."
+        },
+        {
+          "id": "battery",
+          "part": "1S standard LiPo 500 mAh, 4.2 V maximum, high-discharge",
+          "quantity": 1,
+          "unit_cents": 500,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": "Exact pack and connector must be sourced and tested for loaded current/sag. Do not substitute a 4.35 V charge profile."
+        },
+        {
+          "id": "flight_mcu",
+          "part": "Second XIAO ESP32-S3 for dedicated flight control",
+          "quantity": 1,
+          "unit_cents": 749,
+          "price_basis": "manufacturer listing",
+          "source": "xiao",
+          "notes": ""
+        },
+        {
+          "id": "second_mount",
+          "part": "Second-board mount and UART cable",
+          "quantity": 1,
+          "unit_cents": 50,
+          "price_basis": "unquoted allowance",
+          "source": null,
+          "notes": ""
+        }
+      ]
+    }
+  ],
+  "sources": {
+    "sense": {
+      "url": "https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html",
+      "observation": "$13.99 in stock; replaces earlier $13.90 observation. Record actual supplied camera sensor."
+    },
+    "xiao": {
+      "url": "https://www.seeedstudio.com/XIAO-ESP32S3-p-5627.html",
+      "observation": "$7.49 in stock; bare XIAO ESP32-S3, no camera."
+    },
+    "motors": {
+      "url": "https://speedyfpv.com/collections/brushed-motors/brand-speedyfpv",
+      "observation": "720 + 55 mm prop set $3.99. 8520 + 65 mm prop set $4.49 sale / $8.99 crossed-out regular. Budgets use $8.99, without assuming sale persists. Stock and final price require checkout."
+    },
+    "720": {
+      "url": "https://speedyfpv.com/collections/brushed-motors/products/720-brushed-motor-set-4pcs-7x20mm-coreless-motor-with-55mm-propellers",
+      "observation": "Four 7 x 20 mm motors, 1 mm shafts, matched 55 mm CW/CCW props. No loaded thrust curve supplied."
+    },
+    "8520": {
+      "url": "https://speedyfpv.com/collections/brushed-motors/products/usaq-8520-coreless-brushed-motor-set-53-000rpm-with-2cw-2ccw-65mm-propellers",
+      "observation": "Four 8.5 x 20 mm motors and 65 mm props; 5 g per motor. No loaded thrust/current curve supplied."
+    },
+    "range": {
+      "url": "https://www.smart-prototyping.com/VL53L0X-ToF-Distance-Sensor",
+      "observation": "102081 breakout listed $5.90 in stock. Supplier banner reserves requoting. Check selected option and 3.3 V logic; listed 0x52 is the 8-bit address, corresponding to 7-bit 0x29."
+    },
+    "tof_specs": {
+      "url": "https://www.st.com/content/st_com/en/products/imaging-and-photonics-solutions/time-of-flight-sensors/vl53l0x.html",
+      "observation": "VL53L0X is a single-direction ranging sensor, not optical flow or an obstacle map. Range depends on conditions."
+    },
+    "pins": {
+      "url": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/",
+      "observation": "XIAO pins, camera variants, battery input and board power guidance."
+    },
+    "esp_drone": {
+      "url": "https://docs.espressif.com/projects/espressif-esp-drone/en/latest/hardware.html",
+      "observation": "Reference brushed quad hardware and MPU6050. These five carriers are not documented drop-in targets."
+    },
+    "kit": {
+      "url": "https://www.seeedstudio.com/ESP-FLY-co-create-p-6744.html",
+      "observation": "ESP-FLY kit $59.99 single / $49.99 at 10+; camera not in basic kit. Not counted as an under-$50 camera drone."
+    }
+  },
+  "qualification": {
+    "status": "unbuilt-unflown",
+    "scope": "Five engineering candidates for prepared indoor trials, not five proven autonomous products.",
+    "requirements": [
+      "Quote every BOM line and check under $50 before ordering.",
+      "Print and weigh each frame; verify prop, shaft and camera clearance.",
+      "Measure selected propulsion at low operating voltage; target at least 2:1 total static thrust-to-weight.",
+      "Port ESP-Drone or equivalent stabilizer; verify motor order, arming, control timing and command-loss response.",
+      "Implement deterministic positioning/control; LLM chooses missions and inspections, never motor PWM.",
+      "Validate camera focus, frame freshness, link failure and recorded recognition on a real 8 GB computer.",
+      "Run object-present and object-absent indoor missions; retain misses and false confirmations."
+    ]
+  }
+}

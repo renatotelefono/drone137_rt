@@ -1,0 +1,83 @@
+{
+  "adopted": "Per-plan clearance snapshot, exact threshold predicates and bounded directed-edge cache",
+  "changed_existing_runtime_files": [
+    "sim/flight_world.py"
+  ],
+  "geometry": {
+    "exact_routes": 40,
+    "timed_batches_cpu_s": {
+      "baseline": [
+        5.697324000000001,
+        5.785816999999998,
+        5.7981300000000005
+      ],
+      "optimized": [
+        0.6822280000000003,
+        0.7175009999999986,
+        0.7015250000000002
+      ]
+    },
+    "median_cpu_s": {
+      "baseline": 5.785816999999998,
+      "optimized": 0.7015250000000002
+    },
+    "speedup": 8.24748512169915
+  },
+  "fixed_input_repeatability": {
+    "vision_inputs": 16,
+    "identical_vision_repeats": 16,
+    "vision_inputs_matching_recorded_output": 16,
+    "supervisor_states": 22,
+    "identical_supervisor_choices": 22,
+    "supervisor_states_matching_recorded_choice": 22
+  },
+  "repeatability_errors": [],
+  "renderer_trial": {
+    "adopted": false,
+    "reason": "No measured frame-submission speedup; renderer source restored to baseline.",
+    "frames": 51,
+    "byte_identical_frames": 51,
+    "median_frame_metrics": {
+      "baseline": {
+        "submit_ms": 2.350000001490116,
+        "compose": 958.0,
+        "multiply": 1853.0
+      },
+      "optimized": {
+        "submit_ms": 2.5999999940395355,
+        "compose": 21.0,
+        "multiply": 912.0
+      }
+    },
+    "timing_scope": "Instrumented CPU submission time; not GPU completion, FPS or end-to-end mission time."
+  },
+  "native_smoke": {
+    "model_requests": 0,
+    "landed": true,
+    "flight": {
+      "samples": 486,
+      "distance_m": 11.167019993319174,
+      "minimum_truth_center_clearance_m": 0.5409620951562761,
+      "envelope_violations": 0,
+      "estimated_position_rmse_m": 0.07534509580425526,
+      "max_speed_m_s": 0.7129747383226641,
+      "inspection_tracking_rmse_m": 0.02722714746785909,
+      "simulation_to_wall_time_ratio": 0.9888022340377247,
+      "camera_attitude_source": "Gazebo rigid-body quaternion; policy localization uses PX4 estimator",
+      "collision_metric": "Conservative swept horizontal envelope against shared scene boxes, not a contact-sensor count"
+    },
+    "errors": [],
+    "changed_sources": []
+  },
+  "tests": {
+    "passed": 133,
+    "failed": 0
+  },
+  "full_mission_accuracy_remeasured": false,
+  "last_full_mission_accuracy": {
+    "correct": 6,
+    "planned": 8,
+    "source": "online-assets-flight-v1"
+  },
+  "planner_sha256": "5623db7f1cf678be8a4d1e2d91b55880a64388e0256c2f51d7983077ebab4fcd"
+}

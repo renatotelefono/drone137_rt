@@ -1,0 +1,5 @@
+# Local mission runtime; the existing .local/laya-env already has these versions.
+aiohttp==3.14.4
+pillow==12.3.0
+# Required only for measured qualification runs.
+psutil==7.2.2

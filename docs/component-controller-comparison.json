@@ -1,0 +1,151 @@
+{
+  "date": "2026-10-22",
+  "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638",
+  "baseline": {
+    "passed": 22,
+    "total": 42,
+    "engineering_passed": 15
+  },
+  "controller_only": {
+    "passed": 36,
+    "total": 42,
+    "engineering_passed": 20
+  },
+  "revised": {
+    "passed": 40,
+    "total": 42,
+    "engineering_passed": 27
+  },
+  "additional_seeds": {
+    "passed": 400,
+    "total": 420,
+    "engineering_passed": 270
+  },
+  "timestep_2ms": {
+    "passed": 40,
+    "total": 42,
+    "engineering_passed": 27
+  },
+  "seeds": [
+    21001,
+    22003,
+    23003,
+    24001,
+    25013,
+    26003,
+    27011,
+    28001,
+    29009,
+    30011
+  ],
+  "models": [
+    {
+      "name": "Crazyflie-derived reference",
+      "original_id": "cf2-reference",
+      "revised_id": "cf2-reference",
+      "revision": 1,
+      "mass_g": 27,
+      "baseline": 4,
+      "controller_only": 6,
+      "revised": 6,
+      "additional_passed": 60,
+      "additional_total": 60,
+      "failures": [],
+      "max_yaw_rate_rad_s": 55.20499647903198
+    },
+    {
+      "name": "Micro 90 / 1S2P",
+      "original_id": "micro-90",
+      "revised_id": "micro-90-power-v2",
+      "revision": 1,
+      "mass_g": 53.199999999999996,
+      "baseline": 3,
+      "controller_only": 5,
+      "revised": 5,
+      "additional_passed": 50,
+      "additional_total": 60,
+      "failures": [
+        "weak-motor"
+      ],
+      "max_yaw_rate_rad_s": 84.94402475967283
+    },
+    {
+      "name": "Scout 110 / 1S2P",
+      "original_id": "scout-110",
+      "revised_id": "scout-110-power-v2",
+      "revision": 1,
+      "mass_g": 65.19999999999999,
+      "baseline": 3,
+      "controller_only": 5,
+      "revised": 6,
+      "additional_passed": 60,
+      "additional_total": 60,
+      "failures": [],
+      "max_yaw_rate_rad_s": 0.3521192125883566
+    },
+    {
+      "name": "Guard 110 / 1S3P",
+      "original_id": "guard-110",
+      "revised_id": "guard-110-power-v2",
+      "revision": 1,
+      "mass_g": 80.5,
+      "baseline": 3,
+      "controller_only": 5,
+      "revised": 6,
+      "additional_passed": 60,
+      "additional_total": 60,
+      "failures": [],
+      "max_yaw_rate_rad_s": 30.891632054533655
+    },
+    {
+      "name": "Height 110 / 1S3P",
+      "original_id": "height-110",
+      "revised_id": "height-110-power-v2",
+      "revision": 2,
+      "mass_g": 74.5,
+      "baseline": 3,
+      "controller_only": 5,
+      "revised": 6,
+      "additional_passed": 60,
+      "additional_total": 60,
+      "failures": [],
+      "max_yaw_rate_rad_s": 0.9007437919484093
+    },
+    {
+      "name": "Split 110 / 1S3P",
+      "original_id": "split-110",
+      "revised_id": "split-110-power-v2",
+      "revision": 1,
+      "mass_g": 76.5,
+      "baseline": 3,
+      "controller_only": 5,
+      "revised": 6,
+      "additional_passed": 60,
+      "additional_total": 60,
+      "failures": [],
+      "max_yaw_rate_rad_s": 1.4961309949321606
+    },
+    {
+      "name": "Scout / original Pluto pack",
+      "original_id": "scout-published-pack",
+      "revised_id": "scout-published-pack",
+      "revision": 1,
+      "mass_g": 65.60000000000001,
+      "baseline": 3,
+      "controller_only": 5,
+      "revised": 5,
+      "additional_passed": 50,
+      "additional_total": 60,
+      "failures": [
+        "low-battery"
+      ],
+      "max_yaw_rate_rad_s": 3.4284757752993142
+    }
+  ],
+  "real_hardware_tested": false,
+  "recognition_tested": false,
+  "full_8gb_stack_tested": false,
+  "physics_process_peak_rss_mib": 425.078125,
+  "scope_note": "The 95% target applies to simulated flight completion. Five designs have explicitly revised, unmeasured and unpriced battery banks. The unchanged 2:1 reserve screen passes 27/42. Micro 90 still fails motor damage; the original Pluto-pack Scout still fails low battery. Ideal external pose; no hardware, vision or full 8 GB stack qualification.",
+  "flight_target_met": true
+}

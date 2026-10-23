@@ -1,0 +1,157 @@
+{
+  "name": "D137 Scout 110-B bench prototype",
+  "date": "2026-10-22",
+  "configuration": "scout-110-bench-b@1",
+  "physical_enabled": false,
+  "status": "Camera/electrical/mechanical bench development; flight firmware and hardware qualification pending",
+  "currency": "USD",
+  "parts": [
+    {
+      "id": "camera",
+      "part": "Seeed XIAO ESP32-S3 Sense, SKU 113991115; supplied camera and antenna",
+      "quantity": 1,
+      "unit_usd": 13.9,
+      "subtotal_usd": 13.9,
+      "basis": "manufacturer listing",
+      "source": "https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html"
+    },
+    {
+      "id": "imu",
+      "part": "Qkits GY-521 MPU-6050 module, SKU MPU-6050, 3\u20135 V input",
+      "quantity": 1,
+      "unit_usd": 4.95,
+      "subtotal_usd": 4.95,
+      "basis": "retailer USD listing",
+      "source": "https://store.qkits.com/electronics/3-axis-gyroscope-accelerometer-gy-521.html"
+    },
+    {
+      "id": "motors",
+      "part": "Unmanned Tech 41C-069-230, four 8520 motors, 2 CW + 2 CCW, 1 mm shaft",
+      "quantity": 1,
+      "unit_usd": 9.0,
+      "subtotal_usd": 9.0,
+      "basis": "USD budget allowance; actual seller price GBP 6.49",
+      "source": "https://www.unmannedtechshop.co.uk/products/8520-coreless-brushed-motor-pack-2-x-cw-2-x-ccw"
+    },
+    {
+      "id": "propellers",
+      "part": "HQProp 65 mm ultralight, 1 mm shaft, 2 CW + 2 CCW; SpeedyFPV TR21",
+      "quantity": 1,
+      "unit_usd": 2.39,
+      "subtotal_usd": 2.39,
+      "basis": "retailer listing",
+      "source": "https://speedyfpv.com/products/hqprop-65mm-ultralight-propeller-set-2x-cw-2x-ccw-gray"
+    },
+    {
+      "id": "battery",
+      "part": "BETAFPV 01030002: one 450 mAh 1S BT2.0 pack, charge limited to 4.20 V",
+      "quantity": 1,
+      "unit_usd": 3.75,
+      "subtotal_usd": 3.75,
+      "basis": "one-quarter of $14.99 four-pack; rounded",
+      "source": "https://betafpv.com/collections/batt-1s/products/bt2-0-450mah-1s-30c-battery-4pcs"
+    },
+    {
+      "id": "frame",
+      "part": "Printed Scout 110 frame with guards, 110 mm diagonal, 8.6 mm motor bores",
+      "quantity": 1,
+      "unit_usd": 4.0,
+      "subtotal_usd": 4.0,
+      "basis": "unquoted print allowance",
+      "source": "../frames/scout-110.scad"
+    },
+    {
+      "id": "mosfets",
+      "part": "AO3400A N-channel MOSFET, SOT-23",
+      "quantity": 4,
+      "unit_usd": 0.25,
+      "subtotal_usd": 1.0,
+      "basis": "unquoted allowance",
+      "source": "https://www.aosmd.com/products/mosfets/low-voltage-mosfets-12v-30v/ao3400a"
+    },
+    {
+      "id": "diodes",
+      "part": "SS34 Schottky flyback diode",
+      "quantity": 4,
+      "unit_usd": 0.15,
+      "subtotal_usd": 0.6,
+      "basis": "unquoted allowance",
+      "source": null
+    },
+    {
+      "id": "gate_resistors",
+      "part": "100 ohm resistor",
+      "quantity": 4,
+      "unit_usd": 0.02,
+      "subtotal_usd": 0.08,
+      "basis": "unquoted allowance",
+      "source": null
+    },
+    {
+      "id": "pulldowns",
+      "part": "10 kohm resistor",
+      "quantity": 4,
+      "unit_usd": 0.03,
+      "subtotal_usd": 0.12,
+      "basis": "unquoted allowance",
+      "source": null
+    },
+    {
+      "id": "capacitors",
+      "part": "4 \u00d7 100 nF across motors; 470 uF >=6.3 V motor supply, 47 uF and 100 nF electronics decoupling",
+      "quantity": 1,
+      "unit_usd": 0.7,
+      "subtotal_usd": 0.7,
+      "basis": "unquoted allowance",
+      "source": null
+    },
+    {
+      "id": "battery_sense",
+      "part": "2 \u00d7 100 kohm resistors and 100 nF ADC filter",
+      "quantity": 1,
+      "unit_usd": 0.1,
+      "subtotal_usd": 0.1,
+      "basis": "unquoted allowance",
+      "source": null
+    },
+    {
+      "id": "carrier",
+      "part": "Light carrier PCB, IMU mount and low-profile connections",
+      "quantity": 1,
+      "unit_usd": 3.0,
+      "subtotal_usd": 3.0,
+      "basis": "unquoted material allowance; layout/tooling/engineering excluded",
+      "source": null
+    },
+    {
+      "id": "wiring",
+      "part": "BT2.0 aircraft pigtail, short silicone motor wires, camera mount, strap and fasteners",
+      "quantity": 1,
+      "unit_usd": 1.5,
+      "subtotal_usd": 1.5,
+      "basis": "unquoted allowance",
+      "source": null
+    }
+  ],
+  "total_parts_allowance_usd": 45.09,
+  "purchase_warning": "Per-aircraft consumed parts allowance, not a delivered checkout total. Battery minimum purchase is four packs for $14.99; motor price is GBP. Shipping, tax and minimum-order surplus can exceed $50.",
+  "exclusions": [
+    "ground PC and Wi-Fi access point",
+    "charger and USB cable",
+    "shipping and taxes",
+    "tools, engineering, PCB layout/tooling and assembly",
+    "position tracking equipment or navigation sensors",
+    "spares and order minimum surplus"
+  ],
+  "mass_hypothesis_g": 63.26,
+  "changes_from_tested_power_v2": [
+    "Purchased single-cell pack replaces unmeasured parallel-cell concept",
+    "Different specific motor/propeller supply; thrust curve remains unmeasured",
+    "Does not inherit power-v2 end-to-end test score"
+  ],
+  "stock_checked": {
+    "motor_pack_available": true,
+    "propellers_available": true,
+    "original_speedy_motor_and_prop_kit_available": false
+  }
+}

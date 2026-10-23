@@ -3,6 +3,7 @@ import {stressAssets} from './scene-stress.js';
 import {cameraEffects} from './camera-effects.js';
 import {importedLighting} from './scene-imported.js';
 import {GLTFLoader} from './vendor/addons/loaders/GLTFLoader.js';
+import {visibleCollisionMesh} from './visible-colliders.mjs';
 const $=id=>document.getElementById(id),canvas=$('camera');
 const world=await(await fetch('/scene.json')).json();
 if(world.navigation_mode==='observed-range')$('limitations').textContent='GPS disabled · observed range map · synthetic noisy odometry. Map below is evaluator truth and is not supplied to the planner. Physical hardware remains unqualified.';
@@ -39,6 +40,7 @@ let last=0,sequence=0,recording,queue=Promise.resolve(),pending=0,videoError=nul
 const history=[],latency=(world.camera.latency_ms||0)/1000;
 window.flight={ready:true,capture:null,errors:[],frameCount:0,droppedFrames:0,jpegQuality:world.camera.jpeg_quality??.82,assetAudit,
  renderStats:()=>({memory:{...renderer.info.memory},render:{...renderer.info.render}})};
+window.flight.exportCollisionMesh=()=>visibleCollisionMesh(scene,actor);
 function fail(e){window.flight.errors.push(String(e));$('error').textContent=String(e);}
 let polling=false;
 let dropBurst=0;

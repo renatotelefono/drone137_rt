@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-22",
+  "python_regression_tests": 178,
+  "final_targeted_registry_api_tests": 5,
+  "physics_tests": 8,
+  "browser_checks": {
+    "passed": true,
+    "errors": [],
+    "swap_persisted": true,
+    "physics_render_pose_equal": true,
+    "flight_passed": true,
+    "mobile_overflow": false
+  },
+  "final_browser_headless_agreement": {
+    "passed": true,
+    "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a",
+    "errors": {
+      "hover_rmse_m": 0,
+      "transit_rmse_m": 0,
+      "max_height_m": 0,
+      "max_tilt_deg": 0,
+      "min_voltage_v": 0
+    }
+  },
+  "physical_flight_tested": false,
+  "recognition_tested": false,
+  "full_8gb_stack_tested": false
+}

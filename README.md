@@ -4,19 +4,60 @@ Local visual reconnaissance development for a confined space. The first runnable
 product is a browser recon lab with a Python controller, a small local model
 manager, and repeatable Three.js environments. No TypeScript or hosted inference is used.
 
-**Mission control:** open `http://127.0.0.1:8137/control` after starting the app.
-Select an inspection area on the map, write a brief, and assign Scout 01 and/or
-Scout 02. Qwen interprets inventory, doorway-inspection and camera-view comparison
-requests. Review the task and assigned viewpoints, then launch. The dashboard
-shows both rendered cameras, flight state, model findings and separate video reports.
+**Microquad component lab:** `/components` stores swappable parts and pinned
+assemblies in SQLite, with Rapier rigid-body physics rendered by Three.js.
+Run it alone with `python -m scripts.component_lab --port 8152`. The five indoor
+designs and two reference variants have completed a 42-case simulation study;
+unmeasured component assumptions and failed gates remain explicit. See
+[data sources, engine choice, results and limitations](docs/component-physics.md).
+The revised controller and explicitly revised battery hypotheses complete 40/42
+flight cases (95.2%), also 400/420 across additional noise seeds. The original
+assemblies remain available; hardware, camera recognition and the revised
+under-$50 parts budget are not qualified by this physics benchmark.
 
-Aircraft take turns in one shared indoor site. Queued aircraft are docked outside
-the flight volume; a flight must return and finalize its video before the next
-launches. Return cancels queued flights and brings the active drone home; Stop all
-ends motion immediately in the simulation. Reset the virtual site after a stopped
-or failed flight. The rectangle selects authored inspection viewpoints; transit
-may leave it, and it is **not a flight geofence or a full visual-coverage claim**.
-Concurrent multi-aircraft flight and physical drones are not enabled.
+**Mission control:** `/control` now connects the SQLite aircraft assembly to
+Rapier flight, a service-owned Three.js camera, local Qwen plus Florence image
+verification, two-view localization, return/landing and video evidence. Write a
+red fire extinguisher search brief, choose an inspection area and aircraft, review
+the plan and launch. Flight/recording continue when the operator dashboard closes.
+One aircraft flies at a time. The rectangle selects inspection stations; transit
+can leave it. Known map geometry and ideal external positioning remain assumptions.
+See [mission setup, API, tests and limitations](docs/mission-runtime.md).
+The Scout 110-B completed **24/24 full missions** across eight known synthetic
+cases repeated three times, with zero false confirmations, decodable video and
+a 4.26 GiB peak application-memory measurement on a 16 GiB host. This is separate
+from the component-only physics benchmark above. See the
+[full mission qualification and retained failures](docs/mission-integration-validation.md).
+
+The earlier sequential two-aircraft, kinematic mission console remains at
+`/control-legacy`. It supports inventory, doorway and view-comparison experiments.
+Concurrent flight and physical control are not enabled by either dashboard.
+
+**Unknown-place experiment:** `/places` displays environments reconstructed from
+onboard RGB images and synthetic IMU data, with named places, individual visits,
+maps and image-backed model observations saved in SQLite. The experimental
+OpenVINS mapper starts without a room map or true-position feedback. Development
+flights now pass all gates, but the latest fresh-layout suite passed only **2/3**:
+one layout failed coverage and boundary recall. Reliable unfamiliar-environment
+exploration remains open; the earlier 24/24 known-map result does not qualify it.
+See [the test and current architecture](docs/blind-exploration.md) and
+[preserved result summaries](docs/blind-exploration-validation.json).
+
+**Aircraft connection:** Mission Control's **Connect a drone** panel supports
+pinned HTTPS pairing, telemetry and camera preview using the local protocol
+emulator. The host adapter, ownership/deadline checks and sensor monitor pass
+25 distinct automated tests. The emulator has no flight dynamics; matching
+onboard flight firmware and physical navigation integration remain unfinished.
+See [protocol and local setup](hardware/esp32/link-protocol.md) and the
+[current handoff and remaining work](docs/agent-handoff.md).
+
+For the first hardware prototype, use the
+[Scout 110-B parts and bench build](hardware/esp32/indoor/scout-110-bench/README.md).
+Its $45.09 consumed-parts allowance is not a delivered checkout quote. This
+commercial-parts configuration is stored separately from the hypothetical
+power-v2 aircraft used by earlier experiments. The final 24-mission qualification
+uses the Scout 110-B assembly itself. Flight firmware, measured
+component data and real indoor positioning remain hardware work.
 
 **Object-location experiment:** compare the current Qwen model with Qwen plus
 local Laya on a search for a red fire extinguisher. Both use camera images and
@@ -28,8 +69,7 @@ a separate camera-station experiment; it does not add physical flight control.
 rotor dynamics beneath the Three.js camera. Qwen and Qwen+Laya search during
 continuous takeoff, transit, inspection, return and landing, with estimated-pose
 triangulation, draft disturbance, telemetry and video evidence. See
-[the flight-test protocol](docs/native-flight-experiment.md). The dashboard above
-remains the separate kinematic product; this native backend is an evaluation lab.
+[the flight-test protocol](docs/native-flight-experiment.md). The original kinematic product remains at `/control-legacy`; this native PX4 backend is an evaluation lab. The newer `/control` uses the component-based Rapier backend described above.
 The [identity improvement experiment](docs/identity-improvement.md) separates
 visible-part checks from triangulation and compares the 2B and 4B vision models
 without loading both together. Its saved-frame diagnostic is not a real-world
@@ -83,8 +123,8 @@ launcher bootstraps the small Python environment if missing and opens the local
 console. If Finder blocks execution, run the shell commands above in Terminal.
 The service binds only to `127.0.0.1:8137`; Ctrl-C stops its owned processes.
 
-For first-time setup and a single-aircraft smoke test, open **Recon lab** from
-the dashboard header:
+For model installation and the earlier single-aircraft smoke test, open
+`http://127.0.0.1:8137/`:
 
 1. Choose **Scripted demo · no AI**, generate a room seed, and **Start recon** to
    test rendering, navigation, recording and failure handling without model weights.

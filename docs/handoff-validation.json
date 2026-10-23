@@ -1,0 +1,51 @@
+{
+  "date": "2026-10-23",
+  "branch": "codex/indoor-vision-platform",
+  "scope": "Pre-handoff software regressions on configured Apple Silicon workstation; not new full model-driven flights, real hardware, clean-machine installation or actual 8 GB qualification.",
+  "checks": [
+    {
+      "name": "Python regression suite",
+      "passed": 264,
+      "total": 264,
+      "log": ".local/validation/handoff-tests.log",
+      "log_sha256": "f73c9ac492ca9fd6480da3ffd2bd53463b65625629fc1a477b316e8a1dd03ebe"
+    },
+    {
+      "name": "Blind-controller regressions",
+      "passed": 8,
+      "total": 8,
+      "log": ".local/validation/handoff-blind-controller.log",
+      "log_sha256": "53ae085569beaf1f8b1034e5a874e3fa051577f8ac5b977810e0cc67027ba880"
+    },
+    {
+      "name": "Component-physics regressions",
+      "passed": 11,
+      "total": 11,
+      "log": ".local/validation/handoff-component-physics.log",
+      "log_sha256": "850e5b2e457ada9490593ac1c8170760a814d13f05cc2b1d589c53eed8fad400"
+    },
+    {
+      "name": "Mission-physics checks with Scout 110-B assembly",
+      "passed": 6,
+      "total": 6,
+      "log": ".local/validation/handoff-mission-physics.log",
+      "log_sha256": "376531608e09c12f8cd37026aa40a0ddb6b4124de79589106f2bb817da7462db"
+    }
+  ],
+  "current_blind_qualification": {
+    "file": "docs/blind-exploration-validation.json",
+    "latest_suite": "qualification-03",
+    "passed": 2,
+    "planned": 3,
+    "accepted": false
+  },
+  "excluded_from_git": [
+    ".local model weights and runtime environments",
+    ".local raw flight recordings, IMU traces and checkpoints",
+    ".local/data/aircraft.sqlite3 and device pairing keys",
+    "machine-specific camera Wi-Fi configuration"
+  ],
+  "python": "3.12.13",
+  "node": "22.14.0",
+  "full_logs_in_git": false
+}

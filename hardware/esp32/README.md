@@ -5,11 +5,24 @@ over local Wi-Fi to drone137. The ground computer runs the vision models,
 records evidence and plans bounded movements. Stabilization, motor timing and
 loss-of-command handling must run on the aircraft. No onboard LLM is needed.
 
+For the current single-aircraft prototype, use the
+[Scout 110-B build dossier](indoor/scout-110-bench/README.md). It specifies the
+commercial camera, motor, propeller and battery choices separately from the
+earlier hypothetical catalog configurations. Its $45.09 consumed-parts allowance
+is not a delivered under-$50 checkout; the initial battery pack quantity alone
+raises the first-build purchase allowance to $56.33 before tax and shipping.
+
 The newer [five-model indoor catalog](indoor/report.html) expands this single
 design into five alternatives with individual BOMs and frame sources. It updates
 the camera price and selects lower-cost matched motor/propeller sets. The prices
 below remain the original revision A allowances; use the catalog for the latest
-five candidates.
+five candidates. The Scout 110-B dossier supersedes those catalog prices for
+the recommended first bench build.
+
+The [component physics lab](../../docs/component-physics.md) now assembles these
+five designs from versioned SQLite components and runs exploratory Rapier/Three.js
+flights. Its estimated motor curves and geometry are not hardware calibration.
+The original proposal catalog remains disabled for operational/PX4 assignment.
 
 This package contains a **hardware development design**, a piece-by-piece BOM,
 a proposed carrier connection schedule, an unprinted parametric frame, camera-only

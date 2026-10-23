@@ -1,0 +1,2629 @@
+{
+  "date": "2026-10-22",
+  "latest_attempt": {
+    "protocol": {
+      "cases": [
+        {
+          "case": {
+            "id": "hard-west-dim-present",
+            "seed": 72311,
+            "target": true,
+            "target_xy": [
+              4.8,
+              8.65
+            ],
+            "condition": "dim",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.3
+                ],
+                "bottle-table": [
+                  2.8,
+                  2.65
+                ],
+                "lab-bench": [
+                  8.4,
+                  8.0
+                ]
+              },
+              "target_yaw_radians": 0.45,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": 1.0,
+              "draft_enu_m_s": [
+                0.8,
+                0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 0.8,
+                "flicker_fraction": 0.06
+              },
+              "camera": {
+                "latency_ms": 120,
+                "drop_every_n": 9,
+                "jpeg_quality": 0.72
+              }
+            }
+          },
+          "repeat": 0
+        },
+        {
+          "case": {
+            "id": "hard-west-dim-absent",
+            "seed": 72311,
+            "target": false,
+            "target_xy": [
+              4.8,
+              8.65
+            ],
+            "condition": "dim",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.3
+                ],
+                "bottle-table": [
+                  2.8,
+                  2.65
+                ],
+                "lab-bench": [
+                  8.4,
+                  8.0
+                ]
+              },
+              "target_yaw_radians": 0.45,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": 1.0,
+              "draft_enu_m_s": [
+                0.8,
+                0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 0.8,
+                "flicker_fraction": 0.06
+              },
+              "camera": {
+                "latency_ms": 120,
+                "drop_every_n": 9,
+                "jpeg_quality": 0.72
+              }
+            }
+          },
+          "repeat": 0
+        },
+        {
+          "case": {
+            "id": "hard-east-glare-present",
+            "seed": 84623,
+            "target": true,
+            "target_xy": [
+              10.2,
+              6.55
+            ],
+            "condition": "glare",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.3,
+                  8.0
+                ],
+                "bottle-table": [
+                  2.4,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.05
+                ]
+              },
+              "target_yaw_radians": -0.55,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -1.0,
+              "draft_enu_m_s": [
+                0.9,
+                -0.15,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.8,
+                "directional": 1.2,
+                "flicker_fraction": 0.03
+              },
+              "camera": {
+                "latency_ms": 160,
+                "drop_every_n": 8,
+                "jpeg_quality": 0.7
+              }
+            }
+          },
+          "repeat": 0
+        },
+        {
+          "case": {
+            "id": "hard-east-glare-absent",
+            "seed": 84623,
+            "target": false,
+            "target_xy": [
+              10.2,
+              6.55
+            ],
+            "condition": "glare",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.3,
+                  8.0
+                ],
+                "bottle-table": [
+                  2.4,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.05
+                ]
+              },
+              "target_yaw_radians": -0.55,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -1.0,
+              "draft_enu_m_s": [
+                0.9,
+                -0.15,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.8,
+                "directional": 1.2,
+                "flicker_fraction": 0.03
+              },
+              "camera": {
+                "latency_ms": 160,
+                "drop_every_n": 8,
+                "jpeg_quality": 0.7
+              }
+            }
+          },
+          "repeat": 0
+        },
+        {
+          "case": {
+            "id": "hard-west-occluded-present",
+            "seed": 95737,
+            "target": true,
+            "target_xy": [
+              4.8,
+              8.5
+            ],
+            "condition": "nominal",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.15,
+                  7.5
+                ],
+                "bottle-table": [
+                  2.7,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.3,
+                  8.1
+                ]
+              },
+              "target_yaw_radians": -0.4,
+              "partial_occlusion": true,
+              "mount_pitch_error_degrees": 0.7,
+              "draft_enu_m_s": [
+                0.7,
+                0.3,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.9,
+                "directional": 1.1,
+                "flicker_fraction": 0.04
+              },
+              "camera": {
+                "latency_ms": 140,
+                "drop_every_n": 7,
+                "jpeg_quality": 0.68
+              }
+            }
+          },
+          "repeat": 0
+        },
+        {
+          "case": {
+            "id": "hard-west-occluded-absent",
+            "seed": 95737,
+            "target": false,
+            "target_xy": [
+              4.8,
+              8.5
+            ],
+            "condition": "nominal",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.15,
+                  7.5
+                ],
+                "bottle-table": [
+                  2.7,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.3,
+                  8.1
+                ]
+              },
+              "target_yaw_radians": -0.4,
+              "partial_occlusion": true,
+              "mount_pitch_error_degrees": 0.7,
+              "draft_enu_m_s": [
+                0.7,
+                0.3,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.9,
+                "directional": 1.1,
+                "flicker_fraction": 0.04
+              },
+              "camera": {
+                "latency_ms": 140,
+                "drop_every_n": 7,
+                "jpeg_quality": 0.68
+              }
+            }
+          },
+          "repeat": 0
+        },
+        {
+          "case": {
+            "id": "hard-east-motion-present",
+            "seed": 103801,
+            "target": true,
+            "target_xy": [
+              10.15,
+              6.35
+            ],
+            "condition": "motion",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.45
+                ],
+                "bottle-table": [
+                  2.5,
+                  2.55
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.2
+                ]
+              },
+              "target_yaw_radians": 0.6,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -0.8,
+              "draft_enu_m_s": [
+                0.85,
+                -0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 1.0,
+                "flicker_fraction": 0.07
+              },
+              "camera": {
+                "latency_ms": 220,
+                "drop_every_n": 6,
+                "jpeg_quality": 0.64
+              }
+            }
+          },
+          "repeat": 0
+        },
+        {
+          "case": {
+            "id": "hard-east-motion-absent",
+            "seed": 103801,
+            "target": false,
+            "target_xy": [
+              10.15,
+              6.35
+            ],
+            "condition": "motion",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.45
+                ],
+                "bottle-table": [
+                  2.5,
+                  2.55
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.2
+                ]
+              },
+              "target_yaw_radians": 0.6,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -0.8,
+              "draft_enu_m_s": [
+                0.85,
+                -0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 1.0,
+                "flicker_fraction": 0.07
+              },
+              "camera": {
+                "latency_ms": 220,
+                "drop_every_n": 6,
+                "jpeg_quality": 0.64
+              }
+            }
+          },
+          "repeat": 0
+        },
+        {
+          "case": {
+            "id": "hard-west-dim-present",
+            "seed": 72311,
+            "target": true,
+            "target_xy": [
+              4.8,
+              8.65
+            ],
+            "condition": "dim",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.3
+                ],
+                "bottle-table": [
+                  2.8,
+                  2.65
+                ],
+                "lab-bench": [
+                  8.4,
+                  8.0
+                ]
+              },
+              "target_yaw_radians": 0.45,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": 1.0,
+              "draft_enu_m_s": [
+                0.8,
+                0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 0.8,
+                "flicker_fraction": 0.06
+              },
+              "camera": {
+                "latency_ms": 120,
+                "drop_every_n": 9,
+                "jpeg_quality": 0.72
+              }
+            }
+          },
+          "repeat": 1
+        },
+        {
+          "case": {
+            "id": "hard-west-dim-absent",
+            "seed": 72311,
+            "target": false,
+            "target_xy": [
+              4.8,
+              8.65
+            ],
+            "condition": "dim",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.3
+                ],
+                "bottle-table": [
+                  2.8,
+                  2.65
+                ],
+                "lab-bench": [
+                  8.4,
+                  8.0
+                ]
+              },
+              "target_yaw_radians": 0.45,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": 1.0,
+              "draft_enu_m_s": [
+                0.8,
+                0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 0.8,
+                "flicker_fraction": 0.06
+              },
+              "camera": {
+                "latency_ms": 120,
+                "drop_every_n": 9,
+                "jpeg_quality": 0.72
+              }
+            }
+          },
+          "repeat": 1
+        },
+        {
+          "case": {
+            "id": "hard-east-glare-present",
+            "seed": 84623,
+            "target": true,
+            "target_xy": [
+              10.2,
+              6.55
+            ],
+            "condition": "glare",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.3,
+                  8.0
+                ],
+                "bottle-table": [
+                  2.4,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.05
+                ]
+              },
+              "target_yaw_radians": -0.55,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -1.0,
+              "draft_enu_m_s": [
+                0.9,
+                -0.15,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.8,
+                "directional": 1.2,
+                "flicker_fraction": 0.03
+              },
+              "camera": {
+                "latency_ms": 160,
+                "drop_every_n": 8,
+                "jpeg_quality": 0.7
+              }
+            }
+          },
+          "repeat": 1
+        },
+        {
+          "case": {
+            "id": "hard-east-glare-absent",
+            "seed": 84623,
+            "target": false,
+            "target_xy": [
+              10.2,
+              6.55
+            ],
+            "condition": "glare",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.3,
+                  8.0
+                ],
+                "bottle-table": [
+                  2.4,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.05
+                ]
+              },
+              "target_yaw_radians": -0.55,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -1.0,
+              "draft_enu_m_s": [
+                0.9,
+                -0.15,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.8,
+                "directional": 1.2,
+                "flicker_fraction": 0.03
+              },
+              "camera": {
+                "latency_ms": 160,
+                "drop_every_n": 8,
+                "jpeg_quality": 0.7
+              }
+            }
+          },
+          "repeat": 1
+        },
+        {
+          "case": {
+            "id": "hard-west-occluded-present",
+            "seed": 95737,
+            "target": true,
+            "target_xy": [
+              4.8,
+              8.5
+            ],
+            "condition": "nominal",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.15,
+                  7.5
+                ],
+                "bottle-table": [
+                  2.7,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.3,
+                  8.1
+                ]
+              },
+              "target_yaw_radians": -0.4,
+              "partial_occlusion": true,
+              "mount_pitch_error_degrees": 0.7,
+              "draft_enu_m_s": [
+                0.7,
+                0.3,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.9,
+                "directional": 1.1,
+                "flicker_fraction": 0.04
+              },
+              "camera": {
+                "latency_ms": 140,
+                "drop_every_n": 7,
+                "jpeg_quality": 0.68
+              }
+            }
+          },
+          "repeat": 1
+        },
+        {
+          "case": {
+            "id": "hard-west-occluded-absent",
+            "seed": 95737,
+            "target": false,
+            "target_xy": [
+              4.8,
+              8.5
+            ],
+            "condition": "nominal",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.15,
+                  7.5
+                ],
+                "bottle-table": [
+                  2.7,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.3,
+                  8.1
+                ]
+              },
+              "target_yaw_radians": -0.4,
+              "partial_occlusion": true,
+              "mount_pitch_error_degrees": 0.7,
+              "draft_enu_m_s": [
+                0.7,
+                0.3,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.9,
+                "directional": 1.1,
+                "flicker_fraction": 0.04
+              },
+              "camera": {
+                "latency_ms": 140,
+                "drop_every_n": 7,
+                "jpeg_quality": 0.68
+              }
+            }
+          },
+          "repeat": 1
+        },
+        {
+          "case": {
+            "id": "hard-east-motion-present",
+            "seed": 103801,
+            "target": true,
+            "target_xy": [
+              10.15,
+              6.35
+            ],
+            "condition": "motion",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.45
+                ],
+                "bottle-table": [
+                  2.5,
+                  2.55
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.2
+                ]
+              },
+              "target_yaw_radians": 0.6,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -0.8,
+              "draft_enu_m_s": [
+                0.85,
+                -0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 1.0,
+                "flicker_fraction": 0.07
+              },
+              "camera": {
+                "latency_ms": 220,
+                "drop_every_n": 6,
+                "jpeg_quality": 0.64
+              }
+            }
+          },
+          "repeat": 1
+        },
+        {
+          "case": {
+            "id": "hard-east-motion-absent",
+            "seed": 103801,
+            "target": false,
+            "target_xy": [
+              10.15,
+              6.35
+            ],
+            "condition": "motion",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.45
+                ],
+                "bottle-table": [
+                  2.5,
+                  2.55
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.2
+                ]
+              },
+              "target_yaw_radians": 0.6,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -0.8,
+              "draft_enu_m_s": [
+                0.85,
+                -0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 1.0,
+                "flicker_fraction": 0.07
+              },
+              "camera": {
+                "latency_ms": 220,
+                "drop_every_n": 6,
+                "jpeg_quality": 0.64
+              }
+            }
+          },
+          "repeat": 1
+        },
+        {
+          "case": {
+            "id": "hard-west-dim-present",
+            "seed": 72311,
+            "target": true,
+            "target_xy": [
+              4.8,
+              8.65
+            ],
+            "condition": "dim",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.3
+                ],
+                "bottle-table": [
+                  2.8,
+                  2.65
+                ],
+                "lab-bench": [
+                  8.4,
+                  8.0
+                ]
+              },
+              "target_yaw_radians": 0.45,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": 1.0,
+              "draft_enu_m_s": [
+                0.8,
+                0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 0.8,
+                "flicker_fraction": 0.06
+              },
+              "camera": {
+                "latency_ms": 120,
+                "drop_every_n": 9,
+                "jpeg_quality": 0.72
+              }
+            }
+          },
+          "repeat": 2
+        },
+        {
+          "case": {
+            "id": "hard-west-dim-absent",
+            "seed": 72311,
+            "target": false,
+            "target_xy": [
+              4.8,
+              8.65
+            ],
+            "condition": "dim",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.3
+                ],
+                "bottle-table": [
+                  2.8,
+                  2.65
+                ],
+                "lab-bench": [
+                  8.4,
+                  8.0
+                ]
+              },
+              "target_yaw_radians": 0.45,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": 1.0,
+              "draft_enu_m_s": [
+                0.8,
+                0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 0.8,
+                "flicker_fraction": 0.06
+              },
+              "camera": {
+                "latency_ms": 120,
+                "drop_every_n": 9,
+                "jpeg_quality": 0.72
+              }
+            }
+          },
+          "repeat": 2
+        },
+        {
+          "case": {
+            "id": "hard-east-glare-present",
+            "seed": 84623,
+            "target": true,
+            "target_xy": [
+              10.2,
+              6.55
+            ],
+            "condition": "glare",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.3,
+                  8.0
+                ],
+                "bottle-table": [
+                  2.4,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.05
+                ]
+              },
+              "target_yaw_radians": -0.55,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -1.0,
+              "draft_enu_m_s": [
+                0.9,
+                -0.15,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.8,
+                "directional": 1.2,
+                "flicker_fraction": 0.03
+              },
+              "camera": {
+                "latency_ms": 160,
+                "drop_every_n": 8,
+                "jpeg_quality": 0.7
+              }
+            }
+          },
+          "repeat": 2
+        },
+        {
+          "case": {
+            "id": "hard-east-glare-absent",
+            "seed": 84623,
+            "target": false,
+            "target_xy": [
+              10.2,
+              6.55
+            ],
+            "condition": "glare",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.3,
+                  8.0
+                ],
+                "bottle-table": [
+                  2.4,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.05
+                ]
+              },
+              "target_yaw_radians": -0.55,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -1.0,
+              "draft_enu_m_s": [
+                0.9,
+                -0.15,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.8,
+                "directional": 1.2,
+                "flicker_fraction": 0.03
+              },
+              "camera": {
+                "latency_ms": 160,
+                "drop_every_n": 8,
+                "jpeg_quality": 0.7
+              }
+            }
+          },
+          "repeat": 2
+        },
+        {
+          "case": {
+            "id": "hard-west-occluded-present",
+            "seed": 95737,
+            "target": true,
+            "target_xy": [
+              4.8,
+              8.5
+            ],
+            "condition": "nominal",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.15,
+                  7.5
+                ],
+                "bottle-table": [
+                  2.7,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.3,
+                  8.1
+                ]
+              },
+              "target_yaw_radians": -0.4,
+              "partial_occlusion": true,
+              "mount_pitch_error_degrees": 0.7,
+              "draft_enu_m_s": [
+                0.7,
+                0.3,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.9,
+                "directional": 1.1,
+                "flicker_fraction": 0.04
+              },
+              "camera": {
+                "latency_ms": 140,
+                "drop_every_n": 7,
+                "jpeg_quality": 0.68
+              }
+            }
+          },
+          "repeat": 2
+        },
+        {
+          "case": {
+            "id": "hard-west-occluded-absent",
+            "seed": 95737,
+            "target": false,
+            "target_xy": [
+              4.8,
+              8.5
+            ],
+            "condition": "nominal",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.15,
+                  7.5
+                ],
+                "bottle-table": [
+                  2.7,
+                  2.6
+                ],
+                "lab-bench": [
+                  8.3,
+                  8.1
+                ]
+              },
+              "target_yaw_radians": -0.4,
+              "partial_occlusion": true,
+              "mount_pitch_error_degrees": 0.7,
+              "draft_enu_m_s": [
+                0.7,
+                0.3,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.9,
+                "directional": 1.1,
+                "flicker_fraction": 0.04
+              },
+              "camera": {
+                "latency_ms": 140,
+                "drop_every_n": 7,
+                "jpeg_quality": 0.68
+              }
+            }
+          },
+          "repeat": 2
+        },
+        {
+          "case": {
+            "id": "hard-east-motion-present",
+            "seed": 103801,
+            "target": true,
+            "target_xy": [
+              10.15,
+              6.35
+            ],
+            "condition": "motion",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.45
+                ],
+                "bottle-table": [
+                  2.5,
+                  2.55
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.2
+                ]
+              },
+              "target_yaw_radians": 0.6,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -0.8,
+              "draft_enu_m_s": [
+                0.85,
+                -0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 1.0,
+                "flicker_fraction": 0.07
+              },
+              "camera": {
+                "latency_ms": 220,
+                "drop_every_n": 6,
+                "jpeg_quality": 0.64
+              }
+            }
+          },
+          "repeat": 2
+        },
+        {
+          "case": {
+            "id": "hard-east-motion-absent",
+            "seed": 103801,
+            "target": false,
+            "target_xy": [
+              10.15,
+              6.35
+            ],
+            "condition": "motion",
+            "stress": {
+              "furniture_xy": {
+                "stock-rack": [
+                  2.25,
+                  7.45
+                ],
+                "bottle-table": [
+                  2.5,
+                  2.55
+                ],
+                "lab-bench": [
+                  8.2,
+                  8.2
+                ]
+              },
+              "target_yaw_radians": 0.6,
+              "partial_occlusion": false,
+              "mount_pitch_error_degrees": -0.8,
+              "draft_enu_m_s": [
+                0.85,
+                -0.2,
+                0
+              ],
+              "illumination": {
+                "ambient": 0.85,
+                "directional": 1.0,
+                "flicker_fraction": 0.07
+              },
+              "camera": {
+                "latency_ms": 220,
+                "drop_every_n": 6,
+                "jpeg_quality": 0.64
+              }
+            }
+          },
+          "repeat": 2
+        }
+      ],
+      "assembly": "scout-110-bench-b",
+      "deadline_s": 300,
+      "tolerance_m": 0.75,
+      "required_rate": 0.95,
+      "false_confirmations_allowed": 0,
+      "launch_client": "HTTP evaluator; no operator dashboard required",
+      "unexecuted_cases_count_as_failures": true,
+      "scene": "unchanged native-hard-v1 with existing Poly Haven assets",
+      "navigation": "Height-aware routes; 0.58 m 3D planning clearance, 0.35 m monitored envelope. Earlier attempts used 2D footprint distance.",
+      "backend_change": "Rapier microquad / ideal external reference replaces PX4 generic quad. Not an isolated comparison of perception."
+    },
+    "protocol_sha256": "8d06cf98280615174ccd51fc0c49e7ff0f7edf3655bc66282770d31561abb28a",
+    "verified_model_manifest": {
+      "repository": "Qwen/Qwen3-VL-2B-Instruct-GGUF",
+      "revision": "52d6c8ffea26cc873ac5ad116f8631268d7eb503",
+      "files": [
+        {
+          "name": "Qwen3VL-2B-Instruct-Q4_K_M.gguf",
+          "sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+          "size": 1107409952
+        },
+        {
+          "name": "mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf",
+          "sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+          "size": 445053216
+        }
+      ]
+    },
+    "runs": [
+      {
+        "case": "hard-west-dim-present",
+        "repeat": 0,
+        "mission": "afe38d4e592147a7b3937812c1b32015",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.06285746767602625,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 76.67443862502114,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/afe38d4e592147a7b3937812c1b32015/report.html",
+        "observations": 3,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "870"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-dim-absent",
+        "repeat": 0,
+        "mission": "3a39ae8e55fb41179cdc19b4c28f48f4",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 193.301118665986,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/3a39ae8e55fb41179cdc19b4c28f48f4/report.html",
+        "observations": 11,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "2232"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-glare-present",
+        "repeat": 0,
+        "mission": "320cedd3542041aca31c5c71d1155e90",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.07010637567053019,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 212.46706475000246,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/320cedd3542041aca31c5c71d1155e90/report.html",
+        "observations": 12,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "2432"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-glare-absent",
+        "repeat": 0,
+        "mission": "85850371a5b14f409cfef4b5e1c82093",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 182.04125325000496,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/85850371a5b14f409cfef4b5e1c82093/report.html",
+        "observations": 10,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "2084"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-occluded-present",
+        "repeat": 0,
+        "mission": "cd4986ccd6064c39bac625759d35616a",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.6618410534508649,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 120.97781508299522,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/cd4986ccd6064c39bac625759d35616a/report.html",
+        "observations": 5,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1348"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-occluded-absent",
+        "repeat": 0,
+        "mission": "f5c8323432964243bdf8f6c5a2d5b8f1",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 174.16429383298964,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/f5c8323432964243bdf8f6c5a2d5b8f1/report.html",
+        "observations": 10,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1935"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-motion-present",
+        "repeat": 0,
+        "mission": "aeae77f4aedf48f282381566172711ec",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.07532808630082628,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 190.08709620902664,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/aeae77f4aedf48f282381566172711ec/report.html",
+        "observations": 10,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "2079"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-motion-absent",
+        "repeat": 0,
+        "mission": "477629ff1c804724a28d3f18872d2ad8",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 121.62394845800009,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/477629ff1c804724a28d3f18872d2ad8/report.html",
+        "observations": 6,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1288"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-dim-present",
+        "repeat": 1,
+        "mission": "e2511a717e8e4ae69cb8120f938b4976",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.011150737319613887,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 75.31273599999258,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/e2511a717e8e4ae69cb8120f938b4976/report.html",
+        "observations": 3,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "864"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-dim-absent",
+        "repeat": 1,
+        "mission": "7cd7d0622a914264a30c5343a8ad04ae",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 216.22346437501255,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/7cd7d0622a914264a30c5343a8ad04ae/report.html",
+        "observations": 12,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "2507"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-glare-present",
+        "repeat": 1,
+        "mission": "1d3f212abee243da9a20031fd1b3fef2",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.023387447308445115,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 227.58554262502003,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/1d3f212abee243da9a20031fd1b3fef2/report.html",
+        "observations": 12,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "2574"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-glare-absent",
+        "repeat": 1,
+        "mission": "bcccbb92449c486fa38aaeb748b698b3",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 286.99616516701644,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/bcccbb92449c486fa38aaeb748b698b3/report.html",
+        "observations": 15,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "3282"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-occluded-present",
+        "repeat": 1,
+        "mission": "874876b33548490baaacfe8e49a43bd2",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.34709939849547267,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 120.96540366698173,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/874876b33548490baaacfe8e49a43bd2/report.html",
+        "observations": 5,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1333"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-occluded-absent",
+        "repeat": 1,
+        "mission": "52a8d955c6ff4fdf9c3ecb230f79cba0",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 143.41560266699526,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/52a8d955c6ff4fdf9c3ecb230f79cba0/report.html",
+        "observations": 8,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1578"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-motion-present",
+        "repeat": 1,
+        "mission": "42e851399ef84b32af5ed487d28daa20",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.006239899123232448,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 167.0826965419983,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/42e851399ef84b32af5ed487d28daa20/report.html",
+        "observations": 9,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1791"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-motion-absent",
+        "repeat": 1,
+        "mission": "5f7889be563446e4a2c363d3c764d7a7",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 180.57490374997724,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/5f7889be563446e4a2c363d3c764d7a7/report.html",
+        "observations": 10,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1933"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-dim-present",
+        "repeat": 2,
+        "mission": "c8767d6a8e4e40ab906e772b44db21ff",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.1083667495656552,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 75.3252746250073,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/c8767d6a8e4e40ab906e772b44db21ff/report.html",
+        "observations": 3,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "861"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-dim-absent",
+        "repeat": 2,
+        "mission": "48b90e0af8744a14b6ed44b9e4a8873a",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 181.75009216699982,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/48b90e0af8744a14b6ed44b9e4a8873a/report.html",
+        "observations": 10,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "2124"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-glare-present",
+        "repeat": 2,
+        "mission": "83661e817b784db79f59001633ed00ef",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.051749194858531564,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 142.68072595799458,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/83661e817b784db79f59001633ed00ef/report.html",
+        "observations": 7,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1602"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-glare-absent",
+        "repeat": 2,
+        "mission": "15063106ea014de395b74032d445e7b0",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 202.24257633299567,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/15063106ea014de395b74032d445e7b0/report.html",
+        "observations": 11,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "2301"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-occluded-present",
+        "repeat": 2,
+        "mission": "31578782821c4b21843678d4d1b4ce3e",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.17478447255208637,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 152.91581312500057,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/31578782821c4b21843678d4d1b4ce3e/report.html",
+        "observations": 6,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1680"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-west-occluded-absent",
+        "repeat": 2,
+        "mission": "1317bdaf31df457b88706e4e0c701f0f",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 172.36068254100974,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/1317bdaf31df457b88706e4e0c701f0f/report.html",
+        "observations": 10,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1912"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-motion-present",
+        "repeat": 2,
+        "mission": "2735c249c0bb4454b1930e1a33fa91f8",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": 0.336792431446269,
+        "target_present": true,
+        "missed_target": false,
+        "wall_time_s": 186.4479118329764,
+        "outcome": "found",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/2735c249c0bb4454b1930e1a33fa91f8/report.html",
+        "observations": 10,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "2018"
+            }
+          ],
+          "decoded": true
+        }
+      },
+      {
+        "case": "hard-east-motion-absent",
+        "repeat": 2,
+        "mission": "a48ed1109af2434fa50609cf6d5fc9a8",
+        "gates": {
+          "task": true,
+          "no_false_claim": true,
+          "completed": true,
+          "landed": true,
+          "no_collision": true,
+          "attitude": true,
+          "battery": true,
+          "landing_speed": true,
+          "deadline": true,
+          "video": true
+        },
+        "passed": true,
+        "false_confirmation": false,
+        "error_m": null,
+        "target_present": false,
+        "missed_target": false,
+        "wall_time_s": 163.6880117499968,
+        "outcome": "unresolved",
+        "error": null,
+        "report": "http://127.0.0.1:8137/api/mission/runs/a48ed1109af2434fa50609cf6d5fc9a8/report.html",
+        "observations": 9,
+        "video_validation": {
+          "programs": [],
+          "stream_groups": [],
+          "streams": [
+            {
+              "codec_name": "vp8",
+              "width": 960,
+              "height": 540,
+              "nb_read_frames": "1787"
+            }
+          ],
+          "decoded": true
+        }
+      }
+    ],
+    "errors": [],
+    "frozen_software": {
+      "sources": {
+        "app/mission_runtime.py": "f30be6cd826ca51a8e6f7465153006925dfada223a38cc5d98d5a087b597a6de",
+        "adapters/rapier_drone.py": "81d62ee1fe32efbe58493bb957a1ea0336370f4eb0fde2e4514515f21ebda191",
+        "app/mission_camera.py": "6dfe944654763010a64121368249237a04aa73119fd884bcc26a0c84f5a6e21b",
+        "scripts/flight-camera.cjs": "218a538f3580271efe544a7c828aed9b77f14645f4a85b285ae06ce294a3ac87",
+        "scripts/mission-physics.mjs": "d9729f141fc9c6944761bb7faa921b9d5c1ac3df5cfb223c3920e7fec87c8f20",
+        "scripts/mission-transport.cjs": "43a9e2500463c78a7091dfc8db2df6dc653b843f36aef76d17ef9eaafa03f497",
+        "app/ui/mission-physics.mjs": "6acc4c088412aee8a7b5958933118b0fc8057345ad21dbaf4e4460471a7cbc18",
+        "app/ui/micro-physics.mjs": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638",
+        "app/ui/flight-lab.js": "a327b940ca755fdfac66a305b06a9ae60064dc018e1db562470d25d75315a2dd",
+        "app/identity.py": "c0f4c77eeda08c877628feb84e17c088225c5285def2a19924a84fd76d8505e9",
+        "app/localization.py": "c7982fcb15047d8e53a07ea5d70d8d669e46dade62ad86b5ee444c260c778e5e",
+        "app/flight_localization.py": "4fc39e35d4ef1a69bc6e8c6183ca9558dd2ba17b1bf19d244e490324f70563c3",
+        "app/mission_views.py": "8ccb91ce1394ad47f14a954dd6aaa051b5b3043056f7eee00dabf33e3a8d033d",
+        "app/mission_navigation.py": "bee279d647c7dbfd280936e88b712d76319c4e33a90c82d9040d6ea4057135ab",
+        "app/mission_identity.py": "d527073d84a9295576cf66baceeb3a4bf24069d159d4dce38acccf6e8cd491a5",
+        "adapters/vision_reviewer.py": "34b41ab364abc7dbb10ad3461fbf6c0ccf2e35904243329c1d481b7f54e07112",
+        "scripts/vision_reviewer_worker.py": "e2b23f7d1228505c6c18629fabdf1bb239848ab72c4eb1ad89f7babc5aa21d52",
+        "sim/asset_world.py": "d633e95cef793a3818a7be2eebcee8f6e83029ca12ff9491794c6156e5b627b0",
+        "sim/hard_flight.py": "0395dda5d2c4e09d8eb20fa3c56ab21dba83cf6cc825768b6d7a97f9208f9cb8",
+        "config/native-hard-v1.json": "e0c7db462bdc7993275e90da23aeded77b5ba96324334c6a2c70cfbafd945bdf",
+        "sim/flight_world.py": "b89e1943ddee285b9388f550291a740a9f3e34b02a7c66256a361e261d1c5851",
+        "adapters/llama.py": "37e1abf03435d974c84f87721fbbfb18d2e6073540433d1b9459e8fd77c45358",
+        "app/fleet.py": "2e0be485fa99f1626ff4ef424ae727afb6b809e12ff5d7efca9024a4de068481",
+        "app/components.py": "1eba2038f283e6aecc8d4ca2978e46fdd6373e717af5c73abf67ecf0ae1e6b0c",
+        "app/mission_api.py": "abd9568db2b8bb8174075401d2e34f2bbfa3c743365ee062b0bd1fedbed5fcf5",
+        "app/recon_server.py": "ac9f50ffc88c43a9ecdf70cd9204c13ffc29c73897c1633246a686c07bd8a261"
+      },
+      "assembly": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+      "reviewer": {
+        "ready": true,
+        "model": "florence",
+        "manifest": {
+          "repository": "microsoft/Florence-2-base-ft",
+          "revision": "f6c1a25888ffc1d945ee8a1a77ac833c7303d46e",
+          "files": {
+            "LICENSE": {
+              "bytes": 1141,
+              "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+            },
+            "README.md": {
+              "bytes": 14820,
+              "sha256": "092b90e814cd6c15f734b15a81e294b4d12c92d12bff3c674a9474ca935ecd1c"
+            },
+            "config.json": {
+              "bytes": 2430,
+              "sha256": "c666d0fe0172d46e115e8fba6cd93cd83714575b33a73005cab8d24ce2a3aa8f"
+            },
+            "model.safetensors": {
+              "bytes": 463221266,
+              "sha256": "58757d657ff44051314c8030b68e04cb1bb618ca9a4885418f111f6fb708185a"
+            },
+            "preprocessor_config.json": {
+              "bytes": 806,
+              "sha256": "2f5921bbc53c7cc04251e1027b45b1cec726276be6db23d1bb40641bfbe2cf29"
+            },
+            "tokenizer.json": {
+              "bytes": 1355863,
+              "sha256": "847bbeab6174d66a88898f729d52fa8d355fafe1bea101cf960dd404581df70e"
+            },
+            "tokenizer_config.json": {
+              "bytes": 34,
+              "sha256": "79ffcf43af8ebda99d165f61d243180da2e2639952e41e71e11611c18770489c"
+            },
+            "vocab.json": {
+              "bytes": 1099884,
+              "sha256": "394fdc63c71aabe0a9b97117f5d62fb5fcc4d59b2b3ea929a3929e6a53217b3c"
+            },
+            "processing_florence2.py": {
+              "bytes": 46372,
+              "sha256": "4bd7158536cbf1c7891fc8efd94437d79fd09f07f539c7398fab8a885d7d8bca"
+            },
+            "configuration_florence2.py": {
+              "bytes": 15125,
+              "sha256": "653bafddc9651eaff1583a16db4a2bb27d33ec7d541dfab7201aaa4ecaa1cfbf"
+            },
+            "modeling_florence2.py": {
+              "bytes": 127415,
+              "sha256": "5bb7aa72c6ba62e96e1bbae6bc1aaf7b4e8e28cdfc62e670de3d5b67eeab1fdf"
+            }
+          }
+        },
+        "device": "mps",
+        "dtype": "torch.float16",
+        "load_seconds": 0.9778858750069048,
+        "attention": "eager",
+        "gpu_allocation_budget_gib": 1.9,
+        "preprocessing": {
+          "image_size": {
+            "height": 768,
+            "width": 768
+          },
+          "image_splitting": false
+        }
+      },
+      "vision_policy": "cross-model-category-v1; two-view neutral Qwen crop identity AND independent Florence identity; geometry-guided acquisition"
+    },
+    "memory": {
+      "metric": "sum of macOS process physical footprints",
+      "interval_s": 0.2,
+      "budget_gib": 5.0,
+      "sampled_peak_gib": 4.264047048985958,
+      "sampled_peak_rss_gib": 3.4603729248046875,
+      "sampled_peak_guard_gib": 4.264047048985958,
+      "guard_metric": "Larger of summed RSS and summed physical footprints; RSS can double-count shared pages.",
+      "budget_exceeded": false,
+      "measurement_error": null,
+      "host_memory_gib": 16.0,
+      "actual_8gb_hardware": false,
+      "scope": "Evaluator and its child processes (optional visual reviewer or Laya, camera browser including GPU/helpers, Node, simulator/PX4/MAVSDK) plus the app/Qwen process tree. Excludes unrelated applications and user browser tabs. Sampling is not an OS-enforced RAM limit.",
+      "host_swap_start_bytes": 5594480640,
+      "host_swap_end_bytes": 5867700224
+    },
+    "summary": {
+      "planned": 24,
+      "completed": 24,
+      "passed": 24,
+      "rate": 1.0,
+      "false_confirmations": 0,
+      "missed_targets": 0,
+      "memory_passed": true,
+      "accepted": true
+    }
+  },
+  "metrics": {
+    "localization_error_m": {
+      "min": 0.006239899123232448,
+      "median": 0.07271723098567823,
+      "max": 0.6618410534508649
+    },
+    "mission_duration_s": {
+      "min": 75.31273599999258,
+      "median": 173.2624881869997,
+      "max": 286.99616516701644
+    },
+    "visual_observations": 207,
+    "inspection_latency_s": {
+      "median": 4.296967250003945,
+      "max": 5.20982170899515
+    },
+    "raw_target_proposals_on_absent_controls": 94,
+    "video_frames_decoded": 44415,
+    "max_tilt_degrees": 4.5185980493637885,
+    "max_landing_speed_m_s": 0.19988471269607544,
+    "minimum_3d_clearance_m": 0.5674761741519249
+  },
+  "scene_hashes": {
+    "hard-west-dim-present": "835e97d55da415c4690f47a974adfaf3597cfb9ce9f32486b7c32884b2b384c8",
+    "hard-west-dim-absent": "6ac4ed31be2e7629b442e5a5d088b5dc8586004e3d2dbfba1b6f642c7eceea77",
+    "hard-east-glare-present": "a2c90e727cc65defc04254ee2b99a74a2fd67e06c81ca9bad986f83b2d3a4c42",
+    "hard-east-glare-absent": "75d780025fc0cd0b9c6a903450d549614a3e93bff474a2616445870019fd1bad",
+    "hard-west-occluded-present": "0104f67a467284b0a48624fb84b779be0ce50737e2f791410ed44a11a8c7feaa",
+    "hard-west-occluded-absent": "3f0386a54c2ab65dd03ca49379f0d315f2d30a063212859011b22448d5ad1c2f",
+    "hard-east-motion-present": "bd14be49567bc9c3956dc088c4b61e51658c7e1a9278e0d18588ceb21c5271d6",
+    "hard-east-motion-absent": "a62e25db59eb780a6a4393932a971e6619579a75d45a6b9491417f8105d42083"
+  },
+  "regression": {
+    "passed": 200,
+    "total": 200,
+    "log_sha256": "66b85236fad0e13ecf6fbd9357287908003cb705ed5ffef21d4609236349ff0a",
+    "command": ".local/laya-env/bin/python -m unittest discover -s tests -v"
+  },
+  "integration_checks": [
+    {
+      "check": "integrated-browser-independence.json",
+      "mission": "75354443120545fe8889cdc4fddc7567",
+      "state": "complete",
+      "landed": true,
+      "contacts": 0,
+      "error": null,
+      "initial_test_wait_expired": false
+    },
+    {
+      "check": "dashboard-return-check.json",
+      "mission": "025f3ddd1a9948a4b66839f3b7206703",
+      "state": "cancelled",
+      "landed": true,
+      "contacts": 0,
+      "error": "RuntimeError: Operator requested return",
+      "initial_test_wait_expired": false
+    },
+    {
+      "check": "dashboard-land-here-check.json",
+      "mission": "538813de93d840aa941fcd41771967c2",
+      "state": "cancelled",
+      "landed": true,
+      "contacts": 0,
+      "error": "RuntimeError: Operator requested land",
+      "initial_test_wait_expired": true
+    }
+  ],
+  "attempt_history": [
+    {
+      "attempt": "qualification-04",
+      "planned": 24,
+      "executed": 24,
+      "passed": 24,
+      "failed": 0,
+      "not_run": 0,
+      "false_confirmations": 0,
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "attempt": "qualification-03",
+      "planned": 24,
+      "executed": 16,
+      "passed": 15,
+      "failed": 1,
+      "not_run": 8,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": [
+        "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+      ]
+    },
+    {
+      "attempt": "qualification-02",
+      "planned": 24,
+      "executed": 8,
+      "passed": 7,
+      "failed": 1,
+      "not_run": 16,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": [
+        "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+      ]
+    },
+    {
+      "attempt": "qualification-01",
+      "planned": 24,
+      "executed": 8,
+      "passed": 7,
+      "failed": 1,
+      "not_run": 16,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": [
+        "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+      ]
+    },
+    {
+      "attempt": "full-suite-01",
+      "planned": 8,
+      "executed": 8,
+      "passed": 6,
+      "failed": 2,
+      "not_run": 0,
+      "false_confirmations": 2,
+      "accepted": false,
+      "errors": []
+    },
+    {
+      "attempt": "development-11",
+      "planned": 2,
+      "executed": 2,
+      "passed": 2,
+      "failed": 0,
+      "not_run": 0,
+      "false_confirmations": 0,
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "attempt": "development-10",
+      "planned": 3,
+      "executed": 2,
+      "passed": 0,
+      "failed": 2,
+      "not_run": 1,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": [
+        "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+      ]
+    },
+    {
+      "attempt": "development-09",
+      "planned": 2,
+      "executed": 2,
+      "passed": 1,
+      "failed": 1,
+      "not_run": 0,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": []
+    },
+    {
+      "attempt": "development-08",
+      "planned": 1,
+      "executed": 1,
+      "passed": 1,
+      "failed": 0,
+      "not_run": 0,
+      "false_confirmations": 0,
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "attempt": "development-07",
+      "planned": 2,
+      "executed": 1,
+      "passed": 0,
+      "failed": 1,
+      "not_run": 1,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": [
+        "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+      ]
+    },
+    {
+      "attempt": "development-06",
+      "planned": 2,
+      "executed": 2,
+      "passed": 1,
+      "failed": 1,
+      "not_run": 0,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": []
+    },
+    {
+      "attempt": "development-05",
+      "planned": 2,
+      "executed": 2,
+      "passed": 1,
+      "failed": 1,
+      "not_run": 0,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": []
+    },
+    {
+      "attempt": "development-04",
+      "planned": 2,
+      "executed": 2,
+      "passed": 2,
+      "failed": 0,
+      "not_run": 0,
+      "false_confirmations": 0,
+      "accepted": true,
+      "errors": []
+    },
+    {
+      "attempt": "development-03",
+      "planned": 2,
+      "executed": 2,
+      "passed": 1,
+      "failed": 1,
+      "not_run": 0,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": []
+    },
+    {
+      "attempt": "development-02",
+      "planned": 1,
+      "executed": 1,
+      "passed": 0,
+      "failed": 1,
+      "not_run": 0,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": []
+    },
+    {
+      "attempt": "development-01",
+      "planned": 1,
+      "executed": 0,
+      "passed": 0,
+      "failed": 0,
+      "not_run": 1,
+      "false_confirmations": 0,
+      "accepted": false,
+      "errors": [
+        "RuntimeError: {'error': 'Generate a fresh supported mission plan first'}"
+      ]
+    }
+  ],
+  "component_stress": {
+    "total": 6,
+    "flight_passed": 5,
+    "engineering_passed": 4,
+    "results": [
+      {
+        "scenario": "nominal",
+        "gates": {
+          "liftoff": true,
+          "hover": true,
+          "transit": true,
+          "landed": true,
+          "controlled_attitude": true,
+          "no_obstacle_contact": true,
+          "battery_valid": true,
+          "landing_speed": true,
+          "thrust_reserve": true
+        },
+        "flight_passed": true,
+        "engineering_passed": true
+      },
+      {
+        "scenario": "low-battery",
+        "gates": {
+          "liftoff": false,
+          "hover": false,
+          "transit": false,
+          "landed": true,
+          "controlled_attitude": true,
+          "no_obstacle_contact": true,
+          "battery_valid": true,
+          "landing_speed": true,
+          "thrust_reserve": false
+        },
+        "flight_passed": false,
+        "engineering_passed": false
+      },
+      {
+        "scenario": "gust",
+        "gates": {
+          "liftoff": true,
+          "hover": true,
+          "transit": true,
+          "landed": true,
+          "controlled_attitude": true,
+          "no_obstacle_contact": true,
+          "battery_valid": true,
+          "landing_speed": true,
+          "thrust_reserve": true
+        },
+        "flight_passed": true,
+        "engineering_passed": true
+      },
+      {
+        "scenario": "link-loss",
+        "gates": {
+          "liftoff": true,
+          "hover": true,
+          "transit": false,
+          "landed": true,
+          "controlled_attitude": true,
+          "no_obstacle_contact": true,
+          "battery_valid": true,
+          "landing_speed": true,
+          "thrust_reserve": true,
+          "command_expiry": true
+        },
+        "flight_passed": true,
+        "engineering_passed": true
+      },
+      {
+        "scenario": "weak-motor",
+        "gates": {
+          "liftoff": true,
+          "hover": true,
+          "transit": true,
+          "landed": true,
+          "controlled_attitude": true,
+          "no_obstacle_contact": true,
+          "battery_valid": true,
+          "landing_speed": true,
+          "thrust_reserve": true
+        },
+        "flight_passed": true,
+        "engineering_passed": true
+      },
+      {
+        "scenario": "pessimistic",
+        "gates": {
+          "liftoff": true,
+          "hover": true,
+          "transit": true,
+          "landed": true,
+          "controlled_attitude": true,
+          "no_obstacle_contact": true,
+          "battery_valid": true,
+          "landing_speed": true,
+          "thrust_reserve": false
+        },
+        "flight_passed": true,
+        "engineering_passed": false
+      }
+    ]
+  },
+  "runtime_versions": {
+    "llama_server_sha256": "3435b18ac905be1ef990c7096d49717780d81f5c04786885fb8ec5342a0de5a8",
+    "node": "v22.14.0",
+    "python": "Python 3.12.13",
+    "hardware_measured": false,
+    "actual_8gb_host": false
+  },
+  "limitations": [
+    "Eight known synthetic development cases repeated three times; not held-out real-world validation.",
+    "Known operator map and ideal external positioning.",
+    "Provisional propulsion, battery, mass and camera mounting parameters.",
+    "Benchmark camera 960x540; physical camera bench defaults to 640x480.",
+    "Measured on a 16 GiB Apple Silicon host; actual 8 GB hardware untested.",
+    "One active aircraft; physical flight and concurrent fleet operation disabled.",
+    "Aircraft controller firmware, carrier layout and real indoor positioning remain hardware work.",
+    "Operator interventions wait for supervisor checkpoints; they are not an independent hardware emergency channel."
+  ]
+}

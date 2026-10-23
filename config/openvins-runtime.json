@@ -1,0 +1,13 @@
+{
+  "upstream": "https://github.com/rpng/open_vins",
+  "revision": "69488123ed9362dd44b6f28e7f4680abbff1442b",
+  "license": "GPL-3.0-or-later; preserve upstream LICENSE",
+  "patch": "config/vendor-patches/openvins-macos.patch",
+  "purpose": "Experimental replacement for the failed floor-only visual estimator",
+  "status": "Build verified; camera/IMU integration under test, not a qualified runtime",
+  "configuration": {
+    "ros": false,
+    "aruco": false,
+    "cpp_standard": 17
+  }
+}

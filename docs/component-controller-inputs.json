@@ -1,0 +1,2407 @@
+{
+  "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638",
+  "assemblies": [
+    {
+      "configuration": {
+        "content": {
+          "components": {
+            "avionics": "reference-avionics@1",
+            "battery": "battery-240@1",
+            "driver": "reference-drivers@1",
+            "frame": "frame-reference@1",
+            "imu": "reference-imu@1",
+            "propulsion": "cf2-published-propulsion@1"
+          },
+          "id": "cf2-reference",
+          "name": "27 g published-propulsion reference",
+          "notes": "Reference experiment only: 27 g total matches CF2 datasheet; mass distribution, controller, battery dynamics and drag remain assumptions. No priced camera aircraft implied."
+        },
+        "revision": 1,
+        "sha256": "b3a15f2095c08edd6fba9d591476ec89ab52a78970b1a270c00f4c5b3096a80f"
+      },
+      "components": {
+        "avionics": {
+          "content": {
+            "evidence": {
+              "camera_fps": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_height": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "camera_latency_ms": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_width": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "control_hz": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "idle_current_a": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "link_timeout_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "reference-avionics",
+            "kind": "avionics",
+            "name": "Reference avionics mass surrogate",
+            "parameters": {
+              "camera_fps": 5,
+              "camera_height": 480,
+              "camera_latency_ms": 120,
+              "camera_width": 640,
+              "control_hz": 250,
+              "idle_current_a": 0.24,
+              "link_timeout_s": 0.5,
+              "mass_kg": 0.003
+            }
+          },
+          "revision": 1,
+          "sha256": "a41aa12b8d6229bcdb1283c1131a6db75addc405e092f3d50e0ab7b5f4e48ea8"
+        },
+        "battery": {
+          "content": {
+            "evidence": {
+              "capacity_mah": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "cutoff_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "empty_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "full_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "battery-240",
+            "kind": "battery",
+            "name": "1S 240 mAh provisional pack",
+            "parameters": {
+              "capacity_mah": 240,
+              "cutoff_v": 3.1,
+              "empty_v": 3.2,
+              "full_v": 4.2,
+              "mass_kg": 0.0073,
+              "resistance_ohm": 0.12
+            }
+          },
+          "revision": 1,
+          "sha256": "88f796fe6677941b7526e28352d76882b1c65083a55d3a16f6684bb6dfc972e9"
+        },
+        "driver": {
+          "content": {
+            "evidence": {
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "reference-drivers",
+            "kind": "driver",
+            "name": "Reference effective motor drivers",
+            "parameters": {
+              "mass_kg": 0.0005,
+              "resistance_ohm": 0
+            }
+          },
+          "revision": 1,
+          "sha256": "7f891ac369364dbf1d0c06650574a4afac2e1a00a308b9e4e4ccdf455e35da4a"
+        },
+        "frame": {
+          "content": {
+            "evidence": {
+              "body_height_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "drag_area_m2": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "guard_clearance_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "motor_diagonal_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "frame-reference",
+            "kind": "frame",
+            "name": "Published-mass reference frame surrogate",
+            "parameters": {
+              "body_height_m": 0.024,
+              "drag_area_m2": 0.002,
+              "guard_clearance_m": 0.0001,
+              "mass_kg": 0.008,
+              "motor_diagonal_m": 0.065
+            }
+          },
+          "revision": 1,
+          "sha256": "ff33ee004b96582e860cb0ff11107dac38b6faf8e788df8a13b4846b683ce71b"
+        },
+        "imu": {
+          "content": {
+            "evidence": {
+              "gyro_bias_rad_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "gyro_noise_rad_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "reference-imu",
+            "kind": "imu",
+            "name": "Reference IMU mass surrogate",
+            "parameters": {
+              "gyro_bias_rad_s": 0.001,
+              "gyro_noise_rad_s": 0.003,
+              "mass_kg": 0.001
+            }
+          },
+          "revision": 1,
+          "sha256": "001aefb99bc90207b0b8b20bfa526025f735b458ffb6e6590af1ac51a96ee9d2"
+        },
+        "propulsion": {
+          "content": {
+            "evidence": {
+              "curve": {
+                "note": "2015 four-motor table: thrust/4; (current-0.24 A)/4; effective voltage=PWM*V. Assumes motor symmetry and average-voltage equivalence. Clamp outside measured domain; no extrapolation. RPM column is published average.",
+                "source": "https://www.bitcraze.io/documentation/repository/crazyflie-firmware/master/functional-areas/pwm-to-thrust/",
+                "status": "derived"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "max_voltage_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "prop_diameter_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "time_down_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "time_up_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "torque_per_thrust_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "cf2-published-propulsion",
+            "kind": "propulsion",
+            "name": "Crazyflie 2.x published propulsion reference",
+            "parameters": {
+              "curve": [
+                [
+                  0.0,
+                  0.0,
+                  0.0,
+                  0
+                ],
+                [
+                  0.24875,
+                  0.003924,
+                  0.0325,
+                  4485
+                ],
+                [
+                  0.49375,
+                  0.011772,
+                  0.08,
+                  7570
+                ],
+                [
+                  0.735,
+                  0.01937475,
+                  0.1275,
+                  9374
+                ],
+                [
+                  0.97,
+                  0.02673225,
+                  0.175,
+                  10885
+                ],
+                [
+                  1.2,
+                  0.03408975,
+                  0.2275,
+                  12277
+                ],
+                [
+                  1.425,
+                  0.04242825,
+                  0.2825,
+                  13522
+                ],
+                [
+                  1.6262,
+                  0.0515025,
+                  0.3375,
+                  14691
+                ],
+                [
+                  1.855,
+                  0.059841,
+                  0.3975,
+                  15924
+                ],
+                [
+                  2.064375,
+                  0.0701415,
+                  0.4675,
+                  17174
+                ],
+                [
+                  2.28125,
+                  0.080442,
+                  0.5375,
+                  18179
+                ],
+                [
+                  2.48875,
+                  0.09147825,
+                  0.6175,
+                  19397
+                ],
+                [
+                  2.67,
+                  0.10226925,
+                  0.705,
+                  20539
+                ],
+                [
+                  2.8275,
+                  0.112815,
+                  0.805,
+                  21692
+                ],
+                [
+                  2.975,
+                  0.12728475,
+                  0.91,
+                  22598
+                ],
+                [
+                  3.09375,
+                  0.14199975,
+                  1.05,
+                  23882
+                ]
+              ],
+              "mass_kg": 0.0018,
+              "max_voltage_v": 4.2,
+              "prop_diameter_m": 0.045,
+              "time_down_s": 0.04,
+              "time_up_s": 0.025,
+              "torque_per_thrust_m": 0.006
+            }
+          },
+          "revision": 1,
+          "sha256": "4a22019b737cca43499bcb947f832dfecc358f852c1b8f49e5b3c11b6c1f154e"
+        }
+      },
+      "mass_kg": 0.027,
+      "physical_enabled": false,
+      "evidence_counts": {
+        "estimated": 30,
+        "specified": 0,
+        "derived": 1,
+        "measured": 0
+      },
+      "propulsion_evidence": "derived",
+      "sha256": "18824dd36961f220be4ae9a9fd49415ece8a2a3f0c4a62317fa8c02fb1d7a7ec"
+    },
+    {
+      "configuration": {
+        "content": {
+          "components": {
+            "avionics": "sense-single@1",
+            "battery": "battery-240-2p@1",
+            "driver": "ao3400a-drivers@1",
+            "frame": "frame-micro@1",
+            "imu": "mpu6050@1",
+            "propulsion": "motor-720-55-hypothesis@1"
+          },
+          "id": "micro-90-power-v2",
+          "name": "D137 Micro 90 / power v2 (1S2P)",
+          "notes": "Battery design revision; original frame/motors/camera/sensors retained. Parallel 240 mAh cells and harness are unmeasured hypotheses; added mass included. Reprice and bench-test before accepting the original $50 budget. No hardware qualification."
+        },
+        "revision": 1,
+        "sha256": "15aa737ebcd34c6d149cde0787a6f0463758a71c850ec4322489b25b9424bb77"
+      },
+      "components": {
+        "avionics": {
+          "content": {
+            "evidence": {
+              "camera_fps": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_height": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "camera_latency_ms": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_width": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "control_hz": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "idle_current_a": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "link_timeout_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "sense-single",
+            "kind": "avionics",
+            "name": "XIAO Sense + carrier + wiring",
+            "parameters": {
+              "camera_fps": 5,
+              "camera_height": 480,
+              "camera_latency_ms": 120,
+              "camera_width": 640,
+              "control_hz": 250,
+              "idle_current_a": 0.2,
+              "link_timeout_s": 0.5,
+              "mass_kg": 0.012
+            }
+          },
+          "revision": 1,
+          "sha256": "3e0c44fc1d15a98b80c9aae917ee0bcd3afcff426fafe75b784a141148d5a599"
+        },
+        "battery": {
+          "content": {
+            "evidence": {
+              "capacity_mah": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "cutoff_v": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "empty_v": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "full_v": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "battery-240-2p",
+            "kind": "battery",
+            "name": "1S2P 240 mAh cells + 1 g harness (unmeasured)",
+            "parameters": {
+              "capacity_mah": 480,
+              "cutoff_v": 3.1,
+              "empty_v": 3.2,
+              "full_v": 4.2,
+              "mass_kg": 0.0156,
+              "resistance_ohm": 0.06
+            }
+          },
+          "revision": 1,
+          "sha256": "3547dd00ed16ca43fdd4508a0d8cb84971e7813b8cb0d37faa84db8e58803386"
+        },
+        "driver": {
+          "content": {
+            "evidence": {
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "48 milliohm maximum at 2.5 V gate drive used as a conservative nominal-temperature value. PCB thermal and switching losses unmodelled.",
+                "source": "https://www.aosmd.com/products/mosfets/low-voltage-mosfets-12v-30v/ao3400a",
+                "status": "specified"
+              }
+            },
+            "id": "ao3400a-drivers",
+            "kind": "driver",
+            "name": "Four AO3400A drivers + suppression",
+            "parameters": {
+              "mass_kg": 0.002,
+              "resistance_ohm": 0.048
+            }
+          },
+          "revision": 1,
+          "sha256": "dadc58fc670cdd464a3d11da5dcfd4aec6cb5ed4f183847fabe3b4ceb4993a98"
+        },
+        "frame": {
+          "content": {
+            "evidence": {
+              "body_height_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "drag_area_m2": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "guard_clearance_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "motor_diagonal_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "frame-micro",
+            "kind": "frame",
+            "name": "Micro 90 guarded frame",
+            "parameters": {
+              "body_height_m": 0.024,
+              "drag_area_m2": 0.004,
+              "guard_clearance_m": 0.0015,
+              "mass_kg": 0.008,
+              "motor_diagonal_m": 0.09
+            }
+          },
+          "revision": 1,
+          "sha256": "8e1a2257274c67ec2b1951602a1852fe2e09d4e619a760241ab2a6921d4b182f"
+        },
+        "imu": {
+          "content": {
+            "evidence": {
+              "gyro_bias_rad_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "gyro_noise_rad_s": {
+                "note": "Effective sampled noise hypothesis; datasheet density requires bandwidth/filter configuration.",
+                "source": "https://files.seeedstudio.com/wiki/Xadow_IMU_6DOF/res/MPU6050.pdf",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "mpu6050",
+            "kind": "imu",
+            "name": "MPU6050 + breakout",
+            "parameters": {
+              "gyro_bias_rad_s": 0.001,
+              "gyro_noise_rad_s": 0.003,
+              "mass_kg": 0.002
+            }
+          },
+          "revision": 1,
+          "sha256": "2fc3323f17ef5113675760de4c686f53046598b2739f7498a27537fd25c4d6b5"
+        },
+        "propulsion": {
+          "content": {
+            "evidence": {
+              "curve": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "max_voltage_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "prop_diameter_m": {
+                "note": "Matched propeller diameter listed by supplier; this does not validate the assumed thrust curve.",
+                "source": "https://speedyfpv.com/collections/brushed-motors/brand-speedyfpv",
+                "status": "specified"
+              },
+              "time_down_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "time_up_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "torque_per_thrust_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "motor-720-55-hypothesis",
+            "kind": "propulsion",
+            "name": "720 + 55 mm (unmeasured thrust)",
+            "parameters": {
+              "curve": [
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  0.03,
+                  0.2,
+                  6000
+                ],
+                [
+                  2,
+                  0.081,
+                  0.6080000000000001,
+                  14000
+                ],
+                [
+                  3,
+                  0.17550000000000002,
+                  1.168,
+                  20000
+                ],
+                [
+                  3.7,
+                  0.27,
+                  1.6,
+                  26000
+                ]
+              ],
+              "mass_kg": 0.0034,
+              "max_voltage_v": 4.2,
+              "prop_diameter_m": 0.055,
+              "time_down_s": 0.055,
+              "time_up_s": 0.035,
+              "torque_per_thrust_m": 0.007
+            }
+          },
+          "revision": 1,
+          "sha256": "e74e2bde1849ca0499fa22f7e2002be8ab65dd671e42a1b816193bd8b0679caa"
+        }
+      },
+      "mass_kg": 0.0532,
+      "physical_enabled": false,
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "propulsion_evidence": "estimated",
+      "sha256": "21ab20a23d86af1b79c9deaf0ecc40b9d591046a9d23b7c4a8bfd838d6707959"
+    },
+    {
+      "configuration": {
+        "content": {
+          "components": {
+            "avionics": "sense-single@1",
+            "battery": "battery-240-2p@1",
+            "driver": "ao3400a-drivers@1",
+            "frame": "frame-scout@1",
+            "imu": "mpu6050@1",
+            "propulsion": "motor-8520-65-hypothesis@1"
+          },
+          "id": "scout-110-power-v2",
+          "name": "D137 Scout 110 / power v2 (1S2P)",
+          "notes": "Battery design revision; original frame/motors/camera/sensors retained. Parallel 240 mAh cells and harness are unmeasured hypotheses; added mass included. Reprice and bench-test before accepting the original $50 budget. No hardware qualification."
+        },
+        "revision": 1,
+        "sha256": "da6dc77b1b46a38e03134f89d98438e369b56a0a64ccb3cfdddfa8892e339bf3"
+      },
+      "components": {
+        "avionics": {
+          "content": {
+            "evidence": {
+              "camera_fps": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_height": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "camera_latency_ms": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_width": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "control_hz": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "idle_current_a": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "link_timeout_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "sense-single",
+            "kind": "avionics",
+            "name": "XIAO Sense + carrier + wiring",
+            "parameters": {
+              "camera_fps": 5,
+              "camera_height": 480,
+              "camera_latency_ms": 120,
+              "camera_width": 640,
+              "control_hz": 250,
+              "idle_current_a": 0.2,
+              "link_timeout_s": 0.5,
+              "mass_kg": 0.012
+            }
+          },
+          "revision": 1,
+          "sha256": "3e0c44fc1d15a98b80c9aae917ee0bcd3afcff426fafe75b784a141148d5a599"
+        },
+        "battery": {
+          "content": {
+            "evidence": {
+              "capacity_mah": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "cutoff_v": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "empty_v": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "full_v": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "Design hypothesis: 2 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "battery-240-2p",
+            "kind": "battery",
+            "name": "1S2P 240 mAh cells + 1 g harness (unmeasured)",
+            "parameters": {
+              "capacity_mah": 480,
+              "cutoff_v": 3.1,
+              "empty_v": 3.2,
+              "full_v": 4.2,
+              "mass_kg": 0.0156,
+              "resistance_ohm": 0.06
+            }
+          },
+          "revision": 1,
+          "sha256": "3547dd00ed16ca43fdd4508a0d8cb84971e7813b8cb0d37faa84db8e58803386"
+        },
+        "driver": {
+          "content": {
+            "evidence": {
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "48 milliohm maximum at 2.5 V gate drive used as a conservative nominal-temperature value. PCB thermal and switching losses unmodelled.",
+                "source": "https://www.aosmd.com/products/mosfets/low-voltage-mosfets-12v-30v/ao3400a",
+                "status": "specified"
+              }
+            },
+            "id": "ao3400a-drivers",
+            "kind": "driver",
+            "name": "Four AO3400A drivers + suppression",
+            "parameters": {
+              "mass_kg": 0.002,
+              "resistance_ohm": 0.048
+            }
+          },
+          "revision": 1,
+          "sha256": "dadc58fc670cdd464a3d11da5dcfd4aec6cb5ed4f183847fabe3b4ceb4993a98"
+        },
+        "frame": {
+          "content": {
+            "evidence": {
+              "body_height_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "drag_area_m2": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "guard_clearance_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "motor_diagonal_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "frame-scout",
+            "kind": "frame",
+            "name": "Scout 110 guarded frame",
+            "parameters": {
+              "body_height_m": 0.024,
+              "drag_area_m2": 0.006,
+              "guard_clearance_m": 0.0015,
+              "mass_kg": 0.012,
+              "motor_diagonal_m": 0.11
+            }
+          },
+          "revision": 1,
+          "sha256": "4fb6586ab18d44e3b43177c3807cca032b579da878442f7a253fa829492c6e59"
+        },
+        "imu": {
+          "content": {
+            "evidence": {
+              "gyro_bias_rad_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "gyro_noise_rad_s": {
+                "note": "Effective sampled noise hypothesis; datasheet density requires bandwidth/filter configuration.",
+                "source": "https://files.seeedstudio.com/wiki/Xadow_IMU_6DOF/res/MPU6050.pdf",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "mpu6050",
+            "kind": "imu",
+            "name": "MPU6050 + breakout",
+            "parameters": {
+              "gyro_bias_rad_s": 0.001,
+              "gyro_noise_rad_s": 0.003,
+              "mass_kg": 0.002
+            }
+          },
+          "revision": 1,
+          "sha256": "2fc3323f17ef5113675760de4c686f53046598b2739f7498a27537fd25c4d6b5"
+        },
+        "propulsion": {
+          "content": {
+            "evidence": {
+              "curve": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "max_voltage_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "prop_diameter_m": {
+                "note": "Matched propeller diameter listed by supplier; this does not validate the assumed thrust curve.",
+                "source": "https://speedyfpv.com/collections/brushed-motors/brand-speedyfpv",
+                "status": "specified"
+              },
+              "time_down_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "time_up_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "torque_per_thrust_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "motor-8520-65-hypothesis",
+            "kind": "propulsion",
+            "name": "8520 + 65 mm (unmeasured thrust)",
+            "parameters": {
+              "curve": [
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  0.03,
+                  0.2,
+                  6000
+                ],
+                [
+                  2,
+                  0.126,
+                  0.8739999999999999,
+                  14000
+                ],
+                [
+                  3,
+                  0.273,
+                  1.6789999999999998,
+                  20000
+                ],
+                [
+                  3.7,
+                  0.42,
+                  2.3,
+                  24000
+                ]
+              ],
+              "mass_kg": 0.0054,
+              "max_voltage_v": 4.2,
+              "prop_diameter_m": 0.065,
+              "time_down_s": 0.055,
+              "time_up_s": 0.035,
+              "torque_per_thrust_m": 0.007
+            }
+          },
+          "revision": 1,
+          "sha256": "54f73bbf1b613c4b90df97cfacb47ad9709ce929dbf1410c48741be4acc948a8"
+        }
+      },
+      "mass_kg": 0.06520000000000001,
+      "physical_enabled": false,
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "propulsion_evidence": "estimated",
+      "sha256": "5ac8f8bbd30632b8ce8ce83163663a87287a86a908be29114e3aff1b7a31b774"
+    },
+    {
+      "configuration": {
+        "content": {
+          "components": {
+            "avionics": "sense-single@1",
+            "battery": "battery-240-3p@1",
+            "driver": "ao3400a-drivers@1",
+            "frame": "frame-guard@1",
+            "imu": "mpu6050@1",
+            "propulsion": "motor-8520-65-hypothesis@1"
+          },
+          "id": "guard-110-power-v2",
+          "name": "D137 Guard 110 / power v2 (1S3P)",
+          "notes": "Battery design revision; original frame/motors/camera/sensors retained. Parallel 240 mAh cells and harness are unmeasured hypotheses; added mass included. Reprice and bench-test before accepting the original $50 budget. No hardware qualification."
+        },
+        "revision": 1,
+        "sha256": "31a965e0a6831d16d649a4965ce387098e58d7bfebcde6e04d64837b968300d3"
+      },
+      "components": {
+        "avionics": {
+          "content": {
+            "evidence": {
+              "camera_fps": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_height": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "camera_latency_ms": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_width": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "control_hz": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "idle_current_a": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "link_timeout_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "sense-single",
+            "kind": "avionics",
+            "name": "XIAO Sense + carrier + wiring",
+            "parameters": {
+              "camera_fps": 5,
+              "camera_height": 480,
+              "camera_latency_ms": 120,
+              "camera_width": 640,
+              "control_hz": 250,
+              "idle_current_a": 0.2,
+              "link_timeout_s": 0.5,
+              "mass_kg": 0.012
+            }
+          },
+          "revision": 1,
+          "sha256": "3e0c44fc1d15a98b80c9aae917ee0bcd3afcff426fafe75b784a141148d5a599"
+        },
+        "battery": {
+          "content": {
+            "evidence": {
+              "capacity_mah": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "cutoff_v": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "empty_v": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "full_v": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "battery-240-3p",
+            "kind": "battery",
+            "name": "1S3P 240 mAh cells + 1 g harness (unmeasured)",
+            "parameters": {
+              "capacity_mah": 720,
+              "cutoff_v": 3.1,
+              "empty_v": 3.2,
+              "full_v": 4.2,
+              "mass_kg": 0.0229,
+              "resistance_ohm": 0.04
+            }
+          },
+          "revision": 1,
+          "sha256": "2f5b4b92bc7feee0d14f2bc27f72f9c69a0c897ddcdd0704e3617c81a7e71214"
+        },
+        "driver": {
+          "content": {
+            "evidence": {
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "48 milliohm maximum at 2.5 V gate drive used as a conservative nominal-temperature value. PCB thermal and switching losses unmodelled.",
+                "source": "https://www.aosmd.com/products/mosfets/low-voltage-mosfets-12v-30v/ao3400a",
+                "status": "specified"
+              }
+            },
+            "id": "ao3400a-drivers",
+            "kind": "driver",
+            "name": "Four AO3400A drivers + suppression",
+            "parameters": {
+              "mass_kg": 0.002,
+              "resistance_ohm": 0.048
+            }
+          },
+          "revision": 1,
+          "sha256": "dadc58fc670cdd464a3d11da5dcfd4aec6cb5ed4f183847fabe3b4ceb4993a98"
+        },
+        "frame": {
+          "content": {
+            "evidence": {
+              "body_height_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "drag_area_m2": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "guard_clearance_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "motor_diagonal_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "frame-guard",
+            "kind": "frame",
+            "name": "Guard 110 upper-hoop frame",
+            "parameters": {
+              "body_height_m": 0.024,
+              "drag_area_m2": 0.008,
+              "guard_clearance_m": 0.0022,
+              "mass_kg": 0.02,
+              "motor_diagonal_m": 0.11
+            }
+          },
+          "revision": 1,
+          "sha256": "e2b19bf4b92620092cda0f0f239162c7e848c79892cbe48e1723fcb07e006b8d"
+        },
+        "imu": {
+          "content": {
+            "evidence": {
+              "gyro_bias_rad_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "gyro_noise_rad_s": {
+                "note": "Effective sampled noise hypothesis; datasheet density requires bandwidth/filter configuration.",
+                "source": "https://files.seeedstudio.com/wiki/Xadow_IMU_6DOF/res/MPU6050.pdf",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "mpu6050",
+            "kind": "imu",
+            "name": "MPU6050 + breakout",
+            "parameters": {
+              "gyro_bias_rad_s": 0.001,
+              "gyro_noise_rad_s": 0.003,
+              "mass_kg": 0.002
+            }
+          },
+          "revision": 1,
+          "sha256": "2fc3323f17ef5113675760de4c686f53046598b2739f7498a27537fd25c4d6b5"
+        },
+        "propulsion": {
+          "content": {
+            "evidence": {
+              "curve": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "max_voltage_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "prop_diameter_m": {
+                "note": "Matched propeller diameter listed by supplier; this does not validate the assumed thrust curve.",
+                "source": "https://speedyfpv.com/collections/brushed-motors/brand-speedyfpv",
+                "status": "specified"
+              },
+              "time_down_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "time_up_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "torque_per_thrust_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "motor-8520-65-hypothesis",
+            "kind": "propulsion",
+            "name": "8520 + 65 mm (unmeasured thrust)",
+            "parameters": {
+              "curve": [
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  0.03,
+                  0.2,
+                  6000
+                ],
+                [
+                  2,
+                  0.126,
+                  0.8739999999999999,
+                  14000
+                ],
+                [
+                  3,
+                  0.273,
+                  1.6789999999999998,
+                  20000
+                ],
+                [
+                  3.7,
+                  0.42,
+                  2.3,
+                  24000
+                ]
+              ],
+              "mass_kg": 0.0054,
+              "max_voltage_v": 4.2,
+              "prop_diameter_m": 0.065,
+              "time_down_s": 0.055,
+              "time_up_s": 0.035,
+              "torque_per_thrust_m": 0.007
+            }
+          },
+          "revision": 1,
+          "sha256": "54f73bbf1b613c4b90df97cfacb47ad9709ce929dbf1410c48741be4acc948a8"
+        }
+      },
+      "mass_kg": 0.0805,
+      "physical_enabled": false,
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "propulsion_evidence": "estimated",
+      "sha256": "6ee9a0af9d969b0ab8988d2c60dc8a6424daeaf4dc4b3c298cc99aed9e7f6330"
+    },
+    {
+      "configuration": {
+        "content": {
+          "components": {
+            "avionics": "sense-single@1",
+            "battery": "battery-240-3p@1",
+            "driver": "ao3400a-drivers@1",
+            "frame": "frame-scout@1",
+            "imu": "mpu6050@1",
+            "propulsion": "motor-8520-65-hypothesis@1",
+            "range": "vl53l0x@1"
+          },
+          "id": "height-110-power-v2",
+          "name": "D137 Height 110 / power v2 (1S3P)",
+          "notes": "Battery design revision; original frame/motors/camera/sensors retained. Parallel 240 mAh cells and harness are unmeasured hypotheses; added mass included. Reprice and bench-test before accepting the original $50 budget. No hardware qualification."
+        },
+        "revision": 2,
+        "sha256": "c532e9793a3b06e7f3d0af971fb5cfad531158ee3bb45f936a038b93094fd98e"
+      },
+      "components": {
+        "avionics": {
+          "content": {
+            "evidence": {
+              "camera_fps": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_height": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "camera_latency_ms": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_width": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "control_hz": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "idle_current_a": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "link_timeout_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "sense-single",
+            "kind": "avionics",
+            "name": "XIAO Sense + carrier + wiring",
+            "parameters": {
+              "camera_fps": 5,
+              "camera_height": 480,
+              "camera_latency_ms": 120,
+              "camera_width": 640,
+              "control_hz": 250,
+              "idle_current_a": 0.2,
+              "link_timeout_s": 0.5,
+              "mass_kg": 0.012
+            }
+          },
+          "revision": 1,
+          "sha256": "3e0c44fc1d15a98b80c9aae917ee0bcd3afcff426fafe75b784a141148d5a599"
+        },
+        "battery": {
+          "content": {
+            "evidence": {
+              "capacity_mah": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "cutoff_v": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "empty_v": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "full_v": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "battery-240-3p",
+            "kind": "battery",
+            "name": "1S3P 240 mAh cells + 1 g harness (unmeasured)",
+            "parameters": {
+              "capacity_mah": 720,
+              "cutoff_v": 3.1,
+              "empty_v": 3.2,
+              "full_v": 4.2,
+              "mass_kg": 0.0229,
+              "resistance_ohm": 0.04
+            }
+          },
+          "revision": 1,
+          "sha256": "2f5b4b92bc7feee0d14f2bc27f72f9c69a0c897ddcdd0704e3617c81a7e71214"
+        },
+        "driver": {
+          "content": {
+            "evidence": {
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "48 milliohm maximum at 2.5 V gate drive used as a conservative nominal-temperature value. PCB thermal and switching losses unmodelled.",
+                "source": "https://www.aosmd.com/products/mosfets/low-voltage-mosfets-12v-30v/ao3400a",
+                "status": "specified"
+              }
+            },
+            "id": "ao3400a-drivers",
+            "kind": "driver",
+            "name": "Four AO3400A drivers + suppression",
+            "parameters": {
+              "mass_kg": 0.002,
+              "resistance_ohm": 0.048
+            }
+          },
+          "revision": 1,
+          "sha256": "dadc58fc670cdd464a3d11da5dcfd4aec6cb5ed4f183847fabe3b4ceb4993a98"
+        },
+        "frame": {
+          "content": {
+            "evidence": {
+              "body_height_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "drag_area_m2": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "guard_clearance_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "motor_diagonal_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "frame-scout",
+            "kind": "frame",
+            "name": "Scout 110 guarded frame",
+            "parameters": {
+              "body_height_m": 0.024,
+              "drag_area_m2": 0.006,
+              "guard_clearance_m": 0.0015,
+              "mass_kg": 0.012,
+              "motor_diagonal_m": 0.11
+            }
+          },
+          "revision": 1,
+          "sha256": "4fb6586ab18d44e3b43177c3807cca032b579da878442f7a253fa829492c6e59"
+        },
+        "imu": {
+          "content": {
+            "evidence": {
+              "gyro_bias_rad_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "gyro_noise_rad_s": {
+                "note": "Effective sampled noise hypothesis; datasheet density requires bandwidth/filter configuration.",
+                "source": "https://files.seeedstudio.com/wiki/Xadow_IMU_6DOF/res/MPU6050.pdf",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "mpu6050",
+            "kind": "imu",
+            "name": "MPU6050 + breakout",
+            "parameters": {
+              "gyro_bias_rad_s": 0.001,
+              "gyro_noise_rad_s": 0.003,
+              "mass_kg": 0.002
+            }
+          },
+          "revision": 1,
+          "sha256": "2fc3323f17ef5113675760de4c686f53046598b2739f7498a27537fd25c4d6b5"
+        },
+        "propulsion": {
+          "content": {
+            "evidence": {
+              "curve": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "max_voltage_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "prop_diameter_m": {
+                "note": "Matched propeller diameter listed by supplier; this does not validate the assumed thrust curve.",
+                "source": "https://speedyfpv.com/collections/brushed-motors/brand-speedyfpv",
+                "status": "specified"
+              },
+              "time_down_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "time_up_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "torque_per_thrust_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "motor-8520-65-hypothesis",
+            "kind": "propulsion",
+            "name": "8520 + 65 mm (unmeasured thrust)",
+            "parameters": {
+              "curve": [
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  0.03,
+                  0.2,
+                  6000
+                ],
+                [
+                  2,
+                  0.126,
+                  0.8739999999999999,
+                  14000
+                ],
+                [
+                  3,
+                  0.273,
+                  1.6789999999999998,
+                  20000
+                ],
+                [
+                  3.7,
+                  0.42,
+                  2.3,
+                  24000
+                ]
+              ],
+              "mass_kg": 0.0054,
+              "max_voltage_v": 4.2,
+              "prop_diameter_m": 0.065,
+              "time_down_s": 0.055,
+              "time_up_s": 0.035,
+              "torque_per_thrust_m": 0.007
+            }
+          },
+          "revision": 1,
+          "sha256": "54f73bbf1b613c4b90df97cfacb47ad9709ce929dbf1410c48741be4acc948a8"
+        },
+        "range": {
+          "content": {
+            "evidence": {
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "max_range_m": {
+                "note": "Nominal default profile; lighting, reflectance and timing affect actual usable range.",
+                "source": "https://www.st.com/resource/en/datasheet/vl53l0x.pdf",
+                "status": "specified"
+              },
+              "noise_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "vl53l0x",
+            "kind": "range",
+            "name": "VL53L0X + mount",
+            "parameters": {
+              "mass_kg": 0.002,
+              "max_range_m": 1.2,
+              "noise_m": 0.03
+            }
+          },
+          "revision": 1,
+          "sha256": "48230cb1be363035d0c3b119f15b92de33167cd8257389d7c627fe9a2bd7e4ae"
+        }
+      },
+      "mass_kg": 0.0745,
+      "physical_enabled": false,
+      "evidence_counts": {
+        "estimated": 31,
+        "specified": 3,
+        "derived": 0,
+        "measured": 0
+      },
+      "propulsion_evidence": "estimated",
+      "sha256": "b9cbe7f795d45f3b5325c453fa65ab0a59ddc2b98139cf4999889075fd56a4d3"
+    },
+    {
+      "configuration": {
+        "content": {
+          "components": {
+            "avionics": "sense-dual@1",
+            "battery": "battery-240-3p@1",
+            "driver": "ao3400a-drivers@1",
+            "frame": "frame-scout@1",
+            "imu": "mpu6050@1",
+            "propulsion": "motor-8520-65-hypothesis@1"
+          },
+          "id": "split-110-power-v2",
+          "name": "D137 Split 110 / power v2 (1S3P)",
+          "notes": "Battery design revision; original frame/motors/camera/sensors retained. Parallel 240 mAh cells and harness are unmeasured hypotheses; added mass included. Reprice and bench-test before accepting the original $50 budget. No hardware qualification."
+        },
+        "revision": 1,
+        "sha256": "cf548750d189d9cfe4820f31c2d85c897b10638603ba99ad53875551bef67cbf"
+      },
+      "components": {
+        "avionics": {
+          "content": {
+            "evidence": {
+              "camera_fps": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_height": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "camera_latency_ms": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_width": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "control_hz": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "idle_current_a": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "link_timeout_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "sense-dual",
+            "kind": "avionics",
+            "name": "Sense + dedicated flight MCU + carrier",
+            "parameters": {
+              "camera_fps": 5,
+              "camera_height": 480,
+              "camera_latency_ms": 120,
+              "camera_width": 640,
+              "control_hz": 250,
+              "idle_current_a": 0.27,
+              "link_timeout_s": 0.5,
+              "mass_kg": 0.016
+            }
+          },
+          "revision": 1,
+          "sha256": "f9ce33630f0d34a3bcbb6f1eae8c98ecac2a641b980d960f096ac64a7a7e62d7"
+        },
+        "battery": {
+          "content": {
+            "evidence": {
+              "capacity_mah": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "cutoff_v": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "empty_v": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "full_v": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "Design hypothesis: 3 matched battery-240@1 cells in parallel. Mass=count*7.3 g+1 g harness; capacity=count*240 mAh; ideal cell resistance=0.12/count ohm. Parent cell data, interconnect resistance, current sharing and price are unmeasured; not a sourced commercial pack.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "battery-240-3p",
+            "kind": "battery",
+            "name": "1S3P 240 mAh cells + 1 g harness (unmeasured)",
+            "parameters": {
+              "capacity_mah": 720,
+              "cutoff_v": 3.1,
+              "empty_v": 3.2,
+              "full_v": 4.2,
+              "mass_kg": 0.0229,
+              "resistance_ohm": 0.04
+            }
+          },
+          "revision": 1,
+          "sha256": "2f5b4b92bc7feee0d14f2bc27f72f9c69a0c897ddcdd0704e3617c81a7e71214"
+        },
+        "driver": {
+          "content": {
+            "evidence": {
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "48 milliohm maximum at 2.5 V gate drive used as a conservative nominal-temperature value. PCB thermal and switching losses unmodelled.",
+                "source": "https://www.aosmd.com/products/mosfets/low-voltage-mosfets-12v-30v/ao3400a",
+                "status": "specified"
+              }
+            },
+            "id": "ao3400a-drivers",
+            "kind": "driver",
+            "name": "Four AO3400A drivers + suppression",
+            "parameters": {
+              "mass_kg": 0.002,
+              "resistance_ohm": 0.048
+            }
+          },
+          "revision": 1,
+          "sha256": "dadc58fc670cdd464a3d11da5dcfd4aec6cb5ed4f183847fabe3b4ceb4993a98"
+        },
+        "frame": {
+          "content": {
+            "evidence": {
+              "body_height_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "drag_area_m2": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "guard_clearance_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "motor_diagonal_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "frame-scout",
+            "kind": "frame",
+            "name": "Scout 110 guarded frame",
+            "parameters": {
+              "body_height_m": 0.024,
+              "drag_area_m2": 0.006,
+              "guard_clearance_m": 0.0015,
+              "mass_kg": 0.012,
+              "motor_diagonal_m": 0.11
+            }
+          },
+          "revision": 1,
+          "sha256": "4fb6586ab18d44e3b43177c3807cca032b579da878442f7a253fa829492c6e59"
+        },
+        "imu": {
+          "content": {
+            "evidence": {
+              "gyro_bias_rad_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "gyro_noise_rad_s": {
+                "note": "Effective sampled noise hypothesis; datasheet density requires bandwidth/filter configuration.",
+                "source": "https://files.seeedstudio.com/wiki/Xadow_IMU_6DOF/res/MPU6050.pdf",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "mpu6050",
+            "kind": "imu",
+            "name": "MPU6050 + breakout",
+            "parameters": {
+              "gyro_bias_rad_s": 0.001,
+              "gyro_noise_rad_s": 0.003,
+              "mass_kg": 0.002
+            }
+          },
+          "revision": 1,
+          "sha256": "2fc3323f17ef5113675760de4c686f53046598b2739f7498a27537fd25c4d6b5"
+        },
+        "propulsion": {
+          "content": {
+            "evidence": {
+              "curve": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "max_voltage_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "prop_diameter_m": {
+                "note": "Matched propeller diameter listed by supplier; this does not validate the assumed thrust curve.",
+                "source": "https://speedyfpv.com/collections/brushed-motors/brand-speedyfpv",
+                "status": "specified"
+              },
+              "time_down_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "time_up_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "torque_per_thrust_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "motor-8520-65-hypothesis",
+            "kind": "propulsion",
+            "name": "8520 + 65 mm (unmeasured thrust)",
+            "parameters": {
+              "curve": [
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  0.03,
+                  0.2,
+                  6000
+                ],
+                [
+                  2,
+                  0.126,
+                  0.8739999999999999,
+                  14000
+                ],
+                [
+                  3,
+                  0.273,
+                  1.6789999999999998,
+                  20000
+                ],
+                [
+                  3.7,
+                  0.42,
+                  2.3,
+                  24000
+                ]
+              ],
+              "mass_kg": 0.0054,
+              "max_voltage_v": 4.2,
+              "prop_diameter_m": 0.065,
+              "time_down_s": 0.055,
+              "time_up_s": 0.035,
+              "torque_per_thrust_m": 0.007
+            }
+          },
+          "revision": 1,
+          "sha256": "54f73bbf1b613c4b90df97cfacb47ad9709ce929dbf1410c48741be4acc948a8"
+        }
+      },
+      "mass_kg": 0.0765,
+      "physical_enabled": false,
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "propulsion_evidence": "estimated",
+      "sha256": "0c4f8ad7d702f18922404841c5c223ce821c86f485567a48c86f30551963500d"
+    },
+    {
+      "configuration": {
+        "content": {
+          "components": {
+            "avionics": "sense-single@1",
+            "battery": "pluto-600@1",
+            "driver": "ao3400a-drivers@1",
+            "frame": "frame-scout@1",
+            "imu": "mpu6050@1",
+            "propulsion": "motor-8520-65-hypothesis@1"
+          },
+          "id": "scout-published-pack",
+          "name": "Scout 110 / published Pluto battery",
+          "notes": "Exploratory indoor design. Motor thrust and most masses unmeasured. Budget not recalculated after swaps."
+        },
+        "revision": 1,
+        "sha256": "8401d57e58d7be34e9097f52c7d166100fc5618fbe1a67b7fbbb6d8a746d750a"
+      },
+      "components": {
+        "avionics": {
+          "content": {
+            "evidence": {
+              "camera_fps": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_height": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "camera_latency_ms": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "camera_width": {
+                "note": "Configured test resolution; not a measured camera pipeline.",
+                "source": "https://wiki.seeedstudio.com/xiao_esp32s3_getting_started/#resources",
+                "status": "estimated"
+              },
+              "control_hz": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "idle_current_a": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "link_timeout_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "sense-single",
+            "kind": "avionics",
+            "name": "XIAO Sense + carrier + wiring",
+            "parameters": {
+              "camera_fps": 5,
+              "camera_height": 480,
+              "camera_latency_ms": 120,
+              "camera_width": 640,
+              "control_hz": 250,
+              "idle_current_a": 0.2,
+              "link_timeout_s": 0.5,
+              "mass_kg": 0.012
+            }
+          },
+          "revision": 1,
+          "sha256": "3e0c44fc1d15a98b80c9aae917ee0bcd3afcff426fafe75b784a141148d5a599"
+        },
+        "battery": {
+          "content": {
+            "evidence": {
+              "capacity_mah": {
+                "note": "Manufacturer table. Resistance uses the published <0.070 ohm bound conservatively; ageing and wiring are not included.",
+                "source": "https://www.dronaaviation.com/hardware/parts",
+                "status": "specified"
+              },
+              "cutoff_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "empty_v": {
+                "note": "Manufacturer table. Resistance uses the published <0.070 ohm bound conservatively; ageing and wiring are not included.",
+                "source": "https://www.dronaaviation.com/hardware/parts",
+                "status": "specified"
+              },
+              "full_v": {
+                "note": "Manufacturer table. Resistance uses the published <0.070 ohm bound conservatively; ageing and wiring are not included.",
+                "source": "https://www.dronaaviation.com/hardware/parts",
+                "status": "specified"
+              },
+              "mass_kg": {
+                "note": "Manufacturer table. Resistance uses the published <0.070 ohm bound conservatively; ageing and wiring are not included.",
+                "source": "https://www.dronaaviation.com/hardware/parts",
+                "status": "specified"
+              },
+              "resistance_ohm": {
+                "note": "Manufacturer table. Resistance uses the published <0.070 ohm bound conservatively; ageing and wiring are not included.",
+                "source": "https://www.dronaaviation.com/hardware/parts",
+                "status": "specified"
+              }
+            },
+            "id": "pluto-600",
+            "kind": "battery",
+            "name": "Pluto 600 published pack specification",
+            "parameters": {
+              "capacity_mah": 600,
+              "cutoff_v": 3.1,
+              "empty_v": 3.2,
+              "full_v": 4.2,
+              "mass_kg": 0.016,
+              "resistance_ohm": 0.07
+            }
+          },
+          "revision": 1,
+          "sha256": "ad0b429b838eede9a6ceba53d5b32c6584deb46067c297d6f4cdd7aac4a93fd7"
+        },
+        "driver": {
+          "content": {
+            "evidence": {
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "resistance_ohm": {
+                "note": "48 milliohm maximum at 2.5 V gate drive used as a conservative nominal-temperature value. PCB thermal and switching losses unmodelled.",
+                "source": "https://www.aosmd.com/products/mosfets/low-voltage-mosfets-12v-30v/ao3400a",
+                "status": "specified"
+              }
+            },
+            "id": "ao3400a-drivers",
+            "kind": "driver",
+            "name": "Four AO3400A drivers + suppression",
+            "parameters": {
+              "mass_kg": 0.002,
+              "resistance_ohm": 0.048
+            }
+          },
+          "revision": 1,
+          "sha256": "dadc58fc670cdd464a3d11da5dcfd4aec6cb5ed4f183847fabe3b4ceb4993a98"
+        },
+        "frame": {
+          "content": {
+            "evidence": {
+              "body_height_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "drag_area_m2": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "guard_clearance_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "motor_diagonal_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "frame-scout",
+            "kind": "frame",
+            "name": "Scout 110 guarded frame",
+            "parameters": {
+              "body_height_m": 0.024,
+              "drag_area_m2": 0.006,
+              "guard_clearance_m": 0.0015,
+              "mass_kg": 0.012,
+              "motor_diagonal_m": 0.11
+            }
+          },
+          "revision": 1,
+          "sha256": "4fb6586ab18d44e3b43177c3807cca032b579da878442f7a253fa829492c6e59"
+        },
+        "imu": {
+          "content": {
+            "evidence": {
+              "gyro_bias_rad_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "gyro_noise_rad_s": {
+                "note": "Effective sampled noise hypothesis; datasheet density requires bandwidth/filter configuration.",
+                "source": "https://files.seeedstudio.com/wiki/Xadow_IMU_6DOF/res/MPU6050.pdf",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "mpu6050",
+            "kind": "imu",
+            "name": "MPU6050 + breakout",
+            "parameters": {
+              "gyro_bias_rad_s": 0.001,
+              "gyro_noise_rad_s": 0.003,
+              "mass_kg": 0.002
+            }
+          },
+          "revision": 1,
+          "sha256": "2fc3323f17ef5113675760de4c686f53046598b2739f7498a27537fd25c4d6b5"
+        },
+        "propulsion": {
+          "content": {
+            "evidence": {
+              "curve": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "mass_kg": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "max_voltage_v": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "prop_diameter_m": {
+                "note": "Matched propeller diameter listed by supplier; this does not validate the assumed thrust curve.",
+                "source": "https://speedyfpv.com/collections/brushed-motors/brand-speedyfpv",
+                "status": "specified"
+              },
+              "time_down_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "time_up_s": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              },
+              "torque_per_thrust_m": {
+                "note": "Engineering hypothesis; bench calibration required.",
+                "source": "",
+                "status": "estimated"
+              }
+            },
+            "id": "motor-8520-65-hypothesis",
+            "kind": "propulsion",
+            "name": "8520 + 65 mm (unmeasured thrust)",
+            "parameters": {
+              "curve": [
+                [
+                  0,
+                  0,
+                  0,
+                  0
+                ],
+                [
+                  1,
+                  0.03,
+                  0.2,
+                  6000
+                ],
+                [
+                  2,
+                  0.126,
+                  0.8739999999999999,
+                  14000
+                ],
+                [
+                  3,
+                  0.273,
+                  1.6789999999999998,
+                  20000
+                ],
+                [
+                  3.7,
+                  0.42,
+                  2.3,
+                  24000
+                ]
+              ],
+              "mass_kg": 0.0054,
+              "max_voltage_v": 4.2,
+              "prop_diameter_m": 0.065,
+              "time_down_s": 0.055,
+              "time_up_s": 0.035,
+              "torque_per_thrust_m": 0.007
+            }
+          },
+          "revision": 1,
+          "sha256": "54f73bbf1b613c4b90df97cfacb47ad9709ce929dbf1410c48741be4acc948a8"
+        }
+      },
+      "mass_kg": 0.0656,
+      "physical_enabled": false,
+      "evidence_counts": {
+        "estimated": 24,
+        "specified": 7,
+        "derived": 0,
+        "measured": 0
+      },
+      "propulsion_evidence": "estimated",
+      "sha256": "f2d77f9ac5a1cfa81c794a2cd8fd448184105a3cfe7dbf61f313df6d0038c566"
+    }
+  ],
+  "scenarios": [
+    "nominal",
+    "low-battery",
+    "gust",
+    "link-loss",
+    "weak-motor",
+    "pessimistic"
+  ],
+  "seeds": [
+    137,
+    21001,
+    22003,
+    23003,
+    24001,
+    25013,
+    26003,
+    27011,
+    28001,
+    29009,
+    30011
+  ],
+  "dt_s": 0.004
+}

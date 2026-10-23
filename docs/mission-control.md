@@ -1,6 +1,8 @@
 # Virtual mission control
 
-Open `/control` on the local recon service. `/` retains the single-aircraft lab.
+The new `/control` interface is documented in [mission-runtime.md](mission-runtime.md).
+This document describes the earlier kinematic dashboard at `/control-legacy`.
+`/` retains the single-aircraft lab.
 The dashboard is plain JavaScript and SVG for the operational map, with two
 Three.js onboard camera renderers. Both use the existing scene assets, synthetic
 camera effects, MediaRecorder and image/video evidence path.

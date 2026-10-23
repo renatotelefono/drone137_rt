@@ -1,5 +1,32 @@
 # Task ledger
 
+## Active preparation sequence — 23 October 2026
+
+The user requires the blind exploration test to work before preparation items
+1–8. Development-70 passed the complete requested test, including ground
+initialization, movement checks, 82.19% mapping coverage, return and landing.
+Preparation can now proceed. Broader reliability remains open: the earlier
+reserved suites passed 1/3 and 2/3. Qualification-03 finished with 2/3 passes:
+13191 failed coverage/boundary recall; 13192 and 13193 passed every gate.
+All three returned and landed with zero contacts. These synthetic tests do not
+qualify real hardware or an actual 8 GB computer. Read `docs/blind-exploration.md`.
+
+| Item | Status | Required deliverable |
+| --- | --- | --- |
+| 0. Blind exploration and persistent environments | in_progress | Full development flight passes after startup fix; fresh-layout qualification remains open |
+| 1. Drone protocol and emulator | verified | Host implementation: pinned HTTPS, exclusive control, bounded/idempotent commands, freshness checks, SQLite pairing and protocol-only emulator; 25 distinct automated tests pass. Mission Control connection/preview verified. Device firmware is item 2 |
+| 2. Onboard firmware | not_started | Compiled stabilization/mixer, camera, telemetry, arming and command-loss implementation; simulation/host tests; physical tuning remains separate |
+| 3. Position and image quality handling | in_progress | Visual-inertial estimator and mapping exist; integrate timestamp/uncertainty/freshness contracts across the real adapter |
+| 4. Simple mission interface | in_progress | Connect/preview now work with the protocol emulator; unify blind exploration, area/task/review, live map/findings and physical navigation integration |
+| 5. Secure API and MCP | not_started | Authentication, scoped permissions, revocation, control ownership, idempotency, audit, local-only default |
+| 6. Offline installation | not_started | Reproducible installation/startup, local assets, resource limits, diagnostic checks and clean-copy offline verification |
+| 7. End-to-end fault acceptance | not_started | Run the new integrated path through disconnects, stale sensors, inference stalls, conflicting control, restart and unauthorized requests |
+| 8. Build and commissioning files | in_progress | Bench BOM/frame/wiring proposals exist; finish schematic/carrier, printable outputs, flashing and first-connection instructions |
+
+Older task series below are historical milestones and do not replace these
+deliverables. No physical flight should be described as qualified by a software
+test result.
+
 Status vocabulary: `not_started`, `in_progress`, `blocked`, `verified`.
 Verified entries refer only to the host/profile/backend evidence named here.
 

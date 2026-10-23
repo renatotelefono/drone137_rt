@@ -1,0 +1,653 @@
+diff --git a/ov_core/CMakeLists.txt b/ov_core/CMakeLists.txt
+index ecc1cc8..8974cab 100644
+--- a/ov_core/CMakeLists.txt
++++ b/ov_core/CMakeLists.txt
+@@ -1,14 +1,11 @@
+-cmake_minimum_required(VERSION 3.3)
++cmake_minimum_required(VERSION 3.10)
+ project(ov_core)
+ 
+ # Include libraries (if we don't have opencv 4, then fallback to opencv 3)
+ # The OpenCV version needs to match the one used by cv_bridge otherwise you will get a segmentation fault!
+ find_package(Eigen3 REQUIRED)
+-find_package(OpenCV 3 QUIET)
+-if (NOT OpenCV_FOUND)
+-    find_package(OpenCV 4 REQUIRED)
+-endif ()
+-find_package(Boost REQUIRED COMPONENTS system filesystem thread date_time)
++find_package(OpenCV REQUIRED COMPONENTS core imgproc imgcodecs video calib3d features2d highgui)
++find_package(Boost REQUIRED COMPONENTS filesystem thread date_time)
+ message(STATUS "OPENCV: " ${OpenCV_VERSION} " | BOOST: " ${Boost_VERSION})
+ 
+ # By default we build with ROS, but you can disable this and just build as a library
+@@ -39,15 +36,15 @@ endif ()
+ 
+ # We need c++14 for ROS2, thus just require it for everybody
+ # NOTE: To future self, hope this isn't an issue...
+-set(CMAKE_CXX_STANDARD 14)
++set(CMAKE_CXX_STANDARD 17)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+ set(CMAKE_CXX_EXTENSIONS OFF)
+ 
+ # Enable compile optimizations
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fsee -fomit-frame-pointer -fno-signed-zeros -fno-math-errno -funroll-loops")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fomit-frame-pointer -fno-signed-zeros -fno-math-errno -funroll-loops")
+ 
+ # Enable debug flags (use if you want to debug in gdb)
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g3 -Wall -Wuninitialized -Wmaybe-uninitialized -fno-omit-frame-pointer")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wuninitialized -fno-omit-frame-pointer")
+ 
+ # Find our ROS version!
+ # NOTE: Default to using the ROS1 package if both are in our enviroment
+diff --git a/ov_core/cmake/ROS1.cmake b/ov_core/cmake/ROS1.cmake
+index 93d0164..475f83d 100644
+--- a/ov_core/cmake/ROS1.cmake
++++ b/ov_core/cmake/ROS1.cmake
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.3)
++cmake_minimum_required(VERSION 3.10)
+ 
+ # Find ROS build system
+ find_package(catkin QUIET COMPONENTS roscpp rosbag sensor_msgs cv_bridge)
+diff --git a/ov_core/src/cam/CamBase.h b/ov_core/src/cam/CamBase.h
+index da1cbcf..7cf332c 100644
+--- a/ov_core/src/cam/CamBase.h
++++ b/ov_core/src/cam/CamBase.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_CORE_CAM_BASE_H
+ #define OV_CORE_CAM_BASE_H
+ 
++#include <cassert>
+ #include <Eigen/Eigen>
+ #include <unordered_map>
+ 
+diff --git a/ov_core/src/feat/Feature.cpp b/ov_core/src/feat/Feature.cpp
+index 05532d1..7a27a47 100644
+--- a/ov_core/src/feat/Feature.cpp
++++ b/ov_core/src/feat/Feature.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "Feature.h"
+ 
+ using namespace ov_core;
+diff --git a/ov_core/src/plot/matplotlibcpp.h b/ov_core/src/plot/matplotlibcpp.h
+index dd8be4e..5a5d29b 100644
+--- a/ov_core/src/plot/matplotlibcpp.h
++++ b/ov_core/src/plot/matplotlibcpp.h
+@@ -1,5 +1,6 @@
+ #pragma once
+ 
++#include <cassert>
+ #include <algorithm>
+ #include <array>
+ #include <cstdint> // <cstdint> requires c++11 support
+diff --git a/ov_core/src/sim/BsplineSE3.cpp b/ov_core/src/sim/BsplineSE3.cpp
+index 48a73c5..ff894e6 100644
+--- a/ov_core/src/sim/BsplineSE3.cpp
++++ b/ov_core/src/sim/BsplineSE3.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "BsplineSE3.h"
+ 
+ using namespace ov_core;
+diff --git a/ov_core/src/test_profile.cpp b/ov_core/src/test_profile.cpp
+index 1dd4d91..67e272f 100644
+--- a/ov_core/src/test_profile.cpp
++++ b/ov_core/src/test_profile.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include <cmath>
+ #include <sstream>
+ #include <unistd.h>
+diff --git a/ov_core/src/track/Grider_FAST.h b/ov_core/src/track/Grider_FAST.h
+index 00680ca..27a10ef 100644
+--- a/ov_core/src/track/Grider_FAST.h
++++ b/ov_core/src/track/Grider_FAST.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_CORE_GRIDER_FAST_H
+ #define OV_CORE_GRIDER_FAST_H
+ 
++#include <cassert>
+ #include <Eigen/Eigen>
+ #include <functional>
+ #include <iostream>
+diff --git a/ov_core/src/track/Grider_GRID.h b/ov_core/src/track/Grider_GRID.h
+index 59cede9..9eef310 100644
+--- a/ov_core/src/track/Grider_GRID.h
++++ b/ov_core/src/track/Grider_GRID.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_CORE_GRIDER_GRID_H
+ #define OV_CORE_GRIDER_GRID_H
+ 
++#include <cassert>
+ #include <Eigen/Eigen>
+ #include <functional>
+ #include <iostream>
+diff --git a/ov_core/src/track/TrackAruco.cpp b/ov_core/src/track/TrackAruco.cpp
+index 953eaa3..51ac230 100644
+--- a/ov_core/src/track/TrackAruco.cpp
++++ b/ov_core/src/track/TrackAruco.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "TrackAruco.h"
+ 
+ #include "cam/CamBase.h"
+diff --git a/ov_core/src/track/TrackDescriptor.cpp b/ov_core/src/track/TrackDescriptor.cpp
+index 915873d..5178c17 100644
+--- a/ov_core/src/track/TrackDescriptor.cpp
++++ b/ov_core/src/track/TrackDescriptor.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "TrackDescriptor.h"
+ 
+ #include <opencv2/features2d.hpp>
+diff --git a/ov_core/src/track/TrackKLT.cpp b/ov_core/src/track/TrackKLT.cpp
+index d2fe388..a483eb8 100644
+--- a/ov_core/src/track/TrackKLT.cpp
++++ b/ov_core/src/track/TrackKLT.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "TrackKLT.h"
+ 
+ #include "Grider_FAST.h"
+diff --git a/ov_core/src/track/TrackSIM.cpp b/ov_core/src/track/TrackSIM.cpp
+index dc1e618..ab9eef3 100644
+--- a/ov_core/src/track/TrackSIM.cpp
++++ b/ov_core/src/track/TrackSIM.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "TrackSIM.h"
+ 
+ #include "cam/CamBase.h"
+diff --git a/ov_core/src/types/IMU.h b/ov_core/src/types/IMU.h
+index fd8b74d..17c811b 100644
+--- a/ov_core/src/types/IMU.h
++++ b/ov_core/src/types/IMU.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_TYPE_TYPE_IMU_H
+ #define OV_TYPE_TYPE_IMU_H
+ 
++#include <cassert>
+ #include "PoseJPL.h"
+ #include "utils/quat_ops.h"
+ 
+diff --git a/ov_core/src/types/JPLQuat.h b/ov_core/src/types/JPLQuat.h
+index 48a547b..fbd93ce 100644
+--- a/ov_core/src/types/JPLQuat.h
++++ b/ov_core/src/types/JPLQuat.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_TYPE_TYPE_JPLQUAT_H
+ #define OV_TYPE_TYPE_JPLQUAT_H
+ 
++#include <cassert>
+ #include "Type.h"
+ #include "utils/quat_ops.h"
+ 
+diff --git a/ov_core/src/types/Landmark.cpp b/ov_core/src/types/Landmark.cpp
+index 4d20e4e..6bc4d60 100644
+--- a/ov_core/src/types/Landmark.cpp
++++ b/ov_core/src/types/Landmark.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "Landmark.h"
+ 
+ using namespace ov_type;
+diff --git a/ov_core/src/types/Landmark.h b/ov_core/src/types/Landmark.h
+index e396543..853dbe9 100644
+--- a/ov_core/src/types/Landmark.h
++++ b/ov_core/src/types/Landmark.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_TYPE_TYPE_LANDMARK_H
+ #define OV_TYPE_TYPE_LANDMARK_H
+ 
++#include <cassert>
+ #include "LandmarkRepresentation.h"
+ #include "Vec.h"
+ #include "utils/colors.h"
+diff --git a/ov_core/src/types/PoseJPL.h b/ov_core/src/types/PoseJPL.h
+index ec11df5..09869cd 100644
+--- a/ov_core/src/types/PoseJPL.h
++++ b/ov_core/src/types/PoseJPL.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_TYPE_TYPE_POSEJPL_H
+ #define OV_TYPE_TYPE_POSEJPL_H
+ 
++#include <cassert>
+ #include "JPLQuat.h"
+ #include "Vec.h"
+ #include "utils/quat_ops.h"
+diff --git a/ov_core/src/types/Type.h b/ov_core/src/types/Type.h
+index 6135725..47996f5 100644
+--- a/ov_core/src/types/Type.h
++++ b/ov_core/src/types/Type.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_TYPE_TYPE_BASE_H
+ #define OV_TYPE_TYPE_BASE_H
+ 
++#include <cassert>
+ #include <Eigen/Eigen>
+ #include <memory>
+ 
+diff --git a/ov_core/src/types/Vec.h b/ov_core/src/types/Vec.h
+index 2725182..3decbac 100644
+--- a/ov_core/src/types/Vec.h
++++ b/ov_core/src/types/Vec.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_TYPE_TYPE_VEC_H
+ #define OV_TYPE_TYPE_VEC_H
+ 
++#include <cassert>
+ #include "Type.h"
+ 
+ namespace ov_type {
+diff --git a/ov_core/src/utils/print.cpp b/ov_core/src/utils/print.cpp
+index 36195e9..555061e 100644
+--- a/ov_core/src/utils/print.cpp
++++ b/ov_core/src/utils/print.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "print.h"
+ #include <cstdio>
+ #include <cstdlib>
+diff --git a/ov_eval/cmake/ROS1.cmake b/ov_eval/cmake/ROS1.cmake
+index 9d10e6f..958053f 100644
+--- a/ov_eval/cmake/ROS1.cmake
++++ b/ov_eval/cmake/ROS1.cmake
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.3)
++cmake_minimum_required(VERSION 3.10)
+ 
+ # Find ROS build system
+ find_package(catkin QUIET COMPONENTS roscpp rospy geometry_msgs nav_msgs sensor_msgs ov_core)
+diff --git a/ov_init/CMakeLists.txt b/ov_init/CMakeLists.txt
+index 0e7c58a..1061c80 100644
+--- a/ov_init/CMakeLists.txt
++++ b/ov_init/CMakeLists.txt
+@@ -1,15 +1,12 @@
+-cmake_minimum_required(VERSION 3.3)
++cmake_minimum_required(VERSION 3.10)
+ project(ov_init)
+ 
+ 
+ # Include libraries (if we don't have opencv 4, then fallback to opencv 3)
+ # The OpenCV version needs to match the one used by cv_bridge otherwise you will get a segmentation fault!
+ find_package(Eigen3 REQUIRED)
+-find_package(OpenCV 3 QUIET)
+-if (NOT OpenCV_FOUND)
+-    find_package(OpenCV 4 REQUIRED)
+-endif ()
+-find_package(Boost REQUIRED COMPONENTS system filesystem thread date_time)
++find_package(OpenCV REQUIRED COMPONENTS core imgproc imgcodecs video calib3d features2d highgui)
++find_package(Boost REQUIRED COMPONENTS filesystem thread date_time)
+ find_package(Ceres REQUIRED)
+ message(STATUS "OPENCV: " ${OpenCV_VERSION} " | BOOST: " ${Boost_VERSION} " | CERES: " ${Ceres_VERSION})
+ 
+@@ -32,15 +29,15 @@ endif ()
+ 
+ # We need c++14 for ROS2, thus just require it for everybody
+ # NOTE: To future self, hope this isn't an issue...
+-set(CMAKE_CXX_STANDARD 14)
++set(CMAKE_CXX_STANDARD 17)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+ set(CMAKE_CXX_EXTENSIONS OFF)
+ 
+ # Enable compile optimizations
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fsee -fomit-frame-pointer -fno-signed-zeros -fno-math-errno -funroll-loops")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fomit-frame-pointer -fno-signed-zeros -fno-math-errno -funroll-loops")
+ 
+ # Enable debug flags (use if you want to debug in gdb)
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g3 -Wall -Wuninitialized -Wmaybe-uninitialized")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wuninitialized")
+ 
+ # Find our ROS version!
+ # NOTE: Default to using the ROS1 package if both are in our enviroment
+diff --git a/ov_init/cmake/ROS1.cmake b/ov_init/cmake/ROS1.cmake
+index c83be64..a6e7f0c 100644
+--- a/ov_init/cmake/ROS1.cmake
++++ b/ov_init/cmake/ROS1.cmake
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.3)
++cmake_minimum_required(VERSION 3.10)
+ 
+ # Find ROS build system
+ find_package(catkin QUIET COMPONENTS roscpp ov_core)
+diff --git a/ov_init/src/ceres/Factor_GenericPrior.cpp b/ov_init/src/ceres/Factor_GenericPrior.cpp
+index 96fa034..28d5a2c 100644
+--- a/ov_init/src/ceres/Factor_GenericPrior.cpp
++++ b/ov_init/src/ceres/Factor_GenericPrior.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "Factor_GenericPrior.h"
+ 
+ #include "utils/quat_ops.h"
+diff --git a/ov_init/src/dynamic/DynamicInitializer.cpp b/ov_init/src/dynamic/DynamicInitializer.cpp
+index dc48a11..5edeba1 100644
+--- a/ov_init/src/dynamic/DynamicInitializer.cpp
++++ b/ov_init/src/dynamic/DynamicInitializer.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "DynamicInitializer.h"
+ 
+ #include "ceres/Factor_GenericPrior.h"
+diff --git a/ov_init/src/sim/SimulatorInit.cpp b/ov_init/src/sim/SimulatorInit.cpp
+index c705eb3..2c98285 100644
+--- a/ov_init/src/sim/SimulatorInit.cpp
++++ b/ov_init/src/sim/SimulatorInit.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "SimulatorInit.h"
+ 
+ #include "cam/CamBase.h"
+diff --git a/ov_init/src/static/StaticInitializer.cpp b/ov_init/src/static/StaticInitializer.cpp
+index be2308b..35d0011 100644
+--- a/ov_init/src/static/StaticInitializer.cpp
++++ b/ov_init/src/static/StaticInitializer.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "StaticInitializer.h"
+ 
+ #include "utils/helper.h"
+diff --git a/ov_init/src/test_dynamic_init.cpp b/ov_init/src/test_dynamic_init.cpp
+index 9b20ced..f758083 100644
+--- a/ov_init/src/test_dynamic_init.cpp
++++ b/ov_init/src/test_dynamic_init.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include <cmath>
+ #include <csignal>
+ #include <deque>
+diff --git a/ov_init/src/test_dynamic_mle.cpp b/ov_init/src/test_dynamic_mle.cpp
+index 4cdea09..ea5e92e 100644
+--- a/ov_init/src/test_dynamic_mle.cpp
++++ b/ov_init/src/test_dynamic_mle.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include <cmath>
+ #include <csignal>
+ #include <deque>
+diff --git a/ov_init/src/utils/helper.h b/ov_init/src/utils/helper.h
+index d2c3f03..ba5297b 100644
+--- a/ov_init/src/utils/helper.h
++++ b/ov_init/src/utils/helper.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_INIT_HELPER
+ #define OV_INIT_HELPER
+ 
++#include <cassert>
+ #include "cpi/CpiV1.h"
+ #include "types/IMU.h"
+ 
+diff --git a/ov_msckf/CMakeLists.txt b/ov_msckf/CMakeLists.txt
+index 5f8a2eb..d076d45 100644
+--- a/ov_msckf/CMakeLists.txt
++++ b/ov_msckf/CMakeLists.txt
+@@ -1,14 +1,11 @@
+-cmake_minimum_required(VERSION 3.3)
++cmake_minimum_required(VERSION 3.10)
+ project(ov_msckf)
+ 
+ # Include libraries (if we don't have opencv 4, then fallback to opencv 3)
+ # The OpenCV version needs to match the one used by cv_bridge otherwise you will get a segmentation fault!
+ find_package(Eigen3 REQUIRED)
+-find_package(OpenCV 3 QUIET)
+-if (NOT OpenCV_FOUND)
+-    find_package(OpenCV 4 REQUIRED)
+-endif ()
+-find_package(Boost REQUIRED COMPONENTS system filesystem thread date_time)
++find_package(OpenCV REQUIRED COMPONENTS core imgproc imgcodecs video calib3d features2d highgui)
++find_package(Boost REQUIRED COMPONENTS filesystem thread date_time)
+ find_package(Ceres REQUIRED)
+ message(STATUS "OPENCV: " ${OpenCV_VERSION} " | BOOST: " ${Boost_VERSION} " | CERES: " ${Ceres_VERSION})
+ 
+@@ -26,15 +23,15 @@ endif ()
+ 
+ # We need c++14 for ROS2, thus just require it for everybody
+ # NOTE: To future self, hope this isn't an issue...
+-set(CMAKE_CXX_STANDARD 14)
++set(CMAKE_CXX_STANDARD 17)
+ set(CMAKE_CXX_STANDARD_REQUIRED ON)
+ set(CMAKE_CXX_EXTENSIONS OFF)
+ 
+ # Enable compile optimizations
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fsee -fomit-frame-pointer -fno-signed-zeros -fno-math-errno -funroll-loops")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -O3 -fomit-frame-pointer -fno-signed-zeros -fno-math-errno -funroll-loops")
+ 
+ # Enable debug flags (use if you want to debug in gdb)
+-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g3 -Wall -Wuninitialized -fno-omit-frame-pointer")
++set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wuninitialized -fno-omit-frame-pointer")
+ 
+ # Find our ROS version!
+ # NOTE: Default to using the ROS1 package if both are in our enviroment
+diff --git a/ov_msckf/cmake/ROS1.cmake b/ov_msckf/cmake/ROS1.cmake
+index 2ea4292..99d0b58 100644
+--- a/ov_msckf/cmake/ROS1.cmake
++++ b/ov_msckf/cmake/ROS1.cmake
+@@ -1,4 +1,4 @@
+-cmake_minimum_required(VERSION 3.3)
++cmake_minimum_required(VERSION 3.10)
+ 
+ # Find ROS build system
+ find_package(catkin QUIET COMPONENTS roscpp rosbag tf std_msgs geometry_msgs sensor_msgs nav_msgs visualization_msgs image_transport cv_bridge ov_core ov_init)
+@@ -158,3 +158,9 @@ install(TARGETS test_sim_repeat
+         RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+ )
+ 
++
++if(DRONE137_BRIDGE_SOURCE)
++  find_package(nlohmann_json REQUIRED)
++  add_executable(drone137_openvins ${DRONE137_BRIDGE_SOURCE})
++  target_link_libraries(drone137_openvins ov_msckf_lib ${thirdparty_libraries} nlohmann_json::nlohmann_json)
++endif()
+diff --git a/ov_msckf/src/core/VioManager.cpp b/ov_msckf/src/core/VioManager.cpp
+index 6a0d7b9..ba82c4e 100644
+--- a/ov_msckf/src/core/VioManager.cpp
++++ b/ov_msckf/src/core/VioManager.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "VioManager.h"
+ 
+ #include "feat/Feature.h"
+diff --git a/ov_msckf/src/core/VioManagerHelper.cpp b/ov_msckf/src/core/VioManagerHelper.cpp
+index 48198bc..2548e9e 100644
+--- a/ov_msckf/src/core/VioManagerHelper.cpp
++++ b/ov_msckf/src/core/VioManagerHelper.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "VioManager.h"
+ 
+ #include "feat/Feature.h"
+diff --git a/ov_msckf/src/ros/ROS1Visualizer.cpp b/ov_msckf/src/ros/ROS1Visualizer.cpp
+index 6e1cf12..c6aac47 100644
+--- a/ov_msckf/src/ros/ROS1Visualizer.cpp
++++ b/ov_msckf/src/ros/ROS1Visualizer.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "ROS1Visualizer.h"
+ 
+ #include "core/VioManager.h"
+diff --git a/ov_msckf/src/ros/ROS2Visualizer.cpp b/ov_msckf/src/ros/ROS2Visualizer.cpp
+index e91cd74..535690e 100644
+--- a/ov_msckf/src/ros/ROS2Visualizer.cpp
++++ b/ov_msckf/src/ros/ROS2Visualizer.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "ROS2Visualizer.h"
+ 
+ #include "core/VioManager.h"
+diff --git a/ov_msckf/src/ros/ROSVisualizerHelper.cpp b/ov_msckf/src/ros/ROSVisualizerHelper.cpp
+index b18474b..494954d 100644
+--- a/ov_msckf/src/ros/ROSVisualizerHelper.cpp
++++ b/ov_msckf/src/ros/ROSVisualizerHelper.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "ROSVisualizerHelper.h"
+ 
+ #include "core/VioManager.h"
+diff --git a/ov_msckf/src/sim/Simulator.cpp b/ov_msckf/src/sim/Simulator.cpp
+index a37d5ed..201c9d9 100644
+--- a/ov_msckf/src/sim/Simulator.cpp
++++ b/ov_msckf/src/sim/Simulator.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "Simulator.h"
+ 
+ #include "cam/CamBase.h"
+diff --git a/ov_msckf/src/state/Propagator.cpp b/ov_msckf/src/state/Propagator.cpp
+index 47879ec..d737cbb 100644
+--- a/ov_msckf/src/state/Propagator.cpp
++++ b/ov_msckf/src/state/Propagator.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "Propagator.h"
+ 
+ #include "state/State.h"
+diff --git a/ov_msckf/src/state/State.h b/ov_msckf/src/state/State.h
+index f83dee5..5cb6204 100644
+--- a/ov_msckf/src/state/State.h
++++ b/ov_msckf/src/state/State.h
+@@ -22,6 +22,7 @@
+ #ifndef OV_MSCKF_STATE_H
+ #define OV_MSCKF_STATE_H
+ 
++#include <cassert>
+ #include <map>
+ #include <memory>
+ #include <mutex>
+diff --git a/ov_msckf/src/state/StateHelper.cpp b/ov_msckf/src/state/StateHelper.cpp
+index 0c89c56..7139445 100644
+--- a/ov_msckf/src/state/StateHelper.cpp
++++ b/ov_msckf/src/state/StateHelper.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "StateHelper.h"
+ 
+ #include "state/State.h"
+diff --git a/ov_msckf/src/test_sim_repeat.cpp b/ov_msckf/src/test_sim_repeat.cpp
+index aed1df0..8b23e63 100644
+--- a/ov_msckf/src/test_sim_repeat.cpp
++++ b/ov_msckf/src/test_sim_repeat.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include <cmath>
+ #include <csignal>
+ #include <deque>
+diff --git a/ov_msckf/src/update/UpdaterHelper.cpp b/ov_msckf/src/update/UpdaterHelper.cpp
+index b36c004..6aa92fd 100644
+--- a/ov_msckf/src/update/UpdaterHelper.cpp
++++ b/ov_msckf/src/update/UpdaterHelper.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "UpdaterHelper.h"
+ 
+ #include "state/State.h"
+diff --git a/ov_msckf/src/update/UpdaterMSCKF.cpp b/ov_msckf/src/update/UpdaterMSCKF.cpp
+index 9a00ade..8c50e08 100644
+--- a/ov_msckf/src/update/UpdaterMSCKF.cpp
++++ b/ov_msckf/src/update/UpdaterMSCKF.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "UpdaterMSCKF.h"
+ 
+ #include "UpdaterHelper.h"
+diff --git a/ov_msckf/src/update/UpdaterSLAM.cpp b/ov_msckf/src/update/UpdaterSLAM.cpp
+index a769d01..6c1950c 100644
+--- a/ov_msckf/src/update/UpdaterSLAM.cpp
++++ b/ov_msckf/src/update/UpdaterSLAM.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "UpdaterSLAM.h"
+ 
+ #include "UpdaterHelper.h"
+diff --git a/ov_msckf/src/update/UpdaterZeroVelocity.cpp b/ov_msckf/src/update/UpdaterZeroVelocity.cpp
+index 3c55846..a67ef59 100644
+--- a/ov_msckf/src/update/UpdaterZeroVelocity.cpp
++++ b/ov_msckf/src/update/UpdaterZeroVelocity.cpp
+@@ -19,6 +19,7 @@
+  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
+  */
+ 
++#include <cassert>
+ #include "UpdaterZeroVelocity.h"
+ 
+ #include "UpdaterHelper.h"

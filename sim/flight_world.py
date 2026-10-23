@@ -94,24 +94,34 @@ class _RouteGeometry:
     object. Keep the exact distance arithmetic and sampling of ``clear`` while
     skipping boxes that provably cannot violate the threshold.
     """
-    def __init__(self, scene):
+    def __init__(self, scene, altitude=None):
         self.width, self.depth = scene['width'], scene['depth']
+        self.altitude = altitude
         boxes = list(scene['obstacles'])+scene.get('fixtures', [])
         actor = scene['moving_actor']
         boxes.append(dict(x=actor['center'][0], y=actor['center'][1],
-                          sx=actor['size'][0]+2*actor['amplitude_m'], sy=actor['size'][1]))
-        self.boxes = tuple((b['x'], b['y'], b['sx']/2, b['sy']/2) for b in boxes)
+                          sx=actor['size'][0]+2*actor['amplitude_m'], sy=actor['size'][1], height=actor['size'][2]))
+        self.boxes = tuple((b['x'], b['y'], b['sx']/2, b['sy']/2,
+                           b.get('bottom',0), b.get('bottom',0)+b.get('height',3)) for b in boxes)
 
     def point_clear(self, point, margin):
         x, y = point[:2]
         if not min(x, y, self.width-x, self.depth-y) >= margin:
             return False
-        for bx, by, hx, hy in self.boxes:
+        if self.altitude is not None and 3-self.altitude < margin:
+            return False
+        for bx, by, hx, hy, bottom, top in self.boxes:
+            horizontal_margin = margin
+            if self.altitude is not None:
+                dz=max(bottom-self.altitude,self.altitude-top,0)
+                if dz >= margin:
+                    continue
+                horizontal_margin=math.sqrt(max(0,margin*margin-dz*dz))
             dx, dy = abs(x-bx)-hx, abs(y-by)-hy
-            if dx >= margin or dy >= margin:
+            if dx >= horizontal_margin or dy >= horizontal_margin:
                 continue
             distance = math.hypot(max(dx,0),max(dy,0)) if dx>0 or dy>0 else max(dx,dy)
-            if distance < margin:
+            if distance < horizontal_margin:
                 return False
         return True
 
@@ -152,9 +162,9 @@ def inspection_sightline_clear(scene, camera_position, candidate_position, endpo
     return True
 
 
-def route(scene, start, end, margin=.58):
+def route(scene, start, end, margin=.58, altitude=None):
     """A* on an operator-provided map, followed by swept-path simplification."""
-    geometry = _RouteGeometry(scene)
+    geometry = _RouteGeometry(scene, altitude=altitude)
     segment = lambda a,b: geometry.segment_clear(a,b,margin)
     if not geometry.point_clear(start,margin) or not geometry.point_clear(end,margin):
         raise ValueError('Waypoint lacks vehicle clearance')
@@ -162,26 +172,38 @@ def route(scene, start, end, margin=.58):
     step=.25
     cell=lambda p:(round(p[0]/step),round(p[1]/step))
     point=lambda c:[c[0]*step,c[1]*step]
-    first,last=cell(start),cell(end)
-    if not segment(start,point(first)) or not segment(point(last),end):
+    def connectors(endpoint):
+        cx,cy=cell(endpoint)
+        return [(cx+dx,cy+dy) for dx in range(-2,3) for dy in range(-2,3)
+                if segment(endpoint,point((cx+dx,cy+dy)))]
+    starts,ends=connectors(start),set(connectors(end))
+    if not starts or not ends:
         raise ValueError('Waypoint cannot connect to navigation grid')
     # Ordered endpoints preserve floating-point sampling direction. Bounded and
     # local to this plan: no stale geometry or cross-mission memory growth.
     @lru_cache(maxsize=4096)
     def edge_clear(a,b):
         return segment(point(a),point(b))
-    queue=[(0,first)]; costs={first:0}; parent={first:None}
+    # A valid measured position may round into an occupied cell. Connect both
+    # endpoints to every locally visible cell at the same clearance threshold.
+    costs={c:math.dist(start[:2],point(c))/step for c in starts}
+    parent={c:None for c in starts}
+    heuristic=lambda c:math.dist(point(c),end[:2])/step
+    queue=[(costs[c]+heuristic(c),c) for c in starts];heapq.heapify(queue)
+    last=None
     while queue:
         _,current=heapq.heappop(queue)
-        if current==last: break
+        if current in ends:
+            last=current
+            break
         for dx,dy in ((1,0),(-1,0),(0,1),(0,-1),(1,1),(1,-1),(-1,1),(-1,-1)):
             nxt=(current[0]+dx,current[1]+dy)
             if not edge_clear(current,nxt): continue
             cost=costs[current]+math.hypot(dx,dy)
             if cost<costs.get(nxt,math.inf):
                 parent[nxt]=current;costs[nxt]=cost
-                heapq.heappush(queue,(cost+math.dist(nxt,last),nxt))
-    if last not in parent: raise ValueError('No collision-free route in operator map')
+                heapq.heappush(queue,(cost+heuristic(nxt),nxt))
+    if last is None: raise ValueError('No collision-free route in operator map')
     points=[list(end[:2])];c=last
     while c is not None:
         points.append(point(c));c=parent[c]

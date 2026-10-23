@@ -8,6 +8,17 @@ from sim.hard_flight import cases
 
 
 class RouteEquivalence(unittest.TestCase):
+    def test_endpoint_can_connect_when_rounded_grid_cell_is_blocked(self):
+        world={'width':6,'depth':6,'obstacles':[dict(x=2.58,y=2,sx=.2,sy=2,height=3)],
+               'moving_actor':{'center':[5.8,5.8],'size':[.1,.1,1],'amplitude_m':0}}
+        start,end=[1.89,2.12],[4.5,2.12]
+        self.assertGreaterEqual(clear(world,start),.58)
+        self.assertFalse(segment_clear(world,start,[2,2]))
+        for a,b in ((start,end),(end,start)):
+            points=route(world,a,b)
+            self.assertEqual(points[-1],b)
+            self.assertTrue(all(segment_clear(world,p,q) for p,q in zip([a,*points],points)))
+
     def test_threshold_matches_original_distance_at_edges_and_random_points(self):
         rng=random.Random(719)
         for case in cases()[::2]:

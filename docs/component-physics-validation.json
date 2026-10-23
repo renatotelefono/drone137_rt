@@ -1,0 +1,1699 @@
+{
+  "engine": "rapier-0.21.0",
+  "trials": 42,
+  "physics_process_peak_rss_mib": 411.546875,
+  "real_hardware_tested": false,
+  "recognition_tested": false,
+  "full_8gb_stack_tested": false,
+  "results": [
+    {
+      "configuration": "cf2-reference",
+      "scenario": "nominal",
+      "mass_g": 27,
+      "propulsion_evidence": "derived",
+      "evidence_counts": {
+        "estimated": 30,
+        "specified": 0,
+        "derived": 1,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11643990780921223,
+      "transit_rmse_m": 0.0010996830382673359,
+      "max_height_m": 0.8440837264060974,
+      "max_tilt_deg": 8.38142250770388,
+      "landing_speed_m_s": 0.19671043753623962,
+      "min_voltage_v": 4.044389593986747,
+      "soc_remaining": 0.9766018090157724,
+      "static_reserve": {
+        "voltage_v": 3.6672000467777255,
+        "current_a": 4.44,
+        "thrust_weight": 2.144444444444445
+      },
+      "wall_seconds": 0.29381491699999995,
+      "assembly_sha256": "18824dd36961f220be4ae9a9fd49415ece8a2a3f0c4a62317fa8c02fb1d7a7ec",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "cf2-reference",
+      "scenario": "low-battery",
+      "mass_g": 27,
+      "propulsion_evidence": "derived",
+      "evidence_counts": {
+        "estimated": 30,
+        "specified": 0,
+        "derived": 1,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": true,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11645811791822491,
+      "transit_rmse_m": 0.00109996736331762,
+      "max_height_m": 0.8441139459609985,
+      "max_tilt_deg": 8.381551655497624,
+      "landing_speed_m_s": 0.1967090517282486,
+      "min_voltage_v": 3.160341991923951,
+      "soc_remaining": 0.12165017269829899,
+      "static_reserve": {
+        "voltage_v": 2.9074735328555112,
+        "current_a": 3.687721246097049,
+        "thrust_weight": 1.8221830116377944
+      },
+      "wall_seconds": 0.14742775,
+      "assembly_sha256": "18824dd36961f220be4ae9a9fd49415ece8a2a3f0c4a62317fa8c02fb1d7a7ec",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "cf2-reference",
+      "scenario": "gust",
+      "mass_g": 27,
+      "propulsion_evidence": "derived",
+      "evidence_counts": {
+        "estimated": 30,
+        "specified": 0,
+        "derived": 1,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11643990780921223,
+      "transit_rmse_m": 0.06347226500063814,
+      "max_height_m": 0.8440837264060974,
+      "max_tilt_deg": 8.357508162643208,
+      "landing_speed_m_s": 0.19671064615249634,
+      "min_voltage_v": 4.044388026721432,
+      "soc_remaining": 0.9766001932176251,
+      "static_reserve": {
+        "voltage_v": 3.6672000467777255,
+        "current_a": 4.44,
+        "thrust_weight": 2.144444444444445
+      },
+      "wall_seconds": 0.14357920799999999,
+      "assembly_sha256": "18824dd36961f220be4ae9a9fd49415ece8a2a3f0c4a62317fa8c02fb1d7a7ec",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "cf2-reference",
+      "scenario": "link-loss",
+      "mass_g": 27,
+      "propulsion_evidence": "derived",
+      "evidence_counts": {
+        "estimated": 30,
+        "specified": 0,
+        "derived": 1,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true,
+        "command_expiry": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11643990780921223,
+      "transit_rmse_m": 0,
+      "max_height_m": 0.8440837264060974,
+      "max_tilt_deg": 8.590408514281723,
+      "landing_speed_m_s": 0.19662617146968842,
+      "min_voltage_v": 4.048542578954413,
+      "soc_remaining": 0.9831048130253176,
+      "static_reserve": {
+        "voltage_v": 3.6672000467777255,
+        "current_a": 4.44,
+        "thrust_weight": 2.144444444444445
+      },
+      "wall_seconds": 0.203560875,
+      "assembly_sha256": "18824dd36961f220be4ae9a9fd49415ece8a2a3f0c4a62317fa8c02fb1d7a7ec",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "cf2-reference",
+      "scenario": "weak-motor",
+      "mass_g": 27,
+      "propulsion_evidence": "derived",
+      "evidence_counts": {
+        "estimated": 30,
+        "specified": 0,
+        "derived": 1,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": false,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": false,
+        "thrust_reserve": true
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11643990780921223,
+      "transit_rmse_m": 1.5133304553247682,
+      "max_height_m": 0.8440837264060974,
+      "max_tilt_deg": 179.98159332852507,
+      "landing_speed_m_s": 3.6096935272216797,
+      "min_voltage_v": 3.6911704389968523,
+      "soc_remaining": 0.9415868995356488,
+      "static_reserve": {
+        "voltage_v": 3.6672000467777255,
+        "current_a": 4.44,
+        "thrust_weight": 2.144444444444445
+      },
+      "wall_seconds": 0.18128012500000013,
+      "assembly_sha256": "18824dd36961f220be4ae9a9fd49415ece8a2a3f0c4a62317fa8c02fb1d7a7ec",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "cf2-reference",
+      "scenario": "pessimistic",
+      "mass_g": 27,
+      "propulsion_evidence": "derived",
+      "evidence_counts": {
+        "estimated": 30,
+        "specified": 0,
+        "derived": 1,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": false,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.14646027163404612,
+      "transit_rmse_m": 0.011350406300452802,
+      "max_height_m": 0.7003751397132874,
+      "max_tilt_deg": 6.558893526379128,
+      "landing_speed_m_s": 0.19423505663871765,
+      "min_voltage_v": 3.9330717290777253,
+      "soc_remaining": 0.961114159283093,
+      "static_reserve": {
+        "voltage_v": 3.6672000467777255,
+        "current_a": 4.44,
+        "thrust_weight": 1.501111111111111
+      },
+      "wall_seconds": 0.1741835000000001,
+      "assembly_sha256": "18824dd36961f220be4ae9a9fd49415ece8a2a3f0c4a62317fa8c02fb1d7a7ec",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "micro-90",
+      "scenario": "nominal",
+      "mass_g": 47.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": true,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11253391574137102,
+      "transit_rmse_m": 0.000913604977250222,
+      "max_height_m": 0.839121401309967,
+      "max_tilt_deg": 8.772764267707325,
+      "landing_speed_m_s": 0.1965029090642929,
+      "min_voltage_v": 3.8839067019036575,
+      "soc_remaining": 0.9683113399069284,
+      "static_reserve": {
+        "voltage_v": 3.490399271249772,
+        "current_a": 5.913340169936851,
+        "thrust_weight": 1.9911793877232247
+      },
+      "wall_seconds": 0.14450633300000004,
+      "assembly_sha256": "a9eed452a1f443bef0f82821163fee810d904003fdc53bf039514e84480ea077",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "micro-90",
+      "scenario": "low-battery",
+      "mass_g": 47.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": false,
+        "hover": false,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": false,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.6750477012055974,
+      "transit_rmse_m": 0.9100786390835234,
+      "max_height_m": 0.04491696134209633,
+      "max_tilt_deg": 0.9313309646996811,
+      "landing_speed_m_s": 0,
+      "min_voltage_v": 3.094956903159619,
+      "soc_remaining": 0.14681928457278012,
+      "static_reserve": {
+        "voltage_v": 2.8256690517067913,
+        "current_a": 4.369424544078385,
+        "thrust_weight": 1.3217313661527585
+      },
+      "wall_seconds": 0.11948800000000005,
+      "assembly_sha256": "a9eed452a1f443bef0f82821163fee810d904003fdc53bf039514e84480ea077",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "micro-90",
+      "scenario": "gust",
+      "mass_g": 47.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": true,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11253391574137102,
+      "transit_rmse_m": 0.0737564428751369,
+      "max_height_m": 0.839121401309967,
+      "max_tilt_deg": 8.747958372061284,
+      "landing_speed_m_s": 0.19650337100028992,
+      "min_voltage_v": 3.8839067019036575,
+      "soc_remaining": 0.9683085712642662,
+      "static_reserve": {
+        "voltage_v": 3.490399271249772,
+        "current_a": 5.913340169936851,
+        "thrust_weight": 1.9911793877232247
+      },
+      "wall_seconds": 0.12004054199999996,
+      "assembly_sha256": "a9eed452a1f443bef0f82821163fee810d904003fdc53bf039514e84480ea077",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "micro-90",
+      "scenario": "link-loss",
+      "mass_g": 47.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false,
+        "command_expiry": true
+      },
+      "flight_passed": true,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11253391574137102,
+      "transit_rmse_m": 0,
+      "max_height_m": 0.839121401309967,
+      "max_tilt_deg": 9.028999021972865,
+      "landing_speed_m_s": 0.19637876749038696,
+      "min_voltage_v": 3.8839067019036575,
+      "soc_remaining": 0.9787084705190062,
+      "static_reserve": {
+        "voltage_v": 3.490399271249772,
+        "current_a": 5.913340169936851,
+        "thrust_weight": 1.9911793877232247
+      },
+      "wall_seconds": 0.13103883300000008,
+      "assembly_sha256": "a9eed452a1f443bef0f82821163fee810d904003fdc53bf039514e84480ea077",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "micro-90",
+      "scenario": "weak-motor",
+      "mass_g": 47.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": false,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": false,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11253391574137102,
+      "transit_rmse_m": 1.1877697806465624,
+      "max_height_m": 0.839121401309967,
+      "max_tilt_deg": 179.9753595420032,
+      "landing_speed_m_s": 3.8360776901245117,
+      "min_voltage_v": 3.4451352841864455,
+      "soc_remaining": 0.9348160535113804,
+      "static_reserve": {
+        "voltage_v": 3.490399271249772,
+        "current_a": 5.913340169936851,
+        "thrust_weight": 1.9911793877232247
+      },
+      "wall_seconds": 0.14919787499999984,
+      "assembly_sha256": "a9eed452a1f443bef0f82821163fee810d904003fdc53bf039514e84480ea077",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "micro-90",
+      "scenario": "pessimistic",
+      "mass_g": 47.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": false,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.1787854879770573,
+      "transit_rmse_m": 0.01289128826760768,
+      "max_height_m": 0.7004198431968689,
+      "max_tilt_deg": 6.803438517526101,
+      "landing_speed_m_s": 0.19360624253749847,
+      "min_voltage_v": 3.6955572082902606,
+      "soc_remaining": 0.9479120667961032,
+      "static_reserve": {
+        "voltage_v": 3.490399271249772,
+        "current_a": 5.913340169936851,
+        "thrust_weight": 1.393825571406257
+      },
+      "wall_seconds": 0.12463804200000005,
+      "assembly_sha256": "a9eed452a1f443bef0f82821163fee810d904003fdc53bf039514e84480ea077",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-110",
+      "scenario": "nominal",
+      "mass_g": 63.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11059965498362026,
+      "transit_rmse_m": 0.0008546866721631806,
+      "max_height_m": 0.836410403251648,
+      "max_tilt_deg": 8.748081433097912,
+      "landing_speed_m_s": 0.1964181512594223,
+      "min_voltage_v": 3.928394233010711,
+      "soc_remaining": 0.9745278051827103,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 2.2415041733459735
+      },
+      "wall_seconds": 0.11297508300000027,
+      "assembly_sha256": "e86fe3e0155c49ea04c2575e7e8866f91dad93e37584aa0d04cc7b9b8ceeeb1a",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-110",
+      "scenario": "low-battery",
+      "mass_g": 63.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": false,
+        "hover": false,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": false,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.6750364901689401,
+      "transit_rmse_m": 0.9100334049550585,
+      "max_height_m": 0.04491537809371948,
+      "max_tilt_deg": 1.9586601503743417,
+      "landing_speed_m_s": 0,
+      "min_voltage_v": 3.084932916666846,
+      "soc_remaining": 0.14776662109784347,
+      "static_reserve": {
+        "voltage_v": 2.8045741274952896,
+        "current_a": 6.060287193382531,
+        "thrust_weight": 1.499784266681289
+      },
+      "wall_seconds": 0.08832008399999995,
+      "assembly_sha256": "e86fe3e0155c49ea04c2575e7e8866f91dad93e37584aa0d04cc7b9b8ceeeb1a",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-110",
+      "scenario": "gust",
+      "mass_g": 63.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11059965498362026,
+      "transit_rmse_m": 0.08340640044265128,
+      "max_height_m": 0.836410403251648,
+      "max_tilt_deg": 8.723236266807929,
+      "landing_speed_m_s": 0.19641828536987305,
+      "min_voltage_v": 3.928394233010711,
+      "soc_remaining": 0.9745251524011957,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 2.2415041733459735
+      },
+      "wall_seconds": 0.10742025000000012,
+      "assembly_sha256": "e86fe3e0155c49ea04c2575e7e8866f91dad93e37584aa0d04cc7b9b8ceeeb1a",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-110",
+      "scenario": "link-loss",
+      "mass_g": 63.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true,
+        "command_expiry": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11059965498362026,
+      "transit_rmse_m": 0,
+      "max_height_m": 0.836410403251648,
+      "max_tilt_deg": 8.98081331476238,
+      "landing_speed_m_s": 0.19637081027030945,
+      "min_voltage_v": 3.928394233010711,
+      "soc_remaining": 0.9830024964010051,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 2.2415041733459735
+      },
+      "wall_seconds": 0.11289362500000015,
+      "assembly_sha256": "e86fe3e0155c49ea04c2575e7e8866f91dad93e37584aa0d04cc7b9b8ceeeb1a",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-110",
+      "scenario": "weak-motor",
+      "mass_g": 63.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": false,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": false,
+        "thrust_reserve": true
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11059965498362026,
+      "transit_rmse_m": 1.007319917191181,
+      "max_height_m": 0.836410403251648,
+      "max_tilt_deg": 180,
+      "landing_speed_m_s": 3.9848427772521973,
+      "min_voltage_v": 3.427241817244515,
+      "soc_remaining": 0.9401417059421753,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 2.2415041733459735
+      },
+      "wall_seconds": 0.14112362499999972,
+      "assembly_sha256": "e86fe3e0155c49ea04c2575e7e8866f91dad93e37584aa0d04cc7b9b8ceeeb1a",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-110",
+      "scenario": "pessimistic",
+      "mass_g": 63.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": false,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.18895390271357068,
+      "transit_rmse_m": 0.013380234678188458,
+      "max_height_m": 0.7004826664924622,
+      "max_tilt_deg": 6.788083522860615,
+      "landing_speed_m_s": 0.19354741275310516,
+      "min_voltage_v": 3.7783320982501327,
+      "soc_remaining": 0.9590358332695214,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 1.569052921342181
+      },
+      "wall_seconds": 0.110090917,
+      "assembly_sha256": "e86fe3e0155c49ea04c2575e7e8866f91dad93e37584aa0d04cc7b9b8ceeeb1a",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "guard-110",
+      "scenario": "nominal",
+      "mass_g": 73.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": true,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.10960153113387427,
+      "transit_rmse_m": 0.0008430365155993624,
+      "max_height_m": 0.8350117206573486,
+      "max_tilt_deg": 8.739553020971154,
+      "landing_speed_m_s": 0.19660475850105286,
+      "min_voltage_v": 3.887914533151499,
+      "soc_remaining": 0.9720431663394148,
+      "static_reserve": {
+        "voltage_v": 3.492865616083146,
+        "current_a": 8.319228879856803,
+        "thrust_weight": 1.9724843914828563
+      },
+      "wall_seconds": 0.12246141699999999,
+      "assembly_sha256": "d160a7f4350c26583d6196080c72c63524a7df3f52c0d3fca6ee46847da30c87",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "guard-110",
+      "scenario": "low-battery",
+      "mass_g": 73.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": false,
+        "hover": false,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": false,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.6750372770440819,
+      "transit_rmse_m": 0.9100374048624217,
+      "max_height_m": 0.0449150912463665,
+      "max_tilt_deg": 1.9837224404901181,
+      "landing_speed_m_s": 0,
+      "min_voltage_v": 3.049079846531155,
+      "soc_remaining": 0.14796753165800566,
+      "static_reserve": {
+        "voltage_v": 2.828555960953236,
+        "current_a": 6.134635864466435,
+        "thrust_weight": 1.3148131265523584
+      },
+      "wall_seconds": 0.10333649999999989,
+      "assembly_sha256": "d160a7f4350c26583d6196080c72c63524a7df3f52c0d3fca6ee46847da30c87",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "guard-110",
+      "scenario": "gust",
+      "mass_g": 73.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": true,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.10960153113387427,
+      "transit_rmse_m": 0.09605972578762925,
+      "max_height_m": 0.8350117206573486,
+      "max_tilt_deg": 8.71495272855009,
+      "landing_speed_m_s": 0.19660493731498718,
+      "min_voltage_v": 3.887914533151499,
+      "soc_remaining": 0.9720390757803735,
+      "static_reserve": {
+        "voltage_v": 3.492865616083146,
+        "current_a": 8.319228879856803,
+        "thrust_weight": 1.9724843914828563
+      },
+      "wall_seconds": 0.11391750000000002,
+      "assembly_sha256": "d160a7f4350c26583d6196080c72c63524a7df3f52c0d3fca6ee46847da30c87",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "guard-110",
+      "scenario": "link-loss",
+      "mass_g": 73.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false,
+        "command_expiry": true
+      },
+      "flight_passed": true,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.10960153113387427,
+      "transit_rmse_m": 0,
+      "max_height_m": 0.8350117206573486,
+      "max_tilt_deg": 8.978330945911488,
+      "landing_speed_m_s": 0.19631703197956085,
+      "min_voltage_v": 3.887914533151499,
+      "soc_remaining": 0.9815007744709854,
+      "static_reserve": {
+        "voltage_v": 3.492865616083146,
+        "current_a": 8.319228879856803,
+        "thrust_weight": 1.9724843914828563
+      },
+      "wall_seconds": 0.10485891700000002,
+      "assembly_sha256": "d160a7f4350c26583d6196080c72c63524a7df3f52c0d3fca6ee46847da30c87",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "guard-110",
+      "scenario": "weak-motor",
+      "mass_g": 73.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": false,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": false,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.10960153113387427,
+      "transit_rmse_m": 0.817237612476354,
+      "max_height_m": 0.8350117206573486,
+      "max_tilt_deg": 180,
+      "landing_speed_m_s": 3.9688363075256348,
+      "min_voltage_v": 3.4585083919217916,
+      "soc_remaining": 0.9417582282065238,
+      "static_reserve": {
+        "voltage_v": 3.492865616083146,
+        "current_a": 8.319228879856803,
+        "thrust_weight": 1.9724843914828563
+      },
+      "wall_seconds": 0.12332808400000021,
+      "assembly_sha256": "d160a7f4350c26583d6196080c72c63524a7df3f52c0d3fca6ee46847da30c87",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "guard-110",
+      "scenario": "pessimistic",
+      "mass_g": 73.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": false,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.19483912026965375,
+      "transit_rmse_m": 0.013545077411670981,
+      "max_height_m": 0.70039963722229,
+      "max_tilt_deg": 6.776555834898175,
+      "landing_speed_m_s": 0.19370701909065247,
+      "min_voltage_v": 3.702072325546501,
+      "soc_remaining": 0.9534528125144192,
+      "static_reserve": {
+        "voltage_v": 3.492865616083146,
+        "current_a": 8.319228879856803,
+        "thrust_weight": 1.3807390740379992
+      },
+      "wall_seconds": 0.10359304100000008,
+      "assembly_sha256": "d160a7f4350c26583d6196080c72c63524a7df3f52c0d3fca6ee46847da30c87",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "height-110",
+      "scenario": "nominal",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 31,
+        "specified": 3,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11051245962568777,
+      "transit_rmse_m": 0.000818671187001733,
+      "max_height_m": 0.8363147974014282,
+      "max_tilt_deg": 8.745844330030627,
+      "landing_speed_m_s": 0.1965726613998413,
+      "min_voltage_v": 3.916550309947021,
+      "soc_remaining": 0.9734968046647495,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 2.173165631475669
+      },
+      "wall_seconds": 0.11365708300000006,
+      "assembly_sha256": "6e4dc778f0614f983ee4fbf67d9c3d4d76fcd5bb50eac27058a29a19fac68801",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "height-110",
+      "scenario": "low-battery",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 31,
+        "specified": 3,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": false,
+        "hover": false,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": false,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.6750367165644191,
+      "transit_rmse_m": 0.9099686327847804,
+      "max_height_m": 0.04491531848907471,
+      "max_tilt_deg": 3.2341277227872585,
+      "landing_speed_m_s": 0,
+      "min_voltage_v": 3.074556419563713,
+      "soc_remaining": 0.147766175314379,
+      "static_reserve": {
+        "voltage_v": 2.8045741274952896,
+        "current_a": 6.060287193382531,
+        "thrust_weight": 1.4540591365995421
+      },
+      "wall_seconds": 0.09363925000000017,
+      "assembly_sha256": "6e4dc778f0614f983ee4fbf67d9c3d4d76fcd5bb50eac27058a29a19fac68801",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "height-110",
+      "scenario": "gust",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 31,
+        "specified": 3,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11051245962568777,
+      "transit_rmse_m": 0.08097259718883235,
+      "max_height_m": 0.8363147974014282,
+      "max_tilt_deg": 8.719753337330369,
+      "landing_speed_m_s": 0.19657263159751892,
+      "min_voltage_v": 3.916550309947021,
+      "soc_remaining": 0.9734941512806902,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 2.173165631475669
+      },
+      "wall_seconds": 0.10006016699999963,
+      "assembly_sha256": "6e4dc778f0614f983ee4fbf67d9c3d4d76fcd5bb50eac27058a29a19fac68801",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "height-110",
+      "scenario": "link-loss",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 31,
+        "specified": 3,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true,
+        "command_expiry": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11051245962568777,
+      "transit_rmse_m": 0,
+      "max_height_m": 0.8363147974014282,
+      "max_tilt_deg": 8.980651469535992,
+      "landing_speed_m_s": 0.1963619887828827,
+      "min_voltage_v": 3.916550309947021,
+      "soc_remaining": 0.9823481680385966,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 2.173165631475669
+      },
+      "wall_seconds": 0.1065013329999997,
+      "assembly_sha256": "6e4dc778f0614f983ee4fbf67d9c3d4d76fcd5bb50eac27058a29a19fac68801",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "height-110",
+      "scenario": "weak-motor",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 31,
+        "specified": 3,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": false,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": false,
+        "thrust_reserve": true
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11051245962568777,
+      "transit_rmse_m": 0.8489114151650897,
+      "max_height_m": 0.8363147974014282,
+      "max_tilt_deg": 180,
+      "landing_speed_m_s": 3.987210750579834,
+      "min_voltage_v": 3.4400394198194753,
+      "soc_remaining": 0.9393962716926375,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 2.173165631475669
+      },
+      "wall_seconds": 0.1303122500000004,
+      "assembly_sha256": "6e4dc778f0614f983ee4fbf67d9c3d4d76fcd5bb50eac27058a29a19fac68801",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "height-110",
+      "scenario": "pessimistic",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 31,
+        "specified": 3,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": false,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.18980760516423956,
+      "transit_rmse_m": 0.01345718568596957,
+      "max_height_m": 0.7004633545875549,
+      "max_tilt_deg": 6.783870925847173,
+      "landing_speed_m_s": 0.19350823760032654,
+      "min_voltage_v": 3.757373770692745,
+      "soc_remaining": 0.9570424813760504,
+      "static_reserve": {
+        "voltage_v": 3.461023432016373,
+        "current_a": 8.21084970996299,
+        "thrust_weight": 1.521215942032968
+      },
+      "wall_seconds": 0.1151305000000002,
+      "assembly_sha256": "6e4dc778f0614f983ee4fbf67d9c3d4d76fcd5bb50eac27058a29a19fac68801",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "split-110",
+      "scenario": "nominal",
+      "mass_g": 67.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11041080162163278,
+      "transit_rmse_m": 0.000851229593402469,
+      "max_height_m": 0.836200475692749,
+      "max_tilt_deg": 8.742844602947166,
+      "landing_speed_m_s": 0.19657258689403534,
+      "min_voltage_v": 3.897647146615502,
+      "soc_remaining": 0.9716155027007439,
+      "static_reserve": {
+        "voltage_v": 3.4562008917331704,
+        "current_a": 8.264435543410315,
+        "thrust_weight": 2.103011717873754
+      },
+      "wall_seconds": 0.10129445800000031,
+      "assembly_sha256": "323426b75fb4186af076392efa368335ff60afc7a8f30bc60e01800c84d062ae",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "split-110",
+      "scenario": "low-battery",
+      "mass_g": 67.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": false,
+        "hover": false,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": false,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.6750375273045662,
+      "transit_rmse_m": 0.9100382414849028,
+      "max_height_m": 0.04491524398326874,
+      "max_tilt_deg": 3.091483660750031,
+      "landing_speed_m_s": 0,
+      "min_voltage_v": 3.0573718692256673,
+      "soc_remaining": 0.14698795436464607,
+      "static_reserve": {
+        "voltage_v": 2.799648530781269,
+        "current_a": 6.115016819220987,
+        "thrust_weight": 1.4068347378640365
+      },
+      "wall_seconds": 0.08672154199999932,
+      "assembly_sha256": "323426b75fb4186af076392efa368335ff60afc7a8f30bc60e01800c84d062ae",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "split-110",
+      "scenario": "gust",
+      "mass_g": 67.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11041080162163278,
+      "transit_rmse_m": 0.07860852141859072,
+      "max_height_m": 0.836200475692749,
+      "max_tilt_deg": 8.71796164295113,
+      "landing_speed_m_s": 0.19657254219055176,
+      "min_voltage_v": 3.897647146615502,
+      "soc_remaining": 0.9716128623166365,
+      "static_reserve": {
+        "voltage_v": 3.4562008917331704,
+        "current_a": 8.264435543410315,
+        "thrust_weight": 2.103011717873754
+      },
+      "wall_seconds": 0.10150587500000074,
+      "assembly_sha256": "323426b75fb4186af076392efa368335ff60afc7a8f30bc60e01800c84d062ae",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "split-110",
+      "scenario": "link-loss",
+      "mass_g": 67.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true,
+        "command_expiry": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11041080162163278,
+      "transit_rmse_m": 0,
+      "max_height_m": 0.836200475692749,
+      "max_tilt_deg": 8.979089527225279,
+      "landing_speed_m_s": 0.1963600367307663,
+      "min_voltage_v": 3.897647146615502,
+      "soc_remaining": 0.9808705078268595,
+      "static_reserve": {
+        "voltage_v": 3.4562008917331704,
+        "current_a": 8.264435543410315,
+        "thrust_weight": 2.103011717873754
+      },
+      "wall_seconds": 0.1146727920000003,
+      "assembly_sha256": "323426b75fb4186af076392efa368335ff60afc7a8f30bc60e01800c84d062ae",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "split-110",
+      "scenario": "weak-motor",
+      "mass_g": 67.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": false,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": false,
+        "thrust_reserve": true
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11041080162163278,
+      "transit_rmse_m": 0.8265249887920495,
+      "max_height_m": 0.836200475692749,
+      "max_tilt_deg": 180,
+      "landing_speed_m_s": 4.024620056152344,
+      "min_voltage_v": 3.423905728184276,
+      "soc_remaining": 0.9375566422121394,
+      "static_reserve": {
+        "voltage_v": 3.4562008917331704,
+        "current_a": 8.264435543410315,
+        "thrust_weight": 2.103011717873754
+      },
+      "wall_seconds": 0.12531295899999986,
+      "assembly_sha256": "323426b75fb4186af076392efa368335ff60afc7a8f30bc60e01800c84d062ae",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "split-110",
+      "scenario": "pessimistic",
+      "mass_g": 67.6,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 29,
+        "specified": 2,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": false,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.1907898128410811,
+      "transit_rmse_m": 0.013483312158802727,
+      "max_height_m": 0.7004225254058838,
+      "max_tilt_deg": 6.781257419367434,
+      "landing_speed_m_s": 0.1934748739004135,
+      "min_voltage_v": 3.7277164207737306,
+      "soc_remaining": 0.9541164700536124,
+      "static_reserve": {
+        "voltage_v": 3.4562008917331704,
+        "current_a": 8.264435543410315,
+        "thrust_weight": 1.472108202511628
+      },
+      "wall_seconds": 0.10386462500000015,
+      "assembly_sha256": "323426b75fb4186af076392efa368335ff60afc7a8f30bc60e01800c84d062ae",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-published-pack",
+      "scenario": "nominal",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 24,
+        "specified": 7,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11060449662856839,
+      "transit_rmse_m": 0.0008568207370991595,
+      "max_height_m": 0.8364242911338806,
+      "max_tilt_deg": 8.747294815547795,
+      "landing_speed_m_s": 0.19641339778900146,
+      "min_voltage_v": 3.9829132069872886,
+      "soc_remaining": 0.9782084431264324,
+      "static_reserve": {
+        "voltage_v": 3.593643289804459,
+        "current_a": 8.662239290161624,
+        "thrust_weight": 2.339202455481769
+      },
+      "wall_seconds": 0.10149504200000047,
+      "assembly_sha256": "f2d77f9ac5a1cfa81c794a2cd8fd448184105a3cfe7dbf61f313df6d0038c566",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-published-pack",
+      "scenario": "low-battery",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 24,
+        "specified": 7,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": false,
+        "hover": false,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": false,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.6750368706484674,
+      "transit_rmse_m": 0.910042287246177,
+      "max_height_m": 0.044915374368429184,
+      "max_tilt_deg": 0.6821471557590706,
+      "landing_speed_m_s": 0,
+      "min_voltage_v": 3.098620821039873,
+      "soc_remaining": 0.14809109621484545,
+      "static_reserve": {
+        "voltage_v": 2.9041669055819517,
+        "current_a": 6.369045517189674,
+        "thrust_weight": 1.5416718805364378
+      },
+      "wall_seconds": 0.08669116699999994,
+      "assembly_sha256": "f2d77f9ac5a1cfa81c794a2cd8fd448184105a3cfe7dbf61f313df6d0038c566",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-published-pack",
+      "scenario": "gust",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 24,
+        "specified": 7,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11060449662856839,
+      "transit_rmse_m": 0.08090003010374375,
+      "max_height_m": 0.8364242911338806,
+      "max_tilt_deg": 8.72236044763192,
+      "landing_speed_m_s": 0.19641387462615967,
+      "min_voltage_v": 3.9829132069872886,
+      "soc_remaining": 0.9782062998198894,
+      "static_reserve": {
+        "voltage_v": 3.593643289804459,
+        "current_a": 8.662239290161624,
+        "thrust_weight": 2.339202455481769
+      },
+      "wall_seconds": 0.10440037500000017,
+      "assembly_sha256": "f2d77f9ac5a1cfa81c794a2cd8fd448184105a3cfe7dbf61f313df6d0038c566",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-published-pack",
+      "scenario": "link-loss",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 24,
+        "specified": 7,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true,
+        "command_expiry": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.11060449662856839,
+      "transit_rmse_m": 0,
+      "max_height_m": 0.8364242911338806,
+      "max_tilt_deg": 8.981266437912891,
+      "landing_speed_m_s": 0.1963716447353363,
+      "min_voltage_v": 3.9829132069872886,
+      "soc_remaining": 0.9854735055640894,
+      "static_reserve": {
+        "voltage_v": 3.593643289804459,
+        "current_a": 8.662239290161624,
+        "thrust_weight": 2.339202455481769
+      },
+      "wall_seconds": 0.11016754200000015,
+      "assembly_sha256": "f2d77f9ac5a1cfa81c794a2cd8fd448184105a3cfe7dbf61f313df6d0038c566",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-published-pack",
+      "scenario": "weak-motor",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 24,
+        "specified": 7,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": false,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": false,
+        "thrust_reserve": true
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.11060449662856839,
+      "transit_rmse_m": 0.8050900122098132,
+      "max_height_m": 0.8364242911338806,
+      "max_tilt_deg": 180,
+      "landing_speed_m_s": 3.9572978019714355,
+      "min_voltage_v": 3.5732965940503334,
+      "soc_remaining": 0.9477088483962396,
+      "static_reserve": {
+        "voltage_v": 3.593643289804459,
+        "current_a": 8.662239290161624,
+        "thrust_weight": 2.339202455481769
+      },
+      "wall_seconds": 0.13434349999999995,
+      "assembly_sha256": "f2d77f9ac5a1cfa81c794a2cd8fd448184105a3cfe7dbf61f313df6d0038c566",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    },
+    {
+      "configuration": "scout-published-pack",
+      "scenario": "pessimistic",
+      "mass_g": 65.60000000000001,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 24,
+        "specified": 7,
+        "derived": 0,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": false,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.18866655319704126,
+      "transit_rmse_m": 0.013377906160591396,
+      "max_height_m": 0.7004950046539307,
+      "max_tilt_deg": 6.787729376944776,
+      "landing_speed_m_s": 0.19355326890945435,
+      "min_voltage_v": 3.862477929776571,
+      "soc_remaining": 0.9650727012920126,
+      "static_reserve": {
+        "voltage_v": 3.593643289804459,
+        "current_a": 8.662239290161624,
+        "thrust_weight": 1.6374417188372383
+      },
+      "wall_seconds": 0.11059845800000039,
+      "assembly_sha256": "f2d77f9ac5a1cfa81c794a2cd8fd448184105a3cfe7dbf61f313df6d0038c566",
+      "model_sha256": "293896009ea5f21a6c7e6edf9836a86f2320172cbf21e31844922c52cf22996a"
+    }
+  ],
+  "test_date": "2026-10-22",
+  "scope": "Fixed-step scripted controller with ideal external pose; sensitivity study, not hardware qualification or recognition."
+}

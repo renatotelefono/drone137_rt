@@ -1,0 +1,25 @@
+{
+  "version": "blind-exploration-v1",
+  "description": "Camera-derived mapping in unknown synthetic workshops. Separate from the known-map 24/24 benchmark.",
+  "development_seeds": [7301],
+  "qualification_seeds": [8401, 8402, 8403],
+  "limits": {"deadline_s": 600, "max_observations": 100, "application_budget_gib": 5},
+  "acceptance": {
+    "minimum_free_space_coverage": 0.8,
+    "maximum_false_free_fraction": 0.05,
+    "maximum_pose_rmse_m": 0.4,
+    "maximum_return_error_m": 0.4,
+    "maximum_boundary_error_m": 0.75,
+    "minimum_boundary_recall": 0.7,
+    "maximum_contacts": 0,
+    "requires_landing": true,
+    "requires_persisted_place_and_evidence": true,
+    "requires_no_truth_in_controller_input": true
+  },
+  "sensor_contract": {
+    "camera": "Single calibrated RGB camera, no depth-buffer or segmentation access",
+    "motion": "Synthetic accelerometer and gyro, integrated in launch-local coordinates; no global position/velocity sensor",
+    "depth": "Depth Anything V2 metric indoor small, learned from pixels; scale is a learned prior, not measured range",
+    "known_at_start": "Camera calibration, aircraft dimensions, local launch origin, operator travel limits; no room map"
+  }
+}

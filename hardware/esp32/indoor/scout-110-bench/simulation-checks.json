@@ -1,0 +1,419 @@
+{
+  "engine": "rapier-0.21.0",
+  "trials": 6,
+  "physics_process_peak_rss_mib": 418.9375,
+  "real_hardware_tested": false,
+  "recognition_tested": false,
+  "full_8gb_stack_tested": false,
+  "results": [
+    {
+      "engine": "rapier-0.21.0",
+      "scenario": "nominal",
+      "configuration": "scout-110-bench-b",
+      "configuration_revision": 1,
+      "seed": 137,
+      "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+      "mass_g": 63.26,
+      "simulation_seconds": 20.000000000000018,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 27,
+        "specified": 2,
+        "derived": 2,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.005180894144480052,
+      "transit_rmse_m": 0.001388843100764592,
+      "max_height_m": 0.7586897015571594,
+      "max_tilt_deg": 11.674420159443748,
+      "landing_speed_m_s": 0.17913255095481873,
+      "min_voltage_v": 3.399599193472837,
+      "soc_remaining": 0.9679978307349366,
+      "saturated_fraction": 0.0022,
+      "static_reserve": {
+        "voltage_v": 3.399765104055404,
+        "current_a": 8.002348725245028,
+        "thrust_weight": 2.174020606277524
+      },
+      "synthetic_frames_delivered": 100,
+      "physical_enabled": false,
+      "recognition_tested": false,
+      "controller": {
+        "name": "adaptive-tilt-priority-v2",
+        "estimated_rotor_gains": [
+          0.9999222398312705,
+          1.000437549329409,
+          0.9999195852590627,
+          1.0004760314911738
+        ],
+        "minimum_estimated_gain": 0.9983600114519887,
+        "max_yaw_rate_rad_s": 0.021952466707912153,
+        "power_limited_steps": 0
+      },
+      "limitations": [
+        "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+        "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+        "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+        "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+        "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+      ],
+      "wall_seconds": 0.301656583,
+      "trial_sha256": "b06288129fb8921984ece817b7763925dc617728be5ee26829b0794d83bfce40",
+      "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+    },
+    {
+      "engine": "rapier-0.21.0",
+      "scenario": "low-battery",
+      "configuration": "scout-110-bench-b",
+      "configuration_revision": 1,
+      "seed": 137,
+      "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+      "mass_g": 63.26,
+      "simulation_seconds": 20.000000000000018,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 27,
+        "specified": 2,
+        "derived": 2,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": false,
+        "hover": false,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": false,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.6750090582527951,
+      "transit_rmse_m": 0.9099877047643365,
+      "max_height_m": 0.04491525888442993,
+      "max_tilt_deg": 0.21802635663853362,
+      "landing_speed_m_s": 0,
+      "min_voltage_v": 3.1249943162142872,
+      "soc_remaining": 0.12341769319612123,
+      "saturated_fraction": 0,
+      "static_reserve": {
+        "voltage_v": 2.7583130940794947,
+        "current_a": 5.91686836915194,
+        "thrust_weight": 1.4656434250539037
+      },
+      "synthetic_frames_delivered": 100,
+      "physical_enabled": false,
+      "recognition_tested": false,
+      "controller": {
+        "name": "adaptive-tilt-priority-v2",
+        "estimated_rotor_gains": [
+          1,
+          1,
+          1,
+          1
+        ],
+        "minimum_estimated_gain": 1,
+        "max_yaw_rate_rad_s": 0.0014999165842671145,
+        "power_limited_steps": 4473
+      },
+      "limitations": [
+        "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+        "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+        "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+        "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+        "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+      ],
+      "wall_seconds": 0.20407291699999996,
+      "trial_sha256": "354f60bcad74b6c0481d132cf90a704a7a58fbf0eaa22e170ac87071134a02e1",
+      "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+    },
+    {
+      "engine": "rapier-0.21.0",
+      "scenario": "gust",
+      "configuration": "scout-110-bench-b",
+      "configuration_revision": 1,
+      "seed": 137,
+      "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+      "mass_g": 63.26,
+      "simulation_seconds": 20.000000000000018,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 27,
+        "specified": 2,
+        "derived": 2,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.005180894144480052,
+      "transit_rmse_m": 0.046715733533263144,
+      "max_height_m": 0.7586897015571594,
+      "max_tilt_deg": 11.674420159443748,
+      "landing_speed_m_s": 0.17911821603775024,
+      "min_voltage_v": 3.399599193472837,
+      "soc_remaining": 0.9679937672580394,
+      "saturated_fraction": 0.0022,
+      "static_reserve": {
+        "voltage_v": 3.399765104055404,
+        "current_a": 8.002348725245028,
+        "thrust_weight": 2.174020606277524
+      },
+      "synthetic_frames_delivered": 100,
+      "physical_enabled": false,
+      "recognition_tested": false,
+      "controller": {
+        "name": "adaptive-tilt-priority-v2",
+        "estimated_rotor_gains": [
+          0.9999221081904328,
+          1.00043742208205,
+          0.9999194666847565,
+          1.0004758809022747
+        ],
+        "minimum_estimated_gain": 0.997878120029802,
+        "max_yaw_rate_rad_s": 0.021920534723563565,
+        "power_limited_steps": 0
+      },
+      "limitations": [
+        "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+        "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+        "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+        "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+        "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+      ],
+      "wall_seconds": 0.15192391699999996,
+      "trial_sha256": "8cfaaca07f63e4096e07d59a8794573ec8d28eddb6e3f0da1cb6bb246e652350",
+      "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+    },
+    {
+      "engine": "rapier-0.21.0",
+      "scenario": "link-loss",
+      "configuration": "scout-110-bench-b",
+      "configuration_revision": 1,
+      "seed": 137,
+      "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+      "mass_g": 63.26,
+      "simulation_seconds": 20.000000000000018,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 27,
+        "specified": 2,
+        "derived": 2,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": false,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true,
+        "command_expiry": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.005180894144480052,
+      "transit_rmse_m": 0,
+      "max_height_m": 0.7586897015571594,
+      "max_tilt_deg": 12.434015067276588,
+      "landing_speed_m_s": 0.17901457846164703,
+      "min_voltage_v": 3.399599193472837,
+      "soc_remaining": 0.9785890648334963,
+      "saturated_fraction": 0.0022,
+      "static_reserve": {
+        "voltage_v": 3.399765104055404,
+        "current_a": 8.002348725245028,
+        "thrust_weight": 2.174020606277524
+      },
+      "synthetic_frames_delivered": 100,
+      "physical_enabled": false,
+      "recognition_tested": false,
+      "controller": {
+        "name": "adaptive-tilt-priority-v2",
+        "estimated_rotor_gains": [
+          0.9999714061157002,
+          1.0004325555490023,
+          0.9999810204904113,
+          1.0003697555889204
+        ],
+        "minimum_estimated_gain": 0.9983600114519887,
+        "max_yaw_rate_rad_s": 0.02417754245869549,
+        "power_limited_steps": 0
+      },
+      "limitations": [
+        "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+        "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+        "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+        "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+        "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+      ],
+      "wall_seconds": 0.149897417,
+      "trial_sha256": "709326b1d589d5f935600069df2174624dd828981487dd7cf1456515bdf60dea",
+      "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+    },
+    {
+      "engine": "rapier-0.21.0",
+      "scenario": "weak-motor",
+      "configuration": "scout-110-bench-b",
+      "configuration_revision": 1,
+      "seed": 137,
+      "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+      "mass_g": 63.26,
+      "simulation_seconds": 20.000000000000018,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 27,
+        "specified": 2,
+        "derived": 2,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": true
+      },
+      "flight_passed": true,
+      "engineering_passed": true,
+      "hover_rmse_m": 0.005180894144480052,
+      "transit_rmse_m": 0.002854829932657231,
+      "max_height_m": 0.7586897015571594,
+      "max_tilt_deg": 11.674420159443748,
+      "landing_speed_m_s": 0.17918618023395538,
+      "min_voltage_v": 3.399599193472837,
+      "soc_remaining": 0.9575364689630235,
+      "saturated_fraction": 0.0038,
+      "static_reserve": {
+        "voltage_v": 3.399765104055404,
+        "current_a": 8.002348725245028,
+        "thrust_weight": 2.174020606277524
+      },
+      "synthetic_frames_delivered": 100,
+      "physical_enabled": false,
+      "recognition_tested": false,
+      "controller": {
+        "name": "adaptive-tilt-priority-v2",
+        "estimated_rotor_gains": [
+          0.44996509028495413,
+          1.0004376599952483,
+          0.9999198197690146,
+          1.0004761527251416
+        ],
+        "minimum_estimated_gain": 0.4496542945517349,
+        "max_yaw_rate_rad_s": 0.34222089792496435,
+        "power_limited_steps": 0
+      },
+      "limitations": [
+        "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+        "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+        "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+        "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+        "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+      ],
+      "wall_seconds": 0.143678625,
+      "trial_sha256": "2ee18f782f0f37f41b01d89256019501d8a276a9b863456dd62ab43dab94fc4b",
+      "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+    },
+    {
+      "engine": "rapier-0.21.0",
+      "scenario": "pessimistic",
+      "configuration": "scout-110-bench-b",
+      "configuration_revision": 1,
+      "seed": 137,
+      "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+      "mass_g": 63.26,
+      "simulation_seconds": 20.000000000000018,
+      "propulsion_evidence": "estimated",
+      "evidence_counts": {
+        "estimated": 27,
+        "specified": 2,
+        "derived": 2,
+        "measured": 0
+      },
+      "gates": {
+        "liftoff": true,
+        "hover": true,
+        "transit": true,
+        "landed": true,
+        "controlled_attitude": true,
+        "no_obstacle_contact": true,
+        "battery_valid": true,
+        "landing_speed": true,
+        "thrust_reserve": false
+      },
+      "flight_passed": true,
+      "engineering_passed": false,
+      "hover_rmse_m": 0.08441634333716158,
+      "transit_rmse_m": 0.012793532363275085,
+      "max_height_m": 0.8552186489105225,
+      "max_tilt_deg": 11.669793527494424,
+      "landing_speed_m_s": 0.17933738231658936,
+      "min_voltage_v": 3.399599193472837,
+      "soc_remaining": 0.9474461278856576,
+      "saturated_fraction": 0.0026,
+      "static_reserve": {
+        "voltage_v": 3.399765104055404,
+        "current_a": 8.002348725245028,
+        "thrust_weight": 1.5218144243942666
+      },
+      "synthetic_frames_delivered": 100,
+      "physical_enabled": false,
+      "recognition_tested": false,
+      "controller": {
+        "name": "adaptive-tilt-priority-v2",
+        "estimated_rotor_gains": [
+          0.6999457150483015,
+          0.7003064333933073,
+          0.6999438549478549,
+          0.7003333417255024
+        ],
+        "minimum_estimated_gain": 0.695514563958754,
+        "max_yaw_rate_rad_s": 0.02180375544337083,
+        "power_limited_steps": 0
+      },
+      "limitations": [
+        "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+        "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+        "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+        "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+        "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+      ],
+      "wall_seconds": 0.1588856249999999,
+      "trial_sha256": "c735156ca98ca4e116195ddafcb6134ebff377b85a7c4ca0fe58b1716535c212",
+      "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+    }
+  ]
+}

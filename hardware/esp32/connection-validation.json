@@ -1,0 +1,43 @@
+{
+  "date": "2026-10-23",
+  "scope": "Host aircraft protocol, local TLS emulator, monitor and Mission Control connection UI",
+  "physical_hardware_tested": false,
+  "actual_8gb_tested": false,
+  "autonomous_physical_flight_enabled": false,
+  "automated": {
+    "distinct_connection_tests_passed": 25,
+    "distinct_connection_tests_total": 25,
+    "existing_regressions_passed": 37,
+    "existing_regressions_total": 37
+  },
+  "browser_verified": [
+    "Existing Mission Control tab reloaded",
+    "Paired emulator shown",
+    "Connect changed to connected at 4.00 V",
+    "Static camera fixture displayed",
+    "Polling preserves unchanged connection buttons"
+  ],
+  "evidence": {
+    "tests": ".local/validation/aircraft-link-tests.log",
+    "regressions": ".local/validation/connection-regression-tests.log",
+    "screenshot": ".local/validation/mission-control-connection.png"
+  },
+  "source_sha256": {
+    "hardware/esp32/link_protocol.py": "36a617369e163c49ae7c9c108f712dea392b7a1d1a30eb364a1fcbc16893c2f9",
+    "hardware/esp32/link_client.py": "157afe252c10211d5a676fdff730441408d1e98d25f5c6c9c657368eaa3464ba",
+    "hardware/esp32/link_emulator.py": "b9c4de57f20d1881f6201416f9cfe45418bd8c026fe8d5012a5ef2209aeeb560",
+    "hardware/esp32/device_store.py": "3cd58c33a095e5816a1bf6f1b34291a8c081780cad8f05c744f5dba247d169ea",
+    "hardware/esp32/connection.py": "d1d127a0378bdb36cf60cf2bc0ae7d66e103508cc598d8eadd501bf622a0b614",
+    "hardware/esp32/connection_api.py": "b5e9df70478732cd649f4f721619f7f2dc10fbfdd7b0f9859c6666f190b5d631",
+    "app/recon_server.py": "416c5906bdd283af0e514d15437959cbe3bbdb6b22e3b3e5532d942dfb1c5309",
+    "scripts/mission_control.py": "15373f0311bfcd4e40d4d1a8d54109b371c5e6c9648b259680dbbc74f267fa70",
+    "app/ui/aircraft-connections.js": "e96b41085a26bb366e71b7c205d160020d62d1f899cd649a598653f9d1359a62",
+    "app/ui/mission-console.html": "5429d43519fd9417c018ceec2a6d59fc20b358f959b83b50feba1ad8b1c360b6"
+  },
+  "remaining": [
+    "Onboard implementation of protocol and stabilization",
+    "Physical sensor calibration and navigation integration",
+    "Scoped external API/MCP",
+    "Full offline packaging and fault qualification"
+  ]
+}

@@ -52,7 +52,8 @@ def main(name):
     for line in sys.stdin:
         try:
             data=json.loads(line);path=Path(data['image']).resolve()
-            if not path.is_relative_to(ROOT/'.local/validation'):raise ValueError('Image outside evaluation directory')
+            if not any(path.is_relative_to(root) for root in (ROOT/'.local/validation', ROOT/'.local/data/mission-runs')):
+                raise ValueError('Image outside mission/evaluation evidence directories')
             image=Image.open(path).convert('RGB');began=time.monotonic()
             if name=='florence':
                 inputs=processor(text=FLORENCE_PROMPT,images=image,return_tensors='pt').to(device,dtype)

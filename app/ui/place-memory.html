@@ -1,0 +1,7 @@
+<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Drone137 · Places</title><link rel="stylesheet" href="/assets/mission-console.css">
+<style>.observation-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px}.observation-grid img{width:100%;border-radius:8px}.observation-grid article{margin:0}#visit-state{color:#e7b16c}#answer{white-space:pre-wrap}</style>
+<header><div><small>DRONE137 / ENVIRONMENT MEMORY</small><h1>Places</h1></div><a href="/control">Mission control</a></header>
+<main><aside><h2>Saved environments</h2><select id="places" aria-label="Place"></select><p id="status" role="status">Loading saved observations…</p><p>Maps are built from camera observations. Dark space is unknown. Historical maps require a new position match and freshness checks before flight.</p></aside>
+<section><h2 id="name">Select a place</h2><p id="scope"></p><label>Visit<select id="visit-picker" aria-label="Visit"></select></label><p id="visit-state" role="status"></p><canvas id="place-map" width="800" height="360" style="width:100%;background:#14262e"></canvas><p>Green: estimated free space · amber: estimated surface · dark: unknown</p><label>Ask about this place<input id="question" maxlength="600" placeholder="What did we observe here?"></label><button id="ask">Ask local model</button><p id="answer" role="status"></p><h2>Visits and observations</h2><div id="visits"></div></section></main>
+<script type="module" src="/assets/place-memory.js"></script></html>

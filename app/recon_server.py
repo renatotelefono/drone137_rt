@@ -10,7 +10,27 @@ from app.fleet import Fleet, DRONES
 
 def make_recon_app(recon):
     app = web.Application(middlewares=[local_only], client_max_size=1024*1024+4096)
+    from app.component_api import install
+    from app.components import Components
+    components = Components(recon.runs.parent/'components.sqlite3')
+    install(app, components)
+    from hardware.esp32.connection_api import install as install_aircraft
+    install_aircraft(app, recon.runs.parent/'aircraft.sqlite3', components)
+    from app.place_api import install as install_places
+    install_places(app, recon.runs.parent/'places.sqlite3', recon.manager)
     fleet = Fleet(recon)
+    from app.mission_runtime import MissionRuntime
+    from app.mission_api import install as install_missions
+    missions = MissionRuntime(recon.manager, recon.runs.parent/'mission-runs')
+    # One admission lock for both mission implementations and the earlier lab.
+    missions.lock = fleet.lock
+    old_available = fleet.available
+    def legacy_available():
+        if missions.busy:
+            raise RuntimeError('Finish the Rapier mission before using the earlier fleet')
+        old_available()
+    fleet.available = legacy_available
+    install_missions(app, missions, old_available)
 
     async def startup(app):
         import asyncio
@@ -34,6 +54,9 @@ def make_recon_app(recon):
         return web.FileResponse(ROOT/'app/ui/recon.html')
 
     async def dashboard(request):
+        return web.FileResponse(ROOT/'app/ui/mission-console.html')
+
+    async def legacy_dashboard(request):
         return web.FileResponse(ROOT/'app/ui/mission-control.html')
 
     async def hardware_page(request):return web.FileResponse(ROOT/'app/ui/airframes.html')
@@ -58,12 +81,18 @@ def make_recon_app(recon):
         return web.json_response(value, headers={'Cache-Control': 'no-store'})
 
     async def control(request):
+        if missions.busy:
+            raise RuntimeError('Finish the Rapier mission before using the earlier lab')
         name = request.match_info['operation']
         body = await request.json()
+        if missions.busy:
+            raise RuntimeError('Finish the Rapier mission before using the earlier lab')
         if fleet.busy and name in ('start', 'room'):
             raise RuntimeError('Finish the fleet mission before using the Recon lab')
         if name == 'start':
             async with fleet.lock:
+                if missions.busy:
+                    raise RuntimeError('Finish the Rapier mission before using the earlier lab')
                 if fleet.busy:
                     raise RuntimeError('Finish the fleet mission before using the Recon lab')
                 await recon.start(body.get('policy'), body.get('client'), body.get('mission', 'explore'), body.get('compare', True))
@@ -97,7 +126,7 @@ def make_recon_app(recon):
         return web.json_response({'complete': drone.video_complete})
 
     async def model(request):
-        if recon.state in ACTIVE | {'paused'} or fleet.busy:
+        if recon.state in ACTIVE | {'paused'} or fleet.busy or missions.busy:
             raise RuntimeError('End the virtual mission before changing or testing the model')
         operation = request.match_info['operation']
         if operation == 'cancel':
@@ -110,7 +139,11 @@ def make_recon_app(recon):
         return web.json_response(fleet.snapshot(), headers={'Cache-Control': 'no-store'})
 
     async def fleet_control(request):
+        if missions.busy:
+            raise RuntimeError('Finish the Rapier mission before using the earlier fleet')
         body = await request.json()
+        if missions.busy:
+            raise RuntimeError('Finish the Rapier mission before using the earlier fleet')
         if not isinstance(body, dict):
             raise ValueError('Expected a JSON object')
         operation = request.match_info['operation']
@@ -179,6 +212,7 @@ def make_recon_app(recon):
 
     app.router.add_get('/', index)
     app.router.add_get('/control', dashboard)
+    app.router.add_get('/control-legacy', legacy_dashboard)
     app.router.add_get('/camera-worker', index)
     app.router.add_static('/assets/', ROOT/'app/ui', show_index=False)
     app.router.add_get('/api/status', status)

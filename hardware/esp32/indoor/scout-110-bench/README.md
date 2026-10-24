@@ -1,5 +1,7 @@
 # Build choice: D137 Scout 110-B
 
+**Swiss procurement (24 October):** [procurement-ch.md](procurement-ch.md) lists Swiss sources, prices, stock and the two substitutions found.
+
 **24 October build update:** [Prototype A assembly package](assembly.md) now includes the schematic, routed carrier, Gerbers and five printable parts. [Flight firmware and commissioning tools](../../flight/README.md) compile and have software tests. Physical fit, power, timing and flight tuning remain unmeasured. The old mass/profile results below are historical and do not qualify the revised mechanical stack.
 
 Build one **Scout 110-B bench prototype** first: a guarded 110 mm quadcopter,
@@ -29,7 +31,7 @@ machine-readable [bill of materials](bom.json) records quantities and price base
 | BETAFPV 450 mAh 1S BT2.0 pack, SKU 01030002 | 1 | $3.75 allocated | [BETAFPV four-pack $14.99](https://betafpv.com/collections/batt-1s/products/bt2-0-450mah-1s-30c-battery-4pcs) |
 | Scout 110 printed structure with guards | Set | $4.00 historical allowance | Use the [Prototype A five-part package](assembly.md); obtain its actual print price |
 | AO3400A MOSFETs | 4 | $1.00 allowance | SOT-23, low-side motor switches |
-| SS34 Schottky diodes | 4 | $0.60 allowance | One flyback diode per motor |
+| SS34 Schottky diodes, SMA package | 4 | $0.60 allowance | One flyback diode per motor; the carrier footprint is SMA (DO-214AC), so use an SMA-packaged SS34 (for example MDD) or MBRA340T3G |
 | 100 ohm gate resistors + 10 kohm pulldowns | 4 + 4 | $0.20 allowance | One of each per MOSFET |
 | Motor suppression and supply capacitors | Set | $0.70 allowance | 4 × 100 nF; 470 uF ≥6.3 V; 47 uF; 100 nF |
 | Battery measurement divider/filter | Set | $0.10 allowance | 2 × 100 kohm and 100 nF |

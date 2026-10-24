@@ -49,7 +49,7 @@ compared pin-for-pin to the PCB. No private keys or model weights are packaged.
 | References | Quantity | Part / package | Polarity or placement |
 | --- | ---: | --- | --- |
 | Q1–Q4 | 4 | AO3400A, SOT-23 | Pin 1 gate, 2 source/GND, 3 drain/motor− |
-| D1–D4 | 4 | SS34, SMA | **Cathode stripe toward VBAT / right-hand pad**, anode to motor− |
+| D1–D4 | 4 | 3 A / 40 V Schottky in **SMA (DO-214AC)**: SS34 from an SMA-packaged supplier such as MDD, or onsemi MBRA340T3G. The onsemi/Vishay SS34 is SMC and does not fit | **Cathode stripe toward VBAT / right-hand pad**, anode to motor− |
 | R1–R4 | 4 | 100 ohm, 0805 | Series gate resistance |
 | R5–R8 | 4 | 10 kohm, 0805 | Gate pulldown to ground |
 | R9–R10 | 2 | 100 kohm, 1%, 0805 | R9 VBAT to ADC; R10 ADC to GND |

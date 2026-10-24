@@ -35,8 +35,8 @@ propellers, a Seeed XIAO ESP32-S3 Sense as flight controller and camera, a GY-52
 MPU-6050 IMU, one BETAFPV 450 mAh 1S BT2.0 battery, and a custom carrier PCB with
 four AO3400A low-side MOSFETs, four SS34 flyback diodes, gate resistors and
 pull-downs, bulk and suppression capacitors and the battery divider. The frame is a
-printed five-part package: centre plate with guards, electronics bridge, camera
-cradle, battery cradle and arms. Gerbers, schematic, STL and SCAD files are in
+printed five-part package: frame with guards, electronics bridge, camera cradle,
+IMU tray and battery cradle. Gerbers, schematic, STL and SCAD files are in
 `carrier/` and `mechanics/`. Order the carrier from the gerbers with 2 oz copper.
 
 Do not substitute a perfboard driver, a bought frame or a soft IMU mount. The

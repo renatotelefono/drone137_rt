@@ -1,10 +1,7 @@
 # Drone137 aircraft connection, version 1
 
 Status: ground adapter, protocol-only HTTPS emulator, SQLite pairing and
-Mission Control connection/preview implemented. ESP32 flight firmware and
-physical mission navigation are pending. This is not a
-physical flight qualification. `link_protocol.py` is the executable device
-state-machine specification; `link_client.py` is the asynchronous ground adapter.
+Mission Control connection/preview implemented. The ESP32 prototype flight firmware now compiles and shares its C++ controller/parser with a desktop test runner; physical mission navigation remains disabled. This is not a physical flight qualification. `link_protocol.py` is the Python reference, `flight/flight_core.h` and `flight/flight_wire.h` are the board implementation, and `link_client.py` is the asynchronous ground adapter.
 The emulator explicitly advertises `kind=protocol-emulator`, static camera
 imagery and stationary synthetic IMU samples. It has no flight dynamics.
 
@@ -26,6 +23,14 @@ never hand the low-level aircraft credential to an LLM. A paired ground service
 is responsible for checking mission ownership and permission before sending
 commands. Camera, ordinary control and emergency requests use separate network
 connection pools so a blocked image request cannot occupy the stop channel.
+
+The board advertises `channels: {camera_port: 8444, emergency_port: 8445}` in
+its authenticated hello on port 443. The host accepts only port numbers on the
+same paired IP and with the same certificate; changing channels requires a
+reconnection. The emergency server also provides authenticated `/v1/hello`, so
+fresh clock synchronization and stop do not depend on the normal control server.
+Mission Control retains that validated emergency address through sensor faults.
+The single-port reference emulator remains supported.
 
 ## Endpoints
 
@@ -57,7 +62,7 @@ Example envelope (identities and numbers are placeholders):
 ```
 
 Other operations are `arm`, `heartbeat`, `land`, `disarm`; they do not accept a
-setpoint. Setpoints use radians and normalized thrust, with roll/pitch bounded
+setpoint. The board also supports the explicit propeller-free `motor_test` operation with zero-based `motor` 0–3, `duty` 0.01–0.20 and `duration_ms` 20–200. It requires a bench build and never arms. Setpoints use radians and normalized collective PWM duty (the legacy wire field is named `thrust`), with roll/pitch bounded
 to ±0.26 rad, yaw rate ±1 rad/s, thrust 0–0.8. These are provisional indoor
 limits. The ground flight controller generates these commands from navigation
 targets; the onboard estimator, rate loop and mixer must stabilize the vehicle.
@@ -87,7 +92,7 @@ Camera headers are `X-Boot-Id`, `X-Frame-Id`, `X-Capture-Time-Us`, `X-Width` and
 clock uncertainty and maximum 300 ms age before exposing an image to a consumer.
 IMU samples have `time_us`, `gyro_flu_rad_s`, `specific_force_flu_m_s2`; vectors
 are body forward-left-up. Packet order, finiteness, boot identity, ring overrun
-and maximum 50 ms age are checked. Camera/IMU mounting, delay and calibration
+and maximum 50 ms age are checked. Gaps over 20 ms during an established stream are rejected. A new connection begins at the newest continuous history segment, explicitly reporting any discarded earlier startup samples. Camera/IMU mounting, delay and calibration
 still require measured hardware values; this transport cannot establish them.
 
 Only fresh attitude setpoints keep an armed aircraft commanded. Heartbeats
@@ -96,7 +101,7 @@ bounded level-attitude/throttle-reduction ramp and revoke control. IMU failure
 disarms even during the ramp. This fallback is **not an altitude-aware physical
 landing guarantee**: measured hardware and a qualified height source are still
 needed. The emulator tests the command lifecycle, not descent aerodynamics.
-Real firmware defaults must remain unable to arm until commissioned.
+Default board builds cannot arm. A separately gated restrained-rig build permits five-second attitude-loop tests after initial physical checks; it advertises `restrained_rig=true`, `commissioned=false` and never claims flight qualification. See [commissioning](flight/README.md).
 
 ## Local test
 
@@ -120,7 +125,7 @@ It verifies the pinned endpoint before saving the credential to
 `.local/data/aircraft.sqlite3` (mode 0600). Public API responses omit the secret.
 Pair/connect routes require a loopback peer, local Host, same Origin when
 present, and the local-control header for mutations. They are not the remote
-API; remote authentication and scoped MCP access are preparation item 5.
+API; remote authentication and scoped MCP access remain in the older eight-item product roadmap, outside this six-item build-preparation milestone.
 
 The current connection service limits active sensor streams to four and paired
 records to 32. These are admission limits, not measured concurrent-flight or
@@ -133,3 +138,5 @@ cover identity pinning, local-origin checks, exclusive ownership, command expiry
 replay, sensor failure, queue overflow, reconnect, pairing persistence and an
 emergency request during a stalled camera request. The live dashboard was
 verified against the local static-image emulator; no hardware was connected.
+
+The 24 October shared-firmware tests additionally exercise separate camera/control/emergency servers, a stalled control server during Mission Control stop, timestamped recording and bounded motor/rig tools. See [current evidence](../../docs/pre-hardware-six.md).

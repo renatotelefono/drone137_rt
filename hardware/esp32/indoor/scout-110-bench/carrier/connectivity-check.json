@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "electrical_pins_compared": 65,
+  "method": "Actual loaded PCB pad nets versus KiCad schematic export XML; exact pin/net equality",
+  "sha256": {
+    "scout-carrier.kicad_pcb": "32b33c5dea64093af65b30eeca25de32583cadd50f770e1146926dc9135dc48a",
+    "scout-carrier.kicad_sch": "d6a731fbd283df3dcdd802cba55ab92b3aae1a1c2089749fb7a940ab908b3a41",
+    "schematic.net": "97ce0d5ccfbbd2a1138bb77227dd85c292b6e4bfc4139da21c63c2107dff09e1"
+  }
+}

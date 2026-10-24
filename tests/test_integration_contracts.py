@@ -22,10 +22,16 @@ import test_executor
 class LlamaHTTP(unittest.IsolatedAsyncioTestCase):
     async def asyncSetUp(self):
         self.requests=[]
+        self.transports=[]
+        self.drop_response=False
         self.delay=0
         self.finish_reason='stop'
         async def handler(request):
+            self.transports.append(request.transport)
             self.requests.append(await request.json())
+            if self.drop_response:
+                request.transport.close()
+                return web.Response()
             await asyncio.sleep(self.delay)
             return web.json_response({"choices":[{"finish_reason":self.finish_reason,"message":{"content":
                 '{"visible_evidence":"An opening","center":"open_space"}'}}]})
@@ -56,6 +62,18 @@ class LlamaHTTP(unittest.IsolatedAsyncioTestCase):
         self.finish_reason='length'
         with self.assertRaisesRegex(ValueError, 'Incomplete model response'):
             await self.backend.infer(observation())
+
+    async def test_inspections_use_fresh_sockets_and_disconnects_are_not_retried(self):
+        from aiohttp import ClientError
+        await self.backend.infer(observation())
+        await self.backend.infer(observation())
+        self.assertIsNot(self.transports[0],self.transports[1])
+        self.drop_response=True
+        with self.assertRaises(ClientError):await self.backend.infer(observation())
+        self.assertEqual(len(self.requests),3)
+        self.assertTrue(self.backend.quarantined)
+        with self.assertRaises(RuntimeError):await self.backend.infer(observation())
+        self.assertEqual(len(self.requests),3)
 
     async def test_detailed_description_budget_remains_bounded(self):
         await self.backend.image(b'pixels','Describe',{},time.monotonic()+1,max_tokens=384)

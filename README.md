@@ -4,6 +4,8 @@ Local visual reconnaissance development for a confined space. The first runnable
 product is a browser recon lab with a Python controller, a small local model
 manager, and repeatable Three.js environments. No TypeScript or hosted inference is used.
 
+**Pre-hardware build preparation:** [six-item status and evidence](docs/pre-hardware-six.md), [prototype assembly files](hardware/esp32/indoor/scout-110-bench/assembly.md) and [firmware/commissioning guide](hardware/esp32/flight/README.md). Safe builds keep motors disabled; no physical flight is qualified.
+
 **Microquad component lab:** `/components` stores swappable parts and pinned
 assemblies in SQLite, with Rapier rigid-body physics rendered by Three.js.
 Run it alone with `python -m scripts.component_lab --port 8152`. The five indoor
@@ -38,16 +40,18 @@ onboard RGB images and synthetic IMU data, with named places, individual visits,
 maps and image-backed model observations saved in SQLite. The experimental
 OpenVINS mapper starts without a room map or true-position feedback. Development
 flights now pass all gates, but the latest fresh-layout suite passed only **2/3**:
-one layout failed coverage and boundary recall. Reliable unfamiliar-environment
+one flight stopped on the link watchdog. Development-79 passes after diagnostic
+I/O isolation; a new frozen suite is running. Reliable unfamiliar-environment
 exploration remains open; the earlier 24/24 known-map result does not qualify it.
 See [the test and current architecture](docs/blind-exploration.md) and
 [preserved result summaries](docs/blind-exploration-validation.json).
 
 **Aircraft connection:** Mission Control's **Connect a drone** panel supports
-pinned HTTPS pairing, telemetry and camera preview using the local protocol
-emulator. The host adapter, ownership/deadline checks and sensor monitor pass
-25 distinct automated tests. The emulator has no flight dynamics; matching
-onboard flight firmware and physical navigation integration remain unfinished.
+pinned HTTPS pairing, telemetry and camera preview. The ESP32 prototype firmware
+now compiles, and its shared C++ controller is exercised through the host adapter
+and monitor over local TLS. Recording and calibrated camera/IMU replay are
+available. Physical commissioning, control tuning and autonomous-navigation
+integration remain outstanding; the dashboard cannot launch a physical aircraft.
 See [protocol and local setup](hardware/esp32/link-protocol.md) and the
 [current handoff and remaining work](docs/agent-handoff.md).
 
@@ -56,8 +60,11 @@ For the first hardware prototype, use the
 Its $45.09 consumed-parts allowance is not a delivered checkout quote. This
 commercial-parts configuration is stored separately from the hypothetical
 power-v2 aircraft used by earlier experiments. The final 24-mission qualification
-uses the Scout 110-B assembly itself. Flight firmware, measured
-component data and real indoor positioning remain hardware work.
+uses the historical Scout 110-B assembly itself. The new printable stack has
+an estimated 25.1 g structural mass; its complete mass and delivered cost are
+not yet measured. Update the SQLite assembly from the built parts before using
+the old simulation numbers as a hardware prediction. Physical control tuning,
+component measurements and real indoor positioning remain hardware work.
 
 **Object-location experiment:** compare the current Qwen model with Qwen plus
 local Laya on a search for a red fire extinguisher. Both use camera images and

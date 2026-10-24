@@ -21,7 +21,7 @@ import numpy as np
 from app.voxel_mapping import RaycastMap
 from app.temporal_geometry import TemporalGeometry
 from app.visual_inertial import VisualInertial, gravity_disagreement_degrees, tracking_faults
-from app.frontier_planner import candidates, record_view_attempt, choose_frontier
+from app.frontier_planner import candidates, record_observed_view, choose_frontier
 from app.breadcrumbs import Breadcrumbs
 from app.blind_mapping import camera_transform
 from app.place_memory import PlaceMemory
@@ -49,6 +49,36 @@ class ReplanAfterRecovery(RuntimeError):
 
 class MotionSegmentInvalid(ReplanAfterRecovery):
     pass
+
+
+async def journal_observation(model,memory,mapping,visit,entry,pixels,caption,calibration):
+    """Keep captured evidence even when interpretation fails; propagate failure."""
+    began=time.monotonic()
+    try:
+        if caption:
+            raw=await model.image(pixels,PROMPT,SCHEMA,time.monotonic()+20,max_tokens=200)
+            interpretation=json.loads(raw)
+            # Model prose cannot replace the measured pose or journal identity.
+            entry.update({key:interpretation[key] for key in SCHEMA['required']})
+            x,y,z,w=entry['pose']['quaternion']
+            yaw=math.atan2(2*(w*z+x*y),1-2*(y*y+z*z))
+            bearing=None
+            if interpretation['opening'] in ('left','center','right'):
+                transform,k=camera_transform(entry['pose'],calibration)
+                pixel=[interpretation['opening_x']*calibration['width']/1000,
+                       interpretation['opening_y']*calibration['height']/1000,1]
+                ray=transform[:3,:3]@np.linalg.solve(k,pixel)
+                bearing=math.atan2(ray[1],ray[0])
+            mapping.semantic_views.append({'position':entry['pose']['position'][:2],
+                'yaw':yaw,'navigation_view':interpretation['navigation_view'],'opening':interpretation['opening'],
+                'opening_bearing':bearing,'observation':entry['sequence'],'time_s':entry['capture_time_s']})
+            mapping.semantic_views=mapping.semantic_views[-20:]
+    except Exception as exc:
+        entry['interpretation_error']=type(exc).__name__
+        raise
+    finally:
+        entry['latency_s']=time.monotonic()-began
+        memory.observe(visit,entry['sequence'],pixels,entry)
 
 
 def panorama(calibration):
@@ -185,13 +215,14 @@ async def run(args):
     memory = PlaceMemory(ROOT/'.local/data/places.sqlite3')
     memory.begin(args.place, args.name, visit)
     mapping = RaycastMap()
+    mapping.explored_views=[]
     planning_sequence=0
     breadcrumbs = Breadcrumbs()
     async def plan(function,*values):
         nonlocal planning_sequence
         # Planning must not starve command/IMU heartbeats as the map grows.
         frozen=copy.copy(mapping)
-        for key in ('logodds','seen','visits','flight_clear','visibility_obstacles','ground','view_attempts'):
+        for key in ('logodds','seen','visits','flight_clear','visibility_obstacles','ground','view_attempts','band_evidence','attempt_evidence'):
             setattr(frozen,key,getattr(mapping,key).copy())
         frozen.explored_views=list(getattr(mapping,'explored_views',[]))
         frozen.semantic_views=list(mapping.semantic_views)
@@ -203,7 +234,7 @@ async def run(args):
             def audited():
                 result=function(frozen,*values)
                 np.savez_compressed(archive.with_suffix('.npz'),**{key:getattr(frozen,key) for key in
-                    ('logodds','seen','visits','flight_clear','visibility_obstacles','ground','view_attempts')})
+                    ('logodds','seen','visits','flight_clear','visibility_obstacles','ground','view_attempts','band_evidence','attempt_evidence')})
                 archive.with_suffix('.json').write_text(json.dumps({'time_s':audit_time,'args':values,'candidates':result,
                     'explored_views':frozen.explored_views,'semantic_views':frozen.semantic_views},allow_nan=False))
                 return result
@@ -218,7 +249,8 @@ async def run(args):
                            'Metric scale and obstacle geometry from camera/IMU parallax; image correspondences are uncertainty-gated',
                            'Survey and transit at 1.5 m; navigation requires observed clearance at 1.35–1.65 m',
                            'No historical map supplied to this first-visit experiment']
-    sources=['scripts/explore_unknown.py','app/blind_mapping.py','app/metric_mapping.py','app/visual_inertial.py',
+    sources=['scripts/explore_unknown.py','scripts/compact_recording.py','adapters/llama.py',
+             'app/voxel_rays.py','app/jsonl_writer.py','app/blind_mapping.py','app/metric_mapping.py','app/visual_inertial.py',
              'app/frontier_planner.py','app/breadcrumbs.py','app/voxel_mapping.py','app/temporal_geometry.py','app/planar_surfaces.py','app/place_memory.py','app/ui/blind-physics.mjs','scripts/blind_simulator.py',
              'app/ui/visible-colliders.mjs','app/ui/flight-lab.js','scripts/flight-camera.cjs',
              'scripts/blind-physics.mjs','sim/blind_world.py','native/openvins_bridge.cpp',
@@ -399,6 +431,10 @@ async def run(args):
                     if len(points):
                         evidence=await asyncio.to_thread(mapping.prepare_cloud,points,tw[:3,3])
                         mapping.integrate_prepared(evidence,tw[:3,3],f['pose']['position'])
+                    if quality.get('points',0)>=250 and quality.get('baseline_m',0)>=.25:
+                        qx,qy,qz,qw=f['pose']['quaternion']
+                        observed_yaw=math.atan2(2*(qw*qz+qx*qy),1-2*(qy*qy+qz*qz))
+                        record_observed_view(mapping,f['pose']['position'],observed_yaw)
                     vo={'valid':True,'inliers':result['stable_image_tracks'],'landmarks':len(result['landmarks']),'position_std_m':result['position_std_m'],
                         'relative_position_std_m':result.get('relative_position_std_m'),
                         'position':result['position'],'multiview_geometry':quality,'estimator':'OpenVINS RGB + IMU'}
@@ -426,10 +462,7 @@ async def run(args):
         report['state'] = 'exploring'
         heading, scans, last_move = launch_heading, 0, 0
         rejected_views=[]
-        mapping.explored_views=[]
         active_view=None
-        pending_views=[]
-        surveyed_centers=[[0.,0.]]
         survey_height=1.5
         for index in range(args.observations):
             watcher.check()
@@ -467,8 +500,7 @@ async def run(args):
                 # appear untouched and repeatedly attracted the planner back.
                 qx,qy,qz,qw=f['pose']['quaternion']
                 observed_yaw=math.atan2(2*(qw*qz+qx*qy),1-2*(qy*qy+qz*qz))
-                mapping.explored_views.append([*f['pose']['position'][:2],observed_yaw])
-                record_view_attempt(mapping,f['pose']['position'],observed_yaw)
+                record_observed_view(mapping,f['pose']['position'],observed_yaw)
             image = f'frame-{index+1:04}.jpg'
             (folder/image).write_bytes(jpeg)
             began = time.monotonic()
@@ -478,31 +510,9 @@ async def run(args):
                     'visual_odometry': vo, 'observation': None, 'latency_s': 0,
                     'geometry_latency_s':geometry_latency,'evidence_directory':str(folder)}
             report['steps'].append(step)
-            async def record(entry,pixels,caption,calibration):
-                began=time.monotonic()
-                if caption:
-                    raw=await model.image(pixels,PROMPT,SCHEMA,time.monotonic()+20,max_tokens=200)
-                    interpretation=json.loads(raw)
-                    entry.update(interpretation)
-                    x,y,z,w=entry['pose']['quaternion']
-                    yaw=math.atan2(2*(w*z+x*y),1-2*(y*y+z*z))
-                    bearing=None
-                    if interpretation['opening'] in ('left','center','right'):
-                        transform,k=camera_transform(entry['pose'],calibration)
-                        pixel=[interpretation['opening_x']*calibration['width']/1000,
-                               interpretation['opening_y']*calibration['height']/1000,1]
-                        ray=transform[:3,:3]@np.linalg.solve(k,pixel)
-                        bearing=math.atan2(ray[1],ray[0])
-                    mapping.semantic_views.append({'position':entry['pose']['position'][:2],
-                        'yaw':yaw,'navigation_view':interpretation['navigation_view'],'opening':interpretation['opening'],
-                        'opening_bearing':bearing,
-                        'observation':entry['sequence'],'time_s':entry['capture_time_s']})
-                    mapping.semantic_views=mapping.semantic_views[-20:]
-                entry['latency_s']=time.monotonic()-began
-                memory.observe(visit,entry['sequence'],pixels,entry)
             # Caption generation cannot change the flight command. Overlap it
             # with motion, while bounding the queue to one pending observation.
-            journal_task=asyncio.create_task(record(step,jpeg,index%3==0,f['calibration']))
+            journal_task=asyncio.create_task(journal_observation(model,memory,mapping,visit,step,jpeg,index%3==0,f['calibration']))
             save()
             print(json.dumps({'step': index+1, 'position': link.latest['position'], 'mapped_cells': len(report['map']['cells']), 'vo': vo,
                               'seconds': round(report['wall_time_s'], 1)}), flush=True)
@@ -525,9 +535,6 @@ async def run(args):
                 # edge, even though the central launch corridor is observed.
                 await link.fly([0,0,survey_height,heading])
                 link.guard=mapping.segment_clear
-            if active_view is None:
-                if pending_views:
-                    active_view=pending_views.pop(0)
             if active_view is None:
                 options=await plan(candidates,list(link.latest['position']),heading,15)
                 rejected_views=[r for r in rejected_views if time.monotonic()<r['until']]
@@ -576,22 +583,14 @@ async def run(args):
                         await translate_for_depth(link,mapping,yaw,survey_height,report)
                     # Record camera stations actually reached, including the
                     # parallax endpoint, rather than the requested grid point.
-                    mapping.explored_views.append([*p,yaw])
+                    record_observed_view(mapping,p,yaw)
                     if math.dist(p,link.latest['position'][:2])>.15:
-                        mapping.explored_views.append([*link.latest['position'][:2],yaw])
-                    record_view_attempt(mapping,link.latest['position'],yaw)
-                    # A useful corridor may sit outside the direction with
-                    # highest map uncertainty. At a genuinely new station,
-                    # inspect the other two sectors before abandoning it.
-                    # These are camera-only active-sensing moves in already
-                    # observed airspace, never room-authored viewpoints.
-                    if (not active_view.get('survey_followup') and
-                            min(math.dist(active_view['viewpoint'],c) for c in surveyed_centers)>1.8):
-                        center=list(link.latest['position'][:2])
-                        surveyed_centers.append(center)
-                        pending_views=[{'viewpoint':center,'view_heading_rad':yaw+j*2*math.pi/3,
-                                        'survey_followup':True} for j in (1,2)]
-                        report.setdefault('local_sweeps',[]).append({'position':center,'time_s':link.latest['time_s']})
+                        record_observed_view(mapping,link.latest['position'],yaw)
+                    # Recompute the next view from current observed information.
+                    # Fixed two-sector panoramas at every new station spent
+                    # battery looking back into already reconstructed space.
+                    # candidates() considers every heading, including local
+                    # turns, and retains the same collision-clearance checks.
                     active_view=None
             except ReplanAfterRecovery as exc:
                 # A blocked/aborted route is not evidence that its destination
@@ -660,6 +659,7 @@ async def run(args):
                             ground=mapping.ground,flight_clear=mapping.flight_clear,
                             logodds=mapping.logodds,seen=mapping.seen,
                             visits=mapping.visits,view_attempts=mapping.view_attempts,
+                            band_evidence=mapping.band_evidence,attempt_evidence=mapping.attempt_evidence,
                             visibility_obstacles=mapping.visibility_obstacles)
         save()
         watcher.stop()

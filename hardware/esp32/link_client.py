@@ -45,6 +45,8 @@ class AircraftLink:
         self.last_clock_sync_us=None
         self.last_frame=None
         self.last_imu_us=0
+        self.camera_url=self.emergency_url=self.url
+        self.channels=None
 
     async def start(self):
         if self.session:raise RuntimeError('Aircraft link is already open')
@@ -64,7 +66,8 @@ class AircraftLink:
     async def request(self,path,body=None,*,emergency=False):
         method='GET' if body is None else 'POST'
         client=self.emergency_session if emergency else self.session
-        async with client.request(method,self.url+path,json=body,
+        base=self.emergency_url if emergency else self.url
+        async with client.request(method,base+path,json=body,
                     ssl=self.fingerprint,allow_redirects=False) as response:
             data=bytearray()
             async for chunk in response.content.iter_chunked(8192):
@@ -90,6 +93,20 @@ class AircraftLink:
                 self.session_id=None
                 raise ProtocolError('Aircraft rebooted; reconnect and review mission',409)
             self.boot_id=hello['boot_id']
+            channels=hello.get('channels')
+            if channels is not None:
+                if (not isinstance(channels,dict) or set(channels)!={'camera_port','emergency_port'}
+                        or any(type(p) is not int or not 1<=p<=65535 for p in channels.values())):
+                    raise ProtocolError('Invalid aircraft channel ports')
+                if self.channels is not None and channels!=self.channels:
+                    raise ProtocolError('Aircraft channels changed; reconnect',409)
+                self.channels=dict(channels)
+                # A paired aircraft may split its servers, never change host or TLS identity.
+                host=urlsplit(self.url).hostname
+                self.camera_url=f'https://{host}:{channels["camera_port"]}'
+                self.emergency_url=f'https://{host}:{channels["emergency_port"]}'
+            elif self.channels is not None:
+                raise ProtocolError('Aircraft channels disappeared; reconnect',409)
             measurements.append(((received-sent)/2,stamp-(sent+received)/2))
         self.uncertainty_us,self.offset_us=min(measurements)
         if self.uncertainty_us>20_000:raise ProtocolError('Aircraft clock uncertainty exceeds 20 ms',409)
@@ -117,7 +134,8 @@ class AircraftLink:
     async def command(self,operation,**extra):
         async with self.lock:
             if not self.session_id:raise ProtocolError('Claim aircraft control first',409)
-            if set(extra) != ({'setpoint'} if operation=='attitude' else set()):
+            expected={'setpoint'} if operation=='attitude' else {'motor','duty','duration_ms'} if operation=='motor_test' else set()
+            if set(extra) != expected:
                 raise ProtocolError('Unexpected command fields')
             self.sequence+=1
             body={'boot_id':self.boot_id,'session_id':self.session_id,'sequence':self.sequence,
@@ -137,7 +155,7 @@ class AircraftLink:
 
     async def capture(self):
         from adapters.esp32_camera import jpeg_dimensions
-        async with self.camera_session.get(self.url+'/v1/camera',ssl=self.fingerprint,
+        async with self.camera_session.get(self.camera_url+'/v1/camera',ssl=self.fingerprint,
                     allow_redirects=False) as response:
             if response.status!=200 or response.content_type!='image/jpeg':
                 raise ProtocolError('Aircraft camera unavailable',response.status)
@@ -170,17 +188,26 @@ class AircraftLink:
             raise ProtocolError('IMU reboot or ring overrun',409)
         samples=result.get('samples')
         if not isinstance(samples,list) or len(samples)>256:raise ProtocolError('Invalid IMU packet')
-        previous=self.last_imu_us
-        for sample in samples:
+        previous=self.last_imu_us;fresh_start=0
+        for index,sample in enumerate(samples):
             if not isinstance(sample,dict):raise ProtocolError('Invalid IMU sample')
             stamp=sample.get('time_us')
             if type(stamp) is not int or stamp<=previous:raise ProtocolError('Out-of-order IMU sample',409)
+            if previous and stamp-previous>20_000:
+                if self.last_imu_us:raise ProtocolError('IMU sample gap; reinitialize pose',409)
+                fresh_start=index
             for key in ('gyro_flu_rad_s','specific_force_flu_m_s2'):
                 vector=sample.get(key)
                 if (not isinstance(vector,list) or len(vector)!=3
                         or any(type(v) not in (int,float) or not math.isfinite(v) for v in vector)):
                     raise ProtocolError('Invalid IMU vector')
             previous=stamp
+        if fresh_start:
+            # A new connection has no established pose. Start only with the
+            # newest continuous history; record discarded pre-connection data.
+            result['initial_history_discarded_samples']=fresh_start
+            samples=samples[fresh_start:];result['samples']=samples
+            result['oldest_time_us']=samples[0]['time_us']
         if samples:
             age=self.device_time()-previous
             if age < -self.uncertainty_us or age+self.uncertainty_us>50_000:
@@ -192,6 +219,8 @@ class AircraftLink:
         for session in (self.session,self.camera_session,self.emergency_session):
             if session:await session.close()
         self.session=self.camera_session=self.emergency_session=None
-        self.session_id=self.boot_id=self.offset_us=self.last_clock_sync_us=None
+        self.session_id=self.boot_id=self.offset_us=self.last_clock_sync_us=self.uncertainty_us=None
         self.last_frame=None
         self.last_imu_us=0
+        self.camera_url=self.emergency_url=self.url
+        self.channels=None

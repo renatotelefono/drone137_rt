@@ -1,0 +1,30 @@
+{
+  "revision": "prototype-a",
+  "generated_with": "KiCad 10.0.7",
+  "footprint_origin": "KiCad 10.0.7 macOS official distribution, selected bundled footprints",
+  "distribution_url": "https://mirrors.mit.edu/kicad/osx/stable/kicad-unified-universal-10.0.7.dmg",
+  "license": "CC-BY-SA-4.0 with KiCad electronic-design exception; see footprints/LICENSE.md",
+  "physical_validation": "not_run",
+  "sha256": {
+    "footprints/Capacitor_SMD.pretty/C_0805_2012Metric.kicad_mod": "62775a51fe74ba7f1b572de327bdbd3fc92582721b2abcaa47787865590d89cb",
+    "footprints/Capacitor_THT.pretty/CP_Radial_D5.0mm_P2.00mm.kicad_mod": "fd0a251de515130de6e789ffb786d43c746b83178e437feb9fc4f39b6ea9ef39",
+    "footprints/Capacitor_THT.pretty/CP_Radial_D6.3mm_P2.50mm.kicad_mod": "e81a44655d3a9e86e6745c01be07bb025069d56a88e72074fba35f4b042e25e0",
+    "footprints/D137.pretty/WirePad_1.6_0.8.kicad_mod": "0e46d3e923f475792828f4dd6e787f49df0a7f207c8ec078f92ad7d64995907b",
+    "footprints/D137.pretty/WirePad_2.1_1.0.kicad_mod": "299825ff9fbee796bc97abd67909c1658cab76fc91317a322b6c5bf2da3f7955",
+    "footprints/D137.pretty/WirePad_2.8_1.2.kicad_mod": "f7518844cc2b1ad1f33be0b2586b28bbfa3b5fac4db29d15298893100bb4e7d2",
+    "footprints/Diode_SMD.pretty/D_SMA.kicad_mod": "f7cba3b52ed8b34dce89170722de58324eac04e9e61a095e0eab37b9ca93cb7f",
+    "footprints/MountingHole.pretty/MountingHole_2.2mm_M2.kicad_mod": "1b38bd9b2279c528f6e6bd4cf43f4aea04facae04f4afb1649dae640330a7178",
+    "footprints/Package_TO_SOT_SMD.pretty/SOT-23.kicad_mod": "0d88c86c1b6d8c1aae4aa8c09386264c089d4451a128b6ccd63ed253f4300b15",
+    "footprints/Resistor_SMD.pretty/R_0805_2012Metric.kicad_mod": "f050b6a50cc7e6f86291fb7aa8f87b0d02255e21cfbddf291cdccc87e5889794",
+    "gerbers/scout-carrier-B_Cu.gbl": "a7c62a498aa1048b066e6f6a628354b982cfde59578373414c218cfd1b0080d4",
+    "gerbers/scout-carrier-B_Mask.gbs": "9551bd35bea53876b9a1c9ee26e32e9540180e7e3c574b549e2773c6061f261a",
+    "gerbers/scout-carrier-Edge_Cuts.gm1": "731f12e0052fc4ee1c69c67a6c0a442b31ca47def8abd123f338b059be129375",
+    "gerbers/scout-carrier-F_Cu.gtl": "1fe5584cfce5bfa07ee816824eb9300478001fdd6e05e5735b212aae8d9737c7",
+    "gerbers/scout-carrier-F_Mask.gts": "1bebf52cb291a9ef145dc9e4bf89ff7b9239e280e4fb51e721c8c6ef610139bf",
+    "gerbers/scout-carrier-F_Silkscreen.gto": "b20d543f4e737d7e0a0ac6575b74eeb08ed4aa4d85273309a9eb367dd46c26ca",
+    "gerbers/scout-carrier.drl": "67d5aeaba163f3fa5f27323111381d939fe35ca3c592ab56d23e13f2c0041750",
+    "scout-carrier-prototype-a-gerbers.zip": "7e9b682a3cb744e9c3c6154c0f1456a0d4b47e63db70ecb433eecf63ae028dda",
+    "scout-carrier.kicad_pcb": "32b33c5dea64093af65b30eeca25de32583cadd50f770e1146926dc9135dc48a",
+    "scout-carrier.kicad_sch": "d6a731fbd283df3dcdd802cba55ab92b3aae1a1c2089749fb7a940ab908b3a41"
+  }
+}

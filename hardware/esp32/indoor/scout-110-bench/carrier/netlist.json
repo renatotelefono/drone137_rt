@@ -1,0 +1,933 @@
+{
+  "revision": "prototype-a",
+  "board_mm": [
+    42,
+    40,
+    1.0
+  ],
+  "copper_oz": 2,
+  "parts": [
+    {
+      "ref": "J1",
+      "value": "PWM1",
+      "package": "D137:WirePad_1.6_0.8",
+      "position_mm": [
+        2.2,
+        7.2
+      ],
+      "nets": {
+        "1": "PWM1"
+      },
+      "pads": {
+        "1": [
+          2.2,
+          7.2
+        ]
+      }
+    },
+    {
+      "ref": "R1",
+      "value": "100R",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        5,
+        6.0
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "PWM1",
+        "2": "GATE1"
+      },
+      "pads": {
+        "1": [
+          4.0875,
+          6.0
+        ],
+        "2": [
+          5.9125,
+          6.0
+        ]
+      }
+    },
+    {
+      "ref": "Q1",
+      "value": "AO3400A",
+      "package": "Package_TO_SOT_SMD:SOT-23",
+      "position_mm": [
+        10.5,
+        6.0
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "GATE1",
+        "2": "GND",
+        "3": "MOTOR1-"
+      },
+      "pads": {
+        "1": [
+          9.5625,
+          5.05
+        ],
+        "2": [
+          9.5625,
+          6.95
+        ],
+        "3": [
+          11.4375,
+          6.0
+        ]
+      }
+    },
+    {
+      "ref": "R5",
+      "value": "10k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        7,
+        8.5
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "GATE1",
+        "2": "GND"
+      },
+      "pads": {
+        "1": [
+          6.0875,
+          8.5
+        ],
+        "2": [
+          7.9125,
+          8.5
+        ]
+      }
+    },
+    {
+      "ref": "D1",
+      "value": "SS34",
+      "package": "Diode_SMD:D_SMA",
+      "position_mm": [
+        16,
+        6.0
+      ],
+      "rotation_deg": 180,
+      "nets": {
+        "1": "VBAT",
+        "2": "MOTOR1-"
+      },
+      "pads": {
+        "1": [
+          18.0,
+          6.0
+        ],
+        "2": [
+          14.0,
+          6.0
+        ]
+      }
+    },
+    {
+      "ref": "J5",
+      "value": "M1-",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        14,
+        9.5
+      ],
+      "nets": {
+        "1": "MOTOR1-"
+      },
+      "pads": {
+        "1": [
+          14,
+          9.5
+        ]
+      }
+    },
+    {
+      "ref": "J9",
+      "value": "M1+",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        20,
+        9.5
+      ],
+      "nets": {
+        "1": "VBAT"
+      },
+      "pads": {
+        "1": [
+          20,
+          9.5
+        ]
+      }
+    },
+    {
+      "ref": "J2",
+      "value": "PWM2",
+      "package": "D137:WirePad_1.6_0.8",
+      "position_mm": [
+        2.2,
+        15.2
+      ],
+      "nets": {
+        "1": "PWM2"
+      },
+      "pads": {
+        "1": [
+          2.2,
+          15.2
+        ]
+      }
+    },
+    {
+      "ref": "R2",
+      "value": "100R",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        5,
+        14.0
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "PWM2",
+        "2": "GATE2"
+      },
+      "pads": {
+        "1": [
+          4.0875,
+          14.0
+        ],
+        "2": [
+          5.9125,
+          14.0
+        ]
+      }
+    },
+    {
+      "ref": "Q2",
+      "value": "AO3400A",
+      "package": "Package_TO_SOT_SMD:SOT-23",
+      "position_mm": [
+        10.5,
+        14.0
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "GATE2",
+        "2": "GND",
+        "3": "MOTOR2-"
+      },
+      "pads": {
+        "1": [
+          9.5625,
+          13.05
+        ],
+        "2": [
+          9.5625,
+          14.95
+        ],
+        "3": [
+          11.4375,
+          14.0
+        ]
+      }
+    },
+    {
+      "ref": "R6",
+      "value": "10k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        7,
+        16.5
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "GATE2",
+        "2": "GND"
+      },
+      "pads": {
+        "1": [
+          6.0875,
+          16.5
+        ],
+        "2": [
+          7.9125,
+          16.5
+        ]
+      }
+    },
+    {
+      "ref": "D2",
+      "value": "SS34",
+      "package": "Diode_SMD:D_SMA",
+      "position_mm": [
+        16,
+        14.0
+      ],
+      "rotation_deg": 180,
+      "nets": {
+        "1": "VBAT",
+        "2": "MOTOR2-"
+      },
+      "pads": {
+        "1": [
+          18.0,
+          14.0
+        ],
+        "2": [
+          14.0,
+          14.0
+        ]
+      }
+    },
+    {
+      "ref": "J6",
+      "value": "M2-",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        14,
+        17.5
+      ],
+      "nets": {
+        "1": "MOTOR2-"
+      },
+      "pads": {
+        "1": [
+          14,
+          17.5
+        ]
+      }
+    },
+    {
+      "ref": "J10",
+      "value": "M2+",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        20,
+        17.5
+      ],
+      "nets": {
+        "1": "VBAT"
+      },
+      "pads": {
+        "1": [
+          20,
+          17.5
+        ]
+      }
+    },
+    {
+      "ref": "J3",
+      "value": "PWM3",
+      "package": "D137:WirePad_1.6_0.8",
+      "position_mm": [
+        2.2,
+        23.2
+      ],
+      "nets": {
+        "1": "PWM3"
+      },
+      "pads": {
+        "1": [
+          2.2,
+          23.2
+        ]
+      }
+    },
+    {
+      "ref": "R3",
+      "value": "100R",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        5,
+        22.0
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "PWM3",
+        "2": "GATE3"
+      },
+      "pads": {
+        "1": [
+          4.0875,
+          22.0
+        ],
+        "2": [
+          5.9125,
+          22.0
+        ]
+      }
+    },
+    {
+      "ref": "Q3",
+      "value": "AO3400A",
+      "package": "Package_TO_SOT_SMD:SOT-23",
+      "position_mm": [
+        10.5,
+        22.0
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "GATE3",
+        "2": "GND",
+        "3": "MOTOR3-"
+      },
+      "pads": {
+        "1": [
+          9.5625,
+          21.05
+        ],
+        "2": [
+          9.5625,
+          22.95
+        ],
+        "3": [
+          11.4375,
+          22.0
+        ]
+      }
+    },
+    {
+      "ref": "R7",
+      "value": "10k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        7,
+        24.5
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "GATE3",
+        "2": "GND"
+      },
+      "pads": {
+        "1": [
+          6.0875,
+          24.5
+        ],
+        "2": [
+          7.9125,
+          24.5
+        ]
+      }
+    },
+    {
+      "ref": "D3",
+      "value": "SS34",
+      "package": "Diode_SMD:D_SMA",
+      "position_mm": [
+        16,
+        22.0
+      ],
+      "rotation_deg": 180,
+      "nets": {
+        "1": "VBAT",
+        "2": "MOTOR3-"
+      },
+      "pads": {
+        "1": [
+          18.0,
+          22.0
+        ],
+        "2": [
+          14.0,
+          22.0
+        ]
+      }
+    },
+    {
+      "ref": "J7",
+      "value": "M3-",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        14,
+        25.5
+      ],
+      "nets": {
+        "1": "MOTOR3-"
+      },
+      "pads": {
+        "1": [
+          14,
+          25.5
+        ]
+      }
+    },
+    {
+      "ref": "J11",
+      "value": "M3+",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        20,
+        25.5
+      ],
+      "nets": {
+        "1": "VBAT"
+      },
+      "pads": {
+        "1": [
+          20,
+          25.5
+        ]
+      }
+    },
+    {
+      "ref": "J4",
+      "value": "PWM4",
+      "package": "D137:WirePad_1.6_0.8",
+      "position_mm": [
+        2.2,
+        31.2
+      ],
+      "nets": {
+        "1": "PWM4"
+      },
+      "pads": {
+        "1": [
+          2.2,
+          31.2
+        ]
+      }
+    },
+    {
+      "ref": "R4",
+      "value": "100R",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        5,
+        30.0
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "PWM4",
+        "2": "GATE4"
+      },
+      "pads": {
+        "1": [
+          4.0875,
+          30.0
+        ],
+        "2": [
+          5.9125,
+          30.0
+        ]
+      }
+    },
+    {
+      "ref": "Q4",
+      "value": "AO3400A",
+      "package": "Package_TO_SOT_SMD:SOT-23",
+      "position_mm": [
+        10.5,
+        30.0
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "GATE4",
+        "2": "GND",
+        "3": "MOTOR4-"
+      },
+      "pads": {
+        "1": [
+          9.5625,
+          29.05
+        ],
+        "2": [
+          9.5625,
+          30.95
+        ],
+        "3": [
+          11.4375,
+          30.0
+        ]
+      }
+    },
+    {
+      "ref": "R8",
+      "value": "10k",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        7,
+        32.5
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "GATE4",
+        "2": "GND"
+      },
+      "pads": {
+        "1": [
+          6.0875,
+          32.5
+        ],
+        "2": [
+          7.9125,
+          32.5
+        ]
+      }
+    },
+    {
+      "ref": "D4",
+      "value": "SS34",
+      "package": "Diode_SMD:D_SMA",
+      "position_mm": [
+        16,
+        30.0
+      ],
+      "rotation_deg": 180,
+      "nets": {
+        "1": "VBAT",
+        "2": "MOTOR4-"
+      },
+      "pads": {
+        "1": [
+          18.0,
+          30.0
+        ],
+        "2": [
+          14.0,
+          30.0
+        ]
+      }
+    },
+    {
+      "ref": "J8",
+      "value": "M4-",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        14,
+        33.5
+      ],
+      "nets": {
+        "1": "MOTOR4-"
+      },
+      "pads": {
+        "1": [
+          14,
+          33.5
+        ]
+      }
+    },
+    {
+      "ref": "J12",
+      "value": "M4+",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        20,
+        33.5
+      ],
+      "nets": {
+        "1": "VBAT"
+      },
+      "pads": {
+        "1": [
+          20,
+          33.5
+        ]
+      }
+    },
+    {
+      "ref": "J13",
+      "value": "BAT+",
+      "package": "D137:WirePad_2.8_1.2",
+      "position_mm": [
+        20,
+        37
+      ],
+      "nets": {
+        "1": "VBAT"
+      },
+      "pads": {
+        "1": [
+          20,
+          37
+        ]
+      }
+    },
+    {
+      "ref": "J14",
+      "value": "BAT-",
+      "package": "D137:WirePad_2.8_1.2",
+      "position_mm": [
+        14,
+        37
+      ],
+      "nets": {
+        "1": "GND"
+      },
+      "pads": {
+        "1": [
+          14,
+          37
+        ]
+      }
+    },
+    {
+      "ref": "J15",
+      "value": "XIAO BAT+",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        35,
+        26
+      ],
+      "nets": {
+        "1": "VBAT"
+      },
+      "pads": {
+        "1": [
+          35,
+          26
+        ]
+      }
+    },
+    {
+      "ref": "J16",
+      "value": "XIAO GND",
+      "package": "D137:WirePad_2.1_1.0",
+      "position_mm": [
+        35,
+        30
+      ],
+      "nets": {
+        "1": "GND"
+      },
+      "pads": {
+        "1": [
+          35,
+          30
+        ]
+      }
+    },
+    {
+      "ref": "C1",
+      "value": "470uF 10V",
+      "package": "Capacitor_THT:CP_Radial_D6.3mm_P2.50mm",
+      "position_mm": [
+        27,
+        35.5
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "VBAT",
+        "2": "GND"
+      },
+      "pads": {
+        "1": [
+          27.0,
+          35.5
+        ],
+        "2": [
+          29.5,
+          35.5
+        ]
+      }
+    },
+    {
+      "ref": "C2",
+      "value": "47uF 10V",
+      "package": "Capacitor_THT:CP_Radial_D5.0mm_P2.00mm",
+      "position_mm": [
+        34,
+        19
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "VBAT",
+        "2": "GND"
+      },
+      "pads": {
+        "1": [
+          34.0,
+          19.0
+        ],
+        "2": [
+          36.0,
+          19.0
+        ]
+      }
+    },
+    {
+      "ref": "C3",
+      "value": "100nF",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "position_mm": [
+        34,
+        14
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "VBAT",
+        "2": "GND"
+      },
+      "pads": {
+        "1": [
+          33.05,
+          14.0
+        ],
+        "2": [
+          34.95,
+          14.0
+        ]
+      }
+    },
+    {
+      "ref": "R9",
+      "value": "100k 1%",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        31,
+        6
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "VBAT",
+        "2": "VBAT_ADC"
+      },
+      "pads": {
+        "1": [
+          30.0875,
+          6.0
+        ],
+        "2": [
+          31.9125,
+          6.0
+        ]
+      }
+    },
+    {
+      "ref": "R10",
+      "value": "100k 1%",
+      "package": "Resistor_SMD:R_0805_2012Metric",
+      "position_mm": [
+        36,
+        6
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "VBAT_ADC",
+        "2": "GND"
+      },
+      "pads": {
+        "1": [
+          35.0875,
+          6.0
+        ],
+        "2": [
+          36.9125,
+          6.0
+        ]
+      }
+    },
+    {
+      "ref": "C4",
+      "value": "100nF",
+      "package": "Capacitor_SMD:C_0805_2012Metric",
+      "position_mm": [
+        35,
+        9
+      ],
+      "rotation_deg": 0,
+      "nets": {
+        "1": "VBAT_ADC",
+        "2": "GND"
+      },
+      "pads": {
+        "1": [
+          34.05,
+          9.0
+        ],
+        "2": [
+          35.95,
+          9.0
+        ]
+      }
+    },
+    {
+      "ref": "J17",
+      "value": "D10 ADC",
+      "package": "D137:WirePad_1.6_0.8",
+      "position_mm": [
+        38,
+        12
+      ],
+      "nets": {
+        "1": "VBAT_ADC"
+      },
+      "pads": {
+        "1": [
+          38,
+          12
+        ]
+      }
+    },
+    {
+      "ref": "H1",
+      "value": "M2",
+      "package": "MountingHole:MountingHole_2.2mm_M2",
+      "position_mm": [
+        3,
+        2.5
+      ],
+      "rotation_deg": 0,
+      "nets": {},
+      "pads": {
+        "": [
+          3.0,
+          2.5
+        ]
+      }
+    },
+    {
+      "ref": "H2",
+      "value": "M2",
+      "package": "MountingHole:MountingHole_2.2mm_M2",
+      "position_mm": [
+        39,
+        2.5
+      ],
+      "rotation_deg": 0,
+      "nets": {},
+      "pads": {
+        "": [
+          39.0,
+          2.5
+        ]
+      }
+    },
+    {
+      "ref": "H3",
+      "value": "M2",
+      "package": "MountingHole:MountingHole_2.2mm_M2",
+      "position_mm": [
+        3,
+        37
+      ],
+      "rotation_deg": 0,
+      "nets": {},
+      "pads": {
+        "": [
+          3.0,
+          37.0
+        ]
+      }
+    },
+    {
+      "ref": "H4",
+      "value": "M2",
+      "package": "MountingHole:MountingHole_2.2mm_M2",
+      "position_mm": [
+        39,
+        37
+      ],
+      "rotation_deg": 0,
+      "nets": {},
+      "pads": {
+        "": [
+          39.0,
+          37.0
+        ]
+      }
+    }
+  ]
+}

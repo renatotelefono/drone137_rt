@@ -15,6 +15,7 @@ import time
 from aiohttp import web
 from app.components import Components
 from app.mission_camera import MissionCamera
+from app.jsonl_writer import JsonlWriter
 from sim.blind_world import scene
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -30,12 +31,26 @@ class Plant:
         self.lock = asyncio.Lock()
         self.error = None
         self.trace = []
+        self.timing = JsonlWriter(folder/'control-timing.jsonl')
+        self.last_command_ack = None
 
     async def call(self, op, **body):
+        queued = time.monotonic()
         async with self.lock:
+            sent = time.monotonic()
             self.process.stdin.write((json.dumps({'op': op, **body})+'\n').encode())
             await self.process.stdin.drain()
             result = json.loads(await asyncio.wait_for(self.process.stdout.readline(), 20 if op=='load-collision-mesh' else 3))
+            acknowledged = time.monotonic()
+            timing = {'operation': op, 'queued_at': queued, 'sent_at': sent,
+                      'acknowledged_at': acknowledged, 'queue_wait_s': sent-queued,
+                      'rpc_s': acknowledged-sent, 'error': result.get('error'),
+                      'sensor_time_s': result.get('sensor',{}).get('time_s')}
+            if op == 'command':
+                timing['command_ack_interval_s'] = (acknowledged-self.last_command_ack
+                    if self.last_command_ack is not None else None)
+                if 'error' not in result:self.last_command_ack=acknowledged
+            self.timing.write(timing)
             if 'error' in result:
                 raise RuntimeError(result['error'])
             if op == 'imu':return result
@@ -53,22 +68,25 @@ class Plant:
         self.task = asyncio.create_task(self.pump())
 
     async def pump(self):
+        recorder = JsonlWriter(self.folder/'evaluator-telemetry.jsonl')
+        self.recorder = recorder
         try:
-            with (self.folder/'evaluator-telemetry.jsonl').open('w') as f:
-                while True:
-                    if self.goal and time.monotonic()-self.lease < 2:
-                        await self.call('command', target=self.goal)
-                    else:
-                        await self.call('status')
-                    self.trace.append(self.latest)
-                    f.write(json.dumps(self.latest)+'\n')
-                    if len(self.trace) > 14000:
-                        self.trace.pop(0)
-                    await asyncio.sleep(.05)
+            while True:
+                if self.goal and time.monotonic()-self.lease < 2:
+                    await self.call('command', target=self.goal)
+                else:
+                    await self.call('status')
+                self.trace.append(self.latest)
+                recorder.write(self.latest)
+                if len(self.trace) > 14000:
+                    self.trace.pop(0)
+                await asyncio.sleep(.05)
         except asyncio.CancelledError:
             raise
         except Exception as exc:
             self.error = str(exc)
+        finally:
+            await asyncio.to_thread(recorder.close)
 
     def snapshot(self):
         truth, s = self.latest['truth'], self.latest['sensor']
@@ -96,6 +114,11 @@ class Plant:
                 self.process.kill()
                 await self.process.wait()
         self.log.close()
+        # gather(return_exceptions=True) above must not conceal a writer error
+        # that happened while the control task was being cancelled.
+        if hasattr(self,'recorder'):
+            await asyncio.to_thread(self.recorder.close)
+        await asyncio.to_thread(self.timing.close)
 
 
 async def serve(args):
@@ -115,15 +138,14 @@ async def serve(args):
     world['physics_collision_source']=collision
     (folder/'scene.json').write_text(json.dumps(world,indent=2))
     capture_lock = asyncio.Lock()
-    audit = (folder/'public-responses.jsonl').open('w')
+    audit = JsonlWriter(folder/'public-responses.jsonl')
     done = asyncio.Event()
 
     @web.middleware
     async def boundary(request, handler):
         try:
             value = await handler(request)
-            audit.write(json.dumps({'path': request.path, 'result': {k: v for k, v in value.items() if k != 'jpeg'}})+'\n')
-            audit.flush()
+            audit.write({'path': request.path, 'result': {k: v for k, v in value.items() if k != 'jpeg'}})
             return web.json_response(value)
         except (ValueError, RuntimeError) as exc:
             return web.json_response({'error': str(exc)}, status=409)
@@ -186,14 +208,16 @@ async def serve(args):
         await asyncio.wait_for(done.wait(), 750)
     finally:
         await runner.cleanup()
-        try:
-            await camera.close()
-        finally:
-            try:
-                await plant.close()
-            finally:
-                audit.close()
-                (folder/'final.json').write_text(json.dumps(plant.latest, indent=2))
+        errors=[]
+        for close in (camera.close,plant.close):
+            try:await close()
+            except Exception as exc:errors.append(str(exc))
+        try:await asyncio.to_thread(audit.close)
+        except Exception as exc:errors.append(str(exc))
+        if errors:
+            (folder/'recording-error.json').write_text(json.dumps({'errors':errors}))
+            raise RuntimeError('Simulator recording did not finalize: '+'; '.join(errors))
+        (folder/'final.json').write_text(json.dumps(plant.latest, indent=2))
 
 
 if __name__ == '__main__':

@@ -1,6 +1,8 @@
 """Small 3D ray occupancy map, projected for the indoor mission planner."""
 import numpy as np
+import cv2
 from app.blind_mapping import ObservedMap
+from app.voxel_rays import traversed_voxels
 
 
 class RaycastMap(ObservedMap):
@@ -14,6 +16,12 @@ class RaycastMap(ObservedMap):
         self.semantic_views=[]
         self.visibility_obstacles=np.zeros_like(self.logodds,dtype=bool)
         self.view_attempts=np.zeros_like(self.logodds,dtype=np.uint8)
+        # Free-ray evidence accumulated through the 1.35–1.65 m flight band, and
+        # the value seen at each cell's latest view attempt. View ranking uses
+        # them to tell productive repeated views from stale ones; neither is a
+        # clearance input.
+        self.band_evidence=np.zeros_like(self.logodds,dtype=np.float32)
+        self.attempt_evidence=np.zeros_like(self.logodds,dtype=np.float32)
 
     def clear(self,p,radius=.2):
         # 0.20 m plus half a grid cell: provisional clearance around the
@@ -62,14 +70,12 @@ class RaycastMap(ObservedMap):
         surface=indices(points)
         hits,count=np.unique(surface,return_counts=True)
         hits=hits[count>=2]
-        delta=points-origin
-        length=np.linalg.norm(delta,axis=1)
         # Free evidence is a ray through 3D space, not a 2D floor projection.
-        steps=np.arange(.08,8,.1)
-        distances=np.broadcast_to(steps[None,:],(len(points),len(steps)))
-        safe=distances<(length[:,None]-.14)
-        samples=origin+delta[:,None,:]/length[:,None,None]*distances[:,:,None]
-        free=np.unique(indices(samples[safe]))
+        # Traverse actual grid crossings; point sampling left artificial holes
+        # in observed corridors. The near/surface margins remain unchanged.
+        free=traversed_voxels(points,origin,self.voxels.shape,
+                             [self.resolution,self.resolution,self.z_resolution],
+                             [self.extent,self.extent,.15])
         free=np.setdiff1d(free,hits,assume_unique=True)
         ground=points[(points[:,2]>-.1)&(points[:,2]<.12)]
         cells=np.floor((ground[:,:2]+self.extent)/self.resolution).astype(int)
@@ -97,6 +103,7 @@ class RaycastMap(ObservedMap):
         raised=np.max(self.voxels[:,:,3:12],axis=2)
         clear_band=np.all(self.voxels[:,:,6:10]<-.6,axis=2)
         self.flight_clear[:]=np.all(self.voxels[:,:,10:12]<-.6,axis=2)
+        self.band_evidence[:]=-np.minimum(0,self.voxels[:,:,10:12]).sum(axis=2)
         occupied=raised>.8
         # Rank forward views with occluders at camera/flight height. Projecting
         # every low shelf and overhead surface into this 2D mask incorrectly
@@ -105,7 +112,13 @@ class RaycastMap(ObservedMap):
         self.visibility_obstacles[:]=np.any(self.voxels[:,:,10:12]>.8,axis=2)
         # Visible ground beneath a table does not prove the flight volume is
         # empty. Every vertical slice of the clearance band must be observed.
-        free=clear_band
+        # A surface estimate and its voxel quantization do not locate an edge
+        # exactly. Keep the adjoining one-cell footprint unknown, including
+        # diagonal neighbours. Otherwise rays past an estimated edge can label
+        # the uncertain boundary clear. This changes the live map/navigation,
+        # not the evaluator; it never invents an occupied surface or a free ray.
+        boundary_uncertain=cv2.dilate(np.uint8(occupied),np.ones((3,3),np.uint8))>0
+        free=clear_band & ~boundary_uncertain
         self.logodds[:]=0
         self.logodds[free]=-2
         self.logodds[occupied]=raised[occupied]
@@ -121,6 +134,7 @@ class RaycastMap(ObservedMap):
                       scale='Visual-inertial metric scale; provisional camera/IMU calibration',
                       voxel_height_m=self.z_resolution)
         result['navigation_clearance_height_m']=[1.35,1.65]
+        result['occupied_boundary_uncertainty_margin_m']=self.resolution
         result['navigation_free_cells']=np.argwhere(self.flight_clear & (self.logodds<-.3)).tolist()
         result['semantic_views']=list(self.semantic_views)
         return result

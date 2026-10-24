@@ -44,8 +44,23 @@ def exploration_interest(mapping):
     # positive sensing reward for narrow ones. This never grants clearance.
     grounded=ground & unresolved
     interest[grounded]=np.minimum(1.,(interior[grounded]/.35)**2)
-    interest[mapping.logodds>.5]=0.
-    interest/=1+4*np.asarray(getattr(mapping,'view_attempts',np.zeros_like(interest)),dtype=float)
+    occupied=mapping.logodds>.5
+    interest[occupied]=0.
+    # The one-cell uncertain band kept around observed surfaces clears only
+    # when later rays clear the surface itself; viewing it again cannot
+    # resolve it. Leave it out of the view priority, not out of the map.
+    ring=(cv2.dilate(np.uint8(occupied),np.ones((3,3),np.uint8))>0)&~occupied
+    interest[ring]=0.
+    # Repeated views without new flight-band evidence discount redundant
+    # sensing. record_view_attempt resets the count whenever a view adds rays,
+    # so a doorway that is still filling in keeps its information value while
+    # a blank wall strip is deprioritized after a few fruitless views. An
+    # earlier unbounded count of every view, including transit frames, left
+    # a filling doorway at 1/30 of its value; a bounded count instead let the
+    # planner loop on a fruitless strip for thirteen decisions. Priorities
+    # only: nothing here changes occupancy or grants clearance.
+    attempts=np.asarray(getattr(mapping,'view_attempts',np.zeros_like(interest)),dtype=float)
+    interest/=1+4*attempts
     return interest
 
 
@@ -66,7 +81,34 @@ def record_view_attempt(mapping,position,yaw):
     touched=np.unique(cells[~blocked],axis=0)
     if len(touched):
         x,y=touched.T
-        mapping.view_attempts[x,y]=np.minimum(100,mapping.view_attempts[x,y]+1)
+        attempts=np.minimum(100,mapping.view_attempts[x,y].astype(int)+1)
+        evidence=getattr(mapping,'band_evidence',None)
+        if evidence is not None:
+            # A view that added flight-band rays since the previous attempt was
+            # productive. Count only consecutive attempts without new evidence,
+            # so a passage that is still filling in is not treated like a blank
+            # wall that yields nothing however often it is viewed.
+            progressed=evidence[x,y]>mapping.attempt_evidence[x,y]+1e-6
+            attempts[progressed]=1
+            mapping.attempt_evidence[x,y]=evidence[x,y]
+        mapping.view_attempts[x,y]=attempts
+
+
+def record_observed_view(mapping,position,yaw):
+    """Remember distinct *measured* camera stations, including transit views.
+
+    Deduplication prevents the camera frame rate from becoming an artificial
+    retry penalty. Clearance and geometry are never inferred from this history.
+    """
+    history=getattr(mapping,'explored_views',[])
+    if any(math.dist(position[:2],old[:2])<.3 and
+           abs(math.atan2(math.sin(yaw-old[2]),math.cos(yaw-old[2])))<math.pi/6
+           for old in history):
+        return False
+    history.append([float(position[0]),float(position[1]),float(yaw)])
+    mapping.explored_views=history
+    record_view_attempt(mapping,position,yaw)
+    return True
 
 
 def choose_frontier(options, position, heading):
@@ -90,6 +132,14 @@ def choose_frontier(options, position, heading):
         if (option['score'] >= .8*best['score'] and option['path_distance_m'] <= 1.5
                 and float(delta @ forward) > .15 and turn <= math.pi/3):
             return option
+    # Utility estimates from sparse geometry are approximate. Do not spend a
+    # long cross-room detour on a <=15% estimated advantage when another
+    # already-cleared route is at least 35% shorter. Stronger remote gains
+    # still win, and rejected routes are absent from options at the caller.
+    economical=[o for o in options[1:] if o['score']>=.85*best['score']
+                and 2.<o['path_distance_m']<=.65*best['path_distance_m']]
+    if economical:
+        return min(economical,key=lambda o:o['path_distance_m'])
     return best
 
 

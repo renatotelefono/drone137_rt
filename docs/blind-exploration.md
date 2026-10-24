@@ -1,5 +1,36 @@
 # Unknown-place exploration experiment
 
+## Current preparation checkpoint — 24 October 2026
+
+The six-item firmware/build milestone and current flight evidence are tracked in
+[pre-hardware preparation](pre-hardware-six.md) and the
+[comparison section](test-comparison.md). Qualification-07 finished 2/3, with
+one false-free-space failure. Development-77 passes after keeping a one-cell
+uncertain band around observed surfaces; qualification-08 finished 2/3. Continuous ray traversal repaired its failed
+room in development-78. Qualification-09 finished 2/3 after an early watchdog
+failure; development-79 passes after diagnostic I/O isolation. Qualification-10
+finished 1/3 on fresh layouts 21991/21992/21993; the 24 October continuation at the end of this
+file records its diagnosis and the bounded repeated-view discount. The original acceptance gates and room difficulty are
+unchanged. This update supersedes the dated progress entries below.
+
+Completed flights now share byte-identical JPEGs with hardlinks, retaining every
+path and content. A recording marker prevents compaction during capture. Each
+flight writes `recording-storage.json` and a per-file audit; unique images,
+videos and failed results stay available. A new flight requires 3 GiB free.
+For a completed recording only, run `python -m scripts.compact_recording PATH`.
+Older completed recordings also have gzip archives of their raw diagnostic
+JSONL logs, verified by full decompression and SHA-256. Reports, videos, scores
+and review images remain directly accessible. Per-trial `recording-archives.json`
+records both original and compressed hashes. Read the `.jsonl.gz` directly, or
+run `python -m scripts.archive_recording_logs restore RECORDING_FOLDER` before
+using historical tools that expect the raw paths. Run the same tool with
+`archive` after diagnosis to release the restored copy. Active recordings are
+refused; corruption never overwrites existing data.
+
+Do not edit hardlinked historical images in place: write any derived image to a
+new path. Local models and full recordings remain excluded from Git.
+
+
 This is a separate experiment from the existing known-map mission benchmark. It is **not qualified for hardware flight**. A good landing or a passing software test is not a successful mapping mission: all gates in `config/blind-exploration-v1.json` must pass.
 
 ## Information boundary
@@ -217,3 +248,166 @@ Source stayed frozen for the three flights; no scoring threshold was changed.
 The first layout remains a planning/coverage failure despite accurate tracking.
 This suite is failed overall and does not establish 95% reliability. Host
 connection work proceeds under the completed development-70 functional gate.
+
+## 24 October continuation: qualification-10 and the bounded view discount
+
+Qualification-04 to -09 and development-73 to -79 are summarised in
+[pre-hardware preparation](pre-hardware-six.md). Qualification-10 finished **1/3**
+on frozen predeclared layouts:
+
+| Seed | Coverage | False free | Position RMSE | Return error | Result |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 21991 | 56.81% | 0.27% | 4.53 cm | 7.41 cm | Failed coverage and 59.22% boundary recall |
+| 21992 | 84.73% | 1.02% | 3.37 cm | 6.64 cm | Passed every gate |
+| 21993 | 82.11% | 0.65% | 5.20 cm | 8.31 cm | Passed every gate |
+
+All three returned, landed, persisted evidence and recorded zero contacts.
+Every generated workshop shares a 12 × 10 m floor divided by a partition at
+x = 6 m with one 2 m opening. Passing flights in qualification-08 to -10 mapped
+69–79% of the far room; 21991 mapped 16% and 19771 (qualification-08) 28%.
+In 21991 the aircraft stood in the opening twice, around 100–117 s and
+130–137 s. Floor beyond the opening was observed as a free strip, but the
+1.35–1.65 m flight band through it never accumulated two free rays per voxel,
+so no collision-clear viewpoint existed past about 4.3 m launch-local x. The
+67 unresolved doorway cells had 7.4 recorded view attempts on average (maximum
+16): transit frames and the two stations of every sensing translation all
+count. The `1/(1+4n)` discount reduced their combined information value from
+41.3 to 1.36. At planning record 13 the best candidate was a 7.4 m detour to the
+first room's far corner (score 1.04) against the 0.6 m doorway view (0.81). The
+flight spent its remaining battery in the first room's south strip, with four
+tracking recoveries facing blank walls, and stopped on the battery return
+reserve at 283 s.
+
+The repeated-view discount in `app/frontier_planner.py` is now bounded:
+`interest /= 1 + 4·min(n, 2)`, a floor of one ninth. Two failed attempts mark a
+region as hard; further attempts no longer push a still-unresolved region below
+other unresolved regions, so ranking stays information-driven. Station
+suppression, travel cost and visit counts still deter re-sensing from the same
+place, and nothing here grants clearance or changes occupancy, sensors, speed,
+battery reserve or scoring. A counterfactual replay of 21991's recorded planning
+grids (not a flight) selects the opening at records 9 and 13 (5.23 versus 5.10 and
+2.14 versus 1.24) and leaves record 12 unchanged. Alternatives were compared on
+the same records: removing the discount, capping it at one attempt, or using
+square-root and linear forms all also select the opening at record 13 but change
+more of the recorded decisions in passing flights. A regression test fixes the
+bound. The exposed layout 21991 is development data from here on.
+
+Development-80 reran 21991 with the bounded discount and **passed every gate**:
+80.57% coverage, 1.09% false free space, 3.38 cm pose RMSE, 7.72 cm return
+error, zero contacts, landing and persistence; 56 observations in 275 s, one
+tracking recovery, 67% of the far room mapped. Same scene, aircraft, battery,
+camera, clearance policy and acceptance criteria as the failed flight. Because
+the layout informed the change, this is a development result. The unchanged
+implementation is frozen for `qualification-11`, predeclared with fresh layouts
+**23101, 23102, 23103** before observing their results; all three stay in the
+denominator.
+
+Qualification-11 finished **2/3**; the source hash set was verified unchanged
+after the third flight:
+
+| Seed | Coverage | False free | Position RMSE | Return error | Far room mapped | Result |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 23101 | 82.83% | 1.34% | 3.50 cm | 10.17 cm | 76% | Passed every gate |
+| 23102 | 75.04% | 1.90% | 2.80 cm | 6.65 cm | 73% | Failed coverage only; first room 77% |
+| 23103 | 80.47% | 1.18% | 5.76 cm | 9.53 cm | 66% | Passed every gate |
+
+All three returned, landed, persisted evidence and recorded zero contacts, each
+stopping on the battery return reserve near 280 s. The partition opening was
+crossed in every flight, so the bounded discount removed that failure mode in
+this batch, but 23102 left 23% of its first room unmapped. This suite is failed
+overall and does not establish a reliability percentage.
+
+23102's planning records show the cost of the bound. After three decisions in
+the far room it returned to the first room, then chose thirteen consecutive
+short views of the south-wall strip between 153 s and 217 s: 134 floor cells
+beside a blank wall, 55 of which never received a single flight-band ray and
+whose attempt counts reached 27. Each view promised about ten units of
+information at short range and delivered none. The unbounded discount had been
+doing two jobs: discouraging redundant sensing and ending fruitless local
+loops; the bound kept the first and removed the second.
+
+The rule is therefore progress-aware. `RaycastMap` accumulates `band_evidence`,
+the free-ray magnitude through the 1.35–1.65 m band of each cell, and
+`record_view_attempt` compares it with the value at the cell's previous attempt:
+a view that added rays resets the count to one, a view that added nothing
+increments it, and the original `1/(1+4n)` decay applies to that stale count.
+A doorway that is still filling in keeps its information value; a blank strip is
+deprioritised after a few fruitless views. The one-cell uncertain ring around
+observed surfaces clears only when later rays clear the surface itself, so it
+now carries no view priority. Both grids are frozen for planning, written to
+every planning audit and to `map-grid.npz`. Nothing here changes occupancy,
+clearance, sensors, speed, battery reserve or scoring; 321 regressions pass.
+
+Development-81 reran 23102 with this rule and **passed every gate**: 83.53%
+coverage, 1.93% false free space, 6.92 cm pose RMSE, 14.19 cm return error,
+zero contacts, landing and persistence; 49 observations, 79% of the far room
+and 88% of the first room, no tracking recovery, five south-wall views.
+Development-82 reran 21991 and **passed**: 81.95% coverage, 0.97% false free,
+4.83 cm pose RMSE, 16.59 cm return error, zero contacts, 74% of the far room.
+Both layouts informed the change, so both are development results. The
+unchanged implementation is frozen for `qualification-12`, predeclared with
+fresh layouts **24211, 24212, 24213** before observing their results.
+
+Qualification-12 finished **3/3**, with the source hash set verified unchanged
+after the third flight:
+
+| Seed | Coverage | False free | Position RMSE | Return error | Far room mapped | Result |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| 24211 | 82.06% | 1.66% | 7.38 cm | 2.71 cm | 80% | Passed every gate |
+| 24212 | 81.99% | 1.38% | 4.21 cm | 6.97 cm | 71% | Passed every gate |
+| 24213 | 83.75% | 1.65% | 4.12 cm | 7.37 cm | 74% | Passed every gate |
+
+All three returned, landed, persisted evidence and recorded zero contacts,
+stopping on the battery return reserve. This is the first predeclared suite to
+pass completely. It is three flights on synthetic layouts with provisional
+sensors; it does not establish a reliability percentage, physical readiness or
+8 GB operation, and every earlier failed suite remains in the record.
+
+The unchanged implementation is frozen for `qualification-13`, a ten-layout
+reliability suite predeclared with fresh seeds **25321–25330** before observing
+any result. It is accepted only if all ten flights pass every unchanged gate;
+every planned flight stays in the denominator.
+
+Qualification-13 finished **8/10**, source verified unchanged after the tenth
+flight:
+
+| Seed | Coverage | False free | Position RMSE | Return error | Result |
+| --- | ---: | ---: | ---: | ---: | --- |
+| 25321 | 78.06% | 0.75% | 2.7 cm | 6.4 cm | Failed coverage only |
+| 25322 | 85.88% | 1.17% | 5.1 cm | 12.3 cm | Passed |
+| 25323 | 82.83% | 1.27% | 4.7 cm | 6.8 cm | Passed |
+| 25324 | 84.41% | 1.38% | 3.1 cm | 5.9 cm | Passed |
+| 25325 | 86.14% | 1.59% | 5.6 cm | 7.0 cm | Passed |
+| 25326 | 81.72% | 1.92% | 3.6 cm | 5.2 cm | Passed |
+| 25327 | 82.37% | 1.14% | 2.5 cm | 7.4 cm | Passed |
+| 25328 | 51.88% | 0.41% | 3.0 cm | 9.8 cm | Failed coverage and 62.3% boundary recall |
+| 25329 | 84.07% | 1.64% | 3.3 cm | 4.1 cm | Passed |
+| 25330 | 82.53% | 0.92% | 3.9 cm | 5.6 cm | Passed |
+
+All ten returned, landed, persisted evidence and recorded zero contacts. 25328
+reached the opening twice without the flight band through it becoming
+navigable and mapped 7% of the far room; 25321 mapped 73% of the far room and
+83% of the first room. The suite is failed; both failures are retained.
+
+Diagnosis of 25328 from its planning audits, which now record flight-band
+evidence: the opening was filling in on every visit (navigable cells in the
+2 × 2.2 m doorway box rose 42 → 54 → 64 → 92 across the two approaches) but each
+hover station clears the band only about 0.85 m ahead in open space, because
+band cells farther ahead need near-horizontal rays ending on textured vertical
+surfaces, and floor or ceiling rays cross the band only close to the camera.
+The crawl therefore earned 3–13 units of information per step while fresh first-
+room areas offered 24–63, so the planner left at 120 s, returned at 172 s and ran
+out of battery crawling. A replay of its decisions under frontier-style values
+for unknown space bordering observed floor (weights 0.1–0.5, reach 0.6–3 m)
+changed none of the four decisive choices while altering 16–53% of the 319
+recorded decisions in the eleven passing flights of qualifications 12–13, so
+planner valuation is not the lever. The remaining software item for exploration
+is faster flight-band clearance through open doorways, a perception/sensing-
+motion change, not a planner weight. Over the two suites flown with the current
+rule, **11 of 13** fresh predeclared layouts passed every gate, no flight in any
+suite has recorded a contact, and every failure was coverage, never safety.
+
+Probe scripts for these replays are kept with the earlier ones under
+`.local/maintenance/` (`attempt-discount-probe.py`, `interest-breakdown-probe.py`,
+`frontier-valuation-probe.py`); the saved counterfactual record is
+`.local/validation/attempt-discount-diagnostic.json`.

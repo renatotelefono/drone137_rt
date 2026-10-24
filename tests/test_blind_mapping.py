@@ -8,6 +8,26 @@ from app.place_memory import PlaceMemory
 
 
 class TransitTests(unittest.IsolatedAsyncioTestCase):
+    async def test_interpretation_disconnect_preserves_image_and_propagates_failure(self):
+        from aiohttp import ServerDisconnectedError
+        from unittest.mock import AsyncMock
+        from types import SimpleNamespace
+        from scripts.explore_unknown import journal_observation
+        with tempfile.TemporaryDirectory() as folder:
+            memory=PlaceMemory(Path(folder)/'places.sqlite3');visit='a'*32
+            memory.begin('room','Room',visit)
+            mapping=SimpleNamespace(semantic_views=[])
+            model=SimpleNamespace(image=AsyncMock(side_effect=ServerDisconnectedError()))
+            entry=dict(sequence=1,observation=None,pose={'position':[0,0,1.5],'quaternion':[0,0,0,1]},capture_time_s=1.)
+            with self.assertRaises(ServerDisconnectedError):
+                await journal_observation(model,memory,mapping,visit,entry,b'recorded-camera-bytes',True,{})
+            saved=memory.recall('room')['visits'][0]['observations']
+            self.assertEqual(len(saved),1)
+            self.assertIsNone(saved[0]['observation'])
+            self.assertEqual(saved[0]['interpretation_error'],'ServerDisconnectedError')
+            self.assertEqual(mapping.semantic_views,[])
+            self.assertEqual(model.image.await_count,1)
+
     async def test_native_ground_correction_cannot_be_reenabled_after_liftoff(self):
         from app.visual_inertial import VisualInertial,ROOT
         if not (ROOT/'.local/build/openvins/drone137_openvins').is_file():
@@ -37,6 +57,28 @@ class TransitTests(unittest.IsolatedAsyncioTestCase):
                             ('gravity_disagreement_deg',1.1),('position_std_m',float('nan'))]:
             self.assertFalse(initialization_ready(dict(quality,**{field:value}),10.1),(field,value))
         self.assertFalse(initialization_ready(None,10.1))
+
+    def test_observed_transit_views_are_deduplicated_without_changing_clearance(self):
+        import numpy as np
+        from app.frontier_planner import record_observed_view
+        from app.voxel_mapping import RaycastMap
+        m=RaycastMap()
+        original=m.flight_clear.copy()
+        self.assertTrue(record_observed_view(m,[0,0,1.5],0))
+        before=m.view_attempts.copy()
+        self.assertFalse(record_observed_view(m,[.1,0,1.5],.1))
+        np.testing.assert_array_equal(before,m.view_attempts)
+        self.assertTrue(record_observed_view(m,[.4,0,1.5],0))
+        np.testing.assert_array_equal(original,m.flight_clear)
+        self.assertEqual(len(m.explored_views),2)
+
+    def test_comparable_information_prefers_substantially_shorter_cleared_route(self):
+        from app.frontier_planner import choose_frontier
+        far=dict(score=.218,path_distance_m=12.6,viewpoint=[0,3.2],view_heading_rad=5.)
+        local=dict(score=.195,path_distance_m=7.35,viewpoint=[9.5,3.2],view_heading_rad=6.)
+        self.assertIs(choose_frontier([far,local],[6.1,7.1],3.4),local)
+        self.assertIs(choose_frontier([far,dict(local,score=.15)],[6.1,7.1],3.4),far)
+        self.assertIs(choose_frontier([far],[6.1,7.1],3.4),far)
 
     def test_frontier_commitment_is_bounded_and_cannot_restore_a_rejected_route(self):
         from app.frontier_planner import choose_frontier
@@ -323,6 +365,62 @@ class GeometryTests(unittest.TestCase):
         m.logodds[cell]=-2;m.flight_clear[cell]=True
         self.assertEqual(exploration_interest(m)[cell],0)
 
+    def test_fruitless_repeated_views_discount_but_new_band_evidence_resets_attempts(self):
+        import numpy as np
+        from app.voxel_mapping import RaycastMap
+        from app.frontier_planner import exploration_interest, record_view_attempt
+        m=RaycastMap();x,y=(np.indices(m.logodds.shape)+.5)*m.resolution-m.extent
+        # Observed floor continues through an opening whose flight volume is unresolved.
+        passage=(x>.5)&(x<1.5)&(np.abs(y)<.5)
+        m.ground[passage]=3;m.seen[passage]=3
+        cell=m.cell([1,0])
+        raw=float(exploration_interest(m)[cell])
+        self.assertGreater(raw,0)
+        for _ in range(3):record_view_attempt(m,[0,0,1.5],0)
+        self.assertEqual(int(m.view_attempts[cell]),3)
+        self.assertAlmostEqual(float(exploration_interest(m)[cell]),raw/13,places=6)
+        # A free ray through the flight band is new evidence: the next view counts as the first attempt.
+        m.band_evidence[cell]+=.4
+        record_view_attempt(m,[0,0,1.5],0)
+        self.assertEqual(int(m.view_attempts[cell]),1)
+        self.assertAlmostEqual(float(exploration_interest(m)[cell]),raw/5,places=6)
+        # Another fruitless view resumes the count; a far cell behind a wall is untouched.
+        record_view_attempt(m,[0,0,1.5],0)
+        self.assertEqual(int(m.view_attempts[cell]),2)
+        self.assertEqual(int(m.view_attempts[m.cell([5,5])]),0)
+        # Priority never grants clearance: the passage remains unknown for navigation.
+        self.assertFalse(m.clear([1,0]))
+        self.assertFalse(m.flight_clear[passage].any())
+
+    def test_flight_band_rays_accumulate_band_evidence_without_clearing_early(self):
+        import numpy as np
+        from app.voxel_mapping import RaycastMap
+        m=RaycastMap();cell=m.cell([1,0])
+        free=np.array([np.ravel_multi_index((cell[0],cell[1],z),m.voxels.shape) for z in (10,11)])
+        empty=np.zeros((0,2),int)
+        m.integrate_prepared((free,np.array([],int),empty,np.zeros((0,3))),np.array([0,0,1.5]),[0,0,1.5])
+        self.assertAlmostEqual(float(m.band_evidence[cell]),.8,places=6)
+        self.assertFalse(m.flight_clear[cell])
+        m.integrate_prepared((free,np.array([],int),empty,np.zeros((0,3))),np.array([.1,0,1.5]),[.1,0,1.5])
+        self.assertAlmostEqual(float(m.band_evidence[cell]),1.6,places=6)
+        self.assertTrue(m.flight_clear[cell])
+
+    def test_uncertain_ring_around_a_surface_has_no_view_priority_and_stays_unknown(self):
+        import numpy as np
+        from app.voxel_mapping import RaycastMap
+        from app.frontier_planner import exploration_interest
+        m=RaycastMap();x,y=(np.indices(m.logodds.shape)+.5)*m.resolution-m.extent
+        floor=(np.abs(x)<1.5)&(np.abs(y)<1.5)
+        m.ground[floor]=3;m.seen[floor]=3
+        wall=m.cell([1,0]);m.logodds[wall]=2.
+        interest=exploration_interest(m)
+        ring=m.cell([1,.15])
+        self.assertEqual(interest[wall],0)
+        self.assertEqual(interest[ring],0)
+        self.assertGreater(interest[m.cell([0,0])],0)
+        self.assertFalse(m.clear([1,.15]))
+        self.assertGreaterEqual(m.logodds[ring],-.3)
+
     def test_visibility_ray_does_not_skip_a_nearby_wall(self):
         import numpy as np
         from app.frontier_planner import visibility_rewards
@@ -446,6 +544,26 @@ class GeometryTests(unittest.TestCase):
             mapping.integrate_cloud(floor,np.array([offset,0,.3]),[offset,0,.3])
         self.assertGreater(np.count_nonzero(mapping.ground),0)
         self.assertFalse(np.any(mapping.logodds<-.3))
+
+    def test_observed_surface_boundary_stays_unknown_until_surface_is_cleared(self):
+        import numpy as np
+        from app.voxel_mapping import RaycastMap
+        mapping=RaycastMap();c=mapping.cell([0,0])
+        mapping.voxels[c[0]-3:c[0]+4,c[1]-3:c[1]+4,6:12]=-2
+        mapping.voxels[c][8]=2
+        empty=(np.array([],dtype=int),np.array([],dtype=int),
+               np.empty((0,2),dtype=int),np.empty((0,3)))
+        mapping.integrate_prepared(empty,np.array([0,0,1.5]),[0,0,1.5])
+        self.assertGreater(mapping.logodds[c],.5)
+        for dx,dy in ((1,0),(0,1),(1,1),(-1,-1)):
+            self.assertEqual(mapping.logodds[c[0]+dx,c[1]+dy],0)
+        self.assertLess(mapping.logodds[c[0]+2,c[1]],-.3)
+        self.assertEqual(mapping.logodds[c[0]+5,c[1]],0)
+        self.assertFalse(mapping.clear(mapping.xy((c[0]+1,c[1])),radius=0))
+        mapping.voxels[c][8]=-2
+        mapping.integrate_prepared(empty,np.array([.1,0,1.5]),[.1,0,1.5])
+        self.assertLess(mapping.logodds[c[0]+1,c[1]],-.3)
+        self.assertEqual(mapping.logodds[c[0]+5,c[1]],0)
 
     def test_visible_floor_under_table_does_not_erase_the_table(self):
         import numpy as np

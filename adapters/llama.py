@@ -44,7 +44,11 @@ class LlamaBackend:
     async def _session(self):
         if self.session is None:
             self.session = aiohttp.ClientSession(
-                timeout=aiohttp.ClientTimeout(total=self.timeout), trust_env=False)
+                timeout=aiohttp.ClientTimeout(total=self.timeout), trust_env=False,
+                # Inspections can be farther apart than the model server's
+                # keep-alive timeout. Avoid reusing a closing idle socket for
+                # a POST; do not retry uncertain in-flight inference requests.
+                connector=aiohttp.TCPConnector(force_close=True))
         return self.session
 
     async def health(self):

@@ -63,6 +63,22 @@ class AircraftLinkTests(unittest.IsolatedAsyncioTestCase):
         self.link.last_imu_us=1
         with self.assertRaisesRegex(ProtocolError,'overrun'):await self.link.imu()
 
+    async def test_reconnection_starts_at_newest_continuous_sensor_history(self):
+        from unittest.mock import AsyncMock
+        now=int(self.link.device_time())
+        samples=[dict(time_us=t,gyro_flu_rad_s=[0,0,0],specific_force_flu_m_s2=[0,0,9.8]) for t in (now-60000,now-5000,now)]
+        self.link.request=AsyncMock(return_value=dict(boot_id=self.link.boot_id,overrun=False,oldest_time_us=now-60000,samples=samples))
+        result=await self.link.imu()
+        self.assertEqual(result['initial_history_discarded_samples'],1)
+        self.assertEqual(len(result['samples']),2)
+        self.assertEqual(result['oldest_time_us'],now-5000)
+
+    async def test_internal_imu_gap_is_rejected_even_without_overrun_flag(self):
+        from unittest.mock import AsyncMock
+        now=int(self.link.device_time());self.link.last_imu_us=now-30000
+        self.link.request=AsyncMock(return_value=dict(boot_id=self.link.boot_id,overrun=False,samples=[dict(time_us=now,gyro_flu_rad_s=[0,0,0],specific_force_flu_m_s2=[0,0,9.8])]))
+        with self.assertRaisesRegex(ProtocolError,'sample gap'):await self.link.imu()
+
     async def test_expired_and_replayed_images_never_reach_model_consumer(self):
         self.emulator.frame_age_us=500_000
         with self.assertRaisesRegex(ProtocolError,'Stale'):await self.link.capture()

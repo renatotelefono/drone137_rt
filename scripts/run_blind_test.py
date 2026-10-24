@@ -4,6 +4,7 @@ import asyncio
 import hashlib
 import importlib.util
 import json
+import shutil
 from pathlib import Path
 import sys
 
@@ -12,7 +13,12 @@ ROOT=Path(__file__).resolve().parents[1]
 
 async def trial(args):
     folder=Path(args.output).resolve()
+    folder.parent.mkdir(parents=True,exist_ok=True)
+    if shutil.disk_usage(folder.parent).free < 3*1024**3:
+        raise RuntimeError('Need at least 3 GiB free before starting a recorded flight')
     folder.mkdir(parents=True,exist_ok=False)
+    active_recording=folder/'.recording-active'
+    active_recording.touch()
     audit=folder/'evaluation-source';audit.mkdir()
     hashes={}
     for source in ('scripts/score_blind_exploration.py','scripts/run_blind_test.py','config/blind-exploration-v1.json'):
@@ -83,6 +89,16 @@ async def trial(args):
                     except psutil.NoSuchProcess:pass
                 if plant.returncode is None:plant.terminate()
                 await plant.wait()
+        # Capture has ended. Share byte-identical frames without removing any
+        # failed result, video, image path or unique sensor evidence.
+        active_recording.unlink(missing_ok=True)
+        from scripts.compact_recording import compact
+        try:
+            storage=await asyncio.to_thread(compact,folder)
+            print(json.dumps({'recording_storage':storage}),flush=True)
+        except Exception as exc:
+            (folder/'recording-storage-error.json').write_text(json.dumps({'error':str(exc)}))
+            print('Recording storage compaction failed: '+str(exc),file=sys.stderr,flush=True)
 
 
 if __name__=='__main__':

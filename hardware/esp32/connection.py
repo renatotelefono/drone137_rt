@@ -16,6 +16,7 @@ class AircraftConnection:
         self.identity = record['id']
         self.kind = record['kind']
         self.link = AircraftLink(record['endpoint'], record['fingerprint'], record['credential'], 'drone137')
+        self.emergency_endpoint = self.link.url
         self.state = 'disconnected'
         self.error = None
         self.hello = None
@@ -38,6 +39,7 @@ class AircraftConnection:
         try:
             self.hello = await self.link.start()
             self.check_identity(self.hello)
+            self.emergency_endpoint = self.link.emergency_url
             self.frame = await self.link.capture()
             self.frame_received = time.monotonic()
             await self.read_imu()
@@ -129,13 +131,19 @@ class AircraftConnection:
                 'clock_uncertainty_ms': (self.link.uncertainty_us / 1000
                                           if self.link.uncertainty_us is not None else None),
                 'mission_ready': False,
-                'mission_blocker': 'Flight firmware and physical navigation integration are pending'}
+                'firmware': hello.get('firmware'),
+                'commissioned': hello.get('commissioned',False),
+                'restrained_rig': hello.get('restrained_rig',False),
+                'bench_motor_tests': hello.get('bench_motor_tests',False),
+                'calibrated': hello.get('calibrated',False),
+                'controller': hello.get('controller'),
+                'mission_blocker': 'Physical commissioning, tuned flight control and calibrated navigation are pending'}
 
     async def stop(self, operation='land'):
         if operation not in ('land', 'disarm'):
             raise ProtocolError('Unknown stop action')
         # This fresh channel can also reconnect after a failed sensor monitor.
-        emergency = AircraftLink(self.link.url, self.link.fingerprint.fingerprint.hex(),
+        emergency = AircraftLink(self.emergency_endpoint, self.link.fingerprint.fingerprint.hex(),
                                  self.link.credential, 'drone137-stop')
         try:
             hello = await emergency.start()

@@ -1,0 +1,112 @@
+{
+  "status": "mesh_checks_passed",
+  "scope": "Nominal geometry only; print fit, flex, actual mass, wire routing and material properties unmeasured",
+  "models": [
+    {
+      "file": "battery-cradle-a.stl",
+      "sha256": "3fd2c6acc83012f3315158f518375f7876a01f99101ffc17adf84074b8573994",
+      "triangles": 132,
+      "nonmanifold_edges": 0,
+      "connected_components": 1,
+      "bounds_mm": [
+        [
+          -10.0,
+          -32.0,
+          0.0
+        ],
+        [
+          10.0,
+          32.0,
+          4.0
+        ]
+      ],
+      "solid_volume_mm3": 1632.8,
+      "solid_PETG_mass_g_estimate": 2.073656
+    },
+    {
+      "file": "camera-cradle-a.stl",
+      "sha256": "0cc0cd76c8ef3bc500dd118b3c1b252faedeb86da34d94dc8d3c6a603a2e7849",
+      "triangles": 372,
+      "nonmanifold_edges": 0,
+      "connected_components": 1,
+      "bounds_mm": [
+        [
+          -14.0,
+          -5.0,
+          0.0
+        ],
+        [
+          14.0,
+          5.0,
+          24.0
+        ]
+      ],
+      "solid_volume_mm3": 1448.8717566368998,
+      "solid_PETG_mass_g_estimate": 1.8400671309288628
+    },
+    {
+      "file": "electronics-bridge-a.stl",
+      "sha256": "63db37cc158bab8d147a2c72c6f4428cc86423c09cae2b2a42236cb12bb060c4",
+      "triangles": 1692,
+      "nonmanifold_edges": 0,
+      "connected_components": 1,
+      "bounds_mm": [
+        [
+          -20.5,
+          -20.0,
+          0.0
+        ],
+        [
+          20.5,
+          19.5,
+          16.0
+        ]
+      ],
+      "solid_volume_mm3": 2263.823388541618,
+      "solid_PETG_mass_g_estimate": 2.8750557034478548
+    },
+    {
+      "file": "imu-tray-a.stl",
+      "sha256": "2b886d55cb15357a67704193c450975ed3dc25022b10fa5a874aacc1cba0c652",
+      "triangles": 68,
+      "nonmanifold_edges": 0,
+      "connected_components": 1,
+      "bounds_mm": [
+        [
+          -12.0,
+          -9.5,
+          0.0
+        ],
+        [
+          12.0,
+          9.5,
+          3.0
+        ]
+      ],
+      "solid_volume_mm3": 586.8000000000001,
+      "solid_PETG_mass_g_estimate": 0.7452360000000001
+    },
+    {
+      "file": "scout-frame-a.stl",
+      "sha256": "67e647d71189075bae0fb6ff40af7a919ee95c5a36635d8e4c3ff773e51504e5",
+      "triangles": 5524,
+      "nonmanifold_edges": 0,
+      "connected_components": 1,
+      "bounds_mm": [
+        [
+          -74.0909,
+          -74.0909,
+          -17.0
+        ],
+        [
+          74.0909,
+          74.0909,
+          16.0
+        ]
+      ],
+      "solid_volume_mm3": 13836.02086926849,
+      "solid_PETG_mass_g_estimate": 17.57174650397098
+    }
+  ],
+  "total_solid_PETG_mass_g_estimate": 25.105761338347698
+}

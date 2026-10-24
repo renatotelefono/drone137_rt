@@ -1,0 +1,1 @@
+(footprint "WirePad_2.8_1.2" (version 20241229) (generator "drone137") (layer "F.Cu") (pad "1" thru_hole circle (at 0 0) (size 2.8 2.8) (drill 1.2) (layers "*.Cu" "*.Mask")))

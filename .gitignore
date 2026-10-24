@@ -19,3 +19,7 @@ model-*-of-*.bin
 
 # Local camera network credentials; never include in build packages.
 hardware/esp32/camera_bench/config.h
+hardware/esp32/flight/config.h
+
+# Per-user KiCad editor state; keep the shared project and design files.
+*.kicad_prl

@@ -120,7 +120,7 @@ def seeds():
         configs.append(variant)
     bench = copy.deepcopy(next(c for c in configs if c['id']=='scout-110'))
     bench.update(id='scout-110-bench-b', name='Scout 110-B / commercial parts bench prototype',
-        notes='See hardware/esp32/indoor/scout-110-bench/README.md. Single purchased BETAFPV 450 mAh pack limited to 4.2 V, UTM 8520 motors and HQProp 65 mm props. Camera-only firmware exists; flight firmware/carrier/localization and measured propulsion are outstanding. Does not inherit power-v2 mission qualification.')
+        notes='See hardware/esp32/indoor/scout-110-bench/README.md. Single purchased BETAFPV 450 mAh pack limited to 4.2 V, UTM 8520 motors and HQProp 65 mm props. Prototype flight firmware and carrier files now exist; physical tuning, calibrated localization and measured propulsion remain outstanding. The revised printable stack must be weighed; this historical mass hypothesis is not its as-built mass. Does not inherit power-v2 mission qualification.')
     bench['components'].update(propulsion='utm8520-hq65-bench@1', battery='betafpv450-4v2-bench@1')
     configs.append(bench)
     return copy.deepcopy(components),configs

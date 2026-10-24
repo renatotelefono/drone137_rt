@@ -3,6 +3,7 @@ import argparse
 import asyncio
 import hashlib
 import json
+import shutil
 from pathlib import Path
 import sys
 import time
@@ -46,6 +47,10 @@ async def run(args):
     for entry in report['results']:
         if sources() != frozen:
             report['error'] = 'Source changed during qualification; remaining layouts not run'
+            save()
+            break
+        if shutil.disk_usage(folder).free < 3*1024**3:
+            report['error'] = 'Insufficient recording storage; remaining layouts not run'
             save()
             break
         seed = entry['seed']

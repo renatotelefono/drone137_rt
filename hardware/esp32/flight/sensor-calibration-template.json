@@ -1,0 +1,11 @@
+{
+  "device_id": "REPLACE",
+  "source_kind": "unmeasured",
+  "passed": false,
+  "camera_to_imu_time_offset_us": null,
+  "launch_imu_height_m": null,
+  "optics": {"width": 640, "height": 480, "fx": null, "fy": null, "cx": null, "cy": null, "distortion": [null,null,null,null,null]},
+  "mount": {"pitch_degrees": null, "roll_degrees": 0, "yaw_degrees": 0, "body_offset_flu_m": [null,null,null]},
+  "evidence": {"intrinsic_calibration_file": "", "mount_measurement_file": "", "timing_measurement_file": ""},
+  "note": "This template is intentionally rejected by replay. Populate measured values; never substitute simulator calibration."
+}

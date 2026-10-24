@@ -2,8 +2,8 @@
 
 This is the reference section for comparing Drone137's existing tests with the
 first physical Scout 110-B. **No real-drone measurements have been recorded.**
-All numbers below are historical simulation or host-software results, not new
-flights performed while preparing this document.
+The 23 October baseline is frozen. The separate 24 October update below adds
+new software builds and synthetic flights, while retaining the earlier failures.
 
 The [frozen pre-hardware JSON snapshot](test-data/pre-hardware-2026-10-23.json)
 contains exact values, individual outcomes, gates, configuration/model/source
@@ -15,7 +15,73 @@ The [physical-run template](test-data/hardware-run-template.json) provides the
 matching measurement fields. Its `not_run` state and `null` measurements are
 intentional. A missing measurement is not zero, and a template is not a test pass.
 
-## Results available now
+## Six-item preparation update — 24 October
+
+[Implementation and build package](pre-hardware-six.md) ·
+[Machine-readable new evidence](test-data/pre-hardware-six-2026-10-24.json).
+
+- **318/318 Python tests** pass, including the shared onboard controller and host
+  connection/fault/recording contracts. These are test cases, not flight counts.
+- **19/19 blind/component JavaScript tests and 6/6 mission-physics checks** pass.
+  The first combined runner invocation missed the mission input argument;
+  that error is retained separately from the corrected passing mission run.
+- Safe and restrained ESP32 builds compile. The shared C++ controller has its
+  own attitude-plant/TLS tests; the exploration flights below use the existing
+  Rapier controller. Neither path is a physical flight.
+- Carrier DRC/ERC have zero violations; 65 schematic/PCB pins match. Five
+  printable meshes are closed/connected. Actual fit, mass, temperature, supply
+  performance and MCU control/camera timing remain unmeasured.
+- Qualification-04 finished **1/3** (including a disk-full failure).
+  Qualification-05 finished **2/3**. Those layouts became development data;
+  subsequent fixes do not replace their original results.
+
+Qualification-06 finished **2/3** on predeclared layouts **17551, 17552, 17553**.
+Coverage was 83.07%, 84.01% and 81.34%; the third failed after a model caption
+connection error, landing away from launch and missing a journal entry. That
+run remains failed. Development-76 passed after the transport/journal changes;
+qualification-07 finished **2/3** on frozen seeds 18661/18662/18663. Its third
+flight failed only false-free space (5.02197% versus a 5% maximum); all three
+returned and landed without contact. That failure is retained. The new
+mechanical stack and the physical VGA camera are not matched to these historical
+simulation assumptions; measured component and sensor revisions are still needed.
+
+The subsequent suites retain their original gates and complete denominators:
+
+| Suite | Fresh layouts | Result | Failure retained |
+| --- | --- | --- | --- |
+| Qualification-08 | 19771 / 19772 / 19773 | 2/3 | First room: 63.39% coverage; all landed without contact |
+| Qualification-09 | 20881 / 20882 / 20883 | 2/3 | First room: link watchdog latched, off-launch landing; no contact |
+| Qualification-10 | 21991 / 21992 / 21993 | 1/3 | First room: 56.81% coverage, 59.22% boundary recall; flight band through the partition opening never cleared; all landed without contact |
+| Qualification-11 | 23101 / 23102 / 23103 | 2/3 | Second room: 75.04% coverage only (first room 77% mapped); all crossed the opening and landed without contact |
+| Qualification-12 | 24211 / 24212 / 24213 | **3/3** | Coverage 82.06% / 81.99% / 83.75%; all crossed the opening, landed without contact; source verified unchanged |
+| Qualification-13 | 25321 – 25330 (ten) | 8/10 | 25321: 78.06% coverage; 25328: 51.88% coverage, opening never navigable; all ten landed without contact |
+
+Development-78 passed the exposed coverage failure after exact voxel-ray
+traversal replaced fixed-distance sampling. Development-79 passed the exposed
+watchdog room after diagnostic I/O moved outside the control event loop:
+83.19% coverage, 1.95% false free, 2.99 cm pose RMSE, 4.88 cm return error,
+zero contacts, landed/persisted. Its maximum command acknowledgement interval
+was 255 ms. The old watchdog's precise cause was not captured; a passing rerun
+is not proof of causation. Development runs are excluded from qualification rates.
+Qualification-10's failed room reached the partition opening twice but its
+repeated-view discount, inflated by transit frames, left the unresolved doorway
+at about 1/30 of its information value; the discount is now bounded at two
+attempts. Occupancy, clearance and every gate are unchanged. Development-80
+passed that exposed room with the bound: 80.57% coverage, 1.09% false free,
+3.38 cm pose RMSE, 7.72 cm return error, zero contacts, landed/persisted.
+Qualification-11's failed room then exposed the bound's cost, thirteen
+fruitless views of a blank wall strip, so view attempts are now progress-aware:
+they count only while a view adds no flight-band evidence and reset on
+progress. Development-81 (83.53%) and development-82 (81.95%) pass both exposed
+rooms with that rule; both are development results. Qualification-12 then
+passed 3/3 on fresh predeclared layouts with frozen source: the first complete
+suite pass. Qualification-13 then passed 8/10 on ten fresh layouts, 11 of 13
+under the current rule; the two coverage failures are retained and the 25328
+mechanism, slow flight-band clearance through an open doorway, is recorded as
+the remaining software item for exploration.
+No room difficulty, flight deadline, battery reserve or acceptance gate changed.
+
+## Historical results frozen on 23 October
 
 | Test | Recorded result | What the denominator means | Real drone |
 | --- | --- | --- | --- |
@@ -29,7 +95,7 @@ intentional. A missing measurement is not zero, and a template is not a test pas
 
 Do not add these counts into one success rate. Known-map navigation, blind
 exploration, image recognition and software regressions answer different questions.
-The latest blind suite remains failed overall. The 24/24 result does not override
+The historical blind suite failed overall. The 24/24 result does not override
 the low-battery failure or establish 95% reliability in unfamiliar real rooms.
 
 ## Scout 110-B physical behavior baseline

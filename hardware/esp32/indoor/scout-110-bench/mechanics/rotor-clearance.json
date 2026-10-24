@@ -1,0 +1,36 @@
+{
+  "passed": true,
+  "scope": "Rigid STL surfaces against a 65 mm rotor disk expanded vertically to Z=11\u201313 mm. No actual blade flex, shaft alignment, wiring or print tolerance measurement.",
+  "checks": [
+    {
+      "part": "scout-frame-a",
+      "mesh_sha256": "67e647d71189075bae0fb6ff40af7a919ee95c5a36635d8e4c3ff773e51504e5",
+      "minimum_radial_margin_in_rotor_z11_to13_mm": 1.4271743421804501,
+      "passed": true
+    },
+    {
+      "part": "electronics-bridge-a",
+      "mesh_sha256": "63db37cc158bab8d147a2c72c6f4428cc86423c09cae2b2a42236cb12bb060c4",
+      "minimum_radial_margin_in_rotor_z11_to13_mm": 7.4491990220244375,
+      "passed": true
+    },
+    {
+      "part": "camera-cradle-a",
+      "mesh_sha256": "0cc0cd76c8ef3bc500dd118b3c1b252faedeb86da34d94dc8d3c6a603a2e7849",
+      "minimum_radial_margin_in_rotor_z11_to13_mm": null,
+      "passed": true
+    },
+    {
+      "part": "imu-tray-a",
+      "mesh_sha256": "2b886d55cb15357a67704193c450975ed3dc25022b10fa5a874aacc1cba0c652",
+      "minimum_radial_margin_in_rotor_z11_to13_mm": null,
+      "passed": true
+    },
+    {
+      "part": "battery-cradle-a",
+      "mesh_sha256": "3fd2c6acc83012f3315158f518375f7876a01f99101ffc17adf84074b8573994",
+      "minimum_radial_margin_in_rotor_z11_to13_mm": null,
+      "passed": true
+    }
+  ]
+}

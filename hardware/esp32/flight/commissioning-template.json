@@ -1,0 +1,20 @@
+{
+  "device_id": "REPLACE",
+  "operator": "",
+  "evidence_directory": "",
+  "battery_divider_scale": 2.0,
+  "imu_to_flu": [1,0,0,0,1,0,0,0,1],
+  "checks": {
+    "electrical_inspection": false,
+    "motor_order_and_direction": false,
+    "imu_axes": false,
+    "battery_adc": false,
+    "restraint_verified": false,
+    "restrained_tuning": false,
+    "loaded_power_and_temperature": false,
+    "camera_control_timing": false,
+    "link_loss_and_stop": false
+  },
+  "physical_flight_qualified": false,
+  "note": "Blank template. Defaults are provisional, not measurements. Attach logs and instrument readings before marking checks true."
+}

@@ -1,5 +1,10 @@
 # Hardware scope retained; construction blocked
 
+What the program can fly, and what any aircraft must provide, is defined in
+[supported aircraft](../docs/supported-aircraft.md). The build handed to the
+drone builder is the Scout 110-B; its brief is
+[builder-brief.md](esp32/indoor/scout-110-bench/builder-brief.md).
+
 ## Five indoor candidates — 22 October 2026
 
 The [indoor comparison and build catalog](esp32/indoor/report.html) defines five

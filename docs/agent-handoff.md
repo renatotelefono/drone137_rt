@@ -375,6 +375,10 @@ Read these files in order:
 7. `docs/vision-flight-comparison.md` and `docs/vision-flight-validation.json`:
    native rotor preflight and live Qwen/Florence/SmolVLM2 comparison, including
    resource failures and subsequent inspection-policy experiments.
+8. `docs/supported-aircraft.md`: the contract any aircraft must meet, the three
+   connection paths and the physical envelope the software assumes.
+9. `hardware/esp32/indoor/scout-110-bench/builder-brief.md`: the brief handed to
+   whoever builds the physical Scout 110-B.
 
 The visual companion experiments use an optional isolated `.local/vision-env`;
 dependencies are pinned in `requirements-vision-reviewers.txt`. They are invoked

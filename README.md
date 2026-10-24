@@ -5,6 +5,7 @@ product is a browser recon lab with a Python controller, a small local model
 manager, and repeatable Three.js environments. No TypeScript or hosted inference is used.
 
 **Pre-hardware build preparation:** [six-item status and evidence](docs/pre-hardware-six.md), [prototype assembly files](hardware/esp32/indoor/scout-110-bench/assembly.md) and [firmware/commissioning guide](hardware/esp32/flight/README.md). Safe builds keep motors disabled; no physical flight is qualified.
+[Supported aircraft](docs/supported-aircraft.md) defines what the program can fly and the contract any aircraft must meet; the [builder brief](hardware/esp32/indoor/scout-110-bench/builder-brief.md) is the hand-off for building the Scout 110-B.
 
 **Microquad component lab:** `/components` stores swappable parts and pinned
 assemblies in SQLite, with Rapier rigid-body physics rendered by Three.js.

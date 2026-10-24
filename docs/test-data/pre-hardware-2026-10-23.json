@@ -1,0 +1,4105 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "pre-hardware-2026-10-23",
+  "snapshot_date": "2026-10-23",
+  "evidence_kind": "historical_simulation_and_host_tests",
+  "source_evidence_commit": "8b69e513b3214b2ecd889b596c8166565dbe8e00",
+  "provenance_note": "The commit identifies the repository evidence copied for this snapshot, not a claim that every historical run used that commit. Original per-run source, protocol, model and assembly hashes are retained where recorded.",
+  "hardware_results_recorded": false,
+  "actual_8gb_host_tested": false,
+  "raw_video_and_sensor_traces_in_git": false,
+  "source_files": {
+    "scout_component_physics": {
+      "path": "hardware/esp32/indoor/scout-110-bench/simulation-checks.json",
+      "sha256": "92ebf5faa3d7d10073ceb68447a1d6393078fdbf4222cfb9d6d7d9e93e669f41"
+    },
+    "scout_known_map_missions": {
+      "path": "docs/mission-integration-validation.json",
+      "sha256": "1d7c1af88d077102bd5e8c0789c26533a17a14ca4169e9d2cb715248a91c2c11"
+    },
+    "blind_exploration": {
+      "path": "docs/blind-exploration-validation.json",
+      "sha256": "2ee0eea4b6eb4e8f768a8dd8b4a2c1a43393b1fce3b4597a3aa5602f68dae388"
+    },
+    "vision_models": {
+      "path": "docs/vision-flight-validation.json",
+      "sha256": "c79040355ed96ca4b0a020e21922ad773951ee3774e6dc5134d9a429a044c8b3"
+    },
+    "host_connection": {
+      "path": "hardware/esp32/connection-validation.json",
+      "sha256": "61947a6476c59439aeef0586122e70655e706a5a94af07162711c028e6d017e2"
+    },
+    "software_regressions": {
+      "path": "docs/handoff-validation.json",
+      "sha256": "269b86ae0f1b77594bdd123f867bbe1896b0ae72443ffa09619a4924e3cb4300"
+    }
+  },
+  "comparison_rules": [
+    "Keep component flight, full mission, blind mapping, perception and software-test denominators separate.",
+    "Do not compare generic PX4 aircraft metrics directly to the Scout 110-B as a hardware fidelity measurement.",
+    "Known-map mission runs use ideal external positioning; blind mapping starts with an empty map.",
+    "Repeated known cases and successive development attempts are not independent real-world reliability samples.",
+    "Unmeasured hardware values are null, never zero or an inferred pass.",
+    "Freeze component revisions, firmware/model identities, camera settings, scenario, scoring method and gates before paired physical/simulation comparison.",
+    "Commit sanitized summaries and evidence hashes; keep model weights, network credentials and bulk recordings out of Git."
+  ],
+  "suites": {
+    "scout_component_physics": {
+      "engine": "rapier-0.21.0",
+      "trials": 6,
+      "physics_process_peak_rss_mib": 418.9375,
+      "real_hardware_tested": false,
+      "recognition_tested": false,
+      "full_8gb_stack_tested": false,
+      "results": [
+        {
+          "engine": "rapier-0.21.0",
+          "scenario": "nominal",
+          "configuration": "scout-110-bench-b",
+          "configuration_revision": 1,
+          "seed": 137,
+          "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+          "mass_g": 63.26,
+          "simulation_seconds": 20.000000000000018,
+          "propulsion_evidence": "estimated",
+          "evidence_counts": {
+            "estimated": 27,
+            "specified": 2,
+            "derived": 2,
+            "measured": 0
+          },
+          "gates": {
+            "liftoff": true,
+            "hover": true,
+            "transit": true,
+            "landed": true,
+            "controlled_attitude": true,
+            "no_obstacle_contact": true,
+            "battery_valid": true,
+            "landing_speed": true,
+            "thrust_reserve": true
+          },
+          "flight_passed": true,
+          "engineering_passed": true,
+          "hover_rmse_m": 0.005180894144480052,
+          "transit_rmse_m": 0.001388843100764592,
+          "max_height_m": 0.7586897015571594,
+          "max_tilt_deg": 11.674420159443748,
+          "landing_speed_m_s": 0.17913255095481873,
+          "min_voltage_v": 3.399599193472837,
+          "soc_remaining": 0.9679978307349366,
+          "saturated_fraction": 0.0022,
+          "static_reserve": {
+            "voltage_v": 3.399765104055404,
+            "current_a": 8.002348725245028,
+            "thrust_weight": 2.174020606277524
+          },
+          "synthetic_frames_delivered": 100,
+          "physical_enabled": false,
+          "recognition_tested": false,
+          "controller": {
+            "name": "adaptive-tilt-priority-v2",
+            "estimated_rotor_gains": [
+              0.9999222398312705,
+              1.000437549329409,
+              0.9999195852590627,
+              1.0004760314911738
+            ],
+            "minimum_estimated_gain": 0.9983600114519887,
+            "max_yaw_rate_rad_s": 0.021952466707912153,
+            "power_limited_steps": 0
+          },
+          "limitations": [
+            "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+            "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+            "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+            "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+            "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+          ],
+          "wall_seconds": 0.301656583,
+          "trial_sha256": "b06288129fb8921984ece817b7763925dc617728be5ee26829b0794d83bfce40",
+          "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+        },
+        {
+          "engine": "rapier-0.21.0",
+          "scenario": "low-battery",
+          "configuration": "scout-110-bench-b",
+          "configuration_revision": 1,
+          "seed": 137,
+          "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+          "mass_g": 63.26,
+          "simulation_seconds": 20.000000000000018,
+          "propulsion_evidence": "estimated",
+          "evidence_counts": {
+            "estimated": 27,
+            "specified": 2,
+            "derived": 2,
+            "measured": 0
+          },
+          "gates": {
+            "liftoff": false,
+            "hover": false,
+            "transit": false,
+            "landed": true,
+            "controlled_attitude": true,
+            "no_obstacle_contact": true,
+            "battery_valid": true,
+            "landing_speed": true,
+            "thrust_reserve": false
+          },
+          "flight_passed": false,
+          "engineering_passed": false,
+          "hover_rmse_m": 0.6750090582527951,
+          "transit_rmse_m": 0.9099877047643365,
+          "max_height_m": 0.04491525888442993,
+          "max_tilt_deg": 0.21802635663853362,
+          "landing_speed_m_s": 0,
+          "min_voltage_v": 3.1249943162142872,
+          "soc_remaining": 0.12341769319612123,
+          "saturated_fraction": 0,
+          "static_reserve": {
+            "voltage_v": 2.7583130940794947,
+            "current_a": 5.91686836915194,
+            "thrust_weight": 1.4656434250539037
+          },
+          "synthetic_frames_delivered": 100,
+          "physical_enabled": false,
+          "recognition_tested": false,
+          "controller": {
+            "name": "adaptive-tilt-priority-v2",
+            "estimated_rotor_gains": [
+              1,
+              1,
+              1,
+              1
+            ],
+            "minimum_estimated_gain": 1,
+            "max_yaw_rate_rad_s": 0.0014999165842671145,
+            "power_limited_steps": 4473
+          },
+          "limitations": [
+            "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+            "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+            "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+            "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+            "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+          ],
+          "wall_seconds": 0.20407291699999996,
+          "trial_sha256": "354f60bcad74b6c0481d132cf90a704a7a58fbf0eaa22e170ac87071134a02e1",
+          "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+        },
+        {
+          "engine": "rapier-0.21.0",
+          "scenario": "gust",
+          "configuration": "scout-110-bench-b",
+          "configuration_revision": 1,
+          "seed": 137,
+          "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+          "mass_g": 63.26,
+          "simulation_seconds": 20.000000000000018,
+          "propulsion_evidence": "estimated",
+          "evidence_counts": {
+            "estimated": 27,
+            "specified": 2,
+            "derived": 2,
+            "measured": 0
+          },
+          "gates": {
+            "liftoff": true,
+            "hover": true,
+            "transit": true,
+            "landed": true,
+            "controlled_attitude": true,
+            "no_obstacle_contact": true,
+            "battery_valid": true,
+            "landing_speed": true,
+            "thrust_reserve": true
+          },
+          "flight_passed": true,
+          "engineering_passed": true,
+          "hover_rmse_m": 0.005180894144480052,
+          "transit_rmse_m": 0.046715733533263144,
+          "max_height_m": 0.7586897015571594,
+          "max_tilt_deg": 11.674420159443748,
+          "landing_speed_m_s": 0.17911821603775024,
+          "min_voltage_v": 3.399599193472837,
+          "soc_remaining": 0.9679937672580394,
+          "saturated_fraction": 0.0022,
+          "static_reserve": {
+            "voltage_v": 3.399765104055404,
+            "current_a": 8.002348725245028,
+            "thrust_weight": 2.174020606277524
+          },
+          "synthetic_frames_delivered": 100,
+          "physical_enabled": false,
+          "recognition_tested": false,
+          "controller": {
+            "name": "adaptive-tilt-priority-v2",
+            "estimated_rotor_gains": [
+              0.9999221081904328,
+              1.00043742208205,
+              0.9999194666847565,
+              1.0004758809022747
+            ],
+            "minimum_estimated_gain": 0.997878120029802,
+            "max_yaw_rate_rad_s": 0.021920534723563565,
+            "power_limited_steps": 0
+          },
+          "limitations": [
+            "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+            "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+            "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+            "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+            "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+          ],
+          "wall_seconds": 0.15192391699999996,
+          "trial_sha256": "8cfaaca07f63e4096e07d59a8794573ec8d28eddb6e3f0da1cb6bb246e652350",
+          "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+        },
+        {
+          "engine": "rapier-0.21.0",
+          "scenario": "link-loss",
+          "configuration": "scout-110-bench-b",
+          "configuration_revision": 1,
+          "seed": 137,
+          "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+          "mass_g": 63.26,
+          "simulation_seconds": 20.000000000000018,
+          "propulsion_evidence": "estimated",
+          "evidence_counts": {
+            "estimated": 27,
+            "specified": 2,
+            "derived": 2,
+            "measured": 0
+          },
+          "gates": {
+            "liftoff": true,
+            "hover": true,
+            "transit": false,
+            "landed": true,
+            "controlled_attitude": true,
+            "no_obstacle_contact": true,
+            "battery_valid": true,
+            "landing_speed": true,
+            "thrust_reserve": true,
+            "command_expiry": true
+          },
+          "flight_passed": true,
+          "engineering_passed": true,
+          "hover_rmse_m": 0.005180894144480052,
+          "transit_rmse_m": 0,
+          "max_height_m": 0.7586897015571594,
+          "max_tilt_deg": 12.434015067276588,
+          "landing_speed_m_s": 0.17901457846164703,
+          "min_voltage_v": 3.399599193472837,
+          "soc_remaining": 0.9785890648334963,
+          "saturated_fraction": 0.0022,
+          "static_reserve": {
+            "voltage_v": 3.399765104055404,
+            "current_a": 8.002348725245028,
+            "thrust_weight": 2.174020606277524
+          },
+          "synthetic_frames_delivered": 100,
+          "physical_enabled": false,
+          "recognition_tested": false,
+          "controller": {
+            "name": "adaptive-tilt-priority-v2",
+            "estimated_rotor_gains": [
+              0.9999714061157002,
+              1.0004325555490023,
+              0.9999810204904113,
+              1.0003697555889204
+            ],
+            "minimum_estimated_gain": 0.9983600114519887,
+            "max_yaw_rate_rad_s": 0.02417754245869549,
+            "power_limited_steps": 0
+          },
+          "limitations": [
+            "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+            "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+            "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+            "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+            "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+          ],
+          "wall_seconds": 0.149897417,
+          "trial_sha256": "709326b1d589d5f935600069df2174624dd828981487dd7cf1456515bdf60dea",
+          "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+        },
+        {
+          "engine": "rapier-0.21.0",
+          "scenario": "weak-motor",
+          "configuration": "scout-110-bench-b",
+          "configuration_revision": 1,
+          "seed": 137,
+          "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+          "mass_g": 63.26,
+          "simulation_seconds": 20.000000000000018,
+          "propulsion_evidence": "estimated",
+          "evidence_counts": {
+            "estimated": 27,
+            "specified": 2,
+            "derived": 2,
+            "measured": 0
+          },
+          "gates": {
+            "liftoff": true,
+            "hover": true,
+            "transit": true,
+            "landed": true,
+            "controlled_attitude": true,
+            "no_obstacle_contact": true,
+            "battery_valid": true,
+            "landing_speed": true,
+            "thrust_reserve": true
+          },
+          "flight_passed": true,
+          "engineering_passed": true,
+          "hover_rmse_m": 0.005180894144480052,
+          "transit_rmse_m": 0.002854829932657231,
+          "max_height_m": 0.7586897015571594,
+          "max_tilt_deg": 11.674420159443748,
+          "landing_speed_m_s": 0.17918618023395538,
+          "min_voltage_v": 3.399599193472837,
+          "soc_remaining": 0.9575364689630235,
+          "saturated_fraction": 0.0038,
+          "static_reserve": {
+            "voltage_v": 3.399765104055404,
+            "current_a": 8.002348725245028,
+            "thrust_weight": 2.174020606277524
+          },
+          "synthetic_frames_delivered": 100,
+          "physical_enabled": false,
+          "recognition_tested": false,
+          "controller": {
+            "name": "adaptive-tilt-priority-v2",
+            "estimated_rotor_gains": [
+              0.44996509028495413,
+              1.0004376599952483,
+              0.9999198197690146,
+              1.0004761527251416
+            ],
+            "minimum_estimated_gain": 0.4496542945517349,
+            "max_yaw_rate_rad_s": 0.34222089792496435,
+            "power_limited_steps": 0
+          },
+          "limitations": [
+            "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+            "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+            "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+            "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+            "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+          ],
+          "wall_seconds": 0.143678625,
+          "trial_sha256": "2ee18f782f0f37f41b01d89256019501d8a276a9b863456dd62ab43dab94fc4b",
+          "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+        },
+        {
+          "engine": "rapier-0.21.0",
+          "scenario": "pessimistic",
+          "configuration": "scout-110-bench-b",
+          "configuration_revision": 1,
+          "seed": 137,
+          "assembly_sha256": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+          "mass_g": 63.26,
+          "simulation_seconds": 20.000000000000018,
+          "propulsion_evidence": "estimated",
+          "evidence_counts": {
+            "estimated": 27,
+            "specified": 2,
+            "derived": 2,
+            "measured": 0
+          },
+          "gates": {
+            "liftoff": true,
+            "hover": true,
+            "transit": true,
+            "landed": true,
+            "controlled_attitude": true,
+            "no_obstacle_contact": true,
+            "battery_valid": true,
+            "landing_speed": true,
+            "thrust_reserve": false
+          },
+          "flight_passed": true,
+          "engineering_passed": false,
+          "hover_rmse_m": 0.08441634333716158,
+          "transit_rmse_m": 0.012793532363275085,
+          "max_height_m": 0.8552186489105225,
+          "max_tilt_deg": 11.669793527494424,
+          "landing_speed_m_s": 0.17933738231658936,
+          "min_voltage_v": 3.399599193472837,
+          "soc_remaining": 0.9474461278856576,
+          "saturated_fraction": 0.0026,
+          "static_reserve": {
+            "voltage_v": 3.399765104055404,
+            "current_a": 8.002348725245028,
+            "thrust_weight": 1.5218144243942666
+          },
+          "synthetic_frames_delivered": 100,
+          "physical_enabled": false,
+          "recognition_tested": false,
+          "controller": {
+            "name": "adaptive-tilt-priority-v2",
+            "estimated_rotor_gains": [
+              0.6999457150483015,
+              0.7003064333933073,
+              0.6999438549478549,
+              0.7003333417255024
+            ],
+            "minimum_estimated_gain": 0.695514563958754,
+            "max_yaw_rate_rad_s": 0.02180375544337083,
+            "power_limited_steps": 0
+          },
+          "limitations": [
+            "Ideal external position/velocity/attitude reference; noisy gyro only. Adaptive feedback uses velocity/gyro derivatives. No implemented onboard ESP32 estimator/controller firmware.",
+            "Static propulsion interpolation and first-order motor lag; no CFD, ground effect, rotor interference or structural flexibility.",
+            "Linear OCV/SOC and resistive battery; camera timing is synthetic, not video recognition or real Wi-Fi.",
+            "Component geometry/mass distribution and controller gains are provisional; source data coverage is not hardware qualification.",
+            "Heading may be released during motor faults; flight gates do not qualify camera stability or recognition during spinning recovery."
+          ],
+          "wall_seconds": 0.1588856249999999,
+          "trial_sha256": "c735156ca98ca4e116195ddafcb6134ebff377b85a7c4ca0fe58b1716535c212",
+          "model_sha256": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638"
+        }
+      ]
+    },
+    "scout_known_map_missions": {
+      "date": "2026-10-22",
+      "latest_attempt": {
+        "protocol": {
+          "cases": [
+            {
+              "case": {
+                "id": "hard-west-dim-present",
+                "seed": 72311,
+                "target": true,
+                "target_xy": [
+                  4.8,
+                  8.65
+                ],
+                "condition": "dim",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.3
+                    ],
+                    "bottle-table": [
+                      2.8,
+                      2.65
+                    ],
+                    "lab-bench": [
+                      8.4,
+                      8.0
+                    ]
+                  },
+                  "target_yaw_radians": 0.45,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": 1.0,
+                  "draft_enu_m_s": [
+                    0.8,
+                    0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 0.8,
+                    "flicker_fraction": 0.06
+                  },
+                  "camera": {
+                    "latency_ms": 120,
+                    "drop_every_n": 9,
+                    "jpeg_quality": 0.72
+                  }
+                }
+              },
+              "repeat": 0
+            },
+            {
+              "case": {
+                "id": "hard-west-dim-absent",
+                "seed": 72311,
+                "target": false,
+                "target_xy": [
+                  4.8,
+                  8.65
+                ],
+                "condition": "dim",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.3
+                    ],
+                    "bottle-table": [
+                      2.8,
+                      2.65
+                    ],
+                    "lab-bench": [
+                      8.4,
+                      8.0
+                    ]
+                  },
+                  "target_yaw_radians": 0.45,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": 1.0,
+                  "draft_enu_m_s": [
+                    0.8,
+                    0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 0.8,
+                    "flicker_fraction": 0.06
+                  },
+                  "camera": {
+                    "latency_ms": 120,
+                    "drop_every_n": 9,
+                    "jpeg_quality": 0.72
+                  }
+                }
+              },
+              "repeat": 0
+            },
+            {
+              "case": {
+                "id": "hard-east-glare-present",
+                "seed": 84623,
+                "target": true,
+                "target_xy": [
+                  10.2,
+                  6.55
+                ],
+                "condition": "glare",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.3,
+                      8.0
+                    ],
+                    "bottle-table": [
+                      2.4,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.05
+                    ]
+                  },
+                  "target_yaw_radians": -0.55,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -1.0,
+                  "draft_enu_m_s": [
+                    0.9,
+                    -0.15,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.8,
+                    "directional": 1.2,
+                    "flicker_fraction": 0.03
+                  },
+                  "camera": {
+                    "latency_ms": 160,
+                    "drop_every_n": 8,
+                    "jpeg_quality": 0.7
+                  }
+                }
+              },
+              "repeat": 0
+            },
+            {
+              "case": {
+                "id": "hard-east-glare-absent",
+                "seed": 84623,
+                "target": false,
+                "target_xy": [
+                  10.2,
+                  6.55
+                ],
+                "condition": "glare",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.3,
+                      8.0
+                    ],
+                    "bottle-table": [
+                      2.4,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.05
+                    ]
+                  },
+                  "target_yaw_radians": -0.55,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -1.0,
+                  "draft_enu_m_s": [
+                    0.9,
+                    -0.15,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.8,
+                    "directional": 1.2,
+                    "flicker_fraction": 0.03
+                  },
+                  "camera": {
+                    "latency_ms": 160,
+                    "drop_every_n": 8,
+                    "jpeg_quality": 0.7
+                  }
+                }
+              },
+              "repeat": 0
+            },
+            {
+              "case": {
+                "id": "hard-west-occluded-present",
+                "seed": 95737,
+                "target": true,
+                "target_xy": [
+                  4.8,
+                  8.5
+                ],
+                "condition": "nominal",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.15,
+                      7.5
+                    ],
+                    "bottle-table": [
+                      2.7,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.3,
+                      8.1
+                    ]
+                  },
+                  "target_yaw_radians": -0.4,
+                  "partial_occlusion": true,
+                  "mount_pitch_error_degrees": 0.7,
+                  "draft_enu_m_s": [
+                    0.7,
+                    0.3,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.9,
+                    "directional": 1.1,
+                    "flicker_fraction": 0.04
+                  },
+                  "camera": {
+                    "latency_ms": 140,
+                    "drop_every_n": 7,
+                    "jpeg_quality": 0.68
+                  }
+                }
+              },
+              "repeat": 0
+            },
+            {
+              "case": {
+                "id": "hard-west-occluded-absent",
+                "seed": 95737,
+                "target": false,
+                "target_xy": [
+                  4.8,
+                  8.5
+                ],
+                "condition": "nominal",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.15,
+                      7.5
+                    ],
+                    "bottle-table": [
+                      2.7,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.3,
+                      8.1
+                    ]
+                  },
+                  "target_yaw_radians": -0.4,
+                  "partial_occlusion": true,
+                  "mount_pitch_error_degrees": 0.7,
+                  "draft_enu_m_s": [
+                    0.7,
+                    0.3,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.9,
+                    "directional": 1.1,
+                    "flicker_fraction": 0.04
+                  },
+                  "camera": {
+                    "latency_ms": 140,
+                    "drop_every_n": 7,
+                    "jpeg_quality": 0.68
+                  }
+                }
+              },
+              "repeat": 0
+            },
+            {
+              "case": {
+                "id": "hard-east-motion-present",
+                "seed": 103801,
+                "target": true,
+                "target_xy": [
+                  10.15,
+                  6.35
+                ],
+                "condition": "motion",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.45
+                    ],
+                    "bottle-table": [
+                      2.5,
+                      2.55
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.2
+                    ]
+                  },
+                  "target_yaw_radians": 0.6,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -0.8,
+                  "draft_enu_m_s": [
+                    0.85,
+                    -0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 1.0,
+                    "flicker_fraction": 0.07
+                  },
+                  "camera": {
+                    "latency_ms": 220,
+                    "drop_every_n": 6,
+                    "jpeg_quality": 0.64
+                  }
+                }
+              },
+              "repeat": 0
+            },
+            {
+              "case": {
+                "id": "hard-east-motion-absent",
+                "seed": 103801,
+                "target": false,
+                "target_xy": [
+                  10.15,
+                  6.35
+                ],
+                "condition": "motion",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.45
+                    ],
+                    "bottle-table": [
+                      2.5,
+                      2.55
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.2
+                    ]
+                  },
+                  "target_yaw_radians": 0.6,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -0.8,
+                  "draft_enu_m_s": [
+                    0.85,
+                    -0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 1.0,
+                    "flicker_fraction": 0.07
+                  },
+                  "camera": {
+                    "latency_ms": 220,
+                    "drop_every_n": 6,
+                    "jpeg_quality": 0.64
+                  }
+                }
+              },
+              "repeat": 0
+            },
+            {
+              "case": {
+                "id": "hard-west-dim-present",
+                "seed": 72311,
+                "target": true,
+                "target_xy": [
+                  4.8,
+                  8.65
+                ],
+                "condition": "dim",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.3
+                    ],
+                    "bottle-table": [
+                      2.8,
+                      2.65
+                    ],
+                    "lab-bench": [
+                      8.4,
+                      8.0
+                    ]
+                  },
+                  "target_yaw_radians": 0.45,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": 1.0,
+                  "draft_enu_m_s": [
+                    0.8,
+                    0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 0.8,
+                    "flicker_fraction": 0.06
+                  },
+                  "camera": {
+                    "latency_ms": 120,
+                    "drop_every_n": 9,
+                    "jpeg_quality": 0.72
+                  }
+                }
+              },
+              "repeat": 1
+            },
+            {
+              "case": {
+                "id": "hard-west-dim-absent",
+                "seed": 72311,
+                "target": false,
+                "target_xy": [
+                  4.8,
+                  8.65
+                ],
+                "condition": "dim",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.3
+                    ],
+                    "bottle-table": [
+                      2.8,
+                      2.65
+                    ],
+                    "lab-bench": [
+                      8.4,
+                      8.0
+                    ]
+                  },
+                  "target_yaw_radians": 0.45,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": 1.0,
+                  "draft_enu_m_s": [
+                    0.8,
+                    0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 0.8,
+                    "flicker_fraction": 0.06
+                  },
+                  "camera": {
+                    "latency_ms": 120,
+                    "drop_every_n": 9,
+                    "jpeg_quality": 0.72
+                  }
+                }
+              },
+              "repeat": 1
+            },
+            {
+              "case": {
+                "id": "hard-east-glare-present",
+                "seed": 84623,
+                "target": true,
+                "target_xy": [
+                  10.2,
+                  6.55
+                ],
+                "condition": "glare",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.3,
+                      8.0
+                    ],
+                    "bottle-table": [
+                      2.4,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.05
+                    ]
+                  },
+                  "target_yaw_radians": -0.55,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -1.0,
+                  "draft_enu_m_s": [
+                    0.9,
+                    -0.15,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.8,
+                    "directional": 1.2,
+                    "flicker_fraction": 0.03
+                  },
+                  "camera": {
+                    "latency_ms": 160,
+                    "drop_every_n": 8,
+                    "jpeg_quality": 0.7
+                  }
+                }
+              },
+              "repeat": 1
+            },
+            {
+              "case": {
+                "id": "hard-east-glare-absent",
+                "seed": 84623,
+                "target": false,
+                "target_xy": [
+                  10.2,
+                  6.55
+                ],
+                "condition": "glare",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.3,
+                      8.0
+                    ],
+                    "bottle-table": [
+                      2.4,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.05
+                    ]
+                  },
+                  "target_yaw_radians": -0.55,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -1.0,
+                  "draft_enu_m_s": [
+                    0.9,
+                    -0.15,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.8,
+                    "directional": 1.2,
+                    "flicker_fraction": 0.03
+                  },
+                  "camera": {
+                    "latency_ms": 160,
+                    "drop_every_n": 8,
+                    "jpeg_quality": 0.7
+                  }
+                }
+              },
+              "repeat": 1
+            },
+            {
+              "case": {
+                "id": "hard-west-occluded-present",
+                "seed": 95737,
+                "target": true,
+                "target_xy": [
+                  4.8,
+                  8.5
+                ],
+                "condition": "nominal",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.15,
+                      7.5
+                    ],
+                    "bottle-table": [
+                      2.7,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.3,
+                      8.1
+                    ]
+                  },
+                  "target_yaw_radians": -0.4,
+                  "partial_occlusion": true,
+                  "mount_pitch_error_degrees": 0.7,
+                  "draft_enu_m_s": [
+                    0.7,
+                    0.3,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.9,
+                    "directional": 1.1,
+                    "flicker_fraction": 0.04
+                  },
+                  "camera": {
+                    "latency_ms": 140,
+                    "drop_every_n": 7,
+                    "jpeg_quality": 0.68
+                  }
+                }
+              },
+              "repeat": 1
+            },
+            {
+              "case": {
+                "id": "hard-west-occluded-absent",
+                "seed": 95737,
+                "target": false,
+                "target_xy": [
+                  4.8,
+                  8.5
+                ],
+                "condition": "nominal",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.15,
+                      7.5
+                    ],
+                    "bottle-table": [
+                      2.7,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.3,
+                      8.1
+                    ]
+                  },
+                  "target_yaw_radians": -0.4,
+                  "partial_occlusion": true,
+                  "mount_pitch_error_degrees": 0.7,
+                  "draft_enu_m_s": [
+                    0.7,
+                    0.3,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.9,
+                    "directional": 1.1,
+                    "flicker_fraction": 0.04
+                  },
+                  "camera": {
+                    "latency_ms": 140,
+                    "drop_every_n": 7,
+                    "jpeg_quality": 0.68
+                  }
+                }
+              },
+              "repeat": 1
+            },
+            {
+              "case": {
+                "id": "hard-east-motion-present",
+                "seed": 103801,
+                "target": true,
+                "target_xy": [
+                  10.15,
+                  6.35
+                ],
+                "condition": "motion",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.45
+                    ],
+                    "bottle-table": [
+                      2.5,
+                      2.55
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.2
+                    ]
+                  },
+                  "target_yaw_radians": 0.6,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -0.8,
+                  "draft_enu_m_s": [
+                    0.85,
+                    -0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 1.0,
+                    "flicker_fraction": 0.07
+                  },
+                  "camera": {
+                    "latency_ms": 220,
+                    "drop_every_n": 6,
+                    "jpeg_quality": 0.64
+                  }
+                }
+              },
+              "repeat": 1
+            },
+            {
+              "case": {
+                "id": "hard-east-motion-absent",
+                "seed": 103801,
+                "target": false,
+                "target_xy": [
+                  10.15,
+                  6.35
+                ],
+                "condition": "motion",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.45
+                    ],
+                    "bottle-table": [
+                      2.5,
+                      2.55
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.2
+                    ]
+                  },
+                  "target_yaw_radians": 0.6,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -0.8,
+                  "draft_enu_m_s": [
+                    0.85,
+                    -0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 1.0,
+                    "flicker_fraction": 0.07
+                  },
+                  "camera": {
+                    "latency_ms": 220,
+                    "drop_every_n": 6,
+                    "jpeg_quality": 0.64
+                  }
+                }
+              },
+              "repeat": 1
+            },
+            {
+              "case": {
+                "id": "hard-west-dim-present",
+                "seed": 72311,
+                "target": true,
+                "target_xy": [
+                  4.8,
+                  8.65
+                ],
+                "condition": "dim",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.3
+                    ],
+                    "bottle-table": [
+                      2.8,
+                      2.65
+                    ],
+                    "lab-bench": [
+                      8.4,
+                      8.0
+                    ]
+                  },
+                  "target_yaw_radians": 0.45,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": 1.0,
+                  "draft_enu_m_s": [
+                    0.8,
+                    0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 0.8,
+                    "flicker_fraction": 0.06
+                  },
+                  "camera": {
+                    "latency_ms": 120,
+                    "drop_every_n": 9,
+                    "jpeg_quality": 0.72
+                  }
+                }
+              },
+              "repeat": 2
+            },
+            {
+              "case": {
+                "id": "hard-west-dim-absent",
+                "seed": 72311,
+                "target": false,
+                "target_xy": [
+                  4.8,
+                  8.65
+                ],
+                "condition": "dim",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.3
+                    ],
+                    "bottle-table": [
+                      2.8,
+                      2.65
+                    ],
+                    "lab-bench": [
+                      8.4,
+                      8.0
+                    ]
+                  },
+                  "target_yaw_radians": 0.45,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": 1.0,
+                  "draft_enu_m_s": [
+                    0.8,
+                    0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 0.8,
+                    "flicker_fraction": 0.06
+                  },
+                  "camera": {
+                    "latency_ms": 120,
+                    "drop_every_n": 9,
+                    "jpeg_quality": 0.72
+                  }
+                }
+              },
+              "repeat": 2
+            },
+            {
+              "case": {
+                "id": "hard-east-glare-present",
+                "seed": 84623,
+                "target": true,
+                "target_xy": [
+                  10.2,
+                  6.55
+                ],
+                "condition": "glare",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.3,
+                      8.0
+                    ],
+                    "bottle-table": [
+                      2.4,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.05
+                    ]
+                  },
+                  "target_yaw_radians": -0.55,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -1.0,
+                  "draft_enu_m_s": [
+                    0.9,
+                    -0.15,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.8,
+                    "directional": 1.2,
+                    "flicker_fraction": 0.03
+                  },
+                  "camera": {
+                    "latency_ms": 160,
+                    "drop_every_n": 8,
+                    "jpeg_quality": 0.7
+                  }
+                }
+              },
+              "repeat": 2
+            },
+            {
+              "case": {
+                "id": "hard-east-glare-absent",
+                "seed": 84623,
+                "target": false,
+                "target_xy": [
+                  10.2,
+                  6.55
+                ],
+                "condition": "glare",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.3,
+                      8.0
+                    ],
+                    "bottle-table": [
+                      2.4,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.05
+                    ]
+                  },
+                  "target_yaw_radians": -0.55,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -1.0,
+                  "draft_enu_m_s": [
+                    0.9,
+                    -0.15,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.8,
+                    "directional": 1.2,
+                    "flicker_fraction": 0.03
+                  },
+                  "camera": {
+                    "latency_ms": 160,
+                    "drop_every_n": 8,
+                    "jpeg_quality": 0.7
+                  }
+                }
+              },
+              "repeat": 2
+            },
+            {
+              "case": {
+                "id": "hard-west-occluded-present",
+                "seed": 95737,
+                "target": true,
+                "target_xy": [
+                  4.8,
+                  8.5
+                ],
+                "condition": "nominal",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.15,
+                      7.5
+                    ],
+                    "bottle-table": [
+                      2.7,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.3,
+                      8.1
+                    ]
+                  },
+                  "target_yaw_radians": -0.4,
+                  "partial_occlusion": true,
+                  "mount_pitch_error_degrees": 0.7,
+                  "draft_enu_m_s": [
+                    0.7,
+                    0.3,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.9,
+                    "directional": 1.1,
+                    "flicker_fraction": 0.04
+                  },
+                  "camera": {
+                    "latency_ms": 140,
+                    "drop_every_n": 7,
+                    "jpeg_quality": 0.68
+                  }
+                }
+              },
+              "repeat": 2
+            },
+            {
+              "case": {
+                "id": "hard-west-occluded-absent",
+                "seed": 95737,
+                "target": false,
+                "target_xy": [
+                  4.8,
+                  8.5
+                ],
+                "condition": "nominal",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.15,
+                      7.5
+                    ],
+                    "bottle-table": [
+                      2.7,
+                      2.6
+                    ],
+                    "lab-bench": [
+                      8.3,
+                      8.1
+                    ]
+                  },
+                  "target_yaw_radians": -0.4,
+                  "partial_occlusion": true,
+                  "mount_pitch_error_degrees": 0.7,
+                  "draft_enu_m_s": [
+                    0.7,
+                    0.3,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.9,
+                    "directional": 1.1,
+                    "flicker_fraction": 0.04
+                  },
+                  "camera": {
+                    "latency_ms": 140,
+                    "drop_every_n": 7,
+                    "jpeg_quality": 0.68
+                  }
+                }
+              },
+              "repeat": 2
+            },
+            {
+              "case": {
+                "id": "hard-east-motion-present",
+                "seed": 103801,
+                "target": true,
+                "target_xy": [
+                  10.15,
+                  6.35
+                ],
+                "condition": "motion",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.45
+                    ],
+                    "bottle-table": [
+                      2.5,
+                      2.55
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.2
+                    ]
+                  },
+                  "target_yaw_radians": 0.6,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -0.8,
+                  "draft_enu_m_s": [
+                    0.85,
+                    -0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 1.0,
+                    "flicker_fraction": 0.07
+                  },
+                  "camera": {
+                    "latency_ms": 220,
+                    "drop_every_n": 6,
+                    "jpeg_quality": 0.64
+                  }
+                }
+              },
+              "repeat": 2
+            },
+            {
+              "case": {
+                "id": "hard-east-motion-absent",
+                "seed": 103801,
+                "target": false,
+                "target_xy": [
+                  10.15,
+                  6.35
+                ],
+                "condition": "motion",
+                "stress": {
+                  "furniture_xy": {
+                    "stock-rack": [
+                      2.25,
+                      7.45
+                    ],
+                    "bottle-table": [
+                      2.5,
+                      2.55
+                    ],
+                    "lab-bench": [
+                      8.2,
+                      8.2
+                    ]
+                  },
+                  "target_yaw_radians": 0.6,
+                  "partial_occlusion": false,
+                  "mount_pitch_error_degrees": -0.8,
+                  "draft_enu_m_s": [
+                    0.85,
+                    -0.2,
+                    0
+                  ],
+                  "illumination": {
+                    "ambient": 0.85,
+                    "directional": 1.0,
+                    "flicker_fraction": 0.07
+                  },
+                  "camera": {
+                    "latency_ms": 220,
+                    "drop_every_n": 6,
+                    "jpeg_quality": 0.64
+                  }
+                }
+              },
+              "repeat": 2
+            }
+          ],
+          "assembly": "scout-110-bench-b",
+          "deadline_s": 300,
+          "tolerance_m": 0.75,
+          "required_rate": 0.95,
+          "false_confirmations_allowed": 0,
+          "launch_client": "HTTP evaluator; no operator dashboard required",
+          "unexecuted_cases_count_as_failures": true,
+          "scene": "unchanged native-hard-v1 with existing Poly Haven assets",
+          "navigation": "Height-aware routes; 0.58 m 3D planning clearance, 0.35 m monitored envelope. Earlier attempts used 2D footprint distance.",
+          "backend_change": "Rapier microquad / ideal external reference replaces PX4 generic quad. Not an isolated comparison of perception."
+        },
+        "protocol_sha256": "8d06cf98280615174ccd51fc0c49e7ff0f7edf3655bc66282770d31561abb28a",
+        "verified_model_manifest": {
+          "repository": "Qwen/Qwen3-VL-2B-Instruct-GGUF",
+          "revision": "52d6c8ffea26cc873ac5ad116f8631268d7eb503",
+          "files": [
+            {
+              "name": "Qwen3VL-2B-Instruct-Q4_K_M.gguf",
+              "sha256": "089d75c52f4b7ffc56ba998ffc50aae89fcafc755f9e7208aacca281dca6c2ae",
+              "size": 1107409952
+            },
+            {
+              "name": "mmproj-Qwen3VL-2B-Instruct-Q8_0.gguf",
+              "sha256": "f9a68fabba69c3b81e153367b2c7521030b0fa8bb0de400c9599c8e6725f9c82",
+              "size": 445053216
+            }
+          ]
+        },
+        "runs": [
+          {
+            "case": "hard-west-dim-present",
+            "repeat": 0,
+            "mission": "afe38d4e592147a7b3937812c1b32015",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.06285746767602625,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 76.67443862502114,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/afe38d4e592147a7b3937812c1b32015/report.html",
+            "observations": 3,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "870"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-dim-absent",
+            "repeat": 0,
+            "mission": "3a39ae8e55fb41179cdc19b4c28f48f4",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 193.301118665986,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/3a39ae8e55fb41179cdc19b4c28f48f4/report.html",
+            "observations": 11,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "2232"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-glare-present",
+            "repeat": 0,
+            "mission": "320cedd3542041aca31c5c71d1155e90",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.07010637567053019,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 212.46706475000246,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/320cedd3542041aca31c5c71d1155e90/report.html",
+            "observations": 12,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "2432"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-glare-absent",
+            "repeat": 0,
+            "mission": "85850371a5b14f409cfef4b5e1c82093",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 182.04125325000496,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/85850371a5b14f409cfef4b5e1c82093/report.html",
+            "observations": 10,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "2084"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-occluded-present",
+            "repeat": 0,
+            "mission": "cd4986ccd6064c39bac625759d35616a",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.6618410534508649,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 120.97781508299522,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/cd4986ccd6064c39bac625759d35616a/report.html",
+            "observations": 5,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1348"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-occluded-absent",
+            "repeat": 0,
+            "mission": "f5c8323432964243bdf8f6c5a2d5b8f1",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 174.16429383298964,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/f5c8323432964243bdf8f6c5a2d5b8f1/report.html",
+            "observations": 10,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1935"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-motion-present",
+            "repeat": 0,
+            "mission": "aeae77f4aedf48f282381566172711ec",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.07532808630082628,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 190.08709620902664,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/aeae77f4aedf48f282381566172711ec/report.html",
+            "observations": 10,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "2079"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-motion-absent",
+            "repeat": 0,
+            "mission": "477629ff1c804724a28d3f18872d2ad8",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 121.62394845800009,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/477629ff1c804724a28d3f18872d2ad8/report.html",
+            "observations": 6,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1288"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-dim-present",
+            "repeat": 1,
+            "mission": "e2511a717e8e4ae69cb8120f938b4976",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.011150737319613887,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 75.31273599999258,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/e2511a717e8e4ae69cb8120f938b4976/report.html",
+            "observations": 3,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "864"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-dim-absent",
+            "repeat": 1,
+            "mission": "7cd7d0622a914264a30c5343a8ad04ae",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 216.22346437501255,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/7cd7d0622a914264a30c5343a8ad04ae/report.html",
+            "observations": 12,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "2507"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-glare-present",
+            "repeat": 1,
+            "mission": "1d3f212abee243da9a20031fd1b3fef2",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.023387447308445115,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 227.58554262502003,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/1d3f212abee243da9a20031fd1b3fef2/report.html",
+            "observations": 12,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "2574"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-glare-absent",
+            "repeat": 1,
+            "mission": "bcccbb92449c486fa38aaeb748b698b3",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 286.99616516701644,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/bcccbb92449c486fa38aaeb748b698b3/report.html",
+            "observations": 15,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "3282"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-occluded-present",
+            "repeat": 1,
+            "mission": "874876b33548490baaacfe8e49a43bd2",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.34709939849547267,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 120.96540366698173,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/874876b33548490baaacfe8e49a43bd2/report.html",
+            "observations": 5,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1333"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-occluded-absent",
+            "repeat": 1,
+            "mission": "52a8d955c6ff4fdf9c3ecb230f79cba0",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 143.41560266699526,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/52a8d955c6ff4fdf9c3ecb230f79cba0/report.html",
+            "observations": 8,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1578"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-motion-present",
+            "repeat": 1,
+            "mission": "42e851399ef84b32af5ed487d28daa20",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.006239899123232448,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 167.0826965419983,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/42e851399ef84b32af5ed487d28daa20/report.html",
+            "observations": 9,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1791"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-motion-absent",
+            "repeat": 1,
+            "mission": "5f7889be563446e4a2c363d3c764d7a7",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 180.57490374997724,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/5f7889be563446e4a2c363d3c764d7a7/report.html",
+            "observations": 10,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1933"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-dim-present",
+            "repeat": 2,
+            "mission": "c8767d6a8e4e40ab906e772b44db21ff",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.1083667495656552,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 75.3252746250073,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/c8767d6a8e4e40ab906e772b44db21ff/report.html",
+            "observations": 3,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "861"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-dim-absent",
+            "repeat": 2,
+            "mission": "48b90e0af8744a14b6ed44b9e4a8873a",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 181.75009216699982,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/48b90e0af8744a14b6ed44b9e4a8873a/report.html",
+            "observations": 10,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "2124"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-glare-present",
+            "repeat": 2,
+            "mission": "83661e817b784db79f59001633ed00ef",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.051749194858531564,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 142.68072595799458,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/83661e817b784db79f59001633ed00ef/report.html",
+            "observations": 7,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1602"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-glare-absent",
+            "repeat": 2,
+            "mission": "15063106ea014de395b74032d445e7b0",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 202.24257633299567,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/15063106ea014de395b74032d445e7b0/report.html",
+            "observations": 11,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "2301"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-occluded-present",
+            "repeat": 2,
+            "mission": "31578782821c4b21843678d4d1b4ce3e",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.17478447255208637,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 152.91581312500057,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/31578782821c4b21843678d4d1b4ce3e/report.html",
+            "observations": 6,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1680"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-west-occluded-absent",
+            "repeat": 2,
+            "mission": "1317bdaf31df457b88706e4e0c701f0f",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 172.36068254100974,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/1317bdaf31df457b88706e4e0c701f0f/report.html",
+            "observations": 10,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1912"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-motion-present",
+            "repeat": 2,
+            "mission": "2735c249c0bb4454b1930e1a33fa91f8",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": 0.336792431446269,
+            "target_present": true,
+            "missed_target": false,
+            "wall_time_s": 186.4479118329764,
+            "outcome": "found",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/2735c249c0bb4454b1930e1a33fa91f8/report.html",
+            "observations": 10,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "2018"
+                }
+              ],
+              "decoded": true
+            }
+          },
+          {
+            "case": "hard-east-motion-absent",
+            "repeat": 2,
+            "mission": "a48ed1109af2434fa50609cf6d5fc9a8",
+            "gates": {
+              "task": true,
+              "no_false_claim": true,
+              "completed": true,
+              "landed": true,
+              "no_collision": true,
+              "attitude": true,
+              "battery": true,
+              "landing_speed": true,
+              "deadline": true,
+              "video": true
+            },
+            "passed": true,
+            "false_confirmation": false,
+            "error_m": null,
+            "target_present": false,
+            "missed_target": false,
+            "wall_time_s": 163.6880117499968,
+            "outcome": "unresolved",
+            "error": null,
+            "report": "http://127.0.0.1:8137/api/mission/runs/a48ed1109af2434fa50609cf6d5fc9a8/report.html",
+            "observations": 9,
+            "video_validation": {
+              "programs": [],
+              "stream_groups": [],
+              "streams": [
+                {
+                  "codec_name": "vp8",
+                  "width": 960,
+                  "height": 540,
+                  "nb_read_frames": "1787"
+                }
+              ],
+              "decoded": true
+            }
+          }
+        ],
+        "errors": [],
+        "frozen_software": {
+          "sources": {
+            "app/mission_runtime.py": "f30be6cd826ca51a8e6f7465153006925dfada223a38cc5d98d5a087b597a6de",
+            "adapters/rapier_drone.py": "81d62ee1fe32efbe58493bb957a1ea0336370f4eb0fde2e4514515f21ebda191",
+            "app/mission_camera.py": "6dfe944654763010a64121368249237a04aa73119fd884bcc26a0c84f5a6e21b",
+            "scripts/flight-camera.cjs": "218a538f3580271efe544a7c828aed9b77f14645f4a85b285ae06ce294a3ac87",
+            "scripts/mission-physics.mjs": "d9729f141fc9c6944761bb7faa921b9d5c1ac3df5cfb223c3920e7fec87c8f20",
+            "scripts/mission-transport.cjs": "43a9e2500463c78a7091dfc8db2df6dc653b843f36aef76d17ef9eaafa03f497",
+            "app/ui/mission-physics.mjs": "6acc4c088412aee8a7b5958933118b0fc8057345ad21dbaf4e4460471a7cbc18",
+            "app/ui/micro-physics.mjs": "a0f08c28e1fc168e51b365dc01295d73fd217a4bf4c3b430d4305c04c9ce5638",
+            "app/ui/flight-lab.js": "a327b940ca755fdfac66a305b06a9ae60064dc018e1db562470d25d75315a2dd",
+            "app/identity.py": "c0f4c77eeda08c877628feb84e17c088225c5285def2a19924a84fd76d8505e9",
+            "app/localization.py": "c7982fcb15047d8e53a07ea5d70d8d669e46dade62ad86b5ee444c260c778e5e",
+            "app/flight_localization.py": "4fc39e35d4ef1a69bc6e8c6183ca9558dd2ba17b1bf19d244e490324f70563c3",
+            "app/mission_views.py": "8ccb91ce1394ad47f14a954dd6aaa051b5b3043056f7eee00dabf33e3a8d033d",
+            "app/mission_navigation.py": "bee279d647c7dbfd280936e88b712d76319c4e33a90c82d9040d6ea4057135ab",
+            "app/mission_identity.py": "d527073d84a9295576cf66baceeb3a4bf24069d159d4dce38acccf6e8cd491a5",
+            "adapters/vision_reviewer.py": "34b41ab364abc7dbb10ad3461fbf6c0ccf2e35904243329c1d481b7f54e07112",
+            "scripts/vision_reviewer_worker.py": "e2b23f7d1228505c6c18629fabdf1bb239848ab72c4eb1ad89f7babc5aa21d52",
+            "sim/asset_world.py": "d633e95cef793a3818a7be2eebcee8f6e83029ca12ff9491794c6156e5b627b0",
+            "sim/hard_flight.py": "0395dda5d2c4e09d8eb20fa3c56ab21dba83cf6cc825768b6d7a97f9208f9cb8",
+            "config/native-hard-v1.json": "e0c7db462bdc7993275e90da23aeded77b5ba96324334c6a2c70cfbafd945bdf",
+            "sim/flight_world.py": "b89e1943ddee285b9388f550291a740a9f3e34b02a7c66256a361e261d1c5851",
+            "adapters/llama.py": "37e1abf03435d974c84f87721fbbfb18d2e6073540433d1b9459e8fd77c45358",
+            "app/fleet.py": "2e0be485fa99f1626ff4ef424ae727afb6b809e12ff5d7efca9024a4de068481",
+            "app/components.py": "1eba2038f283e6aecc8d4ca2978e46fdd6373e717af5c73abf67ecf0ae1e6b0c",
+            "app/mission_api.py": "abd9568db2b8bb8174075401d2e34f2bbfa3c743365ee062b0bd1fedbed5fcf5",
+            "app/recon_server.py": "ac9f50ffc88c43a9ecdf70cd9204c13ffc29c73897c1633246a686c07bd8a261"
+          },
+          "assembly": "4cd39ed4426bbdac53ce29a71692b7a3936b471f3ead0facdac330dbcded3f58",
+          "reviewer": {
+            "ready": true,
+            "model": "florence",
+            "manifest": {
+              "repository": "microsoft/Florence-2-base-ft",
+              "revision": "f6c1a25888ffc1d945ee8a1a77ac833c7303d46e",
+              "files": {
+                "LICENSE": {
+                  "bytes": 1141,
+                  "sha256": "c2cfccb812fe482101a8f04597dfc5a9991a6b2748266c47ac91b6a5aae15383"
+                },
+                "README.md": {
+                  "bytes": 14820,
+                  "sha256": "092b90e814cd6c15f734b15a81e294b4d12c92d12bff3c674a9474ca935ecd1c"
+                },
+                "config.json": {
+                  "bytes": 2430,
+                  "sha256": "c666d0fe0172d46e115e8fba6cd93cd83714575b33a73005cab8d24ce2a3aa8f"
+                },
+                "model.safetensors": {
+                  "bytes": 463221266,
+                  "sha256": "58757d657ff44051314c8030b68e04cb1bb618ca9a4885418f111f6fb708185a"
+                },
+                "preprocessor_config.json": {
+                  "bytes": 806,
+                  "sha256": "2f5921bbc53c7cc04251e1027b45b1cec726276be6db23d1bb40641bfbe2cf29"
+                },
+                "tokenizer.json": {
+                  "bytes": 1355863,
+                  "sha256": "847bbeab6174d66a88898f729d52fa8d355fafe1bea101cf960dd404581df70e"
+                },
+                "tokenizer_config.json": {
+                  "bytes": 34,
+                  "sha256": "79ffcf43af8ebda99d165f61d243180da2e2639952e41e71e11611c18770489c"
+                },
+                "vocab.json": {
+                  "bytes": 1099884,
+                  "sha256": "394fdc63c71aabe0a9b97117f5d62fb5fcc4d59b2b3ea929a3929e6a53217b3c"
+                },
+                "processing_florence2.py": {
+                  "bytes": 46372,
+                  "sha256": "4bd7158536cbf1c7891fc8efd94437d79fd09f07f539c7398fab8a885d7d8bca"
+                },
+                "configuration_florence2.py": {
+                  "bytes": 15125,
+                  "sha256": "653bafddc9651eaff1583a16db4a2bb27d33ec7d541dfab7201aaa4ecaa1cfbf"
+                },
+                "modeling_florence2.py": {
+                  "bytes": 127415,
+                  "sha256": "5bb7aa72c6ba62e96e1bbae6bc1aaf7b4e8e28cdfc62e670de3d5b67eeab1fdf"
+                }
+              }
+            },
+            "device": "mps",
+            "dtype": "torch.float16",
+            "load_seconds": 0.9778858750069048,
+            "attention": "eager",
+            "gpu_allocation_budget_gib": 1.9,
+            "preprocessing": {
+              "image_size": {
+                "height": 768,
+                "width": 768
+              },
+              "image_splitting": false
+            }
+          },
+          "vision_policy": "cross-model-category-v1; two-view neutral Qwen crop identity AND independent Florence identity; geometry-guided acquisition"
+        },
+        "memory": {
+          "metric": "sum of macOS process physical footprints",
+          "interval_s": 0.2,
+          "budget_gib": 5.0,
+          "sampled_peak_gib": 4.264047048985958,
+          "sampled_peak_rss_gib": 3.4603729248046875,
+          "sampled_peak_guard_gib": 4.264047048985958,
+          "guard_metric": "Larger of summed RSS and summed physical footprints; RSS can double-count shared pages.",
+          "budget_exceeded": false,
+          "measurement_error": null,
+          "host_memory_gib": 16.0,
+          "actual_8gb_hardware": false,
+          "scope": "Evaluator and its child processes (optional visual reviewer or Laya, camera browser including GPU/helpers, Node, simulator/PX4/MAVSDK) plus the app/Qwen process tree. Excludes unrelated applications and user browser tabs. Sampling is not an OS-enforced RAM limit.",
+          "host_swap_start_bytes": 5594480640,
+          "host_swap_end_bytes": 5867700224
+        },
+        "summary": {
+          "planned": 24,
+          "completed": 24,
+          "passed": 24,
+          "rate": 1.0,
+          "false_confirmations": 0,
+          "missed_targets": 0,
+          "memory_passed": true,
+          "accepted": true
+        }
+      },
+      "metrics": {
+        "localization_error_m": {
+          "min": 0.006239899123232448,
+          "median": 0.07271723098567823,
+          "max": 0.6618410534508649
+        },
+        "mission_duration_s": {
+          "min": 75.31273599999258,
+          "median": 173.2624881869997,
+          "max": 286.99616516701644
+        },
+        "visual_observations": 207,
+        "inspection_latency_s": {
+          "median": 4.296967250003945,
+          "max": 5.20982170899515
+        },
+        "raw_target_proposals_on_absent_controls": 94,
+        "video_frames_decoded": 44415,
+        "max_tilt_degrees": 4.5185980493637885,
+        "max_landing_speed_m_s": 0.19988471269607544,
+        "minimum_3d_clearance_m": 0.5674761741519249
+      },
+      "scene_hashes": {
+        "hard-west-dim-present": "835e97d55da415c4690f47a974adfaf3597cfb9ce9f32486b7c32884b2b384c8",
+        "hard-west-dim-absent": "6ac4ed31be2e7629b442e5a5d088b5dc8586004e3d2dbfba1b6f642c7eceea77",
+        "hard-east-glare-present": "a2c90e727cc65defc04254ee2b99a74a2fd67e06c81ca9bad986f83b2d3a4c42",
+        "hard-east-glare-absent": "75d780025fc0cd0b9c6a903450d549614a3e93bff474a2616445870019fd1bad",
+        "hard-west-occluded-present": "0104f67a467284b0a48624fb84b779be0ce50737e2f791410ed44a11a8c7feaa",
+        "hard-west-occluded-absent": "3f0386a54c2ab65dd03ca49379f0d315f2d30a063212859011b22448d5ad1c2f",
+        "hard-east-motion-present": "bd14be49567bc9c3956dc088c4b61e51658c7e1a9278e0d18588ceb21c5271d6",
+        "hard-east-motion-absent": "a62e25db59eb780a6a4393932a971e6619579a75d45a6b9491417f8105d42083"
+      },
+      "regression": {
+        "passed": 200,
+        "total": 200,
+        "log_sha256": "66b85236fad0e13ecf6fbd9357287908003cb705ed5ffef21d4609236349ff0a",
+        "command": ".local/laya-env/bin/python -m unittest discover -s tests -v"
+      },
+      "integration_checks": [
+        {
+          "check": "integrated-browser-independence.json",
+          "mission": "75354443120545fe8889cdc4fddc7567",
+          "state": "complete",
+          "landed": true,
+          "contacts": 0,
+          "error": null,
+          "initial_test_wait_expired": false
+        },
+        {
+          "check": "dashboard-return-check.json",
+          "mission": "025f3ddd1a9948a4b66839f3b7206703",
+          "state": "cancelled",
+          "landed": true,
+          "contacts": 0,
+          "error": "RuntimeError: Operator requested return",
+          "initial_test_wait_expired": false
+        },
+        {
+          "check": "dashboard-land-here-check.json",
+          "mission": "538813de93d840aa941fcd41771967c2",
+          "state": "cancelled",
+          "landed": true,
+          "contacts": 0,
+          "error": "RuntimeError: Operator requested land",
+          "initial_test_wait_expired": true
+        }
+      ],
+      "attempt_history": [
+        {
+          "attempt": "qualification-04",
+          "planned": 24,
+          "executed": 24,
+          "passed": 24,
+          "failed": 0,
+          "not_run": 0,
+          "false_confirmations": 0,
+          "accepted": true,
+          "errors": []
+        },
+        {
+          "attempt": "qualification-03",
+          "planned": 24,
+          "executed": 16,
+          "passed": 15,
+          "failed": 1,
+          "not_run": 8,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": [
+            "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+          ]
+        },
+        {
+          "attempt": "qualification-02",
+          "planned": 24,
+          "executed": 8,
+          "passed": 7,
+          "failed": 1,
+          "not_run": 16,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": [
+            "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+          ]
+        },
+        {
+          "attempt": "qualification-01",
+          "planned": 24,
+          "executed": 8,
+          "passed": 7,
+          "failed": 1,
+          "not_run": 16,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": [
+            "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+          ]
+        },
+        {
+          "attempt": "full-suite-01",
+          "planned": 8,
+          "executed": 8,
+          "passed": 6,
+          "failed": 2,
+          "not_run": 0,
+          "false_confirmations": 2,
+          "accepted": false,
+          "errors": []
+        },
+        {
+          "attempt": "development-11",
+          "planned": 2,
+          "executed": 2,
+          "passed": 2,
+          "failed": 0,
+          "not_run": 0,
+          "false_confirmations": 0,
+          "accepted": true,
+          "errors": []
+        },
+        {
+          "attempt": "development-10",
+          "planned": 3,
+          "executed": 2,
+          "passed": 0,
+          "failed": 2,
+          "not_run": 1,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": [
+            "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+          ]
+        },
+        {
+          "attempt": "development-09",
+          "planned": 2,
+          "executed": 2,
+          "passed": 1,
+          "failed": 1,
+          "not_run": 0,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": []
+        },
+        {
+          "attempt": "development-08",
+          "planned": 1,
+          "executed": 1,
+          "passed": 1,
+          "failed": 0,
+          "not_run": 0,
+          "false_confirmations": 0,
+          "accepted": true,
+          "errors": []
+        },
+        {
+          "attempt": "development-07",
+          "planned": 2,
+          "executed": 1,
+          "passed": 0,
+          "failed": 1,
+          "not_run": 1,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": [
+            "RuntimeError: {'error': 'Mission code changed; restart the service before testing'}"
+          ]
+        },
+        {
+          "attempt": "development-06",
+          "planned": 2,
+          "executed": 2,
+          "passed": 1,
+          "failed": 1,
+          "not_run": 0,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": []
+        },
+        {
+          "attempt": "development-05",
+          "planned": 2,
+          "executed": 2,
+          "passed": 1,
+          "failed": 1,
+          "not_run": 0,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": []
+        },
+        {
+          "attempt": "development-04",
+          "planned": 2,
+          "executed": 2,
+          "passed": 2,
+          "failed": 0,
+          "not_run": 0,
+          "false_confirmations": 0,
+          "accepted": true,
+          "errors": []
+        },
+        {
+          "attempt": "development-03",
+          "planned": 2,
+          "executed": 2,
+          "passed": 1,
+          "failed": 1,
+          "not_run": 0,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": []
+        },
+        {
+          "attempt": "development-02",
+          "planned": 1,
+          "executed": 1,
+          "passed": 0,
+          "failed": 1,
+          "not_run": 0,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": []
+        },
+        {
+          "attempt": "development-01",
+          "planned": 1,
+          "executed": 0,
+          "passed": 0,
+          "failed": 0,
+          "not_run": 1,
+          "false_confirmations": 0,
+          "accepted": false,
+          "errors": [
+            "RuntimeError: {'error': 'Generate a fresh supported mission plan first'}"
+          ]
+        }
+      ],
+      "component_stress": {
+        "total": 6,
+        "flight_passed": 5,
+        "engineering_passed": 4,
+        "results": [
+          {
+            "scenario": "nominal",
+            "gates": {
+              "liftoff": true,
+              "hover": true,
+              "transit": true,
+              "landed": true,
+              "controlled_attitude": true,
+              "no_obstacle_contact": true,
+              "battery_valid": true,
+              "landing_speed": true,
+              "thrust_reserve": true
+            },
+            "flight_passed": true,
+            "engineering_passed": true
+          },
+          {
+            "scenario": "low-battery",
+            "gates": {
+              "liftoff": false,
+              "hover": false,
+              "transit": false,
+              "landed": true,
+              "controlled_attitude": true,
+              "no_obstacle_contact": true,
+              "battery_valid": true,
+              "landing_speed": true,
+              "thrust_reserve": false
+            },
+            "flight_passed": false,
+            "engineering_passed": false
+          },
+          {
+            "scenario": "gust",
+            "gates": {
+              "liftoff": true,
+              "hover": true,
+              "transit": true,
+              "landed": true,
+              "controlled_attitude": true,
+              "no_obstacle_contact": true,
+              "battery_valid": true,
+              "landing_speed": true,
+              "thrust_reserve": true
+            },
+            "flight_passed": true,
+            "engineering_passed": true
+          },
+          {
+            "scenario": "link-loss",
+            "gates": {
+              "liftoff": true,
+              "hover": true,
+              "transit": false,
+              "landed": true,
+              "controlled_attitude": true,
+              "no_obstacle_contact": true,
+              "battery_valid": true,
+              "landing_speed": true,
+              "thrust_reserve": true,
+              "command_expiry": true
+            },
+            "flight_passed": true,
+            "engineering_passed": true
+          },
+          {
+            "scenario": "weak-motor",
+            "gates": {
+              "liftoff": true,
+              "hover": true,
+              "transit": true,
+              "landed": true,
+              "controlled_attitude": true,
+              "no_obstacle_contact": true,
+              "battery_valid": true,
+              "landing_speed": true,
+              "thrust_reserve": true
+            },
+            "flight_passed": true,
+            "engineering_passed": true
+          },
+          {
+            "scenario": "pessimistic",
+            "gates": {
+              "liftoff": true,
+              "hover": true,
+              "transit": true,
+              "landed": true,
+              "controlled_attitude": true,
+              "no_obstacle_contact": true,
+              "battery_valid": true,
+              "landing_speed": true,
+              "thrust_reserve": false
+            },
+            "flight_passed": true,
+            "engineering_passed": false
+          }
+        ]
+      },
+      "runtime_versions": {
+        "llama_server_sha256": "3435b18ac905be1ef990c7096d49717780d81f5c04786885fb8ec5342a0de5a8",
+        "node": "v22.14.0",
+        "python": "Python 3.12.13",
+        "hardware_measured": false,
+        "actual_8gb_host": false
+      },
+      "limitations": [
+        "Eight known synthetic development cases repeated three times; not held-out real-world validation.",
+        "Known operator map and ideal external positioning.",
+        "Provisional propulsion, battery, mass and camera mounting parameters.",
+        "Benchmark camera 960x540; physical camera bench defaults to 640x480.",
+        "Measured on a 16 GiB Apple Silicon host; actual 8 GB hardware untested.",
+        "One active aircraft; physical flight and concurrent fleet operation disabled.",
+        "Aircraft controller firmware, carrier layout and real indoor positioning remain hardware work.",
+        "Operator interventions wait for supervisor checkpoints; they are not an independent hardware emergency channel."
+      ]
+    },
+    "blind_exploration": {
+      "date": "2026-10-23",
+      "scope": "Historical synthetic flight results; not new runs or real-hardware qualification",
+      "development_warning": "Successive engineering attempts are not independent reliability samples; do not pool them into a success rate.",
+      "evidence_location": ".local/validation/blind-mapping",
+      "raw_evidence_in_git": false,
+      "raw_evidence_note": "Images, video, IMU traces, planning arrays and full frozen source archives remain local and are excluded from this repository.",
+      "protocol_version": "blind-exploration-v1",
+      "acceptance": {
+        "minimum_free_space_coverage": 0.8,
+        "maximum_false_free_fraction": 0.05,
+        "maximum_pose_rmse_m": 0.4,
+        "maximum_return_error_m": 0.4,
+        "maximum_boundary_error_m": 0.75,
+        "minimum_boundary_recall": 0.7,
+        "maximum_contacts": 0,
+        "requires_landing": true,
+        "requires_persisted_place_and_evidence": true,
+        "requires_no_truth_in_controller_input": true
+      },
+      "limits": {
+        "deadline_s": 600,
+        "max_observations": 100,
+        "application_budget_gib": 5
+      },
+      "qualification_suites": [
+        {
+          "suite": "qualification-01",
+          "planned": 3,
+          "executed": 3,
+          "passed": 1,
+          "accepted": false,
+          "scope": "Reserved synthetic layouts; not real-world or actual 8 GB qualification",
+          "manifest_sha256": "16613076264a78e410cc7af2f770c0304ce1af5e952a2456c210f723201afe94",
+          "results": [
+            {
+              "seed": 8401,
+              "state": "passed",
+              "accepted": true,
+              "metrics": {
+                "free_space_coverage": 0.8459353922612709,
+                "false_free_fraction": 0.03927680798004988,
+                "boundary_p95_m": 0.29999999999999716,
+                "boundary_recall": 0.9109311740890689,
+                "pose_rmse_m": 0.04237138682827684,
+                "return_error_m": 0.1497700925412324,
+                "contacts": 0,
+                "landed": true,
+                "observations": 47,
+                "visual_corrections": 3283
+              },
+              "gates": {
+                "finalized": true,
+                "coverage": true,
+                "false_free": true,
+                "boundary_error": true,
+                "boundary_recall": true,
+                "pose": true,
+                "return": true,
+                "no_contact": true,
+                "landed": true,
+                "persistence": true,
+                "no_truth_fields": true,
+                "navigation_completed": true,
+                "deadline": true,
+                "memory": true
+              },
+              "error": null,
+              "peak_application_memory_gib": 3.5224609375
+            },
+            {
+              "seed": 8402,
+              "state": "failed",
+              "accepted": false,
+              "metrics": {
+                "free_space_coverage": 0.6851654215581644,
+                "false_free_fraction": 0.03340040241448692,
+                "boundary_p95_m": 0.3000000000000007,
+                "boundary_recall": 0.7471264367816092,
+                "pose_rmse_m": 0.1362601234586415,
+                "return_error_m": 0.2836357759180949,
+                "contacts": 0,
+                "landed": true,
+                "observations": 48,
+                "visual_corrections": 3329
+              },
+              "gates": {
+                "finalized": true,
+                "coverage": false,
+                "false_free": true,
+                "boundary_error": true,
+                "boundary_recall": true,
+                "pose": true,
+                "return": true,
+                "no_contact": true,
+                "landed": true,
+                "persistence": true,
+                "no_truth_fields": true,
+                "navigation_completed": true,
+                "deadline": true,
+                "memory": true
+              },
+              "error": null,
+              "peak_application_memory_gib": 3.5363006591796875
+            },
+            {
+              "seed": 8403,
+              "state": "failed",
+              "accepted": false,
+              "metrics": {
+                "free_space_coverage": 0.7930788440956118,
+                "false_free_fraction": 0.03572609990076083,
+                "boundary_p95_m": 0.3000000000000007,
+                "boundary_recall": 0.911864406779661,
+                "pose_rmse_m": 0.054871501507785435,
+                "return_error_m": 0.09187015218078201,
+                "contacts": 0,
+                "landed": true,
+                "observations": 43,
+                "visual_corrections": 3442
+              },
+              "gates": {
+                "finalized": true,
+                "coverage": false,
+                "false_free": true,
+                "boundary_error": true,
+                "boundary_recall": true,
+                "pose": true,
+                "return": true,
+                "no_contact": true,
+                "landed": true,
+                "persistence": true,
+                "no_truth_fields": true,
+                "navigation_completed": true,
+                "deadline": true,
+                "memory": true
+              },
+              "error": null,
+              "peak_application_memory_gib": 3.7080841064453125
+            }
+          ]
+        },
+        {
+          "suite": "qualification-02",
+          "planned": 3,
+          "planned_seeds": [
+            9991,
+            9992,
+            9993
+          ],
+          "executed": 3,
+          "passed": 2,
+          "accepted": false,
+          "scope": "Reserved synthetic layouts; not real-world or actual 8 GB qualification",
+          "manifest_sha256": "6aa54b02755e8b3786e3d461292badae12b23799f05832df21d0fef9d53d17f2",
+          "results": [
+            {
+              "seed": 9991,
+              "state": "passed",
+              "accepted": true,
+              "metrics": {
+                "free_space_coverage": 0.8035460992907801,
+                "false_free_fraction": 0.04491803278688525,
+                "boundary_p95_m": 0.3000000000000007,
+                "boundary_recall": 0.9101351351351351,
+                "pose_rmse_m": 0.06306277754520224,
+                "return_error_m": 0.15453372942891286,
+                "contacts": 0,
+                "landed": true,
+                "observations": 48,
+                "visual_corrections": 3311
+              },
+              "gates": {
+                "finalized": true,
+                "coverage": true,
+                "false_free": true,
+                "boundary_error": true,
+                "boundary_recall": true,
+                "pose": true,
+                "return": true,
+                "no_contact": true,
+                "landed": true,
+                "persistence": true,
+                "no_truth_fields": true,
+                "navigation_completed": true,
+                "deadline": true,
+                "memory": true
+              },
+              "error": null,
+              "peak_application_memory_gib": 3.4776153564453125
+            },
+            {
+              "seed": 9992,
+              "state": "failed",
+              "accepted": false,
+              "metrics": {
+                "free_space_coverage": 0.0,
+                "false_free_fraction": 0.0,
+                "boundary_p95_m": null,
+                "boundary_recall": 0.0,
+                "pose_rmse_m": 0.033987586294816456,
+                "return_error_m": 0.18883875844362327,
+                "contacts": 0,
+                "landed": true,
+                "observations": 0,
+                "visual_corrections": 0
+              },
+              "gates": {
+                "finalized": true,
+                "coverage": false,
+                "false_free": true,
+                "boundary_error": false,
+                "boundary_recall": false,
+                "pose": true,
+                "return": true,
+                "no_contact": true,
+                "landed": true,
+                "persistence": true,
+                "no_truth_fields": true,
+                "navigation_completed": false,
+                "deadline": true,
+                "memory": true
+              },
+              "error": "TimeoutError: ",
+              "peak_application_memory_gib": 3.5474090576171875
+            },
+            {
+              "seed": 9993,
+              "state": "passed",
+              "accepted": true,
+              "metrics": {
+                "free_space_coverage": 0.8073231425524351,
+                "false_free_fraction": 0.03803641092327698,
+                "boundary_p95_m": 0.2999999999999985,
+                "boundary_recall": 0.896551724137931,
+                "pose_rmse_m": 0.06491404609233441,
+                "return_error_m": 0.1499217241408869,
+                "contacts": 0,
+                "landed": true,
+                "observations": 50,
+                "visual_corrections": 3420
+              },
+              "gates": {
+                "finalized": true,
+                "coverage": true,
+                "false_free": true,
+                "boundary_error": true,
+                "boundary_recall": true,
+                "pose": true,
+                "return": true,
+                "no_contact": true,
+                "landed": true,
+                "persistence": true,
+                "no_truth_fields": true,
+                "navigation_completed": true,
+                "deadline": true,
+                "memory": true
+              },
+              "error": null,
+              "peak_application_memory_gib": 3.596282958984375
+            }
+          ]
+        },
+        {
+          "suite": "qualification-03",
+          "planned": 3,
+          "planned_seeds": [
+            13191,
+            13192,
+            13193
+          ],
+          "executed": 3,
+          "passed": 2,
+          "accepted": false,
+          "scope": "Reserved synthetic layouts; not real-world or actual 8 GB qualification",
+          "manifest_sha256": "252cb0d1630cd6687112b7fb01f61cf1f048a86d1b83271712db0dad163c5566",
+          "results": [
+            {
+              "seed": 13191,
+              "state": "failed",
+              "accepted": false,
+              "metrics": {
+                "free_space_coverage": 0.5254720342002137,
+                "false_free_fraction": 0.023232323232323233,
+                "boundary_p95_m": 0.2999999999999985,
+                "boundary_recall": 0.5698852126941256,
+                "pose_rmse_m": 0.05721832774603836,
+                "return_error_m": 0.049944225125104054,
+                "contacts": 0,
+                "landed": true,
+                "observations": 43,
+                "visual_corrections": 3699
+              },
+              "gates": {
+                "finalized": true,
+                "coverage": false,
+                "false_free": true,
+                "boundary_error": true,
+                "boundary_recall": false,
+                "pose": true,
+                "return": true,
+                "no_contact": true,
+                "landed": true,
+                "persistence": true,
+                "no_truth_fields": true,
+                "navigation_completed": true,
+                "deadline": true,
+                "memory": true
+              },
+              "error": null,
+              "peak_application_memory_gib": 3.5160064697265625
+            },
+            {
+              "seed": 13192,
+              "state": "passed",
+              "accepted": true,
+              "metrics": {
+                "free_space_coverage": 0.8345170454545454,
+                "false_free_fraction": 0.03581526861451461,
+                "boundary_p95_m": 0.3000000000000007,
+                "boundary_recall": 0.9135135135135135,
+                "pose_rmse_m": 0.04386393844228279,
+                "return_error_m": 0.14521133883958764,
+                "contacts": 0,
+                "landed": true,
+                "observations": 43,
+                "visual_corrections": 3288
+              },
+              "gates": {
+                "finalized": true,
+                "coverage": true,
+                "false_free": true,
+                "boundary_error": true,
+                "boundary_recall": true,
+                "pose": true,
+                "return": true,
+                "no_contact": true,
+                "landed": true,
+                "persistence": true,
+                "no_truth_fields": true,
+                "navigation_completed": true,
+                "deadline": true,
+                "memory": true
+              },
+              "error": null,
+              "peak_application_memory_gib": 3.5528564453125
+            },
+            {
+              "seed": 13193,
+              "state": "passed",
+              "accepted": true,
+              "metrics": {
+                "free_space_coverage": 0.8071732954545454,
+                "false_free_fraction": 0.03099510603588907,
+                "boundary_p95_m": 0.29999999999999716,
+                "boundary_recall": 0.8743243243243243,
+                "pose_rmse_m": 0.060423387476131636,
+                "return_error_m": 0.09204738343565415,
+                "contacts": 0,
+                "landed": true,
+                "observations": 44,
+                "visual_corrections": 4193
+              },
+              "gates": {
+                "finalized": true,
+                "coverage": true,
+                "false_free": true,
+                "boundary_error": true,
+                "boundary_recall": true,
+                "pose": true,
+                "return": true,
+                "no_contact": true,
+                "landed": true,
+                "persistence": true,
+                "no_truth_fields": true,
+                "navigation_completed": true,
+                "deadline": true,
+                "memory": true
+              },
+              "error": null,
+              "peak_application_memory_gib": 3.58758544921875
+            }
+          ]
+        }
+      ],
+      "selected_development_run": {
+        "trial": "development-70",
+        "scored": true,
+        "state": "passed",
+        "accepted": true,
+        "metrics": {
+          "free_space_coverage": 0.8218694885361552,
+          "false_free_fraction": 0.03802281368821293,
+          "boundary_p95_m": 0.29999999999999893,
+          "boundary_recall": 0.9058903182125931,
+          "pose_rmse_m": 0.0841533915702223,
+          "return_error_m": 0.13944690061854703,
+          "contacts": 0,
+          "landed": true,
+          "observations": 42,
+          "visual_corrections": 4031
+        },
+        "gates": {
+          "finalized": true,
+          "coverage": true,
+          "false_free": true,
+          "boundary_error": true,
+          "boundary_recall": true,
+          "pose": true,
+          "return": true,
+          "no_contact": true,
+          "landed": true,
+          "persistence": true,
+          "no_truth_fields": true,
+          "navigation_completed": true,
+          "deadline": true,
+          "memory": true
+        },
+        "error": null,
+        "memory_peak_gib": 3.554718017578125,
+        "peak_application_memory_gib": 3.554718017578125
+      },
+      "development_attempts_retained_in_source": 70
+    },
+    "vision_models": {
+      "scope": "Four known live synthetic development missions; not held-out or real-world qualification",
+      "host_memory_gib": 16,
+      "application_budget_gib": 5,
+      "preflight": {
+        "results": ".local/validation/rotor-flight-check-v2/results.json",
+        "sha256": "724068ea6985dbe19162a1690488dc7051237d81eb0b94b2e02bb8e91156cacf",
+        "physical_checks": {
+          "checks": {
+            "four_connected_physical_rotors": true,
+            "rotors_spinning_in_correct_directions": true,
+            "lift_off_over_one_metre": true,
+            "stable_inspection_hover": true,
+            "landed": true
+          },
+          "all_pass": true,
+          "total_mass_kg": 2.0643076923076924,
+          "inspection_samples": 25,
+          "fresh_rotor_samples": 25,
+          "rotor_equivalent_rad_s": [
+            {
+              "min": 768.6202734660001,
+              "max": 770.290925406,
+              "mean": 769.17543949472
+            },
+            {
+              "min": 769.2796109239999,
+              "max": 771.382521723,
+              "mean": 769.85109458672
+            },
+            {
+              "min": 767.067304931,
+              "max": 768.9909808919999,
+              "mean": 767.81369568052
+            },
+            {
+              "min": 770.612205736,
+              "max": 772.6509126409999,
+              "mean": 771.16974106932
+            }
+          ],
+          "maximum_model_altitude_m": 1.30199109993,
+          "hover_tracking_rmse_m": 0.026558741649087707,
+          "maximum_hover_tilt_degrees": 1.3672851607163374,
+          "measurement": "Gazebo joint velocities multiplied by the SDF rotor slowdown factor; actual simulated joints, not commanded motor speeds.",
+          "limitations": "Generic rigid-body, motor and collision models. No physical airframe calibration or propeller flex/propwash validation."
+        }
+      },
+      "comparison": {
+        "qwen": {
+          "summary": {
+            "attempted": 4,
+            "planned": 4,
+            "positive_found": 1,
+            "positive_planned": 2,
+            "missed_or_incorrect_targets": 1,
+            "negative_correct": 1,
+            "negative_planned": 2,
+            "false_location_claims": 1,
+            "flight_physics_pass": 4,
+            "task_correct": 2,
+            "mean_camera_decision_latency_s": 3.16808633329371,
+            "mean_mission_wall_s": 214.71591330200317,
+            "peak_application_gib": 3.4094696044921875,
+            "accepted": false,
+            "errors": []
+          },
+          "results": ".local/validation/vision-flight-comparison-v1/qwen/results.json",
+          "sha256": "c7a5fb89940d0e8d721ca08108949c5a9122121483a80bae99e314a372f8da62",
+          "protocol_sha256": "cbd2af43bd517e91000b55a36dfa6f08b97a9ebcd9ebf3195505532999549d54",
+          "changed_sources": [],
+          "cases": [
+            {
+              "id": "realism-east-glare-present-reference-quad-r1",
+              "outcome": "unresolved",
+              "score": {
+                "truth_xy_m": [
+                  10.2,
+                  6.55
+                ],
+                "error_m": null,
+                "false_location_claim": false,
+                "correct": false,
+                "evaluated": true
+              },
+              "seconds": 252.6645634160086,
+              "physical_checks_pass": true
+            },
+            {
+              "id": "realism-east-glare-absent-reference-quad-r1",
+              "outcome": "unresolved",
+              "score": {
+                "truth_xy_m": null,
+                "error_m": null,
+                "false_location_claim": false,
+                "correct": true,
+                "evaluated": true
+              },
+              "seconds": 237.04464679199737,
+              "physical_checks_pass": true
+            },
+            {
+              "id": "realism-west-occluded-present-reference-quad-r1",
+              "outcome": "found",
+              "score": {
+                "truth_xy_m": [
+                  4.8,
+                  8.5
+                ],
+                "error_m": 0.11774730715346937,
+                "false_location_claim": false,
+                "correct": true,
+                "evaluated": true
+              },
+              "seconds": 155.39294125000015,
+              "physical_checks_pass": true
+            },
+            {
+              "id": "realism-west-occluded-absent-reference-quad-r1",
+              "outcome": "found",
+              "score": {
+                "truth_xy_m": null,
+                "error_m": null,
+                "false_location_claim": true,
+                "correct": false,
+                "evaluated": true
+              },
+              "seconds": 213.76150175000657,
+              "physical_checks_pass": true
+            }
+          ]
+        },
+        "qwen+florence": {
+          "summary": {
+            "attempted": 4,
+            "planned": 4,
+            "positive_found": 1,
+            "positive_planned": 2,
+            "missed_or_incorrect_targets": 1,
+            "negative_correct": 2,
+            "negative_planned": 2,
+            "false_location_claims": 0,
+            "flight_physics_pass": 4,
+            "task_correct": 3,
+            "mean_camera_decision_latency_s": 3.843332661963359,
+            "mean_mission_wall_s": 232.6703660314961,
+            "peak_application_gib": 4.468610405921936,
+            "accepted": false,
+            "errors": []
+          },
+          "results": ".local/validation/vision-flight-comparison-v1/qwen-florence/results.json",
+          "sha256": "fb857fe4fd74993f9883a1c749c705932a7fe94e15323e3f7a9802237c844eeb",
+          "protocol_sha256": "cbd2af43bd517e91000b55a36dfa6f08b97a9ebcd9ebf3195505532999549d54",
+          "changed_sources": [],
+          "cases": [
+            {
+              "id": "realism-east-glare-present-reference-quad-r1",
+              "outcome": "found",
+              "score": {
+                "truth_xy_m": [
+                  10.2,
+                  6.55
+                ],
+                "error_m": 0.05504853559868279,
+                "false_location_claim": false,
+                "correct": true,
+                "evaluated": true
+              },
+              "seconds": 237.48042216699105,
+              "physical_checks_pass": true
+            },
+            {
+              "id": "realism-east-glare-absent-reference-quad-r1",
+              "outcome": "unresolved",
+              "score": {
+                "truth_xy_m": null,
+                "error_m": null,
+                "false_location_claim": false,
+                "correct": true,
+                "evaluated": true
+              },
+              "seconds": 250.29629716699128,
+              "physical_checks_pass": true
+            },
+            {
+              "id": "realism-west-occluded-present-reference-quad-r1",
+              "outcome": "unresolved",
+              "score": {
+                "truth_xy_m": [
+                  4.8,
+                  8.5
+                ],
+                "error_m": null,
+                "false_location_claim": false,
+                "correct": false,
+                "evaluated": true
+              },
+              "seconds": 238.0948492919997,
+              "physical_checks_pass": true
+            },
+            {
+              "id": "realism-west-occluded-absent-reference-quad-r1",
+              "outcome": "unresolved",
+              "score": {
+                "truth_xy_m": null,
+                "error_m": null,
+                "false_location_claim": false,
+                "correct": true,
+                "evaluated": true
+              },
+              "seconds": 204.8098955000023,
+              "physical_checks_pass": true
+            }
+          ]
+        },
+        "qwen+smolvlm": {
+          "summary": {
+            "attempted": 4,
+            "planned": 4,
+            "positive_found": 0,
+            "positive_planned": 2,
+            "missed_or_incorrect_targets": 2,
+            "negative_correct": 2,
+            "negative_planned": 2,
+            "false_location_claims": 0,
+            "flight_physics_pass": 4,
+            "task_correct": 2,
+            "mean_camera_decision_latency_s": 3.5778489232383435,
+            "mean_mission_wall_s": 227.06665569775214,
+            "peak_application_gib": 4.897595934569836,
+            "accepted": false,
+            "errors": []
+          },
+          "results": ".local/validation/smol-sdpa-flights-v1/results.json",
+          "sha256": "8a0acde06039dcedfe5c897ffc5cdbede85f03f6eb6c603fe94e7f39099ddcc8",
+          "protocol_sha256": "cbd2af43bd517e91000b55a36dfa6f08b97a9ebcd9ebf3195505532999549d54",
+          "changed_sources": [],
+          "cases": [
+            {
+              "id": "realism-east-glare-present-reference-quad-r1",
+              "outcome": "unresolved",
+              "score": {
+                "truth_xy_m": [
+                  10.2,
+                  6.55
+                ],
+                "error_m": null,
+                "false_location_claim": false,
+                "correct": false,
+                "evaluated": true
+              },
+              "seconds": 246.3533703330031,
+              "physical_checks_pass": true
+            },
+            {
+              "id": "realism-east-glare-absent-reference-quad-r1",
+              "outcome": "unresolved",
+              "score": {
+                "truth_xy_m": null,
+                "error_m": null,
+                "false_location_claim": false,
+                "correct": true,
+                "evaluated": true
+              },
+              "seconds": 232.19901183299953,
+              "physical_checks_pass": true
+            },
+            {
+              "id": "realism-west-occluded-present-reference-quad-r1",
+              "outcome": "unresolved",
+              "score": {
+                "truth_xy_m": [
+                  4.8,
+                  8.5
+                ],
+                "error_m": null,
+                "false_location_claim": false,
+                "correct": false,
+                "evaluated": true
+              },
+              "seconds": 224.89915425000072,
+              "physical_checks_pass": true
+            },
+            {
+              "id": "realism-west-occluded-absent-reference-quad-r1",
+              "outcome": "unresolved",
+              "score": {
+                "truth_xy_m": null,
+                "error_m": null,
+                "false_location_claim": false,
+                "correct": true,
+                "evaluated": true
+              },
+              "seconds": 204.8150863750052,
+              "physical_checks_pass": true
+            }
+          ]
+        }
+      },
+      "attempts": [
+        {
+          "configuration": "qwen+smolvlm eager attention",
+          "results": ".local/validation/vision-flight-comparison-v1/qwen-smolvlm/results.json",
+          "sha256": "bc24640878eccbe928630c4e16ff7923055d1175599b2e6595016d9b1905c8ee",
+          "summary": {
+            "attempted": 1,
+            "planned": 4,
+            "positive_found": 0,
+            "positive_planned": 2,
+            "missed_or_incorrect_targets": 2,
+            "negative_correct": 0,
+            "negative_planned": 2,
+            "false_location_claims": 0,
+            "flight_physics_pass": 0,
+            "task_correct": 0,
+            "mean_camera_decision_latency_s": 4.8460453196700355,
+            "mean_mission_wall_s": 157.57380612500128,
+            "peak_application_gib": 5.026823088526726,
+            "accepted": false,
+            "errors": [
+              "MemoryError('Application exceeded the 5 GiB experiment budget; run stopped')"
+            ]
+          }
+        },
+        {
+          "configuration": "Florence with initial active inspection trigger",
+          "results": ".local/validation/florence-active-flights-v1/results.json",
+          "sha256": "f429579c255d41b9d290da93c24aa42918922b4c38d72154f30b4212d95e6659",
+          "summary": {
+            "attempted": 4,
+            "planned": 4,
+            "positive_found": 1,
+            "positive_planned": 2,
+            "missed_or_incorrect_targets": 1,
+            "negative_correct": 2,
+            "negative_planned": 2,
+            "false_location_claims": 0,
+            "flight_physics_pass": 4,
+            "task_correct": 3,
+            "mean_camera_decision_latency_s": 4.072439503904661,
+            "mean_mission_wall_s": 260.0016108857526,
+            "peak_application_gib": 4.4975413382053375,
+            "accepted": false,
+            "errors": []
+          }
+        },
+        {
+          "configuration": "Florence with uncertainty trigger and centred views",
+          "results": ".local/validation/florence-active-flights-v2/results.json",
+          "sha256": "3a37d0bfbc9f9c5fd076684c92494c80ebf9480a4da257e8b31c3df3a2e770ed",
+          "summary": {
+            "attempted": 4,
+            "planned": 4,
+            "positive_found": 1,
+            "positive_planned": 2,
+            "missed_or_incorrect_targets": 1,
+            "negative_correct": 2,
+            "negative_planned": 2,
+            "false_location_claims": 0,
+            "flight_physics_pass": 4,
+            "task_correct": 3,
+            "mean_camera_decision_latency_s": 3.8986004417650597,
+            "mean_mission_wall_s": 247.96909845849586,
+            "peak_application_gib": 4.547223329544067,
+            "accepted": false,
+            "errors": []
+          }
+        },
+        {
+          "configuration": "Florence with elevated local inspection views",
+          "results": ".local/validation/florence-active-flights-v3/results.json",
+          "sha256": "09e2d04aaefeec9f92692f52f4068beb91b22efb7109eba716686202ee6afabe",
+          "summary": {
+            "attempted": 4,
+            "planned": 4,
+            "positive_found": 1,
+            "positive_planned": 2,
+            "missed_or_incorrect_targets": 1,
+            "negative_correct": 2,
+            "negative_planned": 2,
+            "false_location_claims": 0,
+            "flight_physics_pass": 4,
+            "task_correct": 3,
+            "mean_camera_decision_latency_s": 3.9136316953463393,
+            "mean_mission_wall_s": 253.03682103100073,
+            "peak_application_gib": 4.545972242951393,
+            "accepted": false,
+            "errors": []
+          }
+        }
+      ],
+      "follow_up": {
+        "policy": "active-v2",
+        "status": "complete",
+        "results": ".local/validation/florence-active-flights-v4/results.json",
+        "sha256": "5a8bd8c5946e4a602c8a759288d165abf5b657bbd7564525e8bbc15a40e81b43",
+        "summary": {
+          "attempted": 4,
+          "planned": 4,
+          "positive_found": 1,
+          "positive_planned": 2,
+          "missed_or_incorrect_targets": 1,
+          "negative_correct": 2,
+          "negative_planned": 2,
+          "false_location_claims": 0,
+          "flight_physics_pass": 4,
+          "task_correct": 3,
+          "mean_camera_decision_latency_s": 3.945666984469426,
+          "mean_mission_wall_s": 254.6266698440013,
+          "peak_application_gib": 4.533489927649498,
+          "accepted": false,
+          "errors": []
+        },
+        "qualification": {
+          "planned_runs": 4,
+          "completed_runs": 4,
+          "task_correct": 3,
+          "individual_runs_meeting_flight_and_task_gates": 3,
+          "qualified_passes": 3,
+          "pass_rate": 0.75,
+          "all_pass": false,
+          "false_location_claims": 0,
+          "memory_ok": true,
+          "per_run_deadline_s": 300,
+          "interpretation": "Observed performance on a frozen synthetic suite. Not a real-world reliability estimate. Absent cases require a completed search with no location claim; unresolved does not prove absence.",
+          "full_suite_qualified": false
+        },
+        "cases": [
+          {
+            "id": "realism-east-glare-present-reference-quad-r1",
+            "outcome": "found",
+            "score": {
+              "truth_xy_m": [
+                10.2,
+                6.55
+              ],
+              "error_m": 0.09923624765245817,
+              "false_location_claim": false,
+              "correct": true,
+              "evaluated": true
+            },
+            "seconds": 251.21525375000783,
+            "physical_checks_pass": true
+          },
+          {
+            "id": "realism-east-glare-absent-reference-quad-r1",
+            "outcome": "unresolved",
+            "score": {
+              "truth_xy_m": null,
+              "error_m": null,
+              "false_location_claim": false,
+              "correct": true,
+              "evaluated": true
+            },
+            "seconds": 246.35517229200923,
+            "physical_checks_pass": true
+          },
+          {
+            "id": "realism-west-occluded-present-reference-quad-r1",
+            "outcome": "unresolved",
+            "score": {
+              "truth_xy_m": [
+                4.8,
+                8.5
+              ],
+              "error_m": null,
+              "false_location_claim": false,
+              "correct": false,
+              "evaluated": true
+            },
+            "seconds": 284.8466727089981,
+            "physical_checks_pass": true
+          },
+          {
+            "id": "realism-west-occluded-absent-reference-quad-r1",
+            "outcome": "unresolved",
+            "score": {
+              "truth_xy_m": null,
+              "error_m": null,
+              "false_location_claim": false,
+              "correct": true,
+              "evaluated": true
+            },
+            "seconds": 236.08958062499005,
+            "physical_checks_pass": true
+          }
+        ]
+      },
+      "review": "http://127.0.0.1:8142/vision-flight-review-v2/report.html",
+      "case_equality_verified": true
+    },
+    "host_connection": {
+      "date": "2026-10-23",
+      "scope": "Host aircraft protocol, local TLS emulator, monitor and Mission Control connection UI",
+      "physical_hardware_tested": false,
+      "actual_8gb_tested": false,
+      "autonomous_physical_flight_enabled": false,
+      "automated": {
+        "distinct_connection_tests_passed": 25,
+        "distinct_connection_tests_total": 25,
+        "existing_regressions_passed": 37,
+        "existing_regressions_total": 37
+      },
+      "browser_verified": [
+        "Existing Mission Control tab reloaded",
+        "Paired emulator shown",
+        "Connect changed to connected at 4.00 V",
+        "Static camera fixture displayed",
+        "Polling preserves unchanged connection buttons"
+      ],
+      "evidence": {
+        "tests": ".local/validation/aircraft-link-tests.log",
+        "regressions": ".local/validation/connection-regression-tests.log",
+        "screenshot": ".local/validation/mission-control-connection.png"
+      },
+      "source_sha256": {
+        "hardware/esp32/link_protocol.py": "36a617369e163c49ae7c9c108f712dea392b7a1d1a30eb364a1fcbc16893c2f9",
+        "hardware/esp32/link_client.py": "157afe252c10211d5a676fdff730441408d1e98d25f5c6c9c657368eaa3464ba",
+        "hardware/esp32/link_emulator.py": "b9c4de57f20d1881f6201416f9cfe45418bd8c026fe8d5012a5ef2209aeeb560",
+        "hardware/esp32/device_store.py": "3cd58c33a095e5816a1bf6f1b34291a8c081780cad8f05c744f5dba247d169ea",
+        "hardware/esp32/connection.py": "d1d127a0378bdb36cf60cf2bc0ae7d66e103508cc598d8eadd501bf622a0b614",
+        "hardware/esp32/connection_api.py": "b5e9df70478732cd649f4f721619f7f2dc10fbfdd7b0f9859c6666f190b5d631",
+        "app/recon_server.py": "416c5906bdd283af0e514d15437959cbe3bbdb6b22e3b3e5532d942dfb1c5309",
+        "scripts/mission_control.py": "15373f0311bfcd4e40d4d1a8d54109b371c5e6c9648b259680dbbc74f267fa70",
+        "app/ui/aircraft-connections.js": "e96b41085a26bb366e71b7c205d160020d62d1f899cd649a598653f9d1359a62",
+        "app/ui/mission-console.html": "5429d43519fd9417c018ceec2a6d59fc20b358f959b83b50feba1ad8b1c360b6"
+      },
+      "remaining": [
+        "Onboard implementation of protocol and stabilization",
+        "Physical sensor calibration and navigation integration",
+        "Scoped external API/MCP",
+        "Full offline packaging and fault qualification"
+      ]
+    },
+    "software_regressions": {
+      "date": "2026-10-23",
+      "branch": "codex/indoor-vision-platform",
+      "scope": "Pre-handoff software regressions on configured Apple Silicon workstation; not new full model-driven flights, real hardware, clean-machine installation or actual 8 GB qualification.",
+      "checks": [
+        {
+          "name": "Python regression suite",
+          "passed": 264,
+          "total": 264,
+          "log": ".local/validation/handoff-tests.log",
+          "log_sha256": "f73c9ac492ca9fd6480da3ffd2bd53463b65625629fc1a477b316e8a1dd03ebe"
+        },
+        {
+          "name": "Blind-controller regressions",
+          "passed": 8,
+          "total": 8,
+          "log": ".local/validation/handoff-blind-controller.log",
+          "log_sha256": "53ae085569beaf1f8b1034e5a874e3fa051577f8ac5b977810e0cc67027ba880"
+        },
+        {
+          "name": "Component-physics regressions",
+          "passed": 11,
+          "total": 11,
+          "log": ".local/validation/handoff-component-physics.log",
+          "log_sha256": "850e5b2e457ada9490593ac1c8170760a814d13f05cc2b1d589c53eed8fad400"
+        },
+        {
+          "name": "Mission-physics checks with Scout 110-B assembly",
+          "passed": 6,
+          "total": 6,
+          "log": ".local/validation/handoff-mission-physics.log",
+          "log_sha256": "376531608e09c12f8cd37026aa40a0ddb6b4124de79589106f2bb817da7462db"
+        }
+      ],
+      "current_blind_qualification": {
+        "file": "docs/blind-exploration-validation.json",
+        "latest_suite": "qualification-03",
+        "passed": 2,
+        "planned": 3,
+        "accepted": false
+      },
+      "excluded_from_git": [
+        ".local model weights and runtime environments",
+        ".local raw flight recordings, IMU traces and checkpoints",
+        ".local/data/aircraft.sqlite3 and device pairing keys",
+        "machine-specific camera Wi-Fi configuration"
+      ],
+      "python": "3.12.13",
+      "node": "22.14.0",
+      "full_logs_in_git": false
+    }
+  }
+}

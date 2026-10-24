@@ -14,7 +14,7 @@ and frame fit while those flight-control tasks are completed.
 
 ## Parts to obtain
 
-Prices checked 22 October 2026. USD except where explicitly stated. The
+Core vendor listings rechecked 23 October 2026. USD except where explicitly stated. The
 machine-readable [bill of materials](bom.json) records quantities and price bases.
 
 | Part | Quantity | Cost per aircraft | Purchase reference / basis |
@@ -46,6 +46,92 @@ The original SpeedyFPV $4.49 motor/propeller kit is sold out in its live product
 inventory. Do not base this build on that sale price. The replacement motor pack
 and HQProp set were available when checked; their combined loaded thrust/current
 has not been published or measured here.
+
+## First-prototype order — 23 October 2026
+
+Order **one prototype**, with spare batteries from the required multipack. Buy the
+unsoldered **Sense** camera version of the XIAO; the plain ESP32-S3 board does not
+include the camera. The camera streams over local Wi-Fi to the ground computer.
+
+| Order now | Purchase quantity | Listed order price |
+| --- | ---: | ---: |
+| [Seeed XIAO ESP32-S3 Sense](https://www.seeedstudio.com/XIAO-ESP32S3-Sense-p-5639.html) | 1 | $13.90 |
+| [Qkits GY-521 MPU-6050](https://store.qkits.com/electronics/3-axis-gyroscope-accelerometer-gy-521.html) | 1 | $4.95 |
+| [Unmanned Tech 8520 motor pack, 2 CW + 2 CCW, 1 mm shafts](https://www.unmannedtechshop.co.uk/products/8520-coreless-brushed-motor-pack-2-x-cw-2-x-ccw) | 1 four-pack | GBP 6.49 |
+| [HQProp 65 mm, 1 mm hub, 2 CW + 2 CCW](https://speedyfpv.com/products/hqprop-65mm-ultralight-propeller-set-2x-cw-2x-ccw-gray) | 1 four-pack | $2.39 |
+| [BETAFPV 450 mAh 1S BT2.0 batteries](https://betafpv.com/collections/batt-1s/products/bt2-0-450mah-1s-30c-battery-4pcs) | 1 four-pack; fit one battery | $14.99 |
+| [BETAFPV BT2.0 Whoop Cable Pigtail](https://betafpv.com/collections/accessories/products/bt2-0-1s-whoop-cable-pigtail) — select **BT2.0 Cable Pigtail**, SKU 00313631 | 1 six-pack; fit one pigtail | $5.99 |
+
+This core order totals **$42.22 plus GBP 6.49**, before frame, carrier, small
+electronics, shipping and taxes. This is not the complete aircraft checkout.
+The motor, propeller and charger stock/price were also checked against their
+retailers' public product-variant data; all were available at the time of checking.
+An extra propeller set is useful but is not included in the subtotal.
+
+The remaining electrical parts are listed below so they can be sourced together.
+They are **bench component candidates**, not a released carrier assembly BOM:
+package fit, supply ripple, current handling and assembled mass still require
+the finished schematic/layout and physical measurements. Small-component prices
+and minimum quantities must be reconfirmed in the cart.
+
+| Component reference | Quantity used on one aircraft | Ordering note |
+| --- | ---: | --- |
+| [AOS AO3400A, SOT-23, LCSC C20917](https://www.lcsc.com/product-detail/MOSFETs_Alpha-Omega-Semicon_C20917.html) | 4 | Listed minimum 5, about $0.43 per five |
+| [MDD SS34, SMA, LCSC C8678](https://www.lcsc.com/product-detail/C8678.html) | 4 | Listed minimum 20, about $0.70 per twenty |
+| [100 ohm, 0805, 1%, C17408](https://www.lcsc.com/product-detail/C17408.html) | 4 | MOSFET gate resistors |
+| [10 kohm, 0805, 1%, C17414](https://www.lcsc.com/product-detail/C17414.html) | 4 | MOSFET gate pulldowns |
+| [100 kohm, 0805, 1%, C149504](https://www.lcsc.com/product-detail/C149504.html) | 2 | Battery measurement divider |
+| [100 nF, 50 V X7R, 0805, C1711](https://www.lcsc.com/product-detail/C1711.html) | 6 | Four motor suppression, one electronics decoupling, one ADC filter |
+| [470 uF, 10 V, SAMYOUNG KMG, C349987](https://www.lcsc.com/product-detail/Aluminum-Electrolytic-Capacitors-Leaded_SamYoung-Electronics_C349987.html) | 1 | Provisional motor-supply bulk capacitor; validate ripple/ESR under motor load |
+| [47 uF, 10 V, SAMYOUNG CLZ, C41428003](https://www.lcsc.com/product-detail/C41428003.html) | 1 | Provisional electronics supply capacitor |
+| [26 AWG silicone wire](https://www.adafruit.com/category/product/1970) | Short signal/individual motor leads as needed | Reuse supplied motor leads; keep the main battery lead at the pigtail's 22 AWG |
+
+Print one [Scout 110 frame](../frames/scout-110.scad) with
+[common.scad](../frames/common.scad) alongside it for **dry fitting**. The frame
+and camera/battery mounting are not mechanically qualified. **Do not order a
+custom carrier PCB yet**: fabrication files and a released assembly drawing do
+not exist. Strap, strain relief and fastening details depend on that final fit.
+
+Shared bench equipment, separate from aircraft cost:
+
+- [VIFLY WhoopStor 3](https://viflydrone.com/collections/lipro-battery-charger/products/vifly-whoopstor-6-ports-1s-battery-storage-charger-discharger),
+  $32.99: BT2.0 charging with selectable 4.20 V. Start at **4.20 V / 0.3 A** for
+  this 450 mAh pack. It needs a suitable power source; use a compatible USB-C PD
+  supply meeting the manufacturer's 40 W input specification, not a plain 5 V
+  USB port. Reuse a suitable supply if already owned. The manufacturer charger
+  plus 65 W US supply bundle was unavailable when checked.
+- USB-C **data** cable for flashing, soldering equipment, a multimeter, and a
+  scale for assembled mass/thrust measurements. Reuse existing tools. Initial
+  camera/IMU checks and motor-output checks are performed without propellers.
+
+The earlier $45.09 consumed-parts estimate is retained above for traceability.
+It is not a promise of a delivered build below $50; charger, spare inventory and
+multiple sellers' shipping alone make that an inappropriate first-order budget.
+
+## Work required before the first flight
+
+1. Finish/review the schematic and carrier, dry-fit the frame, and document the
+   as-built power wiring, motor order and sensor orientation.
+2. Implement onboard IMU estimation, stabilization, mixer, arming, battery
+   monitoring and watchdog/command-loss handling. Verify timing while camera
+   streaming is active. **Current camera-only firmware holds motor outputs low.**
+3. Connect physical timestamped camera/IMU telemetry to Drone137; validate stale
+   data rejection, exclusive control, operator stop and link-loss behaviour on
+   the actual board. Host tests against the protocol emulator do not do this.
+4. Measure mass, propulsion/current, battery sag and vibration; update the SQLite
+   component revisions and repeat the relevant simulations. Complete restrained
+   motor/control checks before a brief guarded hover in a protected test space.
+5. Demonstrate real indoor position/height feedback and recovery before enabling
+   room navigation or mapping. The MPU-6050 is not an indoor position sensor.
+   Additional navigation hardware is not yet specified or included in this order.
+
+Current readiness: **parts procurement and camera bench work can begin; physical
+flight remains disabled and unqualified**. There has been no hardware flight.
+
+Use the [simulation/real-drone comparison section](../../../../docs/test-comparison.md)
+to retain the existing baseline and record the physical measurements. It includes
+exact historical results, configuration/source hashes and a blank physical-run
+template. Do not overwrite earlier results when measured components are added.
 
 ## Battery and mass
 

@@ -17,6 +17,13 @@ to identify the handoff commit. Source and compact validation summaries are in
 Git; local model weights, device credentials, runtime builds and full camera
 recordings are deliberately excluded.
 
+The latest procurement refresh is in the Scout 110-B build guide (23 October).
+`docs/test-comparison.md` is the entry point for simulation versus hardware
+comparison. `docs/test-data/pre-hardware-2026-10-23.json` freezes historical
+records and their source hashes; `hardware-run-template.json` has no measurements
+and must not be counted as a physical test. No new flight was performed to create
+this documentation, and the carrier/firmware/physical readiness status is unchanged.
+
 Current functional checkpoint: **development-70 passed** the full blind mission
 on layout 9992 after ground-phase VIO initialization and a shorter two-axis
 maneuver. Coverage 82.19%, false free 3.80%, position RMSE 8.42 cm, return error

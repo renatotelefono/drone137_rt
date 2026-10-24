@@ -176,6 +176,14 @@ browser tab active: camera/browser loss stops the virtual mission after 2 second
 
 ## Validation and current limits
 
+**Simulation versus real-drone comparison:** [test data and comparison tables](docs/test-comparison.md)
+preserve Scout 110-B component/mission results, blind-mapping failures, the
+historical vision-model comparison and separate software-test counts. A
+[frozen JSON baseline](docs/test-data/pre-hardware-2026-10-23.json) retains exact
+values and source hashes, and a [physical-run template](docs/test-data/hardware-run-template.json)
+is ready for measured hardware results. No physical flight results exist yet;
+unmeasured values stay empty rather than being presented as passes.
+
 Real-world reliability is now tracked separately for **workshops, warehouses,
 building perimeters, flat fields and hillsides**. All five remain unqualified.
 The frozen real-camera smoke test found 11 of 12 labelled object names across six

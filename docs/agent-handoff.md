@@ -7,7 +7,8 @@ integration, fault tests, commissioning tools and blind exploration. This is
 separate from the historical eight-item roadmap below. The user also requires
 storage restraint: retain evidence, avoid duplicate recordings/model downloads.
 
-Work is currently uncommitted on `codex/indoor-vision-platform`; preserve it.
+All of this work is committed on `codex/indoor-vision-platform` and `main` is
+fast-forwarded to the same commit (25 October 2026).
 No hardware is connected, flashed or physically qualified. Read
 [the six-item record](pre-hardware-six.md),
 [firmware guide](../hardware/esp32/flight/README.md) and

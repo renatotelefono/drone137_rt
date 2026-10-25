@@ -21,6 +21,7 @@ from sim.flight_world import VIEWS, inspection_sightline_clear
 from sim.hard_flight import cases
 from sim.asset_world import build, verify_assets
 from app.mission_views import next_views
+from app import mission_wizard
 from adapters.vision_reviewer import VisionReviewer
 
 
@@ -36,6 +37,7 @@ class MissionRuntime:
         self.model_lock = asyncio.Lock()
         self.reviewer = None
         self.available = lambda: None
+        self.templates = mission_wizard.load_templates()
         paths = ['app/mission_runtime.py', 'adapters/rapier_drone.py', 'app/mission_camera.py',
                  'scripts/flight-camera.cjs', 'scripts/mission-physics.mjs', 'scripts/mission-transport.cjs', 'app/ui/mission-physics.mjs',
                  'app/ui/micro-physics.mjs', 'app/ui/flight-lab.js', 'app/identity.py', 'app/localization.py',
@@ -74,6 +76,7 @@ class MissionRuntime:
             if not case:
                 raise ValueError('Select a registered environment')
             assembly = self.components.assemble(body.get('assembly', 'scout-110-power-v2'))
+            template = mission_wizard.validate_template(self.templates, body.get('template'))
             self.planning = True
             self.draft = None
             try:
@@ -87,7 +90,7 @@ class MissionRuntime:
                 if not points:
                     raise ValueError('Area contains no inspection stations')
                 self.draft = {'id': uuid.uuid4().hex, 'created_at': time.time(), 'instruction': instruction,
-                    'area': area, 'case': case['id'], 'assembly': assembly, 'views': points,
+                    'area': area, 'case': case['id'], 'assembly': assembly, 'views': points, 'template': template,
                     'intent': intent, 'dispatchable': supported is True and intent['objective'] != 'unsupported',
                     'backend': 'Rapier component dynamics + service-owned Three.js camera + local Qwen and Florence',
                     'vision_policy': mission_identity.VERSION+'; two-view neutral Qwen crop identity AND independent Florence identity; geometry-guided acquisition',

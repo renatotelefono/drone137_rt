@@ -176,6 +176,12 @@ motion change, not a planner weight. Over the two suites flown with the current
 rule, **11 of 13** fresh predeclared layouts passed every gate, no flight in any
 suite has recorded a contact, and every failure was coverage, never safety.
 All previous failed suites remain recorded.
+**Mission wizard (25 October):** `config/mission-templates.json`, `app/mission_wizard.py`,
+`/api/wizard/*` routes in `app/mission_api.py`, the `template` tag on plans and
+run records, and `app/ui/mission-wizard.js` in the console. Nine tests in
+`tests/test_mission_wizard.py`; full suite 330/330 (`preparation-full-tests-v8.log`).
+The console launches audits through the reviewed plan and simulated exploration
+flights through the existing runner; watch and find are proposed and recorded only.
 Local diagnostics remain `.local/maintenance/voxel-rays-prototype.py`,
 `.local/maintenance/test-ray-traversal.py`, `.local/validation/ray-*.json`.
 The three storage tests also pass after protecting pre-existing

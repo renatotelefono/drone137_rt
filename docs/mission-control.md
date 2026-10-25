@@ -62,6 +62,26 @@ Outdoor missions, arbitrary positions and physical transport are not supported.
   interrupted mission. A report left by a hard crash shows its last recorded state,
   not live telemetry. Individual completed reports remain in dashboard history.
 
+## Mission wizard
+
+The console opens with a **Start here** panel that proposes the four mission
+clusters from `config/mission-templates.json` and ranks them by what the place
+memory and the mission state make sensible:
+
+| Cluster | Capability | Proposed when | Launch today |
+| --- | --- | --- | --- |
+| Map an unknown space | explore | First whenever no mapped place exists; always offered for a new layout | Simulated exploration flight started from the console through `scripts.run_blind_test`; one at a time, same gates as a qualification flight |
+| Audit a known space | seek | First once a mapped place exists; needs the local model | Composes the brief for the qualified target and hands it to the reviewed plan and launch |
+| Watch for changes | seek | When a place has a completed mapped visit as baseline | Proposed and recorded only; needs map reuse on a later visit |
+| Find something in an unknown space | explore + seek | Always last | Proposed and recorded only; not implemented |
+
+A free-text line is classified deterministically to open the matching template;
+the model's intent step still decides what is flown. Each template carries the
+gate its flight is scored against, and the chosen template id travels with the
+plan into the run record (`plan.template`) and the history list, so results can
+be read per mission type. Unsupported targets in an audit list are recorded as
+warnings, never silently relabelled.
+
 ## Local API
 
 All mutations require the existing local host check and
@@ -75,6 +95,11 @@ All mutations require the existing local host check and
 | `POST /api/fleet/launch` | Dispatch reviewed `draft_id` for `session` |
 | `POST /api/fleet/return` | Cancel queue and return active aircraft |
 | `POST /api/fleet/stop` | Cancel queue and stop virtual motion |
+| `GET /api/wizard/templates` | The mission template catalogue |
+| `GET /api/wizard/suggestions?brief=` | Ranked proposals from place memory, model and mission state; optional brief classification |
+| `POST /api/wizard/compose` | Turn a template and its fields into the brief, area and template tag the planner accepts |
+| `POST /api/wizard/explore` | Start one simulated exploration flight (`place`, `seed`); refused while a mission or flight is active |
+| `GET /api/wizard/explore/status` | State, observations, score and last log line of that flight |
 | `GET /api/fleet/drones/{id}/status` | Isolated renderer/controller state |
 | `POST /api/fleet/drones/{id}/ready` | Generation-bound camera heartbeat |
 | `POST /api/fleet/drones/{id}/camera` | Episode/client/ticket-bound JPEG |

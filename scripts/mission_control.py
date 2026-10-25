@@ -33,7 +33,7 @@ async def serve(args):
     await model.backend.health()
     runtime = MissionRuntime(model, ROOT/'.local/data/mission-runs')
     app = web.Application(middlewares=[local_only], client_max_size=8192)
-    install(app, runtime)
+    install(app, runtime, places=ROOT/'.local/data/places.sqlite3')
     from app.component_api import install as install_components
     install_components(app, runtime.components)
     from hardware.esp32.connection_api import install as install_aircraft

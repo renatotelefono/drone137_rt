@@ -177,3 +177,21 @@ configuration and evaluate unseen layouts plus representative real-camera
 positive and hard-negative footage, then train/calibrate a compact target
 verifier if the VLM continues inventing parts. Preserve separate metrics for
 false claims, missed targets, coverage, flight completion and memory.
+
+## 4B retrial, 25 October 2026
+
+A same-day comparison on the frozen perception cases and the intent prompts,
+recorded in `docs/model-4b-trial-2026-10-25.json` (development evidence):
+
+| Model | Perception cases | False clear | Perception latency mean / max | Intent recorded | Intent extra briefs | Intent latency | Resident |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
+| Qwen3-VL-2B Q4_K_M | 32/32 | 0 | 1.15 s / 2.28 s | 8/8 | 6/8 | 0.73 s | 1.9 GB |
+| Qwen3-VL-4B Q4_K_M | 31/32 | 0 | 2.1 s / 3.64 s | 8/8 | 5/8 | 1.55 s | 3.5 GB |
+
+The 4B judged one clear workshop view uncertain, took about twice as long per
+call and used 1.6 GB more memory; on eight extra development briefs it
+classified three physically unsupported requests as inventory where the 2B
+misclassified two. Together with the 21 October flights it is not an upgrade
+for the roles the program uses today. The misreads shared by both models are
+on 'unsupported' briefs, which points at the plan prompt and schema rather
+than model size. The 2B remains the production model.

@@ -49,4 +49,5 @@ el('pair-aircraft').onclick=()=>action(async()=>{
   name:el('pair-name').value.trim(),assembly});}
  finally{el('pair-file').value='';}
 });
+window.addEventListener('drone137-preview',e=>{preview=e.detail;refresh();});
 await refresh();setInterval(refresh,1500);

@@ -183,6 +183,11 @@ run records, and `app/ui/mission-wizard.js` in the console. Nine tests in
 `tests/test_mission_wizard.py`; full suite 330/330 (`preparation-full-tests-v8.log`).
 The console launches audits through the reviewed plan and simulated exploration
 flights through the existing runner; watch and find are proposed and recorded only.
+**Console assistant (25 October):** `app/mission_assistant.py` and `/api/assistant/*`
+turn a typed or dictated request into one of a fixed set of console actions, with
+aircraft names resolved against the registry and launches excluded. Seven tests in
+`tests/test_mission_assistant.py`; full suite 337/337 (`preparation-full-tests-v10.log`).
+Verified live against the paired emulator.
 Local diagnostics remain `.local/maintenance/voxel-rays-prototype.py`,
 `.local/maintenance/test-ray-traversal.py`, `.local/validation/ray-*.json`.
 The three storage tests also pass after protecting pre-existing

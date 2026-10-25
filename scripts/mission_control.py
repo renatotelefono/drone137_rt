@@ -33,11 +33,17 @@ async def serve(args):
     await model.backend.health()
     runtime = MissionRuntime(model, ROOT/'.local/data/mission-runs')
     app = web.Application(middlewares=[local_only], client_max_size=8192)
-    install(app, runtime, places=ROOT/'.local/data/places.sqlite3')
+    launcher = install(app, runtime, places=ROOT/'.local/data/places.sqlite3')
     from app.component_api import install as install_components
     install_components(app, runtime.components)
     from hardware.esp32.connection_api import install as install_aircraft
-    install_aircraft(app, ROOT/'.local/data/aircraft.sqlite3', runtime.components)
+    aircraft = install_aircraft(app, ROOT/'.local/data/aircraft.sqlite3', runtime.components)
+    from app.mission_assistant import Assistant, install as install_assistant
+    from app.mission_wizard import load_templates
+    from app.place_memory import PlaceMemory
+    assistant = Assistant(model, runtime, aircraft, launcher, load_templates())
+    assistant.places = PlaceMemory(ROOT/'.local/data/places.sqlite3')
+    install_assistant(app, assistant)
     from app.place_api import install as install_places
     install_places(app, ROOT/'.local/data/places.sqlite3', model)
     async def dashboard(request):

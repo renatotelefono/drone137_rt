@@ -18,6 +18,8 @@ flight cases (95.2%), also 400/420 across additional noise seeds. The original
 assemblies remain available; hardware, camera recognition and the revised
 under-$50 parts budget are not qualified by this physics benchmark.
 
+**Ask the console:** a typed or dictated request such as "connect to the workshop scout" is mapped by the local model to one console action from a fixed list and run by the service with its usual checks; launches still go through the reviewed plan. See [mission-control.md](docs/mission-control.md).
+
 **Mission wizard:** the console opens with a Start-here panel that proposes the four mission clusters, map, audit, watch and find, from place memory and mission state, composes the brief for the one it can fly, and starts simulated exploration flights directly. See [mission-control.md](docs/mission-control.md).
 
 **Mission control:** `/control` now connects the SQLite aircraft assembly to

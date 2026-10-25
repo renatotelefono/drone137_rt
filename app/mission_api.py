@@ -122,3 +122,4 @@ def install(app, runtime, available=lambda: None, places=None, launcher=None):
         await launcher.close()
         await runtime.close()
     app.on_cleanup.append(cleanup)
+    return launcher

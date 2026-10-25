@@ -82,6 +82,24 @@ plan into the run record (`plan.template`) and the history list, so results can
 be read per mission type. Unsupported targets in an audit list are recorded as
 warnings, never silently relabelled.
 
+## Ask the console
+
+Above the Start-here panel, an ask box accepts a typed or dictated request such
+as "connect to the workshop scout", "what drones are paired", "check the
+extinguishers" or "map a new layout". The local model maps the request to one
+action from a fixed list (`app/mission_assistant.py`): connect, disconnect, show
+camera, list aircraft, status, start model, suggest mission, compose an audit
+brief, start an exploration flight, stop, return home, reduce thrust, cut motors,
+or unknown. The service resolves the spoken aircraft name against the pairing
+registry and refuses ambiguity by listing what is paired. Reads, connections and
+everything that stops motion run at once; starting an exploration flight is
+proposed and waits for a click; launching a mission is not an action here and
+always goes through the reviewed plan. The model never sees an address,
+certificate or credential; it sees aircraft names, kinds and connection states.
+Dictation uses the browser's own speech recognition, which may send audio off
+the computer; typing stays local. Verified live on 25 October against the paired
+protocol emulator: "please connect to the scout demo drone" connected it.
+
 ## Local API
 
 All mutations require the existing local host check and
@@ -100,6 +118,8 @@ All mutations require the existing local host check and
 | `POST /api/wizard/compose` | Turn a template and its fields into the brief, area and template tag the planner accepts |
 | `POST /api/wizard/explore` | Start one simulated exploration flight (`place`, `seed`); refused while a mission or flight is active |
 | `GET /api/wizard/explore/status` | State, observations, score and last log line of that flight |
+| `POST /api/assistant/ask` | Interpret a typed or dictated request as one console action and run it if it is immediate |
+| `POST /api/assistant/confirm` | Start the proposed exploration flight after the operator's click |
 | `GET /api/fleet/drones/{id}/status` | Isolated renderer/controller state |
 | `POST /api/fleet/drones/{id}/ready` | Generation-bound camera heartbeat |
 | `POST /api/fleet/drones/{id}/camera` | Episode/client/ticket-bound JPEG |

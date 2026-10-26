@@ -60,6 +60,37 @@ async def staged(category, seed, model, folder, store):
     return result
 
 
+async def played(folder, model, store, work):
+    """A recorded or rendered sequence: frames NNNNN.jpg at truth['fps'] with the event at truth['at']."""
+    truth = json.loads((folder/'truth.json').read_text())
+    if truth.get('at') is None:
+        return {'scenario': folder.name, 'skipped': 'no event mark'}
+    frames = sorted(folder.glob('*.jpg')); fps = truth.get('fps', RATE)
+    clock = Clock(); state = {'i': 0}
+    def source():
+        if state['i'] >= len(frames):
+            return None
+        data = frames[state['i']].read_bytes(); state['i'] += 1; clock.t = (state['i']-1)/fps
+        return data, state['i'], clock.t
+    name = folder.name
+    watch = PerchedWatch(name, source, store, work/name, model, clock=clock, cooldown_s=30)
+    watch.state = 'watching'
+    for _ in frames:
+        await watch.step()
+    events = [e for e in store.list(limit=500) if e['aircraft'] == name]
+    early = [e for e in events if e['at'] < truth['at'] - .5]
+    hits = [e for e in events if e['at'] >= truth['at'] - .5 and e['kind'] == truth['kind']]
+    hit = hits[-1] if hits else None
+    result = {'scenario': name, 'category': truth['category'], 'kind': truth['kind'], 'detected': hit is not None, 'early_events': len(early),
+              'latency_s': None if hit is None else hit['at'] - truth['at'], 'events': len(events), 'frames': len(frames),
+              'object': truth.get('object'), 'perch_height_m': truth.get('perch_height_m')}
+    if hit is not None and model is not None:
+        result['model'] = {'category': hit['category'], 'matters': hit['matters'], 'summary': hit['summary'], 'latency_s': hit['latency_s'],
+                           'category_correct': hit['category'] == truth['category'], 'matters_correct': hit['matters'] == (truth['category'] in MATTERS)}
+    result['passed'] = bool(result['detected'] and result['early_events'] == 0 and result['latency_s'] <= GATE['max_latency_s'])
+    return result
+
+
 def night(seed, hours):
     detector = ChangeDetector(); alerts = 0; candidates = 0; frames = 0; cooldown_until = -1e9
     for t, frame in quiet(seed, hours):
@@ -93,6 +124,18 @@ async def main(args):
             r = await staged(category, 100 + seed, model, folder/'events', store)
             results.append(r)
             print(json.dumps({k: (round(v, 2) if isinstance(v, float) else v) for k, v in r.items() if k != 'model'} | ({'model': r['model']['category'], 'ok': r['model']['category_correct']} if 'model' in r else {})), flush=True)
+    sets = {}
+    for directory in args.set:
+        folders = sorted(p for p in Path(directory).iterdir() if (p/'truth.json').is_file())
+        rows = []
+        for f in folders:
+            r = await played(f, model, store, folder/'played')
+            rows.append(r); print(json.dumps({k: (round(v, 2) if isinstance(v, float) else v) for k, v in r.items() if k != 'model'} | ({'model': r['model']['category'], 'ok': r['model']['category_correct']} if 'model' in r else {})), flush=True)
+        scored = [r for r in rows if 'skipped' not in r]
+        sets[str(directory)] = {'scenarios': len(rows), 'skipped': len(rows) - len(scored), 'detected': sum(r['detected'] for r in scored), 'passed': sum(r['passed'] for r in scored),
+                                'model_category_accuracy': (sum(r['model']['category_correct'] for r in scored if 'model' in r)/max(1, sum('model' in r for r in scored))) if model else None,
+                                'model_matters_accuracy': (sum(r['model']['matters_correct'] for r in scored if 'model' in r)/max(1, sum('model' in r for r in scored))) if model else None,
+                                'results': rows}
     nights = [night(500 + i, args.hours) for i in range(args.nights)]
     for n in nights:
         print(json.dumps(n), flush=True)
@@ -100,10 +143,11 @@ async def main(args):
     report = {'date': time.strftime('%Y-%m-%d'), 'gate': GATE, 'staged_events': len(results), 'detected': detected, 'passed': passed,
               'detection_rate': detected/len(results), 'max_latency_s': max((r['latency_s'] or 0) for r in results),
               'nights': nights, 'false_alerts_total': sum(n['alerts'] for n in nights), 'night_hours': args.hours,
-              'accepted': passed == len(results) and detected/len(results) >= GATE['detection'] and all(n['passed'] for n in nights),
+              'accepted': passed == len(results) and detected/len(results) >= GATE['detection'] and all(n['passed'] for n in nights)
+                          and all(v['passed'] == v['scenarios'] - v['skipped'] for v in sets.values()),
               'per_category': {c: {'detected': sum(r['detected'] for r in results if r['category'] == c), 'of': args.seeds,
                                    'median_latency_s': sorted((99. if r['latency_s'] is None else r['latency_s']) for r in results if r['category'] == c)[args.seeds//2]} for c in CATEGORIES},
-              'results': results, 'wall_time_s': time.time() - started, 'frame_rate_hz': RATE,
+              'results': results, 'sets': sets, 'wall_time_s': time.time() - started, 'frame_rate_hz': RATE,
               'scope': 'Synthetic staged events drawn on a real photo with sensor noise and lamp flicker; the detector gate is deterministic. Model scores are reported, not gated.'}
     if model is not None:
         scored = [r['model'] for r in results if 'model' in r]
@@ -114,7 +158,8 @@ async def main(args):
                            'per_category': {c: {'correct': sum(r['model']['category_correct'] for r in results if r['category'] == c and 'model' in r),
                                                 'answers': [r['model']['category'] for r in results if r['category'] == c and 'model' in r]} for c in CATEGORIES}}
     Path(args.output).write_text(json.dumps(report, indent=1, default=float) + '\n')
-    print(json.dumps({k: report[k] for k in ('accepted', 'detection_rate', 'passed', 'staged_events', 'false_alerts_total', 'max_latency_s')} | ({'model': report['model']['category_accuracy']} if 'model' in report else {}), default=float), flush=True)
+    print(json.dumps({k: report[k] for k in ('accepted', 'detection_rate', 'passed', 'staged_events', 'false_alerts_total', 'max_latency_s')} | ({'model': report['model']['category_accuracy']} if 'model' in report else {})
+                     | {'sets': {k: {kk: v[kk] for kk in ('scenarios', 'detected', 'passed', 'model_category_accuracy', 'model_matters_accuracy')} for k, v in sets.items()}}, default=float), flush=True)
     temp.cleanup()
     return 0 if report['accepted'] else 1
 
@@ -125,5 +170,6 @@ if __name__ == '__main__':
     parser.add_argument('--nights', type=int, default=2)
     parser.add_argument('--hours', type=float, default=8.)
     parser.add_argument('--model', action='store_true')
+    parser.add_argument('--set', action='append', default=[], help='folder of rendered or recorded scenarios, each with frames and truth.json; repeatable')
     parser.add_argument('--output', default=str(ROOT/'docs/watch-validation.json'))
     sys.exit(asyncio.run(main(parser.parse_args())))

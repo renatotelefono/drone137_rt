@@ -19,15 +19,27 @@ from app.watch_detector import ChangeDetector, KINDS
 ROOT = Path(__file__).resolve().parents[1]
 DATA = Path(os.environ.get('DRONE137_DATA_DIR', ROOT/'.local/data')).resolve()
 CATEGORIES = ('person', 'object_added', 'object_removed', 'object_moved', 'lighting', 'nothing')
-PROMPT = ('Two views from the same fixed indoor camera: left is before, right is now, and the region that '
-          'changed is marked. Say what changed, as one category: person (a person or people appeared or '
-          'moved), object_added, object_removed, object_moved, lighting (only the light level or shadows '
-          'changed), nothing (no real change). Say whether security should look (matters): a person or a '
-          'moved, added or removed object matters; lighting and nothing do not. Summary under 20 words. '
-          'Never describe who a person is.')
-SCHEMA = {'type': 'object', 'properties': {'category': {'type': 'string', 'enum': list(CATEGORIES)},
-                                           'matters': {'type': 'boolean'}, 'summary': {'type': 'string', 'maxLength': 120}},
-          'required': ['category', 'matters', 'summary'], 'additionalProperties': False}
+PROMPT = ('Two views from the same fixed indoor camera. The left panel is labelled BEFORE and the right panel '
+          'NOW; the region that changed is boxed in both. First describe in one sentence of at most 20 words what '
+          'is different in NOW compared with BEFORE. Then give one category: person (a human figure appeared, left or moved; '
+          'any walking or standing human shape counts as person, not as an object), object_added (something '
+          'is in NOW that was not in BEFORE), object_removed (something in BEFORE is gone in NOW), '
+          'object_moved (the same thing is in a different place), lighting (only brightness or shadows '
+          'changed), nothing. Then say whether security should look (matters): a person or an added, removed '
+          'or moved object matters; lighting and nothing do not. Never describe who a person is. ')
+SCHEMA = {'type': 'object', 'properties': {'summary': {'type': 'string', 'maxLength': 120},
+                                           'category': {'type': 'string', 'enum': list(CATEGORIES)},
+                                           'matters': {'type': 'boolean'}},
+          'required': ['summary', 'category', 'matters'], 'additionalProperties': False}
+
+
+def hint(candidate, frame_shape):
+    """What the detector itself knows about the region, in words the model can use."""
+    x, y, w, h = candidate['bbox']; fraction = candidate.get('area_fraction', w*h/(frame_shape[0]*frame_shape[1]))
+    motion = candidate['kind'] == 'motion'
+    shape = 'taller than wide' if h > 1.3*w else 'wider than tall' if w > 1.3*h else 'about square'
+    return (f"Detector note: the boxed region {'moved across the frame' if motion else 'appeared and stayed still'}, "
+            f"covers {fraction*100:.0f} % of the picture and is {shape}.")
 MATTERS = {'person', 'object_added', 'object_removed', 'object_moved'}
 
 
@@ -48,11 +60,14 @@ def composite(before, after, bbox, margin=.25):
         cx, cy = (x0+x1)//2, (y0+y1)//2; hw, hh = max(x1-x0, int(w*.4))//2, max(y1-y0, int(h*.4))//2
         x0, x1 = max(0, cx-hw), min(w, cx+hw); y0, y1 = max(0, cy-hh), min(h, cy+hh)
     panels = []
-    for image in (before, after):
+    for image, label in ((before, 'BEFORE'), (after, 'NOW')):
         crop = image[y0:y1, x0:x1].copy()
         cv2.rectangle(crop, (x-x0, y-y0), (x-x0+bw, y-y0+bh), (0, 220, 255), 2)
+        band = max(22, crop.shape[0]//12)
+        crop = np.vstack([np.zeros((band, crop.shape[1], 3), np.uint8), crop])
+        cv2.putText(crop, label, (8, band-6), cv2.FONT_HERSHEY_SIMPLEX, band/32, (255, 255, 255), 2, cv2.LINE_AA)
         panels.append(crop)
-    out = np.hstack([panels[0], np.full((y1-y0, 6, 3), 255, np.uint8), panels[1]])
+    out = np.hstack([panels[0], np.full((panels[0].shape[0], 6, 3), 255, np.uint8), panels[1]])
     if out.shape[1] > 960:
         out = cv2.resize(out, (960, int(out.shape[0]*960/out.shape[1])))
     return out
@@ -196,7 +211,7 @@ class PerchedWatch:
         if self.model is not None and self.question and kind != 'lighting':
             began = time.monotonic()
             try:
-                raw = await self.model.image(encode(pair, 85), PROMPT, SCHEMA, timeout=12, max_tokens=120)
+                raw = await self.model.image(encode(pair, 85), PROMPT + hint(candidate, after.shape), SCHEMA, timeout=12, max_tokens=160)
                 answer = parse(raw); model_name = getattr(self.model, 'name', 'local')
             except Exception as exc:
                 answer = None; self.error = f'model: {type(exc).__name__}: {exc}'[:160]

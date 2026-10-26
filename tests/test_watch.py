@@ -136,7 +136,12 @@ class Pipeline(unittest.IsolatedAsyncioTestCase):
                 parse(json.dumps(bad))
         a = np.zeros((480, 640, 3), np.uint8); b = a.copy()
         pair = composite(a, b, (300, 200, 40, 30))
-        self.assertEqual(pair.shape[0], pair.shape[0]); self.assertLessEqual(pair.shape[1], 960); self.assertGreaterEqual(pair.shape[1], 2*int(640*.4))
+        self.assertLessEqual(pair.shape[1], 960); self.assertGreaterEqual(pair.shape[1], 2*int(640*.4))
+        self.assertGreater(pair[:22].mean(), 0)   # the BEFORE and NOW labels are drawn into the top band
+        from app.watch_events import hint
+        self.assertIn('moved across the frame', hint({'kind': 'motion', 'bbox': (0, 0, 40, 120), 'area_fraction': .02}, (480, 640)))
+        self.assertIn('taller than wide', hint({'kind': 'motion', 'bbox': (0, 0, 40, 120), 'area_fraction': .02}, (480, 640)))
+        self.assertIn('stayed still', hint({'kind': 'change', 'bbox': (0, 0, 120, 40), 'area_fraction': .05}, (480, 640)))
 
 
 class Connection:

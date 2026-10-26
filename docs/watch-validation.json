@@ -71,8 +71,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A person was removed from the scene.",
-    "latency_s": 1.1348897080024472,
+    "summary": "The red vertical bar in the 'BEFORE' image is gone in the 'NOW' image, and a new yellow box has appeared in the 'NOW' to",
+    "latency_s": 3.074495416993159,
     "category_correct": true,
     "matters_correct": true
    },
@@ -89,8 +89,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A brown rectangular object was removed from the scene.",
-    "latency_s": 1.0474787080020178,
+    "summary": "The brown square in the 'before' image is gone in the 'now' image, and a new white square has appeared in the same area.",
+    "latency_s": 3.0463709169998765,
     "category_correct": true,
     "matters_correct": true
    },
@@ -107,8 +107,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A person was removed from the scene.",
-    "latency_s": 1.0168656250025379,
+    "summary": "The brown square in the 'before' image is gone in the 'now' image, and a white square has appeared in the same location.",
+    "latency_s": 2.981569290990592,
     "category_correct": true,
     "matters_correct": true
    },
@@ -123,11 +123,11 @@
    "iou": 0.4741214057507987,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_removed",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.079343000004883,
-    "category_correct": false,
+    "summary": "The red box in the 'before' image is gone in the 'now' image, and a new yellow box has appeared in the 'now' image.",
+    "latency_s": 2.9976376249978784,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -141,11 +141,11 @@
    "iou": 0.4741214057507987,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_removed",
     "matters": true,
-    "summary": "A person moved from left to right view.",
-    "latency_s": 1.0785013749991776,
-    "category_correct": false,
+    "summary": "The red box in the 'before' image is gone in the 'now' image, and the yellow box is now in the same position as the red,",
+    "latency_s": 3.108081874990603,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -161,8 +161,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A person was removed from the scene.",
-    "latency_s": 1.0125669999979436,
+    "summary": "The brown square in the 'before' image is gone in the 'now' image, and a new white square has appeared in the center of ",
+    "latency_s": 3.0109477500081994,
     "category_correct": true,
     "matters_correct": true
    },
@@ -179,8 +179,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A red vertical object was removed from the scene.",
-    "latency_s": 1.0501763329957612,
+    "summary": "The red object in the 'before' image is gone in the 'now' image, and a yellow rectangle has appeared in the 'now' image.",
+    "latency_s": 2.9787159169936785,
     "category_correct": true,
     "matters_correct": true
    },
@@ -197,8 +197,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A person was removed from the scene.",
-    "latency_s": 1.0115332499990473,
+    "summary": "The brown square in the 'before' image is replaced by a white rectangle in the 'now' image, indicating an object removal",
+    "latency_s": 2.971099750007852,
     "category_correct": true,
     "matters_correct": true
    },
@@ -215,8 +215,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A person was removed from the scene.",
-    "latency_s": 1.0181594580062665,
+    "summary": "The brown box in the 'before' image is gone in the 'now' image, and a new white box has appeared in the corner of the 'n",
+    "latency_s": 1.7503862080047838,
     "category_correct": true,
     "matters_correct": true
    },
@@ -233,8 +233,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A person was removed from the scene.",
-    "latency_s": 1.0071862079930725,
+    "summary": "The red box in the 'BEFORE' image is gone in the 'NOW' image, and a new yellow box has appeared in the 'NOW' image.",
+    "latency_s": 3.0237028330011526,
     "category_correct": true,
     "matters_correct": true
    },
@@ -251,8 +251,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A red object was removed from the scene.",
-    "latency_s": 1.0227427079953486,
+    "summary": "A red vertical object was present in the 'BEFORE' view but is gone in the 'NOW' view, with no other changes.",
+    "latency_s": 1.548452749993885,
     "category_correct": true,
     "matters_correct": true
    },
@@ -269,8 +269,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A brown object was removed from the scene.",
-    "latency_s": 1.0220138329896145,
+    "summary": "The brown square in the 'before' image is gone in the 'now' image, and a new white square has appeared in the same area.",
+    "latency_s": 3.1287442090106197,
     "category_correct": true,
     "matters_correct": true
    },
@@ -285,11 +285,11 @@
    "iou": 0.4741214057507987,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_added",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.0738295839983039,
-    "category_correct": false,
+    "summary": "The red box in NOW shows a vertical object that was not in BEFORE, indicating an object added.",
+    "latency_s": 2.8380017909948947,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -303,11 +303,11 @@
    "iou": 0.7736516357206012,
    "events": 1,
    "model": {
-    "category": "object_removed",
+    "category": "object_added",
     "matters": true,
-    "summary": "A person was removed from the scene.",
-    "latency_s": 1.0130845419917023,
-    "category_correct": false,
+    "summary": "A brown rectangular object has appeared in the NOW view, which was not present in the BEFORE view.",
+    "latency_s": 1.3955689590075053,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -321,11 +321,11 @@
    "iou": 0.794010889292196,
    "events": 1,
    "model": {
-    "category": "object_removed",
+    "category": "object_added",
     "matters": true,
-    "summary": "A person was removed from the scene.",
-    "latency_s": 1.0175840419979068,
-    "category_correct": false,
+    "summary": "The brown rectangle in the box has appeared in the NOW image, while the box itself is unchanged.",
+    "latency_s": 1.9595182920020306,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -339,11 +339,11 @@
    "iou": 0.4741214057507987,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_added",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.0656816670089029,
-    "category_correct": false,
+    "summary": "The red box in NOW is a new object added to the scene, while the yellow box is the same region in BEFORE.",
+    "latency_s": 2.035668540993356,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -357,11 +357,11 @@
    "iou": 0.4741214057507987,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_added",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.0684840829926543,
-    "category_correct": false,
+    "summary": "The red box in NOW shows a new object added to the scene, which was not present before.",
+    "latency_s": 2.8793973330029985,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -375,11 +375,11 @@
    "iou": 0.8012820512820513,
    "events": 1,
    "model": {
-    "category": "object_removed",
+    "category": "object_added",
     "matters": true,
-    "summary": "A person was removed from the scene.",
-    "latency_s": 1.0140154999971855,
-    "category_correct": false,
+    "summary": "The brown box appears in the NOW image, while the yellow box is the same in both, indicating an object added.",
+    "latency_s": 2.9245316669985186,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -395,8 +395,8 @@
    "model": {
     "category": "object_added",
     "matters": true,
-    "summary": "A red object was added to the scene",
-    "latency_s": 1.095022749999771,
+    "summary": "The red object is now in the box, while the yellow box is gone.",
+    "latency_s": 2.836209750006674,
     "category_correct": true,
     "matters_correct": true
    },
@@ -411,11 +411,11 @@
    "iou": 0.8012820512820513,
    "events": 1,
    "model": {
-    "category": "object_removed",
+    "category": "object_added",
     "matters": true,
-    "summary": "A brown rectangular object was removed from the scene.",
-    "latency_s": 1.0447305419947952,
-    "category_correct": false,
+    "summary": "The brown rectangle in the now view is a new object added to the scene, while the yellow box is the same region that was",
+    "latency_s": 2.978963208006462,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -429,11 +429,11 @@
    "iou": 0.7736516357206012,
    "events": 1,
    "model": {
-    "category": "object_removed",
+    "category": "object_added",
     "matters": true,
-    "summary": "A brown rectangular object was removed from the scene.",
-    "latency_s": 1.0401775840000482,
-    "category_correct": false,
+    "summary": "A brown rectangular object has appeared in the NOW view, which was not present in the BEFORE view.",
+    "latency_s": 1.4475624170008814,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -447,11 +447,11 @@
    "iou": 0.47175866495507063,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_added",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.0686806669982616,
-    "category_correct": false,
+    "summary": "The red box in NOW shows a new red rectangle that was not in BEFORE, indicating an object added.",
+    "latency_s": 2.8467937499954132,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -467,8 +467,8 @@
    "model": {
     "category": "object_added",
     "matters": true,
-    "summary": "A red vertical object was added to the scene.",
-    "latency_s": 1.0454444999922998,
+    "summary": "A red object, likely a vape pen, has been added to the scene in NOW compared to BEFORE.",
+    "latency_s": 2.9134707500052173,
     "category_correct": true,
     "matters_correct": true
    },
@@ -483,11 +483,11 @@
    "iou": 0.7736516357206012,
    "events": 1,
    "model": {
-    "category": "object_removed",
+    "category": "object_added",
     "matters": true,
-    "summary": "A brown object was removed from the scene.",
-    "latency_s": 1.0274643339944305,
-    "category_correct": false,
+    "summary": "The brown rectangle in the now view is a new object added to the scene, while the yellow box is the same region in both,",
+    "latency_s": 2.9678517910069786,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -501,11 +501,11 @@
    "iou": 0.18718466195761857,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_added",
     "matters": true,
-    "summary": "A red object moved from the left to the right side of the scene.",
-    "latency_s": 1.1351005420001457,
-    "category_correct": true,
+    "summary": "The red object has been added to the scene in NOW, while the yellow box remains in the same position.",
+    "latency_s": 2.895704416994704,
+    "category_correct": false,
     "matters_correct": true
    },
    "passed": true
@@ -521,8 +521,8 @@
    "model": {
     "category": "object_moved",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.0916632500011474,
+    "summary": "The boxed region in NOW is wider than in BEFORE, indicating a horizontal expansion of the area covered by the camera's 3",
+    "latency_s": 2.32473174999177,
     "category_correct": true,
     "matters_correct": true
    },
@@ -537,10 +537,10 @@
    "iou": 0.41676181776661336,
    "events": 1,
    "model": {
-    "category": "object_removed",
+    "category": "object_added",
     "matters": true,
-    "summary": "A white square was removed from the scene, indicating a change in the environment.",
-    "latency_s": 1.115998084002058,
+    "summary": "The brown square in the center of the room has been replaced by a white square, and a new brown square has appeared on a",
+    "latency_s": 3.068936166993808,
     "category_correct": false,
     "matters_correct": true
    },
@@ -555,11 +555,11 @@
    "iou": 0.1878481012658228,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_removed",
     "matters": true,
-    "summary": "A red object moved from the right to the left side of the scene.",
-    "latency_s": 1.0874473329895409,
-    "category_correct": true,
+    "summary": "The red object in the box has been removed from the scene in the NOW image compared to the BEFORE image.",
+    "latency_s": 2.081353375004255,
+    "category_correct": false,
     "matters_correct": true
    },
    "passed": true
@@ -575,8 +575,8 @@
    "model": {
     "category": "object_moved",
     "matters": true,
-    "summary": "A red object moved from the left to the right side of the scene.",
-    "latency_s": 1.2170355410053162,
+    "summary": "The red object in the box has moved from the left to the right side of the image, and the yellow box has remained in the",
+    "latency_s": 3.0227160420035943,
     "category_correct": true,
     "matters_correct": true
    },
@@ -591,10 +591,10 @@
    "iou": 0.4087193460490463,
    "events": 1,
    "model": {
-    "category": "object_removed",
+    "category": "object_added",
     "matters": true,
-    "summary": "A brown rectangular object was removed from the scene.",
-    "latency_s": 1.094039249990601,
+    "summary": "The brown square in the foreground has appeared in the NOW view, while the yellow box is the same in both images.",
+    "latency_s": 2.8979289580020122,
     "category_correct": false,
     "matters_correct": true
    },
@@ -609,11 +609,11 @@
    "iou": 0.18718466195761857,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_added",
     "matters": true,
-    "summary": "A red object moved from the left to the right side of the scene.",
-    "latency_s": 1.1131997500051511,
-    "category_correct": true,
+    "summary": "A red object, likely a vape pen, is now visible in the right panel, while the left panel shows a red object in a box.  ",
+    "latency_s": 1.6010334580059862,
+    "category_correct": false,
     "matters_correct": true
    },
    "passed": true
@@ -627,10 +627,10 @@
    "iou": 0.41589648798521256,
    "events": 1,
    "model": {
-    "category": "object_removed",
+    "category": "object_added",
     "matters": true,
-    "summary": "A brown rectangular object was removed from the scene.",
-    "latency_s": 1.0996044579951558,
+    "summary": "The brown square object has appeared in the NOW view, while the yellow box is the same in both images.",
+    "latency_s": 1.9860068749985658,
     "category_correct": false,
     "matters_correct": true
    },
@@ -647,8 +647,8 @@
    "model": {
     "category": "object_moved",
     "matters": true,
-    "summary": "A brown object moved from the left to the right side of the frame.",
-    "latency_s": 1.2417281249945518,
+    "summary": "The brown rectangle in the box has moved from the left to the right side of the scene, and the box has expanded to cover",
+    "latency_s": 3.024535416989238,
     "category_correct": true,
     "matters_correct": true
    },
@@ -665,8 +665,8 @@
    "model": {
     "category": "object_moved",
     "matters": true,
-    "summary": "A red object moved from the left to the right side of the scene.",
-    "latency_s": 1.1305724580015521,
+    "summary": "The red object in the center of the image has been moved from the center to the right side of the frame, while the box's",
+    "latency_s": 3.041548499997589,
     "category_correct": true,
     "matters_correct": true
    },
@@ -681,11 +681,11 @@
    "iou": 0.18718466195761857,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "object_added",
     "matters": true,
-    "summary": "A red object moved from the left to the right side of the scene.",
-    "latency_s": 1.1526633339963155,
-    "category_correct": true,
+    "summary": "The red object in the 'before' image is now a separate red object in the 'now' image, and the yellow box has changed to ",
+    "latency_s": 3.0474628750089323,
+    "category_correct": false,
     "matters_correct": true
    },
    "passed": true
@@ -701,8 +701,8 @@
    "model": {
     "category": "object_removed",
     "matters": true,
-    "summary": "A brown object was removed from the scene.",
-    "latency_s": 1.081386707999627,
+    "summary": "The brown box in the 'before' image is gone in the 'now' image, and a new brown box has appeared in the right corner.",
+    "latency_s": 2.983014749988797,
     "category_correct": false,
     "matters_correct": true
    },
@@ -717,11 +717,11 @@
    "iou": 0.0,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "person",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.2906588330079103,
-    "category_correct": false,
+    "summary": "A person appeared in the NOW view, while the boxed region moved across the frame.",
+    "latency_s": 2.953704083003686,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -735,11 +735,11 @@
    "iou": 0.0,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "person",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.522074332999182,
-    "category_correct": false,
+    "summary": "A person appeared in the NOW view, while the boxed region moved across the frame.",
+    "latency_s": 2.82900850000442,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -753,10 +753,10 @@
    "iou": 0.0,
    "events": 1,
    "model": {
-    "category": "object_added",
+    "category": "object_moved",
     "matters": true,
-    "summary": "A person appeared in the right view, marked by a new yellow box.",
-    "latency_s": 1.2742993749998277,
+    "summary": "The person in the now view is in the same position as before, but the box has moved up and to the right, covering more, ",
+    "latency_s": 3.140108624997083,
     "category_correct": false,
     "matters_correct": true
    },
@@ -771,11 +771,11 @@
    "iou": 0.0,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "person",
     "matters": true,
-    "summary": "A person moved into the scene from the left view to the right view.",
-    "latency_s": 1.2933054579916643,
-    "category_correct": false,
+    "summary": "A person appears in the NOW frame, while the boxed region moved across the frame.",
+    "latency_s": 2.903553041993291,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -789,11 +789,11 @@
    "iou": 0.0,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "person",
     "matters": true,
-    "summary": "A person moved into the frame from the left to the right.",
-    "latency_s": 1.317090750002535,
-    "category_correct": false,
+    "summary": "A person appeared in the NOW view, while the boxed region moved across the frame.",
+    "latency_s": 2.9172485830058577,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -807,11 +807,11 @@
    "iou": 0.0,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "person",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.3142665000050329,
-    "category_correct": false,
+    "summary": "A person figure appears in the NOW view, while the boxed region moves across the frame.",
+    "latency_s": 1.5753664590010885,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -825,11 +825,11 @@
    "iou": 0.0,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "person",
     "matters": true,
-    "summary": "A person appeared in the right view, moving from the left view.",
-    "latency_s": 1.2155764580093091,
-    "category_correct": false,
+    "summary": "A person appeared in the NOW view, while the boxed region moved across the frame.",
+    "latency_s": 2.7984608330007177,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -843,11 +843,11 @@
    "iou": 0.0,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "person",
     "matters": true,
-    "summary": "A person moved from the left to the right view.",
-    "latency_s": 1.2579345410049427,
-    "category_correct": false,
+    "summary": "A person appears in the NOW frame, while the boxed region moved across the frame.",
+    "latency_s": 2.853893166000489,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -863,8 +863,8 @@
    "model": {
     "category": "person",
     "matters": true,
-    "summary": "A person appeared in the right view, marked by a yellow box.",
-    "latency_s": 1.284243542002514,
+    "summary": "A person appeared in the NOW view, while the boxed region moved across the frame.",
+    "latency_s": 2.9570268340030452,
     "category_correct": true,
     "matters_correct": true
    },
@@ -881,8 +881,8 @@
    "model": {
     "category": "person",
     "matters": true,
-    "summary": "A person appeared in the right view, marked by a yellow box.",
-    "latency_s": 1.255858292002813,
+    "summary": "A person appeared in the NOW view, while the boxed region moved across the frame.",
+    "latency_s": 2.9602818749990547,
     "category_correct": true,
     "matters_correct": true
    },
@@ -899,8 +899,8 @@
    "model": {
     "category": "person",
     "matters": true,
-    "summary": "A person appeared in the right view, marked by a new bounding box.",
-    "latency_s": 1.279068207993987,
+    "summary": "A person appeared in the NOW view, while the boxed region moved across the frame.",
+    "latency_s": 2.8448875000030966,
     "category_correct": true,
     "matters_correct": true
    },
@@ -915,11 +915,11 @@
    "iou": 0.0,
    "events": 1,
    "model": {
-    "category": "object_moved",
+    "category": "person",
     "matters": true,
-    "summary": "A person appeared in the right view, moving from the left view.",
-    "latency_s": 1.26550291699823,
-    "category_correct": false,
+    "summary": "A person appears in the NOW view, while the boxed region moved across the frame.",
+    "latency_s": 2.835086749997572,
+    "category_correct": true,
     "matters_correct": true
    },
    "passed": true
@@ -1141,24 +1141,456 @@
    "passed": true
   }
  ],
- "wall_time_s": 1084.2127678394318,
+ "sets": {
+  ".local/validation/watch-rendered": {
+   "scenarios": 20,
+   "skipped": 0,
+   "detected": 20,
+   "passed": 20,
+   "model_category_accuracy": 0.55,
+   "model_matters_accuracy": 1.0,
+   "results": [
+    {
+     "scenario": "cart-0",
+     "category": "object_moved",
+     "kind": "motion",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 2.4000000000000004,
+     "events": 2,
+     "frames": 40,
+     "object": "rolling stock cart",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "The boxed region in the 'NOW' image shows a darker, more textured strip that was not present in the 'BEFORE' image, and ",
+      "latency_s": 1.6850169170065783,
+      "category_correct": false,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "cart-1",
+     "category": "object_moved",
+     "kind": "motion",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 0.40000000000000036,
+     "events": 2,
+     "frames": 40,
+     "object": "rolling stock cart",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "A cardboard box has been added to the scene in the NOW view, while the previous view showed a different object in the un",
+      "latency_s": 2.0250742089992855,
+      "category_correct": false,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "cart-2",
+     "category": "object_moved",
+     "kind": "motion",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 0.40000000000000036,
+     "events": 2,
+     "frames": 40,
+     "object": "rolling stock cart",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "A tall, rectangular cardboard box has been added to the scene in the NOW view, while the previous view showed a smaller,",
+      "latency_s": 2.2347351250064094,
+      "category_correct": false,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "cart-3",
+     "category": "object_moved",
+     "kind": "motion",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 0.40000000000000036,
+     "events": 2,
+     "frames": 40,
+     "object": "rolling stock cart",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "object_moved",
+      "matters": true,
+      "summary": "The object in the box has moved from the left to the right side of the frame.",
+      "latency_s": 3.7511308339890093,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "lighting-0",
+     "category": "lighting",
+     "kind": "lighting",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 0.0,
+     "events": 1,
+     "frames": 40,
+     "object": "office-chair",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "lighting",
+      "matters": false,
+      "summary": "Light level changed",
+      "latency_s": null,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "lighting-1",
+     "category": "lighting",
+     "kind": "lighting",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 0.0,
+     "events": 1,
+     "frames": 40,
+     "object": "paint-tin",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "lighting",
+      "matters": false,
+      "summary": "Light level changed",
+      "latency_s": null,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "lighting-2",
+     "category": "lighting",
+     "kind": "lighting",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 0.0,
+     "events": 1,
+     "frames": 40,
+     "object": "paint-tin",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "lighting",
+      "matters": false,
+      "summary": "Light level changed",
+      "latency_s": null,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "lighting-3",
+     "category": "lighting",
+     "kind": "lighting",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 0.0,
+     "events": 1,
+     "frames": 40,
+     "object": "red-canister",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "lighting",
+      "matters": false,
+      "summary": "Light level changed",
+      "latency_s": null,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_added-0",
+     "category": "object_added",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "wooden_crate_01",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "A wooden chest has been added to the scene in the NOW view, while the previous view showed only a road marking and some ",
+      "latency_s": 1.9824005410046084,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_added-1",
+     "category": "object_added",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "wooden_crate_01",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "A wooden chest has been added to the scene in the NOW view, while the area in the BEFORE view was empty.",
+      "latency_s": 1.7299746670032619,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_added-2",
+     "category": "object_added",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "red-canister",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "The yellow box highlights a red object that was not present in the 'before' image but is now visible in the 'now' image.",
+      "latency_s": 3.1188655000005383,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_added-3",
+     "category": "object_added",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "wooden_crate_01",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "A brown, old-fashioned trunk has been added to the scene in the NOW view, while the area marked by the yellow box is the",
+      "latency_s": 1.8303384169994388,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_moved-0",
+     "category": "object_moved",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "paint-tin",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "A white cylindrical object is now visible in the shelf space that was previously empty, and the box is in the same place",
+      "latency_s": 1.566278375001275,
+      "category_correct": false,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_moved-1",
+     "category": "object_moved",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "safety-cones",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "The cone in the foreground is now visible in the NOW image, while the cone was not in the BEFORE image. The region that ",
+      "latency_s": 1.7278381249925587,
+      "category_correct": false,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_moved-2",
+     "category": "object_moved",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "red-canister",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "object_removed",
+      "matters": true,
+      "summary": "The red object in the 'before' image is gone in the 'now' image, and the yellow box is now covering a different area.",
+      "latency_s": 3.126406958006555,
+      "category_correct": false,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_moved-3",
+     "category": "object_moved",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "office-chair",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "object_removed",
+      "matters": true,
+      "summary": "The chair is in the same position, but the scene is now clearer and the lighting has improved.",
+      "latency_s": 2.9216247919976013,
+      "category_correct": false,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_removed-0",
+     "category": "object_removed",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "paint-tin",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "The red object is now in the same position as before, but the box is wider and covers 1% of the picture.",
+      "latency_s": 3.0635793749970617,
+      "category_correct": false,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_removed-1",
+     "category": "object_removed",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "red-canister",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "object_removed",
+      "matters": true,
+      "summary": "The red box in the 'before' image is gone in the 'now' image, and a new white rectangle has appeared in the 'now' image.",
+      "latency_s": 3.1374230830115266,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_removed-2",
+     "category": "object_removed",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "paint-tin",
+     "perch_height_m": 0.75,
+     "model": {
+      "category": "object_removed",
+      "matters": true,
+      "summary": "The red can is in the same place, but the blue box is now in the same place, but the blue box is now in the same place,",
+      "latency_s": 3.1348570419941097,
+      "category_correct": true,
+      "matters_correct": true
+     },
+     "passed": true
+    },
+    {
+     "scenario": "object_removed-3",
+     "category": "object_removed",
+     "kind": "change",
+     "detected": true,
+     "early_events": 0,
+     "latency_s": 1.2000000000000002,
+     "events": 1,
+     "frames": 40,
+     "object": "storage-bin",
+     "perch_height_m": 1.05,
+     "model": {
+      "category": "object_added",
+      "matters": true,
+      "summary": "The yellow box in the 'NOW' image shows a white rectangular object that was not present in the 'BEFORE' image, which is ",
+      "latency_s": 2.516457540987176,
+      "category_correct": false,
+      "matters_correct": true
+     },
+     "passed": true
+    }
+   ]
+  }
+ },
+ "wall_time_s": 1377.445169210434,
  "frame_rate_hz": 2.5,
  "scope": "Synthetic staged events drawn on a real photo with sensor noise and lamp flicker; the detector gate is deterministic. Model scores are reported, not gated.",
  "model": {
   "name": "local Qwen 2B",
   "events_scored": 60,
-  "category_accuracy": 0.5833333333333334,
+  "category_accuracy": 0.85,
   "matters_accuracy": 1.0,
-  "mean_latency_s": 0.9034329173492248,
+  "mean_latency_s": 2.1531223604166976,
   "per_category": {
    "object_removed": {
-    "correct": 10,
+    "correct": 12,
     "answers": [
      "object_removed",
      "object_removed",
      "object_removed",
-     "object_moved",
-     "object_moved",
+     "object_removed",
+     "object_removed",
      "object_removed",
      "object_removed",
      "object_removed",
@@ -1169,54 +1601,54 @@
     ]
    },
    "object_added": {
-    "correct": 2,
+    "correct": 12,
     "answers": [
-     "object_moved",
-     "object_removed",
-     "object_removed",
-     "object_moved",
-     "object_moved",
-     "object_removed",
      "object_added",
-     "object_removed",
-     "object_removed",
-     "object_moved",
      "object_added",
-     "object_removed"
+     "object_added",
+     "object_added",
+     "object_added",
+     "object_added",
+     "object_added",
+     "object_added",
+     "object_added",
+     "object_added",
+     "object_added",
+     "object_added"
     ]
    },
    "object_moved": {
-    "correct": 8,
+    "correct": 4,
     "answers": [
+     "object_added",
      "object_moved",
-     "object_moved",
+     "object_added",
      "object_removed",
      "object_moved",
-     "object_moved",
-     "object_removed",
-     "object_moved",
-     "object_removed",
-     "object_moved",
+     "object_added",
+     "object_added",
+     "object_added",
      "object_moved",
      "object_moved",
+     "object_added",
      "object_removed"
     ]
    },
    "person": {
-    "correct": 3,
+    "correct": 11,
     "answers": [
-     "object_moved",
-     "object_moved",
-     "object_added",
-     "object_moved",
-     "object_moved",
-     "object_moved",
-     "object_moved",
+     "person",
+     "person",
      "object_moved",
      "person",
      "person",
      "person",
-     "object_moved"
+     "person",
+     "person",
+     "person",
+     "person",
+     "person",
+     "person"
     ]
    },
    "lighting": {

@@ -20,11 +20,11 @@ def iou(a, b):
 
 
 class ChangeDetector:
-    def __init__(self, *, width=320, threshold=24, min_area_fraction=.004, learn_frames=5, drift=.01,
-                 persist_frames=4, lighting_fraction=.55, move_px=6, associate_px=40):
+    def __init__(self, *, width=320, threshold=24, min_area_fraction=.002, learn_frames=5, drift=.01,
+                 persist_frames=4, lighting_fraction=.55, shift_fraction=.7, move_px=6, associate_px=40):
         self.width, self.threshold, self.min_area_fraction = width, threshold, min_area_fraction
         self.learn_frames, self.drift, self.persist_frames = learn_frames, drift, persist_frames
-        self.lighting_fraction, self.move_px, self.associate_px = lighting_fraction, move_px, associate_px
+        self.lighting_fraction, self.shift_fraction, self.move_px, self.associate_px = lighting_fraction, shift_fraction, move_px, associate_px
         self.reference = None
         self.learning = []
         self.tracks = []       # [{'bbox', 'first', 'frames', 'centres', 'reported'}] in processing coordinates
@@ -57,11 +57,15 @@ class ChangeDetector:
         diff = cv2.absdiff(gray, self.reference).max(axis=2)
         mask = (diff > self.threshold).astype(np.uint8)
         fraction = float(mask.mean())
-        if fraction > self.lighting_fraction:
+        # A brightness shift in one direction over most of the picture is a light change even where the
+        # dark parts of a dim room move by less than the object threshold.
+        shift = gray.mean(axis=2) - self.reference.mean(axis=2)
+        shifted = max(float((shift < -self.threshold/3).mean()), float((shift > self.threshold/3).mean()))
+        if fraction > self.lighting_fraction or shifted > self.shift_fraction:
             # Whole-image change: light level, not an object. The new light becomes the reference at
             # once; a slow fade would leave partial differences that look like objects for a while.
             self.reference = gray.copy(); self.tracks = []
-            return [{'kind': 'lighting', 'bbox': self.full_bbox(frame), 'area_fraction': fraction, 'frames': 1}]
+            return [{'kind': 'lighting', 'bbox': self.full_bbox(frame), 'area_fraction': max(fraction, shifted), 'frames': 1}]
         kernel = np.ones((3, 3), np.uint8)
         mask = cv2.morphologyEx(cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel), cv2.MORPH_CLOSE, np.ones((7, 7), np.uint8))
         count, labels, stats, centroids = cv2.connectedComponentsWithStats(mask, connectivity=8)

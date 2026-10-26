@@ -129,6 +129,8 @@ All mutations require the existing local host check and
 | `POST /api/aircraft/{id}/manual/input` | One stick sample (roll, pitch, yaw rate, thrust), clamped to the manual envelope; the service streams setpoints at 20 Hz |
 | `POST /api/aircraft/{id}/manual/land` | Land through the aircraft's bounded ramp and end the session |
 | `GET /api/aircraft/{id}/manual` | Manual session state, last setpoint, input age and limits |
+| `GET /api/preflight/memory?profile=` | Memory estimate for a profile (`mapping-flight`, `mission-flight`, `mission-simulation`, `exploration-simulation`) with the host verdict |
+| `POST /api/preflight/memory` | Measured preflight: starts what can be started without an aircraft, samples for `seconds`, compares with free memory |
 | `GET /api/fleet/drones/{id}/status` | Isolated renderer/controller state |
 | `POST /api/fleet/drones/{id}/ready` | Generation-bound camera heartbeat |
 | `POST /api/fleet/drones/{id}/camera` | Episode/client/ticket-bound JPEG |
@@ -160,3 +162,30 @@ while a mission is active and while another aircraft is under manual control; th
 land and cut-motors buttons work throughout. The default board builds cannot arm, so on
 hardware this needs the restrained-rig build; the protocol emulator accepts it and the tests
 in `tests/test_manual_control.py` run against that emulator.
+
+## Memory before a flight
+
+Three layers, all in `app/memory_budget.py` and `scripts/preflight_memory.py`:
+
+1. **Estimate from configuration.** The model server is its two files plus the context cache
+   read from the GGUF header (2 × layers × context × KV heads × head size × 2 bytes) plus a
+   measured overhead; the flight process is a measured baseline plus the mapping grids and
+   frame ring it actually allocates; every other component is a measured baseline with its
+   provenance in `config/memory-baselines.json`. The sum is an upper bound because peaks do
+   not coincide. Every mission plan carries it and the console shows it on the plan line.
+2. **Measured preflight.** Starts the flight structures, the Florence worker and, with a
+   configuration folder, the VIO estimator; samples the running model server; compares with
+   the host. Idle measurements are floors, so a component's estimate stays in the total when it
+   is larger. Larger local measurements are learned into `.local/data/memory-baselines.json`;
+   smaller ones never replace the shipped figures.
+3. **The watch in flight.** Missions now run under the same memory watch as exploration
+   flights, over the physics, the camera renderer, the verifier and the model server, with a
+   budget of 5 GiB on hosts above 10 GiB and 3.5 GiB below; exceeding it fails the mission
+   safely and the run record keeps the measured peak.
+
+Measured on 26 October 2026 on the 16 GB development Mac (`docs/memory-preflight-validation.json`):
+a simulated mission sums to 5.4 GiB as an upper bound, the model server measured
+1.68 GiB resident and the verifier 1.51 GiB; a mapping flight on hardware sums to
+about 2.3 GiB. The launch refuses a plan only when the machine's total memory cannot hold it;
+a tight moment on a busy machine is reported, not refused, because macOS reclaims file cache
+and compressed pages on demand.

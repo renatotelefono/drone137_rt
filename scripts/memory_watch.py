@@ -72,7 +72,7 @@ class MemoryWatch:
         if self.error:
             raise RuntimeError('Memory measurement failed: '+self.error)
         if self.exceeded:
-            raise MemoryError('Application exceeded the 5 GiB experiment budget; run stopped')
+            raise MemoryError(f'Application exceeded the {self.budget/GIB:g} GiB memory budget; run stopped')
 
     def stop(self):
         self.stop_event.set()

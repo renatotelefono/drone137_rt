@@ -225,6 +225,14 @@ Raw evidence stays `.local/validation/`; credentials/binaries stay ignored under
 comparison JSON must remain unchanged. Historical material below is not current
 readiness or the current six-item numbering.
 
+## Pre-flight memory — 26 October 2026
+
+`app/memory_budget.py`: estimate per component from the GGUF header, the allocated grids and
+measured baselines (`config/memory-baselines.json`); a measured preflight (`scripts/preflight_memory.py`,
+`/api/preflight/memory`); the memory watch now covers missions with a host-based budget
+(5 GiB above 10 GiB hosts, 3.5 GiB below). Validation: `docs/memory-preflight-validation.json`.
+Tests: `tests/test_memory_budget.py`.
+
 ## Manual control — 26 October 2026
 
 `hardware/esp32/manual_control.py` and `manual_api.py` add a console stick mode:

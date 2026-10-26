@@ -1,0 +1,29 @@
+{
+ "profile": "mission-simulation",
+ "total_gib": 5.38,
+ "host_total_gib": 16.0,
+ "host_available_gib": 2.88,
+ "fits_machine": true,
+ "fits_now": false,
+ "budget_gib": 5.0,
+ "within_budget": false,
+ "components": {
+  "model-server": 1.715,
+  "flight": 0.358,
+  "console": 0.1,
+  "verifier": 1.515,
+  "renderer": 0.94,
+  "physics": 0.75
+ },
+ "measured": [
+  "flight",
+  "model-server",
+  "verifier"
+ ],
+ "measured_gib": {
+  "flight": 0.037,
+  "model-server": 1.679,
+  "verifier": 1.515
+ },
+ "unknown": []
+}

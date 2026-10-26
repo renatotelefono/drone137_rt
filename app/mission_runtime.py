@@ -25,6 +25,8 @@ from app import mission_wizard
 from adapters.vision_reviewer import VisionReviewer
 from app.docks import Docks
 from app.dock_tags import load_geometry
+from app import memory_budget
+from scripts.memory_watch import MemoryWatch
 
 
 class MissionRuntime:
@@ -94,6 +96,7 @@ class MissionRuntime:
                 if not isinstance(dock, str):
                     raise ValueError('dock must be a registered dock id')
                 self.docks.get(dock)   # unknown docks are refused before launch
+            memory = memory_budget.summary({**(assessment := memory_budget.assess('mission-simulation')), 'measured': [], 'unknown': assessment['unknown']})
             self.planning = True
             self.draft = None
             try:
@@ -107,7 +110,7 @@ class MissionRuntime:
                 if not points:
                     raise ValueError('Area contains no inspection stations')
                 self.draft = {'id': uuid.uuid4().hex, 'created_at': time.time(), 'instruction': instruction,
-                    'area': area, 'case': case['id'], 'assembly': assembly, 'views': points, 'template': template, 'dock': dock,
+                    'area': area, 'case': case['id'], 'assembly': assembly, 'views': points, 'template': template, 'dock': dock, 'memory': memory,
                     'intent': intent, 'dispatchable': supported is True and intent['objective'] != 'unsupported',
                     'backend': 'Rapier component dynamics + service-owned Three.js camera + local Qwen and Florence',
                     'vision_policy': mission_identity.VERSION+'; two-view neutral Qwen crop identity AND independent Florence identity; geometry-guided acquisition',
@@ -121,6 +124,10 @@ class MissionRuntime:
             self.available()
             if self.busy or not self.draft or self.draft['id'] != identity or not self.draft['dispatchable'] or time.time()-self.draft['created_at'] > 600:
                 raise ValueError('Generate a fresh supported mission plan first')
+            check = memory_budget.verdict(self.draft['memory']['total_gib'])
+            if not check['fits_machine']:
+                raise ValueError(f"This machine has {check['host_total_gib']:.0f} GiB; a simulated mission needs about {check['total_gib']:.1f} GiB plus the operating system")
+            self.draft['memory'] = {**self.draft['memory'], 'host_available_gib': round(check['host_available_gib'], 2), 'fits_now': check['fits_now']}
             draft, self.draft = self.draft, None
             episode = uuid.uuid4().hex
             self.run = {'id': episode, 'state': 'starting', 'plan': draft, 'started_at': time.time(),
@@ -177,6 +184,7 @@ class MissionRuntime:
         folder = self.directory/self.run['id']
         folder.mkdir()
         camera, started = MissionCamera(), time.monotonic()
+        memory = None
         case = next(c for c in cases() if c['id'] == draft['case'])
         scene = build(case)
         # Preserve benchmark optics, degradation and latency. The override is
@@ -208,12 +216,19 @@ class MissionRuntime:
                 self.run['reviewer'] = self.reviewer.metadata
                 await flight.start()
                 await camera.open(flight, folder)
+                watched = [p.pid for p in (flight.process, camera.process, self.reviewer.process) if p]
+                model_pid = memory_budget.model_server_pid()
+                if model_pid:
+                    watched.append(model_pid)
+                memory = MemoryWatch(watched, budget_gib=memory_budget.budget_gib())
+                memory.start()
                 self.run['state'] = 'running'
                 await flight.takeoff()
                 views = draft['views']
                 for index, base in enumerate(views):
                     if self.intervention:
                         raise RuntimeError('Operator requested '+self.intervention)
+                    memory.check()
                     first = None
                     first_supported = False
                     pose = base
@@ -328,6 +343,13 @@ class MissionRuntime:
                         except Exception as fallback:
                             self.run['recovery_error'] += '; watchdog landing: '+str(fallback)
         finally:
+            if memory is not None:
+                memory.stop()
+                report = memory.report()
+                (folder/'memory.json').write_text(json.dumps(report, default=float))
+                self.run['memory'] = {**self.run.get('plan', {}).get('memory', {}), 'measured_peak_gib': report['sampled_peak_guard_gib'],
+                                      'budget_gib': report['budget_gib'], 'budget_exceeded': report['budget_exceeded'],
+                                      'host_memory_gib': report['host_memory_gib'], 'metric': report['guard_metric']}
             try:
                 await camera.close()
                 if self.run['state'] == 'finalizing':

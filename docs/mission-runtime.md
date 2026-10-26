@@ -72,6 +72,13 @@ sample older than 0.5 seconds is still rejected. Telemetry logs store each sampl
 once; the display trail is assembled on request instead of duplicated into every
 stored sample.
 
+## Memory
+
+Every plan carries a memory estimate and every mission runs under the memory watch; see
+"Memory before a flight" in `mission-control.md`. The run record's `memory` field holds the
+estimate, the measured peak, the budget and whether it was exceeded; the full samples are in
+`memory.json` next to the run's evidence.
+
 ## API
 
 All endpoints bind to loopback. POST requires `X-Drone137-Control: local`; this

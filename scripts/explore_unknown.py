@@ -266,7 +266,8 @@ async def run(args):
         archived=folder/'source'/source
         archived.parent.mkdir(parents=True,exist_ok=True)
         archived.write_bytes((ROOT/source).read_bytes())
-    watcher = MemoryWatch(args.memory_pid, budget_gib=5)
+    from app.memory_budget import budget_gib
+    watcher = MemoryWatch(args.memory_pid, budget_gib=budget_gib())
     watcher.start()
     link = Link(args.endpoint)
     model = LlamaBackend(timeout=20)

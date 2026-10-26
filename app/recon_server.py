@@ -33,6 +33,8 @@ def make_recon_app(recon):
     install_missions(app, missions, old_available)
     from hardware.esp32.manual_api import install as install_manual
     install_manual(app, aircraft[1], mission_busy=lambda: missions.busy)
+    from app.preflight_api import install as install_preflight
+    install_preflight(app)
     from app.dock_api import install as install_docks
     install_docks(app, missions.docks, clients=missions.dock_clients, runtime=missions, current_pose=missions.current_pose)
 

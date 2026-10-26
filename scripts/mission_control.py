@@ -38,6 +38,8 @@ async def serve(args):
     install_components(app, runtime.components)
     from hardware.esp32.connection_api import install as install_aircraft
     aircraft = install_aircraft(app, ROOT/'.local/data/aircraft.sqlite3', runtime.components)
+    from hardware.esp32.manual_api import install as install_manual
+    install_manual(app, aircraft[1], mission_busy=lambda: runtime.busy)
     from app.mission_assistant import Assistant, install as install_assistant
     from app.mission_wizard import load_templates
     from app.place_memory import PlaceMemory

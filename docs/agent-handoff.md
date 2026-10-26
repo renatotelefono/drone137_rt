@@ -225,6 +225,13 @@ Raw evidence stays `.local/validation/`; credentials/binaries stay ignored under
 comparison JSON must remain unchanged. Historical material below is not current
 readiness or the current six-item numbering.
 
+## Manual control — 26 October 2026
+
+`hardware/esp32/manual_control.py` and `manual_api.py` add a console stick mode:
+keyboard or gamepad to bounded attitude setpoints at 20 Hz over the pinned link, half the
+tilt envelope, level on release, land after 1.5 s of silence, refused during missions,
+tested against the protocol emulator (`tests/test_manual_control.py`). Panel: `app/ui/manual-control.js`.
+
 ## Docking — 25 October 2026
 
 The product gained a landing base. Hardware: dock A in

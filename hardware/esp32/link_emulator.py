@@ -58,12 +58,21 @@ class AircraftEmulator:
         self.width,self.height=jpeg_dimensions(self.image)
 
     async def sensors(self):
+        # Samples are timed like a firmware IMU interrupt, 5 ms apart on the device clock, so a
+        # busy request loop delays their delivery but never opens a gap in the stream.
+        next_us=None
         while True:
-            if not self.freeze_imu:
-                now=self.core.clock()
-                self.core.sensor_health(calibrated=True,voltage_v=4.,imu_time_us=now)
-                self.samples.append({'time_us':now,'gyro_flu_rad_s':[0.,0.,0.],
-                                     'specific_force_flu_m_s2':[0.,0.,9.81]})
+            now=self.core.clock()
+            if self.freeze_imu:
+                next_us=None
+            else:
+                if next_us is None or now-next_us>200_000:
+                    next_us=now
+                while next_us<=now:
+                    self.samples.append({'time_us':next_us,'gyro_flu_rad_s':[0.,0.,0.],
+                                         'specific_force_flu_m_s2':[0.,0.,9.81]})
+                    next_us+=5_000
+                self.core.sensor_health(calibrated=True,voltage_v=4.,imu_time_us=self.samples[-1]['time_us'])
             self.core.tick()
             await asyncio.sleep(.005)
 

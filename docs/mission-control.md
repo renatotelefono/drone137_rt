@@ -125,6 +125,10 @@ All mutations require the existing local host check and
 | `GET /api/docks/{id}/status` | The dock controller's status (mode, 5 V, pin current, pad temperature, contact, fault) and recent landings |
 | `POST /api/docks/{id}/mode` | Set the dock to `off`, `charge` or `storage` |
 | `POST /api/mission/dock` | End the active mission by landing on the dock named in its plan (`docs/docking.md`) |
+| `POST /api/aircraft/{id}/manual/start` | Take manual control of a connected aircraft: claims the exclusive session and arms; refused while a mission is active |
+| `POST /api/aircraft/{id}/manual/input` | One stick sample (roll, pitch, yaw rate, thrust), clamped to the manual envelope; the service streams setpoints at 20 Hz |
+| `POST /api/aircraft/{id}/manual/land` | Land through the aircraft's bounded ramp and end the session |
+| `GET /api/aircraft/{id}/manual` | Manual session state, last setpoint, input age and limits |
 | `GET /api/fleet/drones/{id}/status` | Isolated renderer/controller state |
 | `POST /api/fleet/drones/{id}/ready` | Generation-bound camera heartbeat |
 | `POST /api/fleet/drones/{id}/camera` | Episode/client/ticket-bound JPEG |
@@ -142,3 +146,17 @@ limitations; tests on this synthetic site do not establish real-world reliabilit
 Next flight-control work is local-pose/range integration with PX4 for one indoor
 aircraft. Simultaneous flight then requires actual shared-world peer geometry,
 separation supervision, conflicting-route handling and independent failsafe tests.
+
+## Fly by hand
+
+The **Fly by hand** panel in the console turns the keyboard (W/S pitch, A/D roll, Q/E yaw,
+R/F thrust trim, Space lands) or a gamepad into attitude setpoints over the paired link, for
+commissioning and for moving an aircraft by hand. The manual envelope is half the aircraft's
+tilt limit (0.13 rad), yaw rate 0.5 rad/s and thrust 0.6. The service streams at 20 Hz over a pinned link of its own, so a sensor-monitor fault does not take the sticks away;
+releasing the sticks levels the aircraft at the current thrust trim after 0.3 s, and no input
+at all for 1.5 s lands it. Underneath, the aircraft's own 250 ms setpoint expiry and two-second
+lease still apply, so a stalled browser also ends in the landing ramp. Manual control is refused
+while a mission is active and while another aircraft is under manual control; the emergency
+land and cut-motors buttons work throughout. The default board builds cannot arm, so on
+hardware this needs the restrained-rig build; the protocol emulator accepts it and the tests
+in `tests/test_manual_control.py` run against that emulator.

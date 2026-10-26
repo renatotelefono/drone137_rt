@@ -22,6 +22,8 @@ under-$50 parts budget are not qualified by this physics benchmark.
 
 **Docking:** a mission can end on dock A, a printed landing base with contact charging and a tag column; the aircraft returns, aligns on the tags, lands in the funnel and charges, and the dock pose becomes the map origin. Registry, dock controller API, the simulated dock and the twenty-docking gate are in [docking.md](docs/docking.md); the hardware is in `hardware/esp32/indoor/scout-110-bench/dock/`.
 
+**Fly by hand:** a console panel for keyboard or gamepad control over the paired link, inside a reduced envelope, with release-to-level and land-on-silence; for commissioning, never for missions.
+
 **Mission wizard:** the console opens with a Start-here panel that proposes the four mission clusters, map, audit, watch and find, from place memory and mission state, composes the brief for the one it can fly, and starts simulated exploration flights directly. See [mission-control.md](docs/mission-control.md).
 
 **Mission control:** `/control` now connects the SQLite aircraft assembly to

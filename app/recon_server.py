@@ -15,7 +15,7 @@ def make_recon_app(recon):
     components = Components(recon.runs.parent/'components.sqlite3')
     install(app, components)
     from hardware.esp32.connection_api import install as install_aircraft
-    install_aircraft(app, recon.runs.parent/'aircraft.sqlite3', components)
+    aircraft = install_aircraft(app, recon.runs.parent/'aircraft.sqlite3', components)
     from app.place_api import install as install_places
     install_places(app, recon.runs.parent/'places.sqlite3', recon.manager)
     fleet = Fleet(recon)
@@ -31,6 +31,8 @@ def make_recon_app(recon):
         old_available()
     fleet.available = legacy_available
     install_missions(app, missions, old_available)
+    from hardware.esp32.manual_api import install as install_manual
+    install_manual(app, aircraft[1], mission_busy=lambda: missions.busy)
     from app.dock_api import install as install_docks
     install_docks(app, missions.docks, clients=missions.dock_clients, runtime=missions, current_pose=missions.current_pose)
 

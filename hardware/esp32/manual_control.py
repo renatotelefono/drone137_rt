@@ -71,7 +71,16 @@ class ManualSession:
                 hello = await link.start()
                 self.connection.check_identity(hello)
                 await link.claim()
-                result = await link.command('arm')
+                for attempt in range(5):
+                    try:
+                        result = await link.command('arm')
+                        break
+                    except ProtocolError as exc:
+                        # Arming needs an IMU sample younger than 20 ms; a board busy with a request can
+                        # miss that by a few milliseconds. Five tries over a quarter second, then refuse.
+                        if attempt == 4 or 'arming checks' not in str(exc):
+                            raise
+                        await asyncio.sleep(.05)
             except Exception:
                 self.state = 'fault'
                 await link.close()

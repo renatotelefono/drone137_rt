@@ -115,7 +115,9 @@ class ManualSessionTests(unittest.IsolatedAsyncioTestCase):
             raise TimeoutError('link gone')
         self.session.link.command = dead
         await until(lambda: self.session.state == 'fault', 3.)
-        self.assertIn(self.emulator.core.state, ('landing', 'disarmed'))
+        # The fault state is set before the stop channel's landing request completes; the
+        # aircraft's own 250 ms expiry lands it regardless.
+        await until(lambda: self.emulator.core.state in ('landing', 'disarmed'), 3.)
 
     async def test_not_connected_is_refused(self):
         await self.connection.close()

@@ -10,6 +10,8 @@ import asyncio
 import math
 import time
 
+from aiohttp import ClientError
+
 from hardware.esp32.link_client import AircraftLink
 from hardware.esp32.link_protocol import MAX_THRUST, MAX_TILT_RAD, MAX_YAW_RATE, ProtocolError
 
@@ -43,6 +45,7 @@ class ManualSession:
         self.inputs = self.commands = 0
         self.aircraft_state = None
         self.task = None
+        self.failures = self.consecutive_failures = 0
         self.lock = asyncio.Lock()
         # Manual control owns its own pinned link, like the stop channel does: a sensor-monitor
         # fault must not revoke the sticks, and the 20 Hz stream must not starve the IMU polls.
@@ -118,10 +121,23 @@ class ManualSession:
                 if lost:
                     await self.finish('land', 'No operator input for 1.5 s')
                     return
-                if self.clock() - self.last_sync > 3.:
-                    self.connection.check_identity(await self.link.synchronize())
-                    self.last_sync = self.clock()
-                result = await self.link.command('attitude', setpoint=setpoint)
+                try:
+                    if self.clock() - self.last_sync > 3.:
+                        self.connection.check_identity(await self.link.synchronize())
+                        self.last_sync = self.clock()
+                    result = await self.link.command('attitude', setpoint=setpoint)
+                except (TimeoutError, OSError, ClientError, ProtocolError) as exc:
+                    # One late or lost setpoint is survivable: the aircraft keeps the previous one until
+                    # its 250 ms expiry and the next arrives in 50 ms. A lost session or a run of
+                    # failures is not, and ends in the landing ramp.
+                    transient = (not isinstance(exc, ProtocolError)) or exc.status == 409 and str(exc).startswith(('Expired', 'Mismatched', 'Aircraft clock'))
+                    self.failures += 1; self.consecutive_failures += 1
+                    if not transient or self.consecutive_failures >= 4:
+                        raise
+                    self.error = f'setpoint retry after {type(exc).__name__}: {exc}'[:160]
+                    await asyncio.sleep(self.period)
+                    continue
+                self.consecutive_failures = 0
                 self.aircraft_state = result.get('state')
                 self.commands += 1
                 if self.aircraft_state != 'armed':
@@ -181,6 +197,6 @@ class ManualSession:
     def snapshot(self):
         setpoint, age = self.current()
         return {'state': self.state, 'error': self.error, 'aircraft_state': self.aircraft_state,
-                'setpoint': setpoint, 'trim': self.trim, 'input_age_s': age, 'inputs': self.inputs, 'commands': self.commands,
+                'setpoint': setpoint, 'trim': self.trim, 'input_age_s': age, 'inputs': self.inputs, 'commands': self.commands, 'failures': self.failures,
                 'limits': dict(self.limits), 'rate_hz': 1./self.period,
                 'stick_release_s': STICK_RELEASE_S, 'input_lost_s': INPUT_LOST_S}

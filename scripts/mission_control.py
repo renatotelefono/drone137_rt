@@ -42,6 +42,8 @@ async def serve(args):
     install_manual(app, aircraft[1], mission_busy=lambda: runtime.busy)
     from app.preflight_api import install as install_preflight
     install_preflight(app)
+    from app.watch_api import install as install_watch
+    install_watch(app, aircraft[1], model=model)
     from app.mission_assistant import Assistant, install as install_assistant
     from app.mission_wizard import load_templates
     from app.place_memory import PlaceMemory

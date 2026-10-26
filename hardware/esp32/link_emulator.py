@@ -42,8 +42,12 @@ def tls_context(folder):
 
 
 class AircraftEmulator:
-    def __init__(self,profile,*,clock=None):
+    def __init__(self,profile,*,clock=None,frames=None,frame_rate=2.5):
+        """frames: an optional list of JPEG bytes played in real time at frame_rate, cycling, instead of the fixture."""
         self.profile=profile
+        self.sequence_frames=list(frames) if frames else None
+        self.frame_rate=frame_rate
+        self.sequence_started=None
         self.core=AircraftProtocol(profile['device_id'],clock,flight_enabled=True)
         self.frames=0
         self.samples=deque(maxlen=256)
@@ -110,9 +114,17 @@ class AircraftEmulator:
                 self.frames+=1
                 self.last_frame=(self.frames,self.core.clock()-self.frame_age_us)
             sequence,capture=self.last_frame
-            return web.Response(body=self.image,content_type='image/jpeg',headers={
+            image,width,height=self.image,self.width,self.height
+            if self.sequence_frames:
+                now=self.core.clock()
+                self.sequence_started=self.sequence_started or now
+                index=int((now-self.sequence_started)/1e6*self.frame_rate)%len(self.sequence_frames)
+                image=self.sequence_frames[index]
+                from adapters.esp32_camera import jpeg_dimensions
+                width,height=jpeg_dimensions(image)
+            return web.Response(body=image,content_type='image/jpeg',headers={
                 'Cache-Control':'no-store','X-Boot-Id':self.core.boot_id,'X-Frame-Id':str(sequence),
-                'X-Capture-Time-Us':str(capture),'X-Width':str(self.width),'X-Height':str(self.height)})
+                'X-Capture-Time-Us':str(capture),'X-Width':str(width),'X-Height':str(height)})
         async def startup(app):self.task=asyncio.create_task(self.sensors())
         async def cleanup(app):
             self.task.cancel()
@@ -132,12 +144,14 @@ def main():
     p.add_argument('--identity',type=Path,required=True)
     p.add_argument('--provision',action='store_true')
     p.add_argument('--port',type=int,default=8160)
+    p.add_argument('--frames',type=Path,default=None,help='folder of JPEG frames played in order at 2.5 Hz, cycling, instead of the fixture')
     args=p.parse_args()
     profile=provision(args.identity) if args.provision else json.loads((args.identity/'pairing.json').read_text())
+    frames=[f.read_bytes() for f in sorted(args.frames.glob('*.jpg'))] if args.frames else None
     print(json.dumps({'endpoint':f'https://127.0.0.1:{args.port}',
         'device_id':profile['device_id'],'certificate_sha256':profile['certificate_sha256'],
         'pairing_file':str((args.identity/'pairing.json').resolve()),'kind':'protocol-emulator'}),flush=True)
-    web.run_app(AircraftEmulator(profile).app(),host='127.0.0.1',port=args.port,
+    web.run_app(AircraftEmulator(profile,frames=frames).app(),host='127.0.0.1',port=args.port,
                 ssl_context=tls_context(args.identity),access_log=None)
 
 

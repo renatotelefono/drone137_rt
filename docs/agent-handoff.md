@@ -225,6 +225,14 @@ Raw evidence stays `.local/validation/`; credentials/binaries stay ignored under
 comparison JSON must remain unchanged. Historical material below is not current
 readiness or the current six-item numbering.
 
+## Perched watch — 26 October 2026
+
+`app/watch_detector.py` (motion, change, lighting on every frame), `app/watch_events.py`
+(event store, fixed model question, evidence, cooldown), `app/watch_api.py` and the console's
+Watch panel; `sim/watch_scenes.py` stages events on a real photo; `scripts/qualify_watch.py`
+is the gate (`docs/watch-validation.json`); the emulator plays scripted frames with `--frames`.
+Tests: `tests/test_watch.py`, `tests/test_watch_emulator.py`. Spec and limits: `docs/watch.md`.
+
 ## Pre-flight memory — 26 October 2026
 
 `app/memory_budget.py`: estimate per component from the GGUF header, the allocated grids and

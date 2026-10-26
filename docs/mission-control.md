@@ -131,6 +131,7 @@ All mutations require the existing local host check and
 | `GET /api/aircraft/{id}/manual` | Manual session state, last setpoint, input age and limits |
 | `GET /api/preflight/memory?profile=` | Memory estimate for a profile (`mapping-flight`, `mission-flight`, `mission-simulation`, `exploration-simulation`) with the host verdict |
 | `POST /api/preflight/memory` | Measured preflight: starts what can be started without an aircraft, samples for `seconds`, compares with free memory |
+| `GET /api/watch`, `POST /api/watch/{id}/start`, `/stop`, `GET /api/watch/events`, `POST /api/watch/events/{id}/ack` | Perched watch on a docked camera: events, evidence and alerts (`docs/watch.md`) |
 | `GET /api/fleet/drones/{id}/status` | Isolated renderer/controller state |
 | `POST /api/fleet/drones/{id}/ready` | Generation-bound camera heartbeat |
 | `POST /api/fleet/drones/{id}/camera` | Episode/client/ticket-bound JPEG |

@@ -1,0 +1,1241 @@
+{
+ "date": "2026-10-26",
+ "gate": {
+  "detection": 0.95,
+  "max_latency_s": 4.0,
+  "min_iou_change": 0.15,
+  "false_alerts_per_night": 1
+ },
+ "staged_events": 60,
+ "detected": 60,
+ "passed": 60,
+ "detection_rate": 1.0,
+ "max_latency_s": 1.1999999999999993,
+ "nights": [
+  {
+   "seed": 500,
+   "hours": 8.0,
+   "frames": 72000,
+   "candidates": 0,
+   "alerts": 0,
+   "passed": true
+  },
+  {
+   "seed": 501,
+   "hours": 8.0,
+   "frames": 72000,
+   "candidates": 0,
+   "alerts": 0,
+   "passed": true
+  }
+ ],
+ "false_alerts_total": 0,
+ "night_hours": 8.0,
+ "accepted": true,
+ "per_category": {
+  "object_removed": {
+   "detected": 12,
+   "of": 12,
+   "median_latency_s": 1.1999999999999993
+  },
+  "object_added": {
+   "detected": 12,
+   "of": 12,
+   "median_latency_s": 1.1999999999999993
+  },
+  "object_moved": {
+   "detected": 12,
+   "of": 12,
+   "median_latency_s": 1.1999999999999993
+  },
+  "person": {
+   "detected": 12,
+   "of": 12,
+   "median_latency_s": 0.40000000000000036
+  },
+  "lighting": {
+   "detected": 12,
+   "of": 12,
+   "median_latency_s": 0.0
+  }
+ },
+ "results": [
+  {
+   "category": "object_removed",
+   "seed": 100,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.4741214057507987,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A person was removed from the scene.",
+    "latency_s": 1.1348897080024472,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 101,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.7736516357206012,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A brown rectangular object was removed from the scene.",
+    "latency_s": 1.0474787080020178,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 102,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.794010889292196,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A person was removed from the scene.",
+    "latency_s": 1.0168656250025379,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 103,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.4741214057507987,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.079343000004883,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 104,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.4741214057507987,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from left to right view.",
+    "latency_s": 1.0785013749991776,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 105,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.8758758758758759,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A person was removed from the scene.",
+    "latency_s": 1.0125669999979436,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 106,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.46991766941101965,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A red vertical object was removed from the scene.",
+    "latency_s": 1.0501763329957612,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 107,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.8758758758758759,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A person was removed from the scene.",
+    "latency_s": 1.0115332499990473,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 108,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.8223684210526315,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A person was removed from the scene.",
+    "latency_s": 1.0181594580062665,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 109,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.47175866495507063,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A person was removed from the scene.",
+    "latency_s": 1.0071862079930725,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 110,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.46991766941101965,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A red object was removed from the scene.",
+    "latency_s": 1.0227427079953486,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_removed",
+   "seed": 111,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.7736516357206012,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A brown object was removed from the scene.",
+    "latency_s": 1.0220138329896145,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 100,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.4741214057507987,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.0738295839983039,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 101,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.7736516357206012,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A person was removed from the scene.",
+    "latency_s": 1.0130845419917023,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 102,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.794010889292196,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A person was removed from the scene.",
+    "latency_s": 1.0175840419979068,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 103,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.4741214057507987,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.0656816670089029,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 104,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.4741214057507987,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.0684840829926543,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 105,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.8012820512820513,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A person was removed from the scene.",
+    "latency_s": 1.0140154999971855,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 106,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.46991766941101965,
+   "events": 1,
+   "model": {
+    "category": "object_added",
+    "matters": true,
+    "summary": "A red object was added to the scene",
+    "latency_s": 1.095022749999771,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 107,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.8012820512820513,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A brown rectangular object was removed from the scene.",
+    "latency_s": 1.0447305419947952,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 108,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.7736516357206012,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A brown rectangular object was removed from the scene.",
+    "latency_s": 1.0401775840000482,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 109,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.47175866495507063,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.0686806669982616,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 110,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.46991766941101965,
+   "events": 1,
+   "model": {
+    "category": "object_added",
+    "matters": true,
+    "summary": "A red vertical object was added to the scene.",
+    "latency_s": 1.0454444999922998,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_added",
+   "seed": 111,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.7736516357206012,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A brown object was removed from the scene.",
+    "latency_s": 1.0274643339944305,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 100,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.18718466195761857,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A red object moved from the left to the right side of the scene.",
+    "latency_s": 1.1351005420001457,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 101,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.8210180623973727,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.0916632500011474,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 102,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.41676181776661336,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A white square was removed from the scene, indicating a change in the environment.",
+    "latency_s": 1.115998084002058,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 103,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.1878481012658228,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A red object moved from the right to the left side of the scene.",
+    "latency_s": 1.0874473329895409,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 104,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.18718466195761857,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A red object moved from the left to the right side of the scene.",
+    "latency_s": 1.2170355410053162,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 105,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.4087193460490463,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A brown rectangular object was removed from the scene.",
+    "latency_s": 1.094039249990601,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 106,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.18718466195761857,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A red object moved from the left to the right side of the scene.",
+    "latency_s": 1.1131997500051511,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 107,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.41589648798521256,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A brown rectangular object was removed from the scene.",
+    "latency_s": 1.0996044579951558,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 108,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.8309098462816784,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A brown object moved from the left to the right side of the frame.",
+    "latency_s": 1.2417281249945518,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 109,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.18640628962718742,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A red object moved from the left to the right side of the scene.",
+    "latency_s": 1.1305724580015521,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 110,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.18718466195761857,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A red object moved from the left to the right side of the scene.",
+    "latency_s": 1.1526633339963155,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "object_moved",
+   "seed": 111,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 1.1999999999999993,
+   "iou": 0.4193109700815956,
+   "events": 1,
+   "model": {
+    "category": "object_removed",
+    "matters": true,
+    "summary": "A brown object was removed from the scene.",
+    "latency_s": 1.081386707999627,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 100,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.2906588330079103,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 101,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.522074332999182,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 102,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "object_added",
+    "matters": true,
+    "summary": "A person appeared in the right view, marked by a new yellow box.",
+    "latency_s": 1.2742993749998277,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 103,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved into the scene from the left view to the right view.",
+    "latency_s": 1.2933054579916643,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 104,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved into the frame from the left to the right.",
+    "latency_s": 1.317090750002535,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 105,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.3142665000050329,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 106,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person appeared in the right view, moving from the left view.",
+    "latency_s": 1.2155764580093091,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 107,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person moved from the left to the right view.",
+    "latency_s": 1.2579345410049427,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 108,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "person",
+    "matters": true,
+    "summary": "A person appeared in the right view, marked by a yellow box.",
+    "latency_s": 1.284243542002514,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 109,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "person",
+    "matters": true,
+    "summary": "A person appeared in the right view, marked by a yellow box.",
+    "latency_s": 1.255858292002813,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 110,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "person",
+    "matters": true,
+    "summary": "A person appeared in the right view, marked by a new bounding box.",
+    "latency_s": 1.279068207993987,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "person",
+   "seed": 111,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.40000000000000036,
+   "iou": 0.0,
+   "events": 1,
+   "model": {
+    "category": "object_moved",
+    "matters": true,
+    "summary": "A person appeared in the right view, moving from the left view.",
+    "latency_s": 1.26550291699823,
+    "category_correct": false,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 100,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 101,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 102,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 103,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 104,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 105,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 106,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 107,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 108,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 109,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 110,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  },
+  {
+   "category": "lighting",
+   "seed": 111,
+   "detected": true,
+   "early_events": 0,
+   "latency_s": 0.0,
+   "iou": 1.0,
+   "events": 1,
+   "model": {
+    "category": "lighting",
+    "matters": false,
+    "summary": "Light level changed",
+    "latency_s": null,
+    "category_correct": true,
+    "matters_correct": true
+   },
+   "passed": true
+  }
+ ],
+ "wall_time_s": 1084.2127678394318,
+ "frame_rate_hz": 2.5,
+ "scope": "Synthetic staged events drawn on a real photo with sensor noise and lamp flicker; the detector gate is deterministic. Model scores are reported, not gated.",
+ "model": {
+  "name": "local Qwen 2B",
+  "events_scored": 60,
+  "category_accuracy": 0.5833333333333334,
+  "matters_accuracy": 1.0,
+  "mean_latency_s": 0.9034329173492248,
+  "per_category": {
+   "object_removed": {
+    "correct": 10,
+    "answers": [
+     "object_removed",
+     "object_removed",
+     "object_removed",
+     "object_moved",
+     "object_moved",
+     "object_removed",
+     "object_removed",
+     "object_removed",
+     "object_removed",
+     "object_removed",
+     "object_removed",
+     "object_removed"
+    ]
+   },
+   "object_added": {
+    "correct": 2,
+    "answers": [
+     "object_moved",
+     "object_removed",
+     "object_removed",
+     "object_moved",
+     "object_moved",
+     "object_removed",
+     "object_added",
+     "object_removed",
+     "object_removed",
+     "object_moved",
+     "object_added",
+     "object_removed"
+    ]
+   },
+   "object_moved": {
+    "correct": 8,
+    "answers": [
+     "object_moved",
+     "object_moved",
+     "object_removed",
+     "object_moved",
+     "object_moved",
+     "object_removed",
+     "object_moved",
+     "object_removed",
+     "object_moved",
+     "object_moved",
+     "object_moved",
+     "object_removed"
+    ]
+   },
+   "person": {
+    "correct": 3,
+    "answers": [
+     "object_moved",
+     "object_moved",
+     "object_added",
+     "object_moved",
+     "object_moved",
+     "object_moved",
+     "object_moved",
+     "object_moved",
+     "person",
+     "person",
+     "person",
+     "object_moved"
+    ]
+   },
+   "lighting": {
+    "correct": 12,
+    "answers": [
+     "lighting",
+     "lighting",
+     "lighting",
+     "lighting",
+     "lighting",
+     "lighting",
+     "lighting",
+     "lighting",
+     "lighting",
+     "lighting",
+     "lighting",
+     "lighting"
+    ]
+   }
+  }
+ }
+}

@@ -96,6 +96,27 @@ class ManualSessionTests(unittest.IsolatedAsyncioTestCase):
         self.assertEqual(self.session.state, 'armed'); self.assertEqual(self.emulator.core.state, 'armed')
         self.assertEqual(self.connection.state, 'fault')
 
+    async def test_one_lost_setpoint_is_retried_and_a_run_of_losses_lands(self):
+        await self.session.start()
+        self.session.input({'roll_rad': 0., 'pitch_rad': 0., 'yaw_rate_rad_s': 0., 'thrust': .4})
+        original = self.session.link.command
+        calls = {'n': 0}
+        async def flaky(operation, **extra):
+            calls['n'] += 1
+            if calls['n'] in (3, 7):
+                raise ProtocolError('Expired or excessive command deadline', 409)
+            return await original(operation, **extra)
+        self.session.link.command = flaky
+        for _ in range(4):
+            await asyncio.sleep(.1)
+            self.session.input({'roll_rad': 0., 'pitch_rad': 0., 'yaw_rate_rad_s': 0., 'thrust': .4})
+        self.assertEqual(self.session.state, 'armed'); self.assertGreaterEqual(self.session.failures, 1); self.assertIn('retry', self.session.error)
+        async def dead(operation, **extra):
+            raise TimeoutError('link gone')
+        self.session.link.command = dead
+        await until(lambda: self.session.state == 'fault', 3.)
+        self.assertIn(self.emulator.core.state, ('landing', 'disarmed'))
+
     async def test_not_connected_is_refused(self):
         await self.connection.close()
         with self.assertRaises(ProtocolError):

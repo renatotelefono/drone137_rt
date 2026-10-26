@@ -225,6 +225,36 @@ Raw evidence stays `.local/validation/`; credentials/binaries stay ignored under
 comparison JSON must remain unchanged. Historical material below is not current
 readiness or the current six-item numbering.
 
+## Docking — 25 October 2026
+
+The product gained a landing base. Hardware: dock A in
+`hardware/esp32/indoor/scout-110-bench/dock/` (printed funnel body, tag stand, contact
+charging, carrier prototype B charge path, Swiss parts in `procurement-ch.md`).
+Software, all local and deterministic:
+
+- `app/dock_tags.py`: tag36h11 detection with OpenCV's ArUco module, pose of the
+  aircraft in the dock frame from the tag column, and a renderer that draws the
+  column into synthetic frames with the profile's optics and distortion.
+- `app/docking.py`: the `dock` mission phase (return, acquire, align, descend, settle,
+  docked) as specified in `docs/docking.md`; it sees frames, estimate, dock status
+  and a setpoint interface only.
+- `app/docks.py` and `app/dock_api.py`: versioned dock registry, pinned-HTTPS dock
+  controller client, `/api/docks/...` and `POST /api/mission/dock`.
+- `sim/dock_world.py`: the simulated dock (electronics, contact, faults), the tag camera
+  with the benchmark latency and frame drops, a first-order vehicle for tests and the
+  Rapier plant wrapper for the gate.
+- `app/mission_runtime.py`: a plan may name a registered dock; the mission then ends
+  on it, and the console assistant offers `dock status` and `return to dock`.
+- Gate: `scripts/qualify_docking.py` (`--vehicle kinematic|rapier`). Results in
+  `docs/docking-validation.json` (Rapier plant) and
+  `docs/docking-validation-kinematic.json`. Tests: `tests/test_dock_tags.py`,
+  `tests/test_docks.py`, `tests/test_docking.py`, `tests/test_docking_runtime.py`.
+
+Not done: dock controller firmware and the carrier STAT input (hardware), the Three.js
+renderer does not draw the tags (the simulated dock camera renders them for the dock
+phase), and the Watch cluster's sortie scheduler. The dock frame in software is
+forward-left-up; the hardware drawings call the same axes +Y, −X, +Z.
+
 ## Historical checkpoint — 23 October 2026
 
 The active request is to finish blind visual exploration first, then complete

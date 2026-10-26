@@ -119,7 +119,12 @@ All mutations require the existing local host check and
 | `POST /api/wizard/explore` | Start one simulated exploration flight (`place`, `seed`); refused while a mission or flight is active |
 | `GET /api/wizard/explore/status` | State, observations, score and last log line of that flight |
 | `POST /api/assistant/ask` | Interpret a typed or dictated request as one console action and run it if it is immediate |
-| `POST /api/assistant/confirm` | Start the proposed exploration flight after the operator's click |
+| `POST /api/assistant/confirm` | Start the proposed exploration flight, or the docking approach, after the operator's click |
+| `GET /api/docks` | Registered docks (poses, tag ids, charge policy; link credentials never included) |
+| `POST /api/docks/register` | Register or re-pose a dock from the aircraft's current estimate, or from an explicit `pose` |
+| `GET /api/docks/{id}/status` | The dock controller's status (mode, 5 V, pin current, pad temperature, contact, fault) and recent landings |
+| `POST /api/docks/{id}/mode` | Set the dock to `off`, `charge` or `storage` |
+| `POST /api/mission/dock` | End the active mission by landing on the dock named in its plan (`docs/docking.md`) |
 | `GET /api/fleet/drones/{id}/status` | Isolated renderer/controller state |
 | `POST /api/fleet/drones/{id}/ready` | Generation-bound camera heartbeat |
 | `POST /api/fleet/drones/{id}/camera` | Episode/client/ticket-bound JPEG |

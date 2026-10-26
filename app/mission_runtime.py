@@ -23,6 +23,8 @@ from sim.asset_world import build, verify_assets
 from app.mission_views import next_views
 from app import mission_wizard
 from adapters.vision_reviewer import VisionReviewer
+from app.docks import Docks
+from app.dock_tags import load_geometry
 
 
 class MissionRuntime:
@@ -38,7 +40,9 @@ class MissionRuntime:
         self.reviewer = None
         self.available = lambda: None
         self.templates = mission_wizard.load_templates()
-        paths = ['app/mission_runtime.py', 'adapters/rapier_drone.py', 'app/mission_camera.py',
+        self.docks = Docks(self.directory.parent/'docks.sqlite3')
+        self.dock_clients = {}
+        paths = ['app/mission_runtime.py', 'app/docking.py', 'app/dock_tags.py', 'app/docks.py', 'sim/dock_world.py', 'config/dock-a.json', 'adapters/rapier_drone.py', 'app/mission_camera.py',
                  'scripts/flight-camera.cjs', 'scripts/mission-physics.mjs', 'scripts/mission-transport.cjs', 'app/ui/mission-physics.mjs',
                  'app/ui/micro-physics.mjs', 'app/ui/flight-lab.js', 'app/identity.py', 'app/localization.py',
                  'app/flight_localization.py', 'app/mission_views.py', 'app/mission_navigation.py', 'app/mission_identity.py', 'adapters/vision_reviewer.py',
@@ -50,6 +54,14 @@ class MissionRuntime:
     @property
     def busy(self):
         return self.planning or bool(self.task and not self.task.done())
+
+    def current_pose(self):
+        """The aircraft's estimated pose for dock registration, or None before any flight."""
+        v = self.vehicle
+        if not v or not v.latest:
+            return None
+        p = v.latest['position']
+        return {'x': float(p[0]), 'y': float(p[1]), 'z': float(p[2]), 'yaw': float(v.latest['yaw'])}
 
     def snapshot(self):
         return {'mode': 'service-owned-rapier-mission', 'busy': self.busy, 'draft': self.draft,
@@ -77,6 +89,11 @@ class MissionRuntime:
                 raise ValueError('Select a registered environment')
             assembly = self.components.assemble(body.get('assembly', 'scout-110-power-v2'))
             template = mission_wizard.validate_template(self.templates, body.get('template'))
+            dock = body.get('dock')
+            if dock is not None:
+                if not isinstance(dock, str):
+                    raise ValueError('dock must be a registered dock id')
+                self.docks.get(dock)   # unknown docks are refused before launch
             self.planning = True
             self.draft = None
             try:
@@ -90,7 +107,7 @@ class MissionRuntime:
                 if not points:
                     raise ValueError('Area contains no inspection stations')
                 self.draft = {'id': uuid.uuid4().hex, 'created_at': time.time(), 'instruction': instruction,
-                    'area': area, 'case': case['id'], 'assembly': assembly, 'views': points, 'template': template,
+                    'area': area, 'case': case['id'], 'assembly': assembly, 'views': points, 'template': template, 'dock': dock,
                     'intent': intent, 'dispatchable': supported is True and intent['objective'] != 'unsupported',
                     'backend': 'Rapier component dynamics + service-owned Three.js camera + local Qwen and Florence',
                     'vision_policy': mission_identity.VERSION+'; two-view neutral Qwen crop identity AND independent Florence identity; geometry-guided acquisition',
@@ -113,13 +130,42 @@ class MissionRuntime:
             self.task = asyncio.create_task(self.execute(draft))
             return self.snapshot()
 
-    async def stop(self, return_home=False):
+    async def stop(self, return_home=False, dock=False):
         if self.task and not self.task.done():
-            self.intervention = 'return' if return_home else 'land'
+            if dock and not (self.run or {}).get('plan', {}).get('dock'):
+                raise ValueError('This mission has no dock; plan it with a registered dock id')
+            self.intervention = 'dock' if dock else 'return' if return_home else 'land'
             if self.vehicle:
                 self.vehicle.interrupt = 'Operator requested '+self.intervention
-            self.run['state'] = 'returning' if return_home else 'landing'
+            self.run['state'] = 'docking' if dock else 'returning' if return_home else 'landing'
         return self.snapshot()
+
+    async def dock(self, flight, scene, folder, dock_id):
+        """End the flight on the registered dock. In simulation the dock, its camera and its electronics
+        are simulated around the same plant; the controller still sees only frames, estimate and status."""
+        from sim.dock_world import DockSimulation, Estimator, RapierDockVehicle
+        entry = self.docks.get(dock_id); record = entry['dock']; pose = record['pose']
+        simulation = DockSimulation(load_geometry(), scene['camera'], lambda w, e: RapierDockVehicle(flight, w, e), Estimator(),
+                                    origin=(pose['x'], pose['y'], pose['z']), yaw=pose['yaw'], index=record['index'], seed=scene.get('seed', 0))
+        self.dock_clients[dock_id] = simulation.client
+        flight.phase, flight.message = 'docking', 'Docking on ' + record['name']
+        log = []
+        result = await simulation.phase(log).run()
+        truth = simulation.truth()
+        summary = {'dock': dock_id, 'revision': entry['revision'], 'outcome': result['outcome'], 'attempts': result['attempts'],
+                   'states': [s['state'] for s in result['states']], 'frames': result['frames'], 'detections': result['detections'],
+                   'duration_s': result['duration_s'], 'dock_status': result.get('dock_status'), 'estimate_reset': result.get('estimate_reset', False),
+                   'touchdown': {k: truth[k] for k in ('f_m', 'l_m', 'yaw_deg', 'landed')}, 'stand_contacts': truth['stand_contacts'],
+                   'error': result.get('error'), 'note': 'Simulated dock A around the Rapier plant; touchdown is simulation truth for the record only'}
+        (folder/'docking-log.json').write_text(json.dumps({'summary': summary, 'log': log}, indent=1, default=float))
+        self.run['docking'] = summary
+        self.docks.record_landing(dock_id, entry['revision'], result['outcome'], summary)
+        if simulation.vehicle.landed:
+            flight.phase, flight.landed = 'landed', True
+        else:
+            await flight.land()
+        if result['outcome'] != 'docked':
+            raise RuntimeError('Docking ended with ' + result['outcome'])
 
     def persist(self, folder):
         data = json.dumps(self.run, indent=2, allow_nan=False)
@@ -253,8 +299,12 @@ class MissionRuntime:
                         pose = candidate
                     if self.run['outcome'] == 'found':
                         break
-                self.run['state'] = 'returning'
-                await flight.return_land()
+                if draft.get('dock'):
+                    self.run['state'] = 'docking'
+                    await self.dock(flight, scene, folder, draft['dock'])
+                else:
+                    self.run['state'] = 'returning'
+                    await flight.return_land()
                 self.run['state'] = 'finalizing'
         except (Exception, asyncio.CancelledError) as exc:
             self.run.update(state='cancelled' if self.intervention else 'failed', error=f'{type(exc).__name__}: {exc}')
@@ -264,6 +314,8 @@ class MissionRuntime:
                 try:
                     if flight.error:
                         await flight.watchdog_land()
+                    elif self.intervention == 'dock' and draft.get('dock') and 'docking' not in self.run:
+                        await self.dock(flight, scene, folder, draft['dock'])
                     elif self.intervention == 'return':
                         await flight.return_land()
                     else:

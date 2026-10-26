@@ -35,7 +35,7 @@ the pocket centre on the floor.
 | Spring pin | protrudes 2.5 mm at rest, compressed 1.5 mm | The cradle underside sits 5 mm above the feet; the boss top is 1 mm below it |
 | Foot strips | copper tape 6 × 28 mm at x = ±14 | The feet stand at (±14, ±9); margin 3 mm in x and 5 mm in y |
 | Tag stand | L plate 140 × 240 mm, foot 100 mm | Butts against the dock's +Y wall; the tag plane is 203 mm from the pocket centre, 191 mm from the docked camera |
-| Tag column | tag36h11: 40 mm at 82 and 142 mm, 80 mm at 195 mm above the table | The lowest is at camera height when docked; with the profile camera (960 × 540, fx 722, pitched down 10°) one tag is always fully in view from below the docked height to about 200 mm above it, no gaps. The 80 mm tag is 58 px wide at 1 m for acquisition |
+| Tag column | tag36h11: 40 mm at 82 and 142 mm, 60 mm at 205 mm above the table, quiet zones 5 mm apart | The lowest is at camera height when docked; with the profile camera (960 × 540, fx 722, pitched down 10°) one tag is always fully in view from below the docked height to about 200 mm above it, no gaps. The 60 mm tag is 43 px wide at 1 m for acquisition |
 
 All of these are parameters at the top of `generate_dock.py`; the checks in
 `clearance-checks.json` fail the script if a change breaks the fit.
@@ -84,8 +84,8 @@ PD supply 5 V ──USB-C socket──┬── INA219 (charge current, voltage)
    to GND inside the bay through two 1.5 mm holes drilled beside the strips.
 4. Fit the USB-C socket, INA219, MOSFET switch, NTC and XIAO in the bay; close it with a
    flat 199 × 199 × 2 mm lid or leave it open on a table.
-5. Print the three tags (tag36h11, ids 3k, 3k+1, 3k+2 for dock k; 40, 40 and 80 mm
-   outer black border) on matte paper and glue them centred at 82, 142 and 195 mm
+5. Print the three tags (tag36h11, ids 3k, 3k+1, 3k+2 for dock k; 40, 40 and 60 mm
+   outer black border) on matte paper and glue them centred at 82, 142 and 205 mm
    above the table.
 6. Put the stand's foot against the dock's +Y wall and tape it down.
 7. Place the Scout in the pocket by hand, feet on the strips, and confirm 5 V at J18

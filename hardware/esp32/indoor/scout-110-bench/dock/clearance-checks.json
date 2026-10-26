@@ -25,8 +25,8 @@
         142.0
       ],
       [
-        80.0,
-        195.0
+        60.0,
+        205.0
       ]
     ],
     "camera_z": 82.0,
@@ -71,8 +71,8 @@
         142.0
       ],
       [
-        80.0,
-        195.0
+        60.0,
+        205.0
       ]
     ],
     "plane_y_from_dock_centre_mm": 203.0
@@ -81,15 +81,15 @@
     "tag_plane_from_camera_mm": 191.0,
     "fully_visible_centre_offset_mm": {
       "40": 49.47501562863257,
-      "80": 29.131002953854686
+      "60": 39.11493578736803
     },
     "camera_height_covered_mm": [
       66.20343768668423,
-      257.8094562691715
+      277.79338910268484
     ],
     "coverage_gaps_mm": [],
     "camera_height_docked_mm": 82.0,
-    "descent_covered_above_docked_mm": 175.8094562691715,
+    "descent_covered_above_docked_mm": 195.79338910268484,
     "docked_height_covered": true,
     "camera": {
       "width": 960,
@@ -106,8 +106,12 @@
     "axis_drop_at_tag_plane_mm": 33.67845331531681,
     "tag_width_px_at_1m": {
       "40": 28.885912134409697,
-      "80": 57.771824268819394
+      "60": 43.32886820161455
     }
   },
-  "scope": "Nominal geometry from the STL files; print fit, slide friction and contact wear unmeasured"
+  "scope": "Nominal geometry from the STL files; print fit, slide friction and contact wear unmeasured",
+  "tag_quiet_zone_gaps_mm": [
+    10.0,
+    0.5
+  ]
 }

@@ -6,7 +6,7 @@ run=25;       // horizontal capture run of the funnel per side
 slope=30;     // funnel wall angle from horizontal, above the PETG-on-PETG friction angle
 wall=3; floor_z=25; floor_t=3;
 boss_d=8; boss_h=4; pin_d=2; pin=[0,9];   // charge pin under the forward cradle contact
-board_w=140; board_t=3; board_h=240; board_foot=100; tags=[[40,82],[40,142],[80,195]];   // [size, centre above table]; camera at Z=82 when docked
+board_w=140; board_t=3; board_h=240; board_foot=100; tags=[[40,82],[40,142],[60,205]];   // [size, centre above table]; camera at Z=82 when docked
 top=floor_z+run*tan(slope); opening=pocket+2*run; outer=opening+2*wall;
 module body(){
   difference(){

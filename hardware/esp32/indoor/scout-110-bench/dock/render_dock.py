@@ -15,7 +15,7 @@ for sx in (-1, 1):
     dock.append((box(sx*P['strip_x']-P['strip_w']/2, -P['strip_l']/2, fz, P['strip_w'], P['strip_l'], .3), (184, 115, 51), 1, 'copper foot strips, GND'))
 rng = np.random.default_rng(137)
 for size, tz in P['tags']:
-    dock.append((box(-size/2, yb-.6, tz-size/2, size, .6, size), (25, 25, 28), 1, 'tag36h11 column: 40, 40 and 80 mm'))
+    dock.append((box(-size/2, yb-.6, tz-size/2, size, .6, size), (25, 25, 28), 1, 'tag36h11 column: 40, 40 and 60 mm'))
     inner = size*.75; c = inner/6
     dock.append((box(-inner/2, yb-.8, tz-inner/2, inner, .6, inner), (240, 240, 240), 1, 'tag interior'))
     for i in range(6):

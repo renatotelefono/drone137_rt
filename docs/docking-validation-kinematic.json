@@ -1,0 +1,1131 @@
+{
+ "date": "2026-10-25",
+ "vehicle": "kinematic",
+ "runs": 20,
+ "passed": 20,
+ "accepted": true,
+ "gate": {
+  "touchdown_m": 0.02,
+  "yaw_deg": 5.0,
+  "stand_contacts": 0,
+  "estimate_reset_m": 0.02,
+  "attempts": 1
+ },
+ "camera": {
+  "width": 960,
+  "height": 540,
+  "vertical_fov": 41,
+  "effects": {
+   "exposure": 0.38,
+   "blur": 0.6,
+   "noise": 0.018,
+   "vignette": 0.28,
+   "distortion": -0.025,
+   "glare": 0.0,
+   "jitter": 0.001
+  },
+  "jpeg_quality": 0.72,
+  "latency_ms": 120,
+  "drop_every_n": 9,
+  "pitch_degrees": -10
+ },
+ "geometry": "dock-a@1",
+ "procedure": {
+  "approach_flu_m": [
+   -0.6,
+   0.0,
+   0.3
+  ],
+  "hover_flu_m": [
+   0.0,
+   0.0,
+   0.15
+  ],
+  "touchdown_tolerance_m": 0.02,
+  "height_tolerance_m": 0.03,
+  "yaw_tolerance_deg": 5.0,
+  "max_lateral_speed_m_s": 0.1,
+  "max_yaw_rate_rad_s": 0.4,
+  "descent_speed_m_s": 0.05,
+  "frame_period_s": 0.4,
+  "contact_current_ma": 20,
+  "acquire_timeout_s": 10,
+  "align_timeout_s": 60,
+  "settle_timeout_s": 5,
+  "blind_descent_height_m": 0.06,
+  "max_reprojection_px": 2.0,
+  "retries": 2,
+  "hold_lateral_m": 0.006,
+  "search_back_m": 0.3,
+  "integral_gain_per_s": 0.6,
+  "integral_limit_m": 0.04
+ },
+ "summary": {
+  "max_touchdown_mm": 4.405156098010066,
+  "max_yaw_deg": 0.31286926382909924,
+  "max_estimate_error_after_reset_mm": 10.335364150466088,
+  "attempts": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "mean_duration_s": 35.23499999999948,
+  "stand_contacts": 0
+ },
+ "wall_time_s": 39.67497205734253,
+ "logs": "/Users/klauskopper/.codex/worktrees/9a64/drone137/.local/validation/docking-kinematic",
+ "runs_detail": [
+  {
+   "seed": 2000,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.16825594872737143,
+    "y_m": -0.25241185933920374,
+    "z_m": -0.07567396736972036,
+    "yaw_deg": 0.1967168585624557
+   },
+   "touchdown": {
+    "f_m": -0.004037772116960214,
+    "l_m": -8.415846335396715e-05,
+    "yaw_deg": -0.03752273524991542,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 133,
+   "detections": 47,
+   "duration_s": 58.649999999999324,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 57.649999999999324
+   },
+   "estimate_error_after_reset_m": 0.010335364150466087,
+   "estimate_height_error_after_reset_m": -0.0006353650475137989,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2001,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.07463938666496579,
+    "y_m": 0.24943161459112384,
+    "z_m": -0.0039839591652137156,
+    "yaw_deg": 13.864453516590395
+   },
+   "touchdown": {
+    "f_m": -0.0020628273286786847,
+    "l_m": 0.004405156098010066,
+    "yaw_deg": -0.021962326727768055,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 53,
+   "detections": 48,
+   "duration_s": 27.649999999999526,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 26.649999999999547
+   },
+   "estimate_error_after_reset_m": 0.0039912150596647985,
+   "estimate_height_error_after_reset_m": -0.0033125471364698652,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2002,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.3656644024947147,
+    "y_m": -0.09214684978156426,
+    "z_m": 0.02529801781938108,
+    "yaw_deg": -10.462305129142317
+   },
+   "touchdown": {
+    "f_m": -0.002571115617089559,
+    "l_m": 0.0010891977587514923,
+    "yaw_deg": 0.31286926382909924,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 60,
+   "detections": 54,
+   "duration_s": 29.949999999999477,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 28.9499999999995
+   },
+   "estimate_error_after_reset_m": 0.0037754166040058937,
+   "estimate_height_error_after_reset_m": -0.005457247462868559,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2003,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.1593511715520927,
+    "y_m": -0.14747190937554394,
+    "z_m": 0.024215325287353144,
+    "yaw_deg": 14.952431327392087
+   },
+   "touchdown": {
+    "f_m": -0.004278890596326912,
+    "l_m": 0.0016534947576167802,
+    "yaw_deg": -0.03695840739068914,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 53,
+   "detections": 48,
+   "duration_s": 27.549999999999528,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 26.54999999999955
+   },
+   "estimate_error_after_reset_m": 0.009702034025717792,
+   "estimate_height_error_after_reset_m": -0.0016416244861768513,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2004,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.08135729972584436,
+    "y_m": 0.3095375137570436,
+    "z_m": 0.06660365982950905,
+    "yaw_deg": 4.883626217225733
+   },
+   "touchdown": {
+    "f_m": 0.0013968505082173621,
+    "l_m": 0.0012167203107313895,
+    "yaw_deg": 0.10324740761498563,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 50,
+   "detections": 45,
+   "duration_s": 26.94999999999954,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 25.949999999999562
+   },
+   "estimate_error_after_reset_m": 0.0036521294619099314,
+   "estimate_height_error_after_reset_m": -0.00036568945602136644,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2005,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.33714110448269125,
+    "y_m": 0.0342840490960846,
+    "z_m": 0.04881231453160471,
+    "yaw_deg": 11.917905308126384
+   },
+   "touchdown": {
+    "f_m": -0.0018396901104260621,
+    "l_m": 0.0012452999074807902,
+    "yaw_deg": -0.12347792815926387,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 41,
+   "detections": 37,
+   "duration_s": 23.449999999999616,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 22.449999999999637
+   },
+   "estimate_error_after_reset_m": 0.0013100090078917036,
+   "estimate_height_error_after_reset_m": 0.0030469432990980366,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2006,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.34808506046228765,
+    "y_m": -0.13547327860800576,
+    "z_m": -0.03157427414896464,
+    "yaw_deg": -4.254064932353122
+   },
+   "touchdown": {
+    "f_m": 0.0004518508641813135,
+    "l_m": 0.0017710623810667236,
+    "yaw_deg": 0.06517405521938789,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 124,
+   "detections": 39,
+   "duration_s": 55.64999999999934,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 54.64999999999934
+   },
+   "estimate_error_after_reset_m": 0.005434998333526983,
+   "estimate_height_error_after_reset_m": 0.004684453098699594,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2007,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.3465271525849892,
+    "y_m": 0.03870960612126857,
+    "z_m": -0.0453174657645145,
+    "yaw_deg": 4.81179988587798
+   },
+   "touchdown": {
+    "f_m": -0.0024317738599051175,
+    "l_m": 0.0008744088905174863,
+    "yaw_deg": -0.11773055735210633,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 134,
+   "detections": 45,
+   "duration_s": 59.84999999999932,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 58.84999999999932
+   },
+   "estimate_error_after_reset_m": 0.008868507360206685,
+   "estimate_height_error_after_reset_m": -0.0019243032176884602,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2008,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.1482207410244833,
+    "y_m": -0.3482180546501595,
+    "z_m": 0.05549251386528454,
+    "yaw_deg": -14.568187922376863
+   },
+   "touchdown": {
+    "f_m": -0.0031059123319663318,
+    "l_m": 0.0015574217791276546,
+    "yaw_deg": 0.09572271393648768,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 100,
+   "detections": 41,
+   "duration_s": 46.34999999999937,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 45.34999999999937
+   },
+   "estimate_error_after_reset_m": 0.004558122342338158,
+   "estimate_height_error_after_reset_m": 0.001542193416046865,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2009,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.14798824321887719,
+    "y_m": -0.10960255828429402,
+    "z_m": 0.07772987353727837,
+    "yaw_deg": -2.175853046888024
+   },
+   "touchdown": {
+    "f_m": -0.0022594134745235195,
+    "l_m": -0.0013520029045903659,
+    "yaw_deg": -0.12306703038117511,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 53,
+   "detections": 44,
+   "duration_s": 27.549999999999528,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 26.54999999999955
+   },
+   "estimate_error_after_reset_m": 0.008596642792234743,
+   "estimate_height_error_after_reset_m": 0.004623364105487864,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2010,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.17032079735212657,
+    "y_m": -0.09974680571375404,
+    "z_m": -0.028621390579112678,
+    "yaw_deg": -7.776176054580256
+   },
+   "touchdown": {
+    "f_m": -0.002567897944997233,
+    "l_m": -0.002340454860644492,
+    "yaw_deg": 0.1477594466963962,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 46,
+   "detections": 39,
+   "duration_s": 24.849999999999586,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 23.849999999999607
+   },
+   "estimate_error_after_reset_m": 0.003916854554467068,
+   "estimate_height_error_after_reset_m": -0.002429011349772632,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2011,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.00412408113587843,
+    "y_m": 0.34580773863786396,
+    "z_m": 0.02924179840355068,
+    "yaw_deg": -7.884752777021715
+   },
+   "touchdown": {
+    "f_m": 0.00011078245031392875,
+    "l_m": 0.0020989305502481237,
+    "yaw_deg": -0.07096152484020188,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 51,
+   "detections": 46,
+   "duration_s": 27.249999999999535,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 26.249999999999556
+   },
+   "estimate_error_after_reset_m": 0.0031238432257304737,
+   "estimate_height_error_after_reset_m": 0.004216304715138765,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2012,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.17478331413563045,
+    "y_m": 0.08661293313766183,
+    "z_m": -0.02283301911845081,
+    "yaw_deg": -6.4236442643172245
+   },
+   "touchdown": {
+    "f_m": 0.0010472411781679014,
+    "l_m": 0.0009516652811578652,
+    "yaw_deg": -0.05969852008429956,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 57,
+   "detections": 51,
+   "duration_s": 28.749999999999503,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 27.749999999999524
+   },
+   "estimate_error_after_reset_m": 0.006426799646895743,
+   "estimate_height_error_after_reset_m": -0.0026257403272339397,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2013,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.015462240686229421,
+    "y_m": 0.20770757236332993,
+    "z_m": -0.04856624160077422,
+    "yaw_deg": 13.203948185766171
+   },
+   "touchdown": {
+    "f_m": -0.00021638141963187252,
+    "l_m": -0.00015116714799989772,
+    "yaw_deg": -0.18323173294108266,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 105,
+   "detections": 44,
+   "duration_s": 47.74999999999936,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 46.74999999999936
+   },
+   "estimate_error_after_reset_m": 0.0034246472192552245,
+   "estimate_height_error_after_reset_m": 0.0030957758842481806,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2014,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.08539026836415714,
+    "y_m": -0.37374048023601025,
+    "z_m": -0.037508389851775945,
+    "yaw_deg": 0.8049907823633273
+   },
+   "touchdown": {
+    "f_m": -0.0005003049386300695,
+    "l_m": 0.0012103721154108626,
+    "yaw_deg": 0.034321876816113525,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 52,
+   "detections": 43,
+   "duration_s": 26.04999999999956,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 25.04999999999958
+   },
+   "estimate_error_after_reset_m": 0.0030706165359147895,
+   "estimate_height_error_after_reset_m": 0.0038274786278870094,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2015,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.049010861254646626,
+    "y_m": 0.27973109984949435,
+    "z_m": 0.043428451542013614,
+    "yaw_deg": 14.01837655067909
+   },
+   "touchdown": {
+    "f_m": 0.00045159102606762147,
+    "l_m": -0.0011679857296722496,
+    "yaw_deg": 0.05105163185034668,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 57,
+   "detections": 49,
+   "duration_s": 30.049999999999475,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 29.049999999999496
+   },
+   "estimate_error_after_reset_m": 0.0009914077648378189,
+   "estimate_height_error_after_reset_m": -0.002755610487415752,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2016,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.2101083238394259,
+    "y_m": 0.3325728615935118,
+    "z_m": -0.039093506313513444,
+    "yaw_deg": -2.896947644878246
+   },
+   "touchdown": {
+    "f_m": -0.0033274454358489525,
+    "l_m": 0.0027857673529922966,
+    "yaw_deg": 0.021655297078695655,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 134,
+   "detections": 48,
+   "duration_s": 59.94999999999932,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 58.94999999999932
+   },
+   "estimate_error_after_reset_m": 0.005732938674735315,
+   "estimate_height_error_after_reset_m": 0.0068123312116539075,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2017,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.37898745782303583,
+    "y_m": -0.08412415813988573,
+    "z_m": 0.050437608263028955,
+    "yaw_deg": -1.3798678700669265
+   },
+   "touchdown": {
+    "f_m": -0.0038461524724666685,
+    "l_m": 0.0014924135228719937,
+    "yaw_deg": 0.15811371128612914,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 39,
+   "detections": 35,
+   "duration_s": 22.649999999999633,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 21.649999999999654
+   },
+   "estimate_error_after_reset_m": 0.0038705801396244004,
+   "estimate_height_error_after_reset_m": 0.0006285274941630513,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2018,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.12010195336348221,
+    "y_m": 0.2521111810300279,
+    "z_m": 0.06569831729278995,
+    "yaw_deg": 14.758694487904561
+   },
+   "touchdown": {
+    "f_m": -0.001669722507056992,
+    "l_m": 0.0030361821598736682,
+    "yaw_deg": -0.012919104756315884,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 55,
+   "detections": 48,
+   "duration_s": 28.44999999999951,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 27.44999999999953
+   },
+   "estimate_error_after_reset_m": 0.007986729436622758,
+   "estimate_height_error_after_reset_m": -0.003000184400821207,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 2019,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.14223792441276087,
+    "y_m": 0.05403994090171838,
+    "z_m": -0.025553195569550446,
+    "yaw_deg": 14.062182593551832
+   },
+   "touchdown": {
+    "f_m": -0.0030086000027920168,
+    "l_m": 0.002594279692507362,
+    "yaw_deg": 0.06910701556795155,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 47,
+   "detections": 41,
+   "duration_s": 25.349999999999575,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 24.349999999999596
+   },
+   "estimate_error_after_reset_m": 0.0019024143637234407,
+   "estimate_height_error_after_reset_m": 0.0013106935902681333,
+   "error": null,
+   "engine": "first-order kinematic model",
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  }
+ ],
+ "scope": "Simulated dock A with the benchmark camera optics, latency and frame drops; the docking controller sees frames, estimate and dock status only. Not a hardware qualification."
+}

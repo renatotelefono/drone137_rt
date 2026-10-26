@@ -1,7 +1,42 @@
 # Docking: return, align, land, charge
 
-Status: specification. Nothing in `app/` implements it yet. The hardware it targets is
-dock A in `hardware/esp32/indoor/scout-110-bench/dock/` and carrier prototype B.
+Status: implemented in simulation on 25 October 2026. The hardware it targets is dock A in
+`hardware/esp32/indoor/scout-110-bench/dock/` and carrier prototype B.
+
+## Implementation and results
+
+| Piece | Where |
+| --- | --- |
+| Tag detection, pose in the dock frame, synthetic tag renderer | `app/dock_tags.py` |
+| The `dock` phase: return, acquire, align, descend, settle, docked | `app/docking.py` |
+| Dock registry, dock controller client, API | `app/docks.py`, `app/dock_api.py` |
+| Simulated dock: electronics, contact, tag camera, vehicles | `sim/dock_world.py` |
+| Mission runtime: plan with a dock, `POST /api/mission/dock`, assistant actions | `app/mission_runtime.py`, `app/mission_assistant.py` |
+| Gate | `scripts/qualify_docking.py`, results below |
+| Geometry constants shared by all of the above | `config/dock-a.json` |
+
+The dock frame in software is forward-left-up with the origin at the pocket centre; the
+hardware drawings call the same axes +Y, −X, +Z.
+
+Gate, first-order vehicle (`docs/docking-validation-kinematic.json`): 20 of 20 dockings
+from the return gate's error distribution ended on the dock at the first attempt, worst
+touchdown 0.8 mm and 0.22°, no stand contact, mean
+27 s from the return gate to contact, estimate re-anchored within
+9 mm of the truth.
+
+Gate, Rapier plant (`docs/docking-validation.json`, the service-owned micro-physics in
+real time, benchmark scene with its 0.8 m/s draft, camera latency 120 ms and every ninth
+frame dropped): 20 of 20 dockings from the return gate's error distribution ended on the
+dock at the first attempt, worst touchdown 12.0 mm and 0.18°, no stand
+contact, mean 25 s from the return gate to contact, estimate re-anchored within
+10 mm of the truth. Before the integral term the same plant touched down 6 to
+16 mm short of the centre on each of six runs (`.local/validation/docking-rapier-before-integral.log`
+on the development Mac).
+
+Not done: the dock controller firmware and the carrier STAT input are hardware work;
+the Three.js mission renderer does not draw the tag column (the dock phase in simulation
+renders its own frames from the plant's pose); the Watch cluster's sortie scheduler is
+not written.
 
 ## Why a dock
 
@@ -20,8 +55,8 @@ a site needs three or four aircraft sharing docks.
   stand, +Z up. The docked aircraft is at the origin with yaw 0: its camera faces the
   tags.
 - **Tag stand.** The tag plane is at Y = +203 mm. Three tag36h11 tags on one vertical
-  column: 40 mm with centres 57 and 117 mm above the pocket floor, and 80 mm centred
-  170 mm above it, all centred on X = 0. The lowest tag centre is at the docked camera
+  column: 40 mm with centres 57 and 117 mm above the pocket floor, and 60 mm centred
+  180 mm above it, all centred on X = 0; the quiet zones are 5 mm apart. The lowest tag centre is at the docked camera
   height. Tag ids are 3k, 3k+1, 3k+2 for dock k, lowest first, so a detection names
   its dock.
 - **Camera in the aircraft.** 12 mm forward of the aircraft centre and 57 mm above the
@@ -29,8 +64,8 @@ a site needs three or four aircraft sharing docks.
 - **Visibility,** from `dock/clearance-checks.json`: with the profile's 41° vertical
   field of view, at least one tag is fully in view for every camera height from 16 mm
   below the docked height to 175 mm above it, with no gap. At 1 m a 40 mm tag is 29 px
-  wide and the 80 mm tag 58 px; at 2 m the 80 mm tag is still 29 px. Acquisition is
-  therefore reliable from about 1.5 m for the big tag and 0.8 m for the small ones.
+  wide and the 60 mm tag 43 px. Acquisition is therefore reliable from about 1.2 m for
+  the big tag and 0.8 m for the small ones.
 - **Capture.** The funnel takes a touchdown error of ±25 mm in X and Y and sets the
   final yaw to the nearest multiple of 90°. The software's job is to arrive within
   ±20 mm facing the tags.
@@ -93,8 +128,8 @@ issues one small move per frame and waits for the next frame before the next mov
 
 | State | Does | Leaves when | Abort |
 | --- | --- | --- | --- |
-| **return** | Existing return navigation to the approach point: dock frame (0, −0.45 m, +0.30 m), yaw 0 | Within the 0.4 m return gate | As today |
-| **acquire** | Detect tag36h11 in each frame; accept a detection whose id belongs to this dock | A tag seen in 2 consecutive frames | No tag in 10 s: yaw ±30° search; then climb 0.3 m; then land in place and report `dock not found` |
+| **return** | Existing return navigation to the approach point: dock frame (0, −0.60 m, +0.30 m), yaw 0 | Within the 0.4 m return gate | As today |
+| **acquire** | Detect tag36h11 in each frame; accept a detection whose id belongs to this dock | A tag seen in 2 consecutive frames | No tag in 10 s: look 30° left, then right; back away 0.3 m and down to hover height, look left and right again; then land in place and report `dock not found` |
 | **align** | From the tag corners and the calibrated intrinsics, solve the camera pose in the dock frame (PnP; the tag column's layout is known). Command lateral and height moves toward hover point (0, 0, +0.15 m), yaw toward 0, at most 0.10 m/s, 0.4 rad/s | Error below 20 mm in X and Y, 30 mm in Z, 5° in yaw, held for 3 frames | Tag lost 3 frames: back to acquire. 60 s without converging: land in place, report |
 | **descend** | Descend at 0.05 m/s keeping X, Y, yaw servoed on the tag | Dock reports `contact`, or height estimate below 0 | Tag lost above 60 mm: climb to the hover point, back to align. Tag lost below 60 mm: continue; the funnel captures ±25 mm |
 | **settle** | Collective to zero, disarm, wait 2 s | Dock `contact` true and pin current above 20 mA | No contact within 5 s: the aircraft is probably at yaw 180° or outside the pocket; arm, climb to the hover point, back to align, at most twice, then report `docked without contact` |
@@ -102,7 +137,9 @@ issues one small move per frame and waits for the next frame before the next mov
 
 Height during descend comes from the tag solution, not from VIO, because VIO drift is
 the reason the return gate is 0.4 m. Lateral and yaw errors likewise. VIO only bridges
-frames.
+frames. A bounded integral of the lateral error (0.6 per second, limited to ±40 mm)
+cancels a steady plant offset: against the benchmark scene's 0.8 m/s draft the Rapier
+plant otherwise touched down 6 to 16 mm short of the centre on every run.
 
 ### Tag detection
 
@@ -118,7 +155,7 @@ frames.
 
 | Quantity | Value | Source |
 | --- | ---: | --- |
-| Approach point | (0, −0.45, +0.30) m, yaw 0 | Big tag 2.5° high at that range, inside the field of view with the −10° pitch |
+| Approach point | (0, −0.60, +0.30) m, yaw 0 | With a 0.4 m arrival error the aircraft is 0.2 to 1.0 m from the column; the whole column stays in view at the near end and the tags stay above 29 px at the far end |
 | Hover point | (0, 0, +0.15) m above the pocket floor | 150 mm of guided descent, three seconds at 0.05 m/s, about seven frames |
 | Touchdown tolerance | ±20 mm, 5° | Funnel capture ±25 mm |
 | Frame rate | 2.5 Hz | Aircraft camera poll |

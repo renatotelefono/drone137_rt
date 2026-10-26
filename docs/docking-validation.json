@@ -1,0 +1,1477 @@
+{
+ "date": "2026-10-25",
+ "vehicle": "rapier",
+ "runs": 20,
+ "passed": 20,
+ "accepted": true,
+ "gate": {
+  "touchdown_m": 0.02,
+  "yaw_deg": 5.0,
+  "stand_contacts": 0,
+  "estimate_reset_m": 0.02,
+  "attempts": 1
+ },
+ "camera": {
+  "width": 960,
+  "height": 540,
+  "vertical_fov": 41,
+  "effects": {
+   "exposure": 0.38,
+   "blur": 0.6,
+   "noise": 0.018,
+   "vignette": 0.28,
+   "distortion": -0.025,
+   "glare": 0.0,
+   "jitter": 0.001
+  },
+  "jpeg_quality": 0.72,
+  "latency_ms": 120,
+  "drop_every_n": 9,
+  "pitch_degrees": -10
+ },
+ "geometry": "dock-a@1",
+ "procedure": {
+  "approach_flu_m": [
+   -0.6,
+   0.0,
+   0.3
+  ],
+  "hover_flu_m": [
+   0.0,
+   0.0,
+   0.15
+  ],
+  "touchdown_tolerance_m": 0.02,
+  "height_tolerance_m": 0.03,
+  "yaw_tolerance_deg": 5.0,
+  "max_lateral_speed_m_s": 0.1,
+  "max_yaw_rate_rad_s": 0.4,
+  "descent_speed_m_s": 0.05,
+  "frame_period_s": 0.4,
+  "contact_current_ma": 20,
+  "acquire_timeout_s": 10,
+  "align_timeout_s": 60,
+  "settle_timeout_s": 5,
+  "blind_descent_height_m": 0.06,
+  "max_reprojection_px": 2.0,
+  "retries": 2,
+  "hold_lateral_m": 0.006,
+  "search_back_m": 0.3,
+  "integral_gain_per_s": 0.6,
+  "integral_limit_m": 0.04
+ },
+ "summary": {
+  "max_touchdown_mm": 12.019753456115723,
+  "max_yaw_deg": 0.18115628059884406,
+  "max_estimate_error_after_reset_mm": 9.780000891836824,
+  "attempts": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1
+  ],
+  "mean_duration_s": 25.29920300414924,
+  "stand_contacts": 0
+ },
+ "wall_time_s": 775.2168838977814,
+ "logs": "/Users/klauskopper/.codex/worktrees/9a64/drone137/.local/validation/docking-rapier",
+ "runs_detail": [
+  {
+   "seed": 3000,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.12451296373336011,
+    "y_m": 0.23310725379005703,
+    "z_m": -0.012617782390928145,
+    "yaw_deg": -9.172808066569024
+   },
+   "touchdown": {
+    "f_m": -0.005526185035705566,
+    "l_m": 0.0006409883499145501,
+    "yaw_deg": 0.1246828548447878,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 49,
+   "detections": 44,
+   "duration_s": 25.925660875000176,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 24.92735495800298
+   },
+   "estimate_error_after_reset_m": 0.008649997064935544,
+   "estimate_height_error_after_reset_m": -0.027315247000266947,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.26490764697961994,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.735199144953565,
+    "minimum_clearance_m": 0.6077509624394879,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3001,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.18445794090239784,
+    "y_m": -0.3358682946170887,
+    "z_m": 0.0470478285604772,
+    "yaw_deg": 6.588434323659751
+   },
+   "touchdown": {
+    "f_m": -0.003016352653503418,
+    "l_m": 0.0012159347534179683,
+    "yaw_deg": 0.016667200191058263,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 62,
+   "detections": 34,
+   "duration_s": 32.255646374993376,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 31.253379000001587
+   },
+   "estimate_error_after_reset_m": 0.007720130886963064,
+   "estimate_height_error_after_reset_m": -0.027126914051724262,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.5203750929875361,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.771511056392293,
+    "minimum_clearance_m": 0.4803037643432616,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3002,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.15112289897831202,
+    "y_m": -0.030102812182839587,
+    "z_m": 0.01893683857808281,
+    "yaw_deg": -2.4947425623033146
+   },
+   "touchdown": {
+    "f_m": -0.012019753456115723,
+    "l_m": -0.0033763647079467786,
+    "yaw_deg": 0.014083325203051427,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 50,
+   "detections": 44,
+   "duration_s": 26.476348584001244,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 25.475959250004962
+   },
+   "estimate_error_after_reset_m": 0.00850626219405805,
+   "estimate_height_error_after_reset_m": -0.027351376687051683,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.4075139624922628,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.703849129025893,
+    "minimum_clearance_m": 0.5929763317108153,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3003,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.07548147969782507,
+    "y_m": -0.06531096567131506,
+    "z_m": 0.012060668045681417,
+    "yaw_deg": 5.697545646800991
+   },
+   "touchdown": {
+    "f_m": -0.004021644592285156,
+    "l_m": -0.0008461475372314459,
+    "yaw_deg": -0.062452505530055,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 44,
+   "detections": 40,
+   "duration_s": 23.736434833001113,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 22.735123999998905
+   },
+   "estimate_error_after_reset_m": 0.00760608591775634,
+   "estimate_height_error_after_reset_m": -0.026655237814204466,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.41393528237022115,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.6381901444793465,
+    "minimum_clearance_m": 0.58610200881958,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3004,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.3685486847848049,
+    "y_m": -0.020261697198767876,
+    "z_m": -0.005370621234301804,
+    "yaw_deg": 2.8975174708333573
+   },
+   "touchdown": {
+    "f_m": 0.001304388046264648,
+    "l_m": 0.00392460823059082,
+    "yaw_deg": 0.02109601179620066,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 28,
+   "detections": 25,
+   "duration_s": 17.010273749998305,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 16.00829325000086
+   },
+   "estimate_error_after_reset_m": 0.002230604592083773,
+   "estimate_height_error_after_reset_m": -0.023764363150658545,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.2920017919247429,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.49426937961546,
+    "minimum_clearance_m": 0.6042190794561897,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3005,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.11997902341933565,
+    "y_m": -0.03065095592007448,
+    "z_m": -0.016921109741488447,
+    "yaw_deg": 6.447779603007829
+   },
+   "touchdown": {
+    "f_m": -0.000260591506958008,
+    "l_m": 0.0012526512145996094,
+    "yaw_deg": 0.09755457313609744,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 44,
+   "detections": 40,
+   "duration_s": 23.900114124997344,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 22.89903779100132
+   },
+   "estimate_error_after_reset_m": 0.006207309786816308,
+   "estimate_height_error_after_reset_m": -0.024942404419392775,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    0.3866618559318181,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.591472464418253,
+    "minimum_clearance_m": 0.6094986375450226,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3006,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.021753786548122874,
+    "y_m": 0.07026424035103385,
+    "z_m": 0.026215021552029594,
+    "yaw_deg": -4.690241883091892
+   },
+   "touchdown": {
+    "f_m": 0.00042998790740966797,
+    "l_m": -0.00014221668243408198,
+    "yaw_deg": 0.09290842939772286,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 43,
+   "detections": 39,
+   "duration_s": 23.43640004100598,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 22.434400167003332
+   },
+   "estimate_error_after_reset_m": 0.002922315507630649,
+   "estimate_height_error_after_reset_m": -0.024402757222372666,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.4798746818924393,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.727832182165212,
+    "minimum_clearance_m": 0.5202493667602538,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3007,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.25354424909006384,
+    "y_m": -0.0842158691894526,
+    "z_m": 0.06852817615562377,
+    "yaw_deg": 4.729930724670956
+   },
+   "touchdown": {
+    "f_m": -0.00970768928527832,
+    "l_m": -0.0026643276214599622,
+    "yaw_deg": 0.0036319123617852517,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 33,
+   "detections": 30,
+   "duration_s": 18.992340041993884,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 17.991973958000017
+   },
+   "estimate_error_after_reset_m": 0.009780000891836824,
+   "estimate_height_error_after_reset_m": -0.024642140059838356,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.1531770754524382,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.51178256853479,
+    "minimum_clearance_m": 0.6087992570989385,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3008,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.3489027533385147,
+    "y_m": -0.1076356574360519,
+    "z_m": -0.02572727331216184,
+    "yaw_deg": 7.938614526188564
+   },
+   "touchdown": {
+    "f_m": -0.0015450716018676758,
+    "l_m": -0.0005946159362792971,
+    "yaw_deg": -0.021868760554189817,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 31,
+   "detections": 27,
+   "duration_s": 18.330359334002424,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 17.32991016699816
+   },
+   "estimate_error_after_reset_m": 0.003779652897318461,
+   "estimate_height_error_after_reset_m": -0.02824279683165936,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.5225672600026128,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.638824542636212,
+    "minimum_clearance_m": 0.4788876771926879,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3009,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.0594285513146286,
+    "y_m": 0.3597923248869517,
+    "z_m": 0.04146686627530752,
+    "yaw_deg": -14.012483979642594
+   },
+   "touchdown": {
+    "f_m": -0.008970141410827637,
+    "l_m": -0.0016653537750244151,
+    "yaw_deg": 0.005047006704845684,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 96,
+   "detections": 43,
+   "duration_s": 47.22574512499705,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 46.225182750000386
+   },
+   "estimate_error_after_reset_m": 0.005890134972610748,
+   "estimate_height_error_after_reset_m": -0.027878383758613293,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.2605108354497245,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.942559545950958,
+    "minimum_clearance_m": 0.6108801838878385,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3010,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.004944892565365429,
+    "y_m": 0.1386747709991596,
+    "z_m": -0.003030602931053501,
+    "yaw_deg": -11.88097263109624
+   },
+   "touchdown": {
+    "f_m": 0.006724834442138672,
+    "l_m": 0.0017583370208740243,
+    "yaw_deg": 0.18115628059884406,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 46,
+   "detections": 41,
+   "duration_s": 24.516098750005767,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 23.51577054199879
+   },
+   "estimate_error_after_reset_m": 0.005156696611965243,
+   "estimate_height_error_after_reset_m": -0.02594916899061995,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.021549410530165812,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.573583172471007,
+    "minimum_clearance_m": 0.6049343818372934,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3011,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.3321511975283033,
+    "y_m": -0.15873405353288447,
+    "z_m": -0.05592200649069731,
+    "yaw_deg": 1.453500439971136
+   },
+   "touchdown": {
+    "f_m": -0.0010812282562255857,
+    "l_m": -0.0013988018035888674,
+    "yaw_deg": 0.03226221561747172,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 60,
+   "detections": 54,
+   "duration_s": 30.57231904099899,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 29.571340792004776
+   },
+   "estimate_error_after_reset_m": 0.004200644070225314,
+   "estimate_height_error_after_reset_m": -0.025117312902436066,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.0163993951170037,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.629946793208924,
+    "minimum_clearance_m": 0.6072775898286578,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3012,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.017495062548166178,
+    "y_m": 0.17134610566755337,
+    "z_m": -0.07896897419597133,
+    "yaw_deg": -3.653510751139429
+   },
+   "touchdown": {
+    "f_m": 0.001367092132568359,
+    "l_m": 0.004234671592712402,
+    "yaw_deg": 0.044920789420502705,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 44,
+   "detections": 40,
+   "duration_s": 23.373592083000403,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 22.372421540996584
+   },
+   "estimate_error_after_reset_m": 0.008986250703220048,
+   "estimate_height_error_after_reset_m": -0.024666390806505657,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    0.29052590317521076,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.585966759283417,
+    "minimum_clearance_m": 0.605101827492074,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3013,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.07827580837966962,
+    "y_m": 0.07140340366412903,
+    "z_m": 0.010223190770114084,
+    "yaw_deg": -9.360525610960593
+   },
+   "touchdown": {
+    "f_m": 0.0059773921966552734,
+    "l_m": 0.0010806322097778327,
+    "yaw_deg": -0.03359520595683318,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 46,
+   "detections": 41,
+   "duration_s": 24.69451499999559,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 23.693381125005544
+   },
+   "estimate_error_after_reset_m": 0.0026436665796280806,
+   "estimate_height_error_after_reset_m": -0.02684854358503425,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    0.2284056440621823,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.587828758872027,
+    "minimum_clearance_m": 0.6017452839417324,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3014,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.30501107816774514,
+    "y_m": 0.045031156877634815,
+    "z_m": -0.01979834087331886,
+    "yaw_deg": 14.972294029346772
+   },
+   "touchdown": {
+    "f_m": -0.008665204048156738,
+    "l_m": -0.0006439685821533214,
+    "yaw_deg": 0.04393553507510536,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 33,
+   "detections": 30,
+   "duration_s": 19.249149458999455,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 18.24879483300174
+   },
+   "estimate_error_after_reset_m": 0.006913508042125459,
+   "estimate_height_error_after_reset_m": -0.02596512571873511,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.3685427754185153,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.595610896935574,
+    "minimum_clearance_m": 0.610988633803443,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3015,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.002011251289175132,
+    "y_m": 0.1080619934532533,
+    "z_m": 0.0722819230760906,
+    "yaw_deg": -4.484072431107241
+   },
+   "touchdown": {
+    "f_m": -0.001374244689941406,
+    "l_m": -0.001749992370605469,
+    "yaw_deg": -0.0016807264410064176,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 44,
+   "detections": 40,
+   "duration_s": 23.991078500002914,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 22.99038779199327
+   },
+   "estimate_error_after_reset_m": 0.003026663624804426,
+   "estimate_height_error_after_reset_m": -0.026023446933133028,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    0.10741999993889503,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.60293375209693,
+    "minimum_clearance_m": 0.6054283330509732,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3016,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.3139947625069075,
+    "y_m": 0.16849905659821415,
+    "z_m": 0.005501600385890768,
+    "yaw_deg": 10.48945909690935
+   },
+   "touchdown": {
+    "f_m": -0.001841306686401367,
+    "l_m": -0.001539111137390137,
+    "yaw_deg": 0.03542082158328238,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 58,
+   "detections": 52,
+   "duration_s": 29.975947915998404,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 28.97582437499659
+   },
+   "estimate_error_after_reset_m": 0.005016604880525567,
+   "estimate_height_error_after_reset_m": -0.02382903782335035,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    0.47352088847593365,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.7875705411169065,
+    "minimum_clearance_m": 0.608341545186705,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3017,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.09744374184624686,
+    "y_m": -0.21296576055408525,
+    "z_m": -0.0034438832450530833,
+    "yaw_deg": -8.177185382667126
+   },
+   "touchdown": {
+    "f_m": 0.0055692195892333984,
+    "l_m": 0.0009478330612182624,
+    "yaw_deg": 0.05116072607325977,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 44,
+   "detections": 40,
+   "duration_s": 24.08746608299407,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 23.0869605830012
+   },
+   "estimate_error_after_reset_m": 0.004443984625435908,
+   "estimate_height_error_after_reset_m": -0.02736507175369576,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    0.55241171871131,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.870933616847126,
+    "minimum_clearance_m": 0.6008486078675243,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3018,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": -0.09692596720732898,
+    "y_m": -0.252836634379673,
+    "z_m": -0.04476247528394575,
+    "yaw_deg": -1.0981137908589444
+   },
+   "touchdown": {
+    "f_m": 0.004878640174865723,
+    "l_m": 0.0013397932052612311,
+    "yaw_deg": 0.03220425921124797,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 46,
+   "detections": 40,
+   "duration_s": 24.37948279199918,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 23.378404125003726
+   },
+   "estimate_error_after_reset_m": 0.008059864889826497,
+   "estimate_height_error_after_reset_m": -0.02288021896504689,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    -0.44258323358805557,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.635100256312289,
+    "minimum_clearance_m": 0.5572496652603148,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3019,
+   "outcome": "docked",
+   "attempts": 1,
+   "states": [
+    "return",
+    "acquire",
+    "align",
+    "descend",
+    "settle",
+    "docked"
+   ],
+   "drawn_error": {
+    "x_m": 0.07098565036538966,
+    "y_m": -0.25885650876306365,
+    "z_m": 0.001008725791964391,
+    "yaw_deg": 2.203722748346475
+   },
+   "touchdown": {
+    "f_m": 0.006120204925537109,
+    "l_m": 0.0012632608413696296,
+    "yaw_deg": -0.026601839497147204,
+    "landed": true
+   },
+   "stand_contacts": 0,
+   "frames": 44,
+   "detections": 40,
+   "duration_s": 23.85508737499913,
+   "dock_status": {
+    "mode": "charge",
+    "supply_v": 5.0,
+    "pin_current_ma": 450.0,
+    "pad_temp_c": 22.0,
+    "contact": true,
+    "fault": null,
+    "uptime_s": 22.854928125001607
+   },
+   "estimate_error_after_reset_m": 0.007418313194641324,
+   "estimate_height_error_after_reset_m": -0.026442400218509583,
+   "error": null,
+   "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+   "away_point_dock_frame": [
+    -1.6,
+    0.1800375045796025,
+    0.9
+   ],
+   "flight": {
+    "engine": "Rapier 0.21.0 / unchanged micro-physics plant",
+    "dt_s": 0.004,
+    "distance_m": 5.664126240976774,
+    "minimum_clearance_m": 0.6009234480567731,
+    "envelope_violations": 0,
+    "envelope_radius_m": 0.35,
+    "clearance_metric": "3D signed distance to obstacle boxes, walls, ceiling and cart swept bounds; controlled floor contact excluded",
+    "landed": false,
+    "error": null,
+    "physical_enabled": false,
+    "position_source": "ideal external reference"
+   },
+   "checks": {
+    "docked": true,
+    "touchdown_within_20_mm": true,
+    "yaw_within_5_deg": true,
+    "no_stand_contact": true,
+    "estimate_reset_within_20_mm": true,
+    "first_attempt": true
+   },
+   "passed": true
+  }
+ ],
+ "scope": "Simulated dock A with the benchmark camera optics, latency and frame drops; the docking controller sees frames, estimate and dock status only. Not a hardware qualification."
+}

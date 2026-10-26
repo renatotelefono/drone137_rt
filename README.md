@@ -20,6 +20,8 @@ under-$50 parts budget are not qualified by this physics benchmark.
 
 **Ask the console:** a typed or dictated request such as "connect to the workshop scout" is mapped by the local model to one console action from a fixed list and run by the service with its usual checks; launches still go through the reviewed plan. See [mission-control.md](docs/mission-control.md).
 
+**Docking:** a mission can end on dock A, a printed landing base with contact charging and a tag column; the aircraft returns, aligns on the tags, lands in the funnel and charges, and the dock pose becomes the map origin. Registry, dock controller API, the simulated dock and the twenty-docking gate are in [docking.md](docs/docking.md); the hardware is in `hardware/esp32/indoor/scout-110-bench/dock/`.
+
 **Mission wizard:** the console opens with a Start-here panel that proposes the four mission clusters, map, audit, watch and find, from place memory and mission state, composes the brief for the one it can fly, and starts simulated exploration flights directly. See [mission-control.md](docs/mission-control.md).
 
 **Mission control:** `/control` now connects the SQLite aircraft assembly to

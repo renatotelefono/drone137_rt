@@ -14,10 +14,10 @@ import re
 
 ACTIONS = ('connect', 'disconnect', 'show_camera', 'list_aircraft', 'status', 'start_model',
            'suggest_mission', 'compose_audit', 'start_exploration', 'stop_mission', 'return_home',
-           'land_aircraft', 'cut_motors', 'unknown')
+           'land_aircraft', 'cut_motors', 'dock_status', 'return_to_dock', 'unknown')
 IMMEDIATE = {'connect', 'disconnect', 'show_camera', 'list_aircraft', 'status', 'start_model',
-             'suggest_mission', 'compose_audit', 'stop_mission', 'return_home', 'land_aircraft', 'cut_motors'}
-CONFIRM = {'start_exploration'}
+             'suggest_mission', 'compose_audit', 'stop_mission', 'return_home', 'land_aircraft', 'cut_motors', 'dock_status'}
+CONFIRM = {'start_exploration', 'return_to_dock'}
 NEEDS_AIRCRAFT = {'connect', 'disconnect', 'show_camera', 'land_aircraft', 'cut_motors'}
 SCHEMA = {'type': 'object', 'properties': {
     'action': {'type': 'string', 'enum': list(ACTIONS)},
@@ -39,6 +39,8 @@ PROMPT = (
     '- start_exploration: map an unknown layout in the simulator; put a place name in place and a seed in seed.\n'
     '- stop_mission / return_home: stop the active mission or bring the aircraft home.\n'
     '- land_aircraft / cut_motors: emergency reduce thrust / cut motors on a connected aircraft.\n'
+    '- dock_status: whether the aircraft is on its dock, charging, and the dock state.\n'
+    '- return_to_dock: end the active mission by landing on its registered dock to charge.\n'
     '- unknown: anything else, or when the aircraft or intent is unclear; say in reply what you need.\n'
     'Copy the aircraft name as the operator said it into aircraft, or leave it empty. Never invent names or '
     'capabilities. Launching a mission is not an action here. Keep reply under 25 words.\n'
@@ -115,6 +117,18 @@ class Assistant:
             result.update(needs_confirmation=True, proposal={'place': plan['place'], 'seed': plan['seed'], 'name': plan['name']},
                           reply=f"Ready to map layout {plan['seed']} as {plan['place']} in the simulator. Confirm to start.")
             return result
+        if intent['action'] == 'return_to_dock':
+            run = getattr(self.runtime, 'run', None) or {}
+            dock = (run.get('plan') or {}).get('dock')
+            if not getattr(self.runtime, 'busy', False) or not run:
+                result.update(action='unknown', reply='No mission is flying, so there is nothing to bring to the dock.')
+                return result
+            if not dock:
+                result.update(action='unknown', reply='This mission was planned without a dock; use return home or land instead.')
+                return result
+            result.update(needs_confirmation=True, proposal={'kind': 'return_to_dock', 'dock': dock, 'mission': run.get('id')},
+                          reply=f'End the mission on dock {dock} and charge? Confirm to start the docking approach.')
+            return result
         if intent['action'] == 'compose_audit':
             from app import mission_wizard
             try:
@@ -143,6 +157,24 @@ class Assistant:
             reply = (f"Model {model.get('state', 'unknown')}. " + (f"Mission {run.get('state')}: {run.get('plan', {}).get('instruction', '')[:80]}" if run else 'No mission running.')
                      + (' Exploration flight running.' if self.launcher.active else ''))
             return {'busy': s.get('busy'), 'model': model, 'mission_state': run.get('state'), 'exploration': self.launcher.status()}, reply
+        if action == 'dock_status':
+            docks = getattr(self.runtime, 'docks', None)
+            clients = getattr(self.runtime, 'dock_clients', {}) or {}
+            rows = []
+            for entry in (docks.list() if docks else []):
+                dock = entry['dock']; client = clients.get(dock['id'])
+                status = await client.status() if client else None
+                rows.append({'id': dock['id'], 'name': dock['name'], 'place_id': dock['place_id'], 'status': status})
+            run = getattr(self.runtime, 'run', None) or {}
+            docking = run.get('docking')
+            if not rows:
+                return {'docks': [], 'docking': docking}, 'No dock is registered yet.'
+            parts = []
+            for r in rows:
+                s = r['status']
+                parts.append(f"{r['name']}: " + ('no controller connection' if s is None else
+                             (f"{'docked, ' if s['contact'] else 'empty, '}mode {s['mode']}" + (f", fault {s['fault']}" if s['fault'] else ''))))
+            return {'docks': rows, 'docking': docking}, '; '.join(parts) + '.'
         if action == 'start_model':
             if hasattr(self.model, 'start'):
                 await self.model.start()
@@ -194,6 +226,11 @@ class Assistant:
 
     async def confirm(self, proposal):
         async with self.lock:
+            if isinstance(proposal, dict) and proposal.get('kind') == 'return_to_dock':
+                run = getattr(self.runtime, 'run', None) or {}
+                if not getattr(self.runtime, 'busy', False) or run.get('id') != proposal.get('mission'):
+                    raise RuntimeError('That mission is no longer flying')
+                return await self.runtime.stop(dock=True)
             if not isinstance(proposal, dict) or proposal.get('kind') != 'start_exploration':
                 raise ValueError('Nothing to confirm')
             self.runtime.available()

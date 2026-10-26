@@ -2,7 +2,7 @@ const $=id=>document.getElementById(id);
 async function post(path,body){const r=await fetch(path,{method:'POST',headers:{'Content-Type':'application/json','X-Drone137-Control':'local'},body:JSON.stringify(body)});const x=await r.json();if(!r.ok)throw Error(x.error||r.status);return x;}
 function show(reply,proposal){
  $('ask-reply').textContent=reply||'';const box=$('ask-confirm');box.replaceChildren();box.hidden=!proposal;
- if(proposal){const b=document.createElement('button');b.textContent=`Confirm: map seed ${proposal.seed} as ${proposal.place}`;b.onclick=async()=>{b.disabled=true;try{const st=await post('/api/assistant/confirm',{proposal:{kind:'start_exploration',...proposal}});show('Exploration started; progress is shown in Start here.');document.dispatchEvent(new CustomEvent('drone137-exploration',{detail:st}));}catch(e){show(e.message);}};const c=document.createElement('button');c.textContent='Cancel';c.onclick=()=>show('');box.append(b,c);}
+ if(proposal){const b=document.createElement('button');b.textContent=proposal.kind==='return_to_dock'?`Confirm: return to dock ${proposal.dock} and charge`:`Confirm: map seed ${proposal.seed} as ${proposal.place}`;b.onclick=async()=>{b.disabled=true;try{const st=await post('/api/assistant/confirm',{proposal:{kind:'start_exploration',...proposal}});show('Exploration started; progress is shown in Start here.');document.dispatchEvent(new CustomEvent('drone137-exploration',{detail:st}));}catch(e){show(e.message);}};const c=document.createElement('button');c.textContent='Cancel';c.onclick=()=>show('');box.append(b,c);}
 }
 async function ask(){
  const text=$('ask-text').value.trim();if(!text)return;$('ask-send').disabled=true;show('Interpreting…');

@@ -31,6 +31,8 @@ def make_recon_app(recon):
         old_available()
     fleet.available = legacy_available
     install_missions(app, missions, old_available)
+    from app.dock_api import install as install_docks
+    install_docks(app, missions.docks, clients=missions.dock_clients, runtime=missions, current_pose=missions.current_pose)
 
     async def startup(app):
         import asyncio

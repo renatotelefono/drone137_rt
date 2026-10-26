@@ -9,12 +9,33 @@
       "capability": "explore",
       "starts_from": "Unknown space, no saved map",
       "produces": "Occupancy map, observation images at each station, return to launch",
-      "gate": {"minimum_free_space_coverage": 0.8, "maximum_false_free_fraction": 0.05, "maximum_contacts": 0, "requires_landing": true, "requires_persisted_place_and_evidence": true},
+      "gate": {
+        "minimum_free_space_coverage": 0.8,
+        "maximum_false_free_fraction": 0.05,
+        "maximum_contacts": 0,
+        "requires_landing": true,
+        "requires_persisted_place_and_evidence": true
+      },
       "fields": [
-        {"id": "place", "label": "Place name", "type": "text", "required": true},
-        {"id": "seed", "label": "Simulated layout seed", "type": "integer", "required": true, "note": "Simulation only; a real flight uses the paired aircraft instead"}
+        {
+          "id": "place",
+          "label": "Place name",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "seed",
+          "label": "Simulated layout seed",
+          "type": "integer",
+          "required": true,
+          "note": "Simulation only; a real flight uses the paired aircraft instead"
+        }
       ],
-      "launch": {"path": "explore", "status": "simulation", "note": "Flies the blind exploration mission in the simulator from this console. On hardware this becomes the first flight after commissioning."}
+      "launch": {
+        "path": "explore",
+        "status": "simulation",
+        "note": "Flies the blind exploration mission in the simulator from this console. On hardware this becomes the first flight after commissioning."
+      }
     },
     {
       "id": "audit",
@@ -23,12 +44,34 @@
       "capability": "seek",
       "starts_from": "Known floor plan",
       "produces": "A verdict per listed item with image evidence and a located position",
-      "gate": {"target_verified_in_two_views": true, "maximum_localization_error_m": 0.75, "requires_landing": true},
+      "gate": {
+        "target_verified_in_two_views": true,
+        "maximum_localization_error_m": 0.75,
+        "requires_landing": true
+      },
       "fields": [
-        {"id": "targets", "label": "Items to find", "type": "list", "required": true, "supported": ["red fire extinguisher"], "note": "Only the qualified target can be flown today; other items are recorded as unsupported"},
-        {"id": "area", "label": "Inspection area", "type": "area", "required": true}
+        {
+          "id": "targets",
+          "label": "Items to find",
+          "type": "list",
+          "required": true,
+          "supported": [
+            "red fire extinguisher"
+          ],
+          "note": "Only the qualified target can be flown today; other items are recorded as unsupported"
+        },
+        {
+          "id": "area",
+          "label": "Inspection area",
+          "type": "area",
+          "required": true
+        }
       ],
-      "launch": {"path": "mission", "status": "simulation", "note": "Composes the brief, then the reviewed plan is launched as today. The qualified target is the red fire extinguisher."}
+      "launch": {
+        "path": "mission",
+        "status": "simulation",
+        "note": "Composes the brief, then the reviewed plan is launched as today. The qualified target is the red fire extinguisher."
+      }
     },
     {
       "id": "watch",
@@ -37,12 +80,44 @@
       "capability": "seek",
       "starts_from": "Known map with a completed earlier visit as baseline",
       "produces": "A list of changes against the baseline; nothing changed is a valid result",
-      "gate": {"baseline_visit_required": true, "maximum_false_change_fraction": 0.05, "requires_landing": true},
+      "gate": {
+        "baseline_visit_required": true,
+        "maximum_false_change_fraction": 0.05,
+        "requires_landing": true,
+        "dock_contact_required_when_dock_given": true
+      },
       "fields": [
-        {"id": "place", "label": "Place", "type": "place", "required": true},
-        {"id": "baseline", "label": "Baseline visit", "type": "visit", "required": true}
+        {
+          "id": "place",
+          "label": "Place",
+          "type": "place",
+          "required": true
+        },
+        {
+          "id": "baseline",
+          "label": "Baseline visit",
+          "type": "visit",
+          "required": true
+        },
+        {
+          "id": "dock",
+          "label": "Dock to return to",
+          "type": "dock",
+          "required": false
+        },
+        {
+          "id": "sortie_every_min",
+          "label": "Sortie every (minutes)",
+          "type": "minutes",
+          "required": false,
+          "default": 60
+        }
       ],
-      "launch": {"path": "none", "status": "planned", "note": "Needs the map of an earlier visit reused on the next one, which is the next software item. The console proposes it and records the request; it cannot fly it yet."}
+      "launch": {
+        "path": "none",
+        "status": "planned",
+        "note": "Needs the map of an earlier visit reused on the next one, which is the next software item. The console proposes it and records the request; it cannot fly it yet. With a registered dock, each sortie ends on the dock and the next one starts when the dock reports a full cell (docs/docking.md)."
+      }
     },
     {
       "id": "find",
@@ -51,11 +126,24 @@
       "capability": "explore+seek",
       "starts_from": "Unknown space, time-critical",
       "produces": "Target position and image before full coverage",
-      "gate": {"target_verified_in_two_views": true, "maximum_contacts": 0, "requires_landing": true},
+      "gate": {
+        "target_verified_in_two_views": true,
+        "maximum_contacts": 0,
+        "requires_landing": true
+      },
       "fields": [
-        {"id": "target", "label": "What to find", "type": "text", "required": true}
+        {
+          "id": "target",
+          "label": "What to find",
+          "type": "text",
+          "required": true
+        }
       ],
-      "launch": {"path": "none", "status": "planned", "note": "Combines both capabilities in one flight. Not implemented; proposed so the demand is recorded."}
+      "launch": {
+        "path": "none",
+        "status": "planned",
+        "note": "Combines both capabilities in one flight. Not implemented; proposed so the demand is recorded."
+      }
     }
   ]
 }

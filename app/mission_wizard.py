@@ -16,7 +16,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 TEMPLATES = ROOT/'config/mission-templates.json'
 LAUNCH_PATHS = ('mission', 'explore', 'none')
-FIELD_TYPES = ('text', 'integer', 'list', 'area', 'place', 'visit')
+FIELD_TYPES = ('text', 'integer', 'list', 'area', 'place', 'visit', 'dock', 'minutes')
 
 
 def load_templates(path=TEMPLATES):

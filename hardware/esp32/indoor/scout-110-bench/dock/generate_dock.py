@@ -13,7 +13,7 @@ N = 64  # points per ring; a multiple of 8 so the square corners are exact
 
 P = dict(pocket=150., run=25., slope_deg=30., wall=3., floor_z=25., floor_t=3.,
          boss_d=8., boss_h=4., pin_d=2., pin_y=9., pin_travel=2.5,
-         board_w=140., board_t=3., board_h=240., board_foot=100., tags=((40., 82.), (40., 142.), (80., 195.)),   # (size, centre above table)
+         board_w=140., board_t=3., board_h=240., board_foot=100., tags=((40., 82.), (40., 142.), (60., 205.)),   # (size, centre above table); quiet zones must not overlap
          camera_z=82., camera_y=12., strip_x=14., strip_w=6., strip_l=28.)
 P['top'] = P['floor_z'] + P['run']*math.tan(math.radians(P['slope_deg']))
 P['opening'] = P['pocket'] + 2*P['run']
@@ -160,6 +160,9 @@ if __name__ == '__main__':
         tag_column=dict(family='tag36h11', tags_size_and_centre_above_table_mm=[list(t) for t in P['tags']], plane_y_from_dock_centre_mm=P['outer']/2+P['board_foot']),
         tag_view=tag_view(),
         scope='Nominal geometry from the STL files; print fit, slide friction and contact wear unmeasured')
+    spans = sorted((z - size/2 - size/8, z + size/2 + size/8) for size, z in P['tags'])   # black border plus one-cell quiet zone
+    checks['tag_quiet_zone_gaps_mm'] = [round(b[0] - a[1], 1) for a, b in zip(spans, spans[1:])]
+    assert all(gap > 0 for gap in checks['tag_quiet_zone_gaps_mm']) and spans[-1][1] <= P['floor_z'] + P['board_h'] and spans[0][0] >= P['floor_z'], checks['tag_quiet_zone_gaps_mm']
     assert not checks['tag_view']['coverage_gaps_mm'] and checks['tag_view']['descent_covered_above_docked_mm'] >= 120 and checks['tag_view']['docked_height_covered'], checks['tag_view']
     assert checks['pocket_clearance_per_side_mm'] > 0.5 and 0.5 <= checks['pin_compression_mm'] <= P['pin_travel'] and checks['boss_top_below_cradle_mm'] >= 0.5, checks
     (HERE/'clearance-checks.json').write_text(json.dumps(checks, indent=2))

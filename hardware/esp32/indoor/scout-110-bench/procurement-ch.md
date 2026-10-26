@@ -70,7 +70,7 @@ One dock per aircraft. Geometry and wiring are in `dock/README.md`.
 | NTC 10 kΩ, insulated leads, pack of 25 | 1 | [Distrelec, Vishay NTCLE413E2103F520L](https://www.distrelec.ch/en/p/30438838) | 25.81 | 4125 in stock | One per dock; the pack lasts |
 | Logic-level P-MOSFET, 5 V switch | 1 | Any AO3401A or IRLML6402 from the same JLCPCB run, or a Bastelgarage MOSFET module | about 2 | — | — |
 | PETG, 1 kg | 1 | Bastelgarage eSun was out of stock in all colours on 25 Oct; any PETG | about 14 | — | About 150 g per dock at 15 % infill plus about 60 g for the stand |
-| AprilTags | 3 | Print from [apriltag-imgs, tag36h11](https://github.com/AprilRobotics/apriltag-imgs/tree/master/tag36h11) at 40, 40 and 80 mm | 0 | — | ids 3k, 3k+1, 3k+2 for dock k |
+| AprilTags | 3 | Print from [apriltag-imgs, tag36h11](https://github.com/AprilRobotics/apriltag-imgs/tree/master/tag36h11) at 40, 40 and 60 mm | 0 | — | ids 3k, 3k+1, 3k+2 for dock k |
 | 5 V supply | 1 | The 45 W or 65 W PD supply from the bench list | — | — | One per dock |
 | Version 2 only: Qi transmitter and receiver pair, 5 V 1 A | 1 | [Bastelgarage Wireless Charging Modul](https://www.bastelgarage.ch/wireless-charging-modul-5v-1a) | 10.90 | In stock | Receiver coil under the battery cradle feeds the same J18 / J19 pads; adds about 5 g to the aircraft |
 

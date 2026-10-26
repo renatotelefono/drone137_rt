@@ -1,0 +1,35 @@
+Shop,Item,Part of,Qty,Unit price,Currency,Line total,Stock on 26 Oct 2026,Link
+Bastelgarage,MPU-6050 (GY-521),Aircraft,1,10.90,CHF,10.90,In stock,https://www.bastelgarage.ch/mpu-6050-3-axis-accelerometer-with-gyroscope
+Bastelgarage,"M2 nylon screws, nuts, spacers, 260 pcs",Aircraft,1,14.90,CHF,14.90,In stock,https://www.bastelgarage.ch/sechskant-m2-distanzbolzen-abstandhalter-nylon-260-stuck
+Bastelgarage,"M2 x 5 stainless screws, 10 pcs",Aircraft,1,3.90,CHF,3.90,In stock,https://www.bastelgarage.ch/10-stuck-m2x5mm-linsenkopfschrauben-set-rostfrei
+Bastelgarage,"M2 stainless nuts, 10 pcs",Aircraft,1,2.90,CHF,2.90,In stock,https://www.bastelgarage.ch/10-stuck-m2-mutter-set-rostfrei
+Bastelgarage,"Two-core 0.25 mm2 cable, per metre",Aircraft,3,0.95,CHF,2.85,In stock,https://www.bastelgarage.ch/kabel-2x0-25mm-awg24-grau-liyy
+Bastelgarage,"Heat-shrink set, 140 pcs",Aircraft,1,14.90,CHF,14.90,In stock,https://www.bastelgarage.ch/schrumpfschlauch-set-schwarz-140-stuck-total-7-6m
+Bastelgarage,"Copper tape 20 mm, 10 m",Aircraft and dock,1,14.90,CHF,14.90,In stock,https://www.bastelgarage.ch/20mm-kupferklebeband-10m
+Bastelgarage,"PETG 1.75 mm, 1 kg, grey",Aircraft and dock,1,13.90,CHF,13.90,In stock,https://www.bastelgarage.ch/petg-grau-filament-1-75mm-1kg-esun
+Bastelgarage,XIAO ESP32-C3,Dock,1,9.90,CHF,9.90,In stock,https://www.bastelgarage.ch/seeed-studio-xiao-esp32-c3
+Bastelgarage,"USB-C socket breakout, 6-pin with CC resistors",Dock,1,4.90,CHF,4.90,In stock,https://www.bastelgarage.ch/usb-typ-c-buchse-breakout-board
+Bastelgarage,INA219 current and voltage sensor,Dock,1,12.90,CHF,12.90,In stock,https://www.bastelgarage.ch/gravity-ina219-i2c-digitales-wattmeter
+Bastelgarage,IRF520 MOSFET module,Dock,1,3.90,CHF,3.90,In stock,https://www.bastelgarage.ch/irf520-mosfet-treiber-modul
+Bastelgarage,"USB-C soldering iron 60 W, Yihua 928D-IV",Bench,1,34.90,CHF,34.90,In stock,https://www.bastelgarage.ch/yihua-928d-iv-usb-c-lotkolben-60w
+Bastelgarage,"Solder 0.5 mm lead-free, 50 g",Bench,1,14.90,CHF,14.90,In stock,https://www.bastelgarage.ch/atten-lotzinn-bleifrei-0-5mm-50g
+Bastelgarage,USB-C data cable 1 m,Bench,1,8.90,CHF,8.90,In stock,https://www.bastelgarage.ch/usb-3-0-typ-c-kabel-1m-schwarz
+Distrelec,"C1 470 uF 10 V, Panasonic EEUEB1A471, pack of 5",Aircraft,1,3.68,CHF,3.68,195 in stock,https://www.distrelec.ch/en/p/30429110
+Distrelec,"C2 47 uF 16 V, Panasonic EEUFC1C470, pack of 5",Aircraft,1,1.83,CHF,1.83,1190 in stock,https://www.distrelec.ch/en/p/30429714
+Distrelec,"100 nF 50 V leaded ceramic, KEMET C320C104M5U5TA7301",Aircraft,10,0.041,CHF,0.41,12916 in stock,https://www.distrelec.ch/en/p/16572671
+Distrelec,Spring contact PTR 1060/G-A6X-3.0N-AU-3.0C,Dock,1,6.49,CHF,6.49,23 in stock,https://www.distrelec.ch/en/p/30019746
+Distrelec,"NTC 10 kOhm, Vishay NTCLE413E2103F520L, pack of 25",Dock,1,25.81,CHF,25.81,4125 in stock,https://www.distrelec.ch/en/p/30438838
+Galaxus,"InLine USB-C PD supply 65 W, 3 ports",Bench and dock,2,26.50,CHF,53.00,8 in stock,https://www.galaxus.ch/de/s1/product/inline-usb-pd-netzteil-65-w-usb-ladegeraet-37345173
+Galaxus,Purecrea MH-500 precision scale 0.01 g,Bench,1,25.90,CHF,25.90,In stock,https://www.galaxus.ch/en/s12/product/purecrea-mh-500-precision-scales-54993706
+Galaxus,Uni-T UT139C multimeter,Bench,1,45.50,CHF,45.50,9 in stock,https://www.galaxus.ch/de/s4/product/uni-t-ut139c-cat-iii-600v-hand-multimeter-multimeter-34370475
+Galaxus,"Velcro cable ties 200 mm, 6 pcs",Aircraft,1,5.25,CHF,5.25,5 in stock,https://www.galaxus.ch/de/s4/product/velcro-brand-klettband-klettkabelbinder-200-mm-6-stk-kabelbinder-14958774
+fpvracing.ch,"BETAFPV Lava II 480 mAh 1S 95C BT2.0, 4-pack",Aircraft,1,28.90,CHF,28.90,In stock,https://fpvracing.ch/en/1s/4197-betafpv-lava-ii-480mah-1s-95c-bt20-4-pcs.html
+fpvracing.ch,"BT2.0 U-pigtails, 6 pcs",Aircraft,1,7.90,CHF,7.90,In stock,https://fpvracing.ch/en/connectivity/4261-bt20-u-pigtail.html
+fpvframe.ch,"VIFLY WhoopStor 3 charger, BT2.0, 4.20 V",Bench,1,30.00,CHF,30.00,1 left,https://fpvframe.ch/product/vifly-whoopstor-3/
+FlyingTech UK (alternative),VIFLY WhoopStor V3 charger,Bench,0,27.90,GBP,0.00,In stock,https://www.flyingtech.co.uk/product/vifly-whoopstor-v3-1s-lipo-battery-charger-discharger-ph2-bt2-0/
+DigiKey.ch,"XIAO ESP32-S3 Sense, Seeed 113991115",Aircraft,1,12.44,CHF,12.44,3117 in stock,https://www.digikey.ch/en/products/detail/seeed-technology-co-ltd/113991115/18724504
+Unmanned Tech UK,"8520 coreless motors, 2 CW + 2 CCW, 1.0 mm shaft",Aircraft,1,6.49,GBP,6.49,Available,https://www.unmannedtechshop.co.uk/products/8520-coreless-brushed-motor-pack-2-x-cw-2-x-ccw
+RaceDayQuads US,"Gemfan 65 mm bi-blade props, 1.0 mm shaft, 8-pack, grey",Aircraft,2,3.49,USD,6.98,Available,https://www.racedayquads.com/products/gemfan-65mm-bi-blade-2-5-prop-8-pack-1mm-shaft-choose-your-color
+JLCPCB,"Carrier PCB prototype B, assembled, 5 pcs",Aircraft,1,60.00,CHF,60.00,Order after KiCad regeneration,https://jlcpcb.com/
+AprilRobotics (print yourself),"AprilTags tag36h11, 40, 40 and 60 mm",Dock,3,0.00,CHF,0.00,Print,https://github.com/AprilRobotics/apriltag-imgs/tree/master/tag36h11
+Seeed Studio (optional),ESP-FLY bench kit,Bench platform,1,59.99,USD,59.99,Not verified (bot check),https://www.seeedstudio.com/ESP-FLY-co-create-p-6744.html

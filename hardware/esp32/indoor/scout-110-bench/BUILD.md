@@ -1,111 +1,188 @@
-# Building the Drone137 prototype: Scout 110-B, dock A and the bench
+# Drone137 prototype build brief
 
-One page for the person who orders the parts and builds the first unit. The detailed
-documents stay where they are: `builder-brief.md` (what the aircraft is for),
-`assembly.md` (step by step, carrier wiring), `dock/README.md` (the dock),
-`procurement-ch.md` (every link checked on 25 October 2026), `../../../../docs/docking.md`
-(how the aircraft lands on the dock). Prices are CHF unless marked; links were opened on
-25 October 2026 and stock changes daily.
+Scout 110-B aircraft, dock A, and the bench. For the person who orders the parts and builds
+the first unit. Every link in the parts table was opened on 26 October 2026 and showed the
+stock stated; the same table is in `parts-ch.csv` for a spreadsheet. Prices are CHF including
+VAT unless marked.
 
-## What the prototype is
+## 1. What Drone137 is
 
-| Part of the system | What it is | Made of |
+Drone137 is an autonomous indoor reconnaissance system: a small aircraft flies inside a
+building, maps it, looks for what it was asked to find, and brings back evidence, with a
+local vision model as the brain and no connection to the Internet. The product is defined by
+four mission clusters an operator picks from a wizard:
+
+| Cluster | Question | Today |
 | --- | --- | --- |
-| Scout 110-B | A 148 mm guarded quadcopter with one forward camera that flies indoor reconnaissance missions commanded by the ground computer | Printed PETG frame, four 8520 brushed motors, 65 mm props, one 1S 480 mAh cell, a 42 × 40 mm carrier PCB, a XIAO ESP32-S3 Sense (camera, Wi-Fi), an MPU-6050 IMU |
-| Dock A | A landing base: the aircraft lands in a funnel, slides to the centre, and charges through two copper foot strips and one spring pin | Printed PETG body and tag stand, three AprilTags, a XIAO ESP32-C3, a current sensor, a 5 V switch, a thermistor, a USB-C 5 V supply |
-| Ground computer | Runs everything else: navigation, mapping, the local vision model, the mission console, the docking controller | The Apple-silicon Mac already in use (16 GB); nothing leaves the site |
+| Map | What is the layout of this place? | Flies in simulation |
+| Audit | Are the listed items where they should be? | Flies in simulation for the qualified target |
+| Watch | What changed since the last visit? | Planned |
+| Find | Where is this thing, in an unknown layout? | Planned |
 
-## Specification
+The design decision that shapes the hardware: all intelligence is on the ground computer. The
+aircraft carries a camera, an IMU, a Wi-Fi link and an attitude loop, nothing else. The ground
+computer runs navigation, mapping, the model, the mission and the docking approach, and sends
+roll, pitch, yaw rate and collective over a pinned link; if the link stops, the aircraft lands
+on its own. That is why the aircraft is cheap and light, why no pilot is needed, and why
+nothing leaves the site.
 
-| Item | Scout 110-B | Dock A |
+The dock turns it into a product. With dock A the aircraft lands in a funnel, charges through
+two copper strips and a spring pin, and takes off again on schedule, so the Watch cluster
+becomes unattended sorties. The dock pose is also the origin of the place map: every landing
+closes the navigation loop.
+
+The software side of all of this exists and is gated in simulation: 24 of 24 missions, 11 of
+13 blind exploration flights, 20 of 20 dockings on the physics plant, every mission plan with a
+memory estimate, and a manual stick mode for commissioning. What does not exist is a flown
+airframe. This brief is the step from software to hardware.
+
+## 2. What the prototype consists of
+
+| Part of the system | What it is | Why it is built this way |
 | --- | --- | --- |
-| Size | 110 mm motor to motor, 148 mm over the guards, 64 mm tall | Body 206 × 206 × 39 mm; pocket 150 mm square; tag stand 140 × 240 mm standing 100 mm in front of the body |
-| Mass | 63 g all-up in the simulation profile; printed parts about 25 g; measure before the first hover | About 150 g body and 60 g stand at 15 % infill |
-| Power | 1S Li-Po 480 mAh, BT2.0, charged to 4.20 V; about 5 to 7 minutes of flight | 5 V from a USB-C PD supply; charge current up to 500 mA on the aircraft, about 1.5 h for a full charge |
-| Propulsion | Four 8520 coreless motors, 1.0 mm shafts, PWM 24 kHz on GPIO 1, 2, 4, 7; 65 mm two-blade props | — |
-| Sensors | OV2640 camera forward, pitched 10° down, VGA JPEG at 2.5 Hz; MPU-6050 on GPIO 5 and 6 at 25 Hz or better; battery voltage on GPIO 9 | INA219 current and voltage on the 5 V line; NTC 10 kΩ under the floor |
-| Control board | XIAO ESP32-S3 Sense; onboard attitude loop; ground sends roll, pitch, yaw rate, collective, each valid 250 ms | XIAO ESP32-C3 switching the 5 V, serving `/status` and `/mode` |
-| Charging | Carrier prototype B: PTC 0.5 A, MCP73831-2 at 500 mA, STAT to GPIO 3; copper disc under the cradle at (0, +9 mm) and copper caps on the two feet at x = +14 mm | Spring pin at (0, +9 mm) on a 4 mm boss; copper strips 6 × 28 mm at x = ±14 mm; cuts 5 V above 0.7 A, 45 °C or 3 h |
-| Capture | Lands within ±20 mm and 5° by the tags; the funnel takes the rest | 30° funnel walls capture ±25 mm; yaw locks to multiples of 90° |
-| Tags | — | tag36h11, ids 3k, 3k+1, 3k+2 for dock k: 40 mm at 82 and 142 mm, 60 mm at 205 mm above the table |
-| Link | Pinned HTTPS on a private Wi-Fi, per-device certificate and pairing credential, separate camera, control and emergency ports | Same scheme, status and mode only |
-| Software gates met in simulation | Blind exploration 11 of 13 flights; missions 24 of 24; docking 20 of 20 on the Rapier plant (worst 12 mm) | — |
+| Scout 110-B | A 148 mm guarded quadcopter, brushed 1S, one forward camera | Smallest airframe that carries the camera board, flies 5 to 7 minutes and survives indoor contact; brushed motors need no speed controllers, so the carrier is four transistors |
+| Dock A | A printed funnel base with contact charging and a tag stand | Contact charging adds under 1 g to the aircraft; the funnel takes a 25 mm landing error; the tag column is what the forward camera steers by in the last metre |
+| Bench | Charger, scale, multimeter, iron | The first unit is commissioned on the bench: measured masses go into the registry and the physics model before any hover |
+| Ground computer | The Mac already in use | Runs everything; 16 GB today, 8 GB reachable, see the memory page in the docs |
 
-## Build sequence
+## 3. Scout 110-B specification
 
-1. **Order the long-lead parts today.** XIAO ESP32-S3 Sense (DigiKey, four-week lead; every Swiss shop was out), 8520 motors (UK), 65 mm 1.0 mm-hub props (US only), the spring contact (Distrelec, to order). Everything else is in Swiss stock.
-2. **Regenerate the carrier for prototype B** with KiCad 10 on a machine that has it: `generate_carrier.py`, `generate_schematic.py`, ERC, DRC, `check_carrier.py`, then refresh `carrier/provenance.json`. Order five assembled boards at JLCPCB (two to three weeks). The committed Gerbers are still prototype A, without the charge path.
-3. **Print** the five Scout parts (`mechanics/*.stl`, PETG, 0.2 mm layers, 3 walls, 25 % infill) and the dock body and stand (`dock/*.stl`, 15 % infill). The dock body needs a 220 mm bed; the stand prints flat.
-4. **Bench first.** Charge the cells to 4.20 V, weigh every part on the 0.01 g scale, enter the measured masses in the component registry, and rerun the physics model before any hover. Meanwhile the Seeed ESP-FLY kit lets the firmware and the link be exercised on a flying board while the Scout parts ship.
-5. **Assemble the Scout** per `assembly.md`: motors in the bores, carrier on the four M2 mounts, XIAO and IMU rigid on the bridge, battery cradle strapped under the plate, motor leads with a 100 nF across each motor, charge contacts wired to J18 and J19, STAT to J20.
-6. **Flash and pair.** Build target `esp32:esp32:XIAO_ESP32S3:PSRAM=opi`; pair over the pinned link; check motor direction, IMU axes, camera frames and the battery reading from the console.
-7. **Assemble the dock** per `dock/README.md`: ream the pin hole to the pin barrel, lay the copper strips, fit the electronics in the bay, glue the tags centred at 82, 142 and 205 mm, tape the stand's foot against the dock's front wall. Place the Scout by hand and confirm 5 V at J18 and a charge current on the INA219.
-8. **Commission.** Restrained hover in the bench enclosure, then first flights, then docking: first by hand into the funnel from 50 mm off-centre, then the guided descent from the hover point, then the full approach. Keep every recording.
+| Item | Value |
+| --- | --- |
+| Size | 110 mm motor to motor, 148 mm over the guards, 64 mm tall |
+| Mass | 63 g all-up in the simulation profile; printed parts about 25 g; measure before the first hover |
+| Frame | Five printed PETG parts: frame with guards, electronics bridge, camera cradle, IMU tray, battery cradle (`mechanics/*.stl`) |
+| Motors | Four 8520 coreless, 1.0 mm shafts, PWM 24 kHz on GPIO 1, 2, 4, 7; direction set by wiring |
+| Props | 65 mm two-blade, 1.0 mm hub |
+| Power | BETAFPV Lava II 480 mAh 1S, BT2.0 plug, charged to 4.20 V; about 5 to 7 minutes of flight |
+| Board | XIAO ESP32-S3 Sense: camera forward pitched 10° down, Wi-Fi, onboard attitude loop |
+| IMU | MPU-6050 on GPIO 5 and 6, mounted rigid with the camera |
+| Carrier PCB | 42 × 40 mm, two layers, 2 oz copper: four AO3400A motor drivers with SS34 diodes, 470 µF and 47 µF bulk capacitors, 100 nF across each motor, battery divider to GPIO 9; prototype B adds the charge path: PTC 0.5 A, MCP73831 at 500 mA, STAT on GPIO 3 |
+| Dock contacts | Copper disc under the battery cradle at (0, +9 mm); copper caps on the two feet at x = +14 mm |
+| Link | Pinned HTTPS on the private Wi-Fi, per-aircraft certificate and credential, separate camera, control and emergency ports; VGA JPEG at 2.5 Hz, IMU at 25 Hz or better |
+| Control contract | Roll and pitch ±0.26 rad, yaw rate ±1 rad/s, collective 0.8, each valid 250 ms; missing setpoints start the landing ramp |
 
-## Shopping list, checked 26 October 2026
+## 4. Dock A specification
 
-Every link below was opened on 26 October 2026 and showed the stated stock. Prices include VAT
-unless marked. Seeed Studio and GetFPV sit behind a bot check and could not be re-read; the
-alternatives given for them were verified.
+| Item | Value |
+| --- | --- |
+| Body | 206 × 206 × 39 mm printed PETG, 150 mm square pocket, 30° funnel walls capturing ±25 mm, electronics bay underneath |
+| Contacts | Spring pin at (0, +9 mm) on a 4 mm boss; copper strips 6 × 28 mm at x = ±14 mm |
+| Tag stand | L-shaped plate 140 × 240 mm standing 100 mm in front of the body; tag36h11 tags of 40, 40 and 60 mm at 82, 142 and 205 mm above the table |
+| Electronics | XIAO ESP32-C3 serving `/status` and `/mode`; INA219 on the 5 V line; IRF520 switch; NTC under the floor; USB-C 5 V in |
+| Rules | Cuts 5 V above 0.7 A, 45 °C or 3 h; charge, storage and off modes; the ground computer sets the mode |
 
-### Aircraft, about CHF 170 including the PCB run
+## 5. Why each component
 
-| # | Part | Qty | Buy | Price CHF | Stock 26 Oct |
-| ---: | --- | ---: | --- | ---: | --- |
-| 1 | XIAO ESP32-S3 Sense, Seeed 113991115 | 1 | [DigiKey.ch 1597-113991115-ND](https://www.digikey.ch/en/products/detail/seeed-technology-co-ltd/113991115/18724504) | 12.44 | 3117 in stock; ships to CH, free over CHF 70 |
-| 2 | GY-521 MPU-6050 | 1 | [Bastelgarage](https://www.bastelgarage.ch/mpu-6050-3-axis-accelerometer-with-gyroscope) | 10.90 | In stock |
-| 3 | 8520 motors, 2 CW + 2 CCW, 1.0 mm shaft | 1 pack | [Unmanned Tech UK](https://www.unmannedtechshop.co.uk/products/8520-coreless-brushed-motor-pack-2-x-cw-2-x-ccw) | GBP 6.49 | Available; Swiss shops out |
-| 4 | Gemfan 65 mm bi-blade props, 1.0 mm shaft, 8-pack | 2 packs | [RaceDayQuads US](https://www.racedayquads.com/products/gemfan-65mm-bi-blade-2-5-prop-8-pack-1mm-shaft-choose-your-color) | USD 3.49 each | Grey available; no Swiss or EU shop stocks a 1.0 mm hub |
-| 5 | BETAFPV Lava II 480 mAh 1S 95C BT2.0, 4-pack | 1 | [fpvracing.ch](https://fpvracing.ch/en/1s/4197-betafpv-lava-ii-480mah-1s-95c-bt20-4-pcs.html) | 28.90 | In stock |
-| 6 | BT2.0 U-pigtails, 6 pcs | 1 | [fpvracing.ch](https://fpvracing.ch/en/connectivity/4261-bt20-u-pigtail.html) | 7.90 | In stock |
-| 7 | Carrier PCB prototype B, assembled | 5 | [JLCPCB](https://jlcpcb.com/) from the regenerated Gerbers | about 60 | After the KiCad regeneration |
-| 8 | C1 470 µF 10 V, 6.3 mm body, Panasonic EEUEB1A471 | 1 pack of 5 | [Distrelec 304-29-110](https://www.distrelec.ch/en/p/30429110) | 3.68 | 195 in stock |
-| 9 | C2 47 µF 16 V, 5 mm body, Panasonic EEUFC1C470 | 1 pack of 5 | [Distrelec 304-29-714](https://www.distrelec.ch/en/p/30429714) | 1.83 | 1190 in stock |
-| 10 | 100 nF 50 V leaded ceramic, KEMET C320C104M5U5TA7301 | 10 (min 5) | [Distrelec 165-72-671](https://www.distrelec.ch/en/p/16572671) | 0.41 | 12916 in stock; the Bastelgarage set went out of stock |
-| 11 | M2 nylon screws, nuts and spacers, 260 pcs | 1 | [Bastelgarage](https://www.bastelgarage.ch/sechskant-m2-distanzbolzen-abstandhalter-nylon-260-stuck) | 14.90 | In stock |
-| 12 | M2 × 5 stainless screws, 10 pcs | 1 | [Bastelgarage](https://www.bastelgarage.ch/10-stuck-m2x5mm-linsenkopfschrauben-set-rostfrei) | 3.90 | In stock |
-| 13 | M2 stainless nuts, 10 pcs | 1 | [Bastelgarage](https://www.bastelgarage.ch/10-stuck-m2-mutter-set-rostfrei) | 2.90 | In stock |
-| 14 | Two-core 0.25 mm² (24 AWG) cable, per metre | 3 m | [Bastelgarage](https://www.bastelgarage.ch/kabel-2x0-25mm-awg24-grau-liyy) | 0.95 / m | In stock; the single-colour 100 m rolls are out |
-| 15 | Heat-shrink set, 140 pcs | 1 | [Bastelgarage](https://www.bastelgarage.ch/schrumpfschlauch-set-schwarz-140-stuck-total-7-6m) | 14.90 | In stock |
-| 16 | Velcro cable ties 200 mm, 6 pcs (battery strap) | 1 | [Galaxus](https://www.galaxus.ch/de/s4/product/velcro-brand-klettband-klettkabelbinder-200-mm-6-stk-kabelbinder-14958774) | 5.25 | 5 in stock |
-| 17 | PETG 1.75 mm, 1 kg, grey (frame, cradles, dock) | 1 | [Bastelgarage eSun grey](https://www.bastelgarage.ch/petg-grau-filament-1-75mm-1kg-esun) | 13.90 | In stock; black and white are out |
+- **XIAO ESP32-S3 Sense.** Camera, Wi-Fi and the microcontroller on one 21 × 17 mm board with 8 MB of PSRAM for frames. The ground computer needs only JPEG frames and IMU samples over Wi-Fi, so this one board is the whole avionics.
+- **MPU-6050.** A six-axis IMU for the onboard attitude loop and the ground estimator. At this stage the rigid mount shared with the camera matters more than sensor grade.
+- **8520 motors and 65 mm props.** Brushed 1S propulsion: no speed controllers, the lowest mass and cost, and a modelled thrust-to-weight of 2.2. The 1.0 mm shafts and hubs must match.
+- **Carrier PCB.** Four low-side transistors drive the motors, flyback diodes and bulk capacitors keep the board's supply stable under motor current, 100 nF across each motor tames brush noise, and a divider reads the cell. Prototype B adds the charger so the dock only has to supply 5 V.
+- **Lava II 480 mAh.** A 1S cell with the low-resistance BT2.0 plug, charged to 4.20 V rather than its 4.35 V rating for longevity and safety.
+- **Printed PETG parts.** The geometry will change with measurements; printing keeps the loop short, and PETG tolerates contact.
+- **Nylon M2 hardware.** Non-conductive fasteners around the IMU and the board; steel M2 × 5 only where the camera cradle needs stiffness.
+- **Copper tape, Velcro, cable, heat-shrink.** The dock contacts, the battery strap, the motor and charge leads.
+- **Dock electronics.** The C3 is the cheapest board with Wi-Fi for the status API; the USB-C breakout with its CC resistors makes a PD supply deliver 5 V; the INA219 measures charge current, which is also how the dock knows the aircraft has made contact; the spring pin and the strips are the contacts; the NTC and the MOSFET switch are the safety cut-off.
+- **Bench.** The charger sets 4.20 V; the 0.01 g scale puts measured masses into the component registry before the physics model clears a hover; the multimeter checks the carrier before power; the iron and cable are for the hand-soldered leads and for flashing.
+- **ESP-FLY kit, optional.** A ready-made drone on the same board: firmware, link, console and manual flight can be exercised the week it arrives while the Scout parts ship. No guards, no dock contacts, different motor pins, so it stays a bench tool.
 
-### Dock A, about CHF 100 for the first dock
+## 6. Build sequence
 
-| # | Part | Qty | Buy | Price CHF | Stock 26 Oct |
-| ---: | --- | ---: | --- | ---: | --- |
-| 18 | XIAO ESP32-C3 | 1 | [Bastelgarage](https://www.bastelgarage.ch/seeed-studio-xiao-esp32-c3) | 9.90 | In stock |
-| 19 | USB-C socket breakout with CC pull-downs | 1 | [Bastelgarage](https://www.bastelgarage.ch/usb-typ-c-buchse-breakout-board) | 4.90 | In stock; not the 4-pin version |
-| 20 | INA219 current and voltage sensor | 1 | [Bastelgarage, DFRobot Gravity](https://www.bastelgarage.ch/gravity-ina219-i2c-digitales-wattmeter) | 12.90 | In stock |
-| 21 | Spring contact, PTR 1060/G-A6X-3.0N-AU-3.0C, 28.5 mm | 1 | [Distrelec 300-19-746](https://www.distrelec.ch/en/p/30019746) | 6.49 | 23 in stock; the shorter [PTR 5110](https://www.distrelec.ch/en/p/14022290) is still to order |
-| 22 | Copper tape 20 mm, 10 m | 1 | [Bastelgarage](https://www.bastelgarage.ch/20mm-kupferklebeband-10m) | 14.90 | In stock; also the aircraft's disc and foot caps |
-| 23 | NTC 10 kΩ, Vishay NTCLE413E2103F520L, pack of 25 | 1 | [Distrelec 304-38-838](https://www.distrelec.ch/en/p/30438838) | 25.81 | 4125 in stock |
-| 24 | IRF520 MOSFET module (low-side 5 V switch on the strip return) | 1 | [Bastelgarage](https://www.bastelgarage.ch/irf520-mosfet-treiber-modul) | 3.90 | In stock |
-| 25 | AprilTags tag36h11, 40, 40 and 60 mm, ids 3k, 3k+1, 3k+2 | 3 | Print from [apriltag-imgs](https://github.com/AprilRobotics/apriltag-imgs/tree/master/tag36h11) | 0 | — |
-| 26 | USB-C PD supply 65 W, 3 ports (one per dock) | 1 | [Galaxus InLine](https://www.galaxus.ch/de/s1/product/inline-usb-pd-netzteil-65-w-usb-ladegeraet-37345173) | 26.50 | 8 in stock |
-| 27 | Version 2 only: Qi transmitter and receiver, 5 V 1 A | 1 | [Bastelgarage](https://www.bastelgarage.ch/wireless-charging-modul-5v-1a) | 10.90 | In stock |
+1. Order the long-lead parts today: the XIAO Sense (DigiKey), motors (UK), props (US), and the charger (one left at fpvframe).
+2. Regenerate the carrier for prototype B with KiCad 10 on a machine that has it: `generate_carrier.py`, `generate_schematic.py`, ERC, DRC, `check_carrier.py`, refresh `carrier/provenance.json`. Order five assembled boards at JLCPCB. The committed Gerbers are still prototype A.
+3. Print the five Scout parts (0.2 mm layers, 3 walls, 25 % infill) and the dock body and stand (15 % infill). The dock body needs a 220 mm bed.
+4. Bench first: charge the cells to 4.20 V, weigh every part, enter the masses in the component registry, rerun the physics model before any hover.
+5. Assemble the Scout per `assembly.md`, including the copper charge contacts wired to J18 and J19 and STAT to J20.
+6. Flash the firmware, pair over the pinned link, check motor direction, IMU axes, camera and battery reading from the console, then fly by hand in the restrained enclosure.
+7. Assemble the dock per `dock/README.md`; place the Scout by hand and confirm 5 V and a charge current.
+8. Commission: restrained hover, first flights, then docking by hand, then guided.
 
-### Bench, about CHF 170
+## 7. Parts, by shop
 
-| # | Item | Qty | Buy | Price CHF | Stock 26 Oct |
-| ---: | --- | ---: | --- | ---: | --- |
-| 28 | VIFLY WhoopStor 3 charger, 4.20 V, BT2.0 | 1 | [fpvframe.ch](https://fpvframe.ch/product/vifly-whoopstor-3/) | 28 to 32 | 1 left; [FlyingTech UK](https://www.flyingtech.co.uk/product/vifly-whoopstor-v3-1s-lipo-battery-charger-discharger-ph2-bt2-0/) GBP 27.90 in stock; fpvracing out |
-| 29 | Precision scale 0.01 g / 500 g, Purecrea MH-500 | 1 | [Galaxus](https://www.galaxus.ch/en/s12/product/purecrea-mh-500-precision-scales-54993706) | 25.90 | In stock |
-| 30 | Multimeter Uni-T UT139C | 1 | [Galaxus](https://www.galaxus.ch/de/s4/product/uni-t-ut139c-cat-iii-600v-hand-multimeter-multimeter-34370475) | 45.50 | 9 in stock |
-| 31 | USB-C soldering iron 60 W, Yihua 928D-IV | 1 | [Bastelgarage](https://www.bastelgarage.ch/yihua-928d-iv-usb-c-lotkolben-60w) | 34.90 | In stock; runs from the 65 W PD supply |
-| 32 | Solder 0.5 mm lead-free, 50 g | 1 | [Bastelgarage Atten](https://www.bastelgarage.ch/atten-lotzinn-bleifrei-0-5mm-50g) | 14.90 | In stock |
-| 33 | USB-C data cable 1 m | 1 | [Bastelgarage](https://www.bastelgarage.ch/usb-3-0-typ-c-kabel-1m-schwarz) | 8.90 | In stock |
-| 34 | Optional bench platform: Seeed ESP-FLY kit | 1 | [Seeed Studio](https://www.seeedstudio.com/ESP-FLY-co-create-p-6744.html) | USD 59.99 | Not re-checked; bot check |
+Seven orders is the practical minimum: three Swiss shops, the charger, and three abroad. No single shop carries everything; Galaxus resells most Bastelgarage items at a few francs more if you prefer one Swiss basket.
 
-Totals: aircraft about CHF 170, dock about CHF 100, bench about CHF 170, together about
-CHF 440 plus the optional ESP-FLY kit. The DigiKey order is below the free-shipping line;
-adding the two Distrelec capacitor packs there instead would not change that, so expect
-DigiKey's delivery charge or combine with another DigiKey purchase.
+### Bastelgarage, about CHF 170, free shipping from CHF 50
 
-## What is not yet verified
+| Item | Part of | Qty | CHF | Stock | Link |
+| --- | --- | ---: | ---: | --- | --- |
+| MPU-6050 (GY-521) | Aircraft | 1 | 10.90 | In stock | https://www.bastelgarage.ch/mpu-6050-3-axis-accelerometer-with-gyroscope |
+| M2 nylon screws, nuts, spacers, 260 pcs | Aircraft | 1 | 14.90 | In stock | https://www.bastelgarage.ch/sechskant-m2-distanzbolzen-abstandhalter-nylon-260-stuck |
+| M2 × 5 stainless screws, 10 pcs | Aircraft | 1 | 3.90 | In stock | https://www.bastelgarage.ch/10-stuck-m2x5mm-linsenkopfschrauben-set-rostfrei |
+| M2 stainless nuts, 10 pcs | Aircraft | 1 | 2.90 | In stock | https://www.bastelgarage.ch/10-stuck-m2-mutter-set-rostfrei |
+| Two-core 0.25 mm² cable, per metre | Aircraft | 3 | 0.95 | In stock | https://www.bastelgarage.ch/kabel-2x0-25mm-awg24-grau-liyy |
+| Heat-shrink set, 140 pcs | Aircraft | 1 | 14.90 | In stock | https://www.bastelgarage.ch/schrumpfschlauch-set-schwarz-140-stuck-total-7-6m |
+| Copper tape 20 mm, 10 m | Aircraft and dock | 1 | 14.90 | In stock | https://www.bastelgarage.ch/20mm-kupferklebeband-10m |
+| PETG 1.75 mm, 1 kg, grey | Aircraft and dock | 1 | 13.90 | In stock | https://www.bastelgarage.ch/petg-grau-filament-1-75mm-1kg-esun |
+| XIAO ESP32-C3 | Dock | 1 | 9.90 | In stock | https://www.bastelgarage.ch/seeed-studio-xiao-esp32-c3 |
+| USB-C socket breakout, 6-pin with CC resistors | Dock | 1 | 4.90 | In stock | https://www.bastelgarage.ch/usb-typ-c-buchse-breakout-board |
+| INA219 current and voltage sensor | Dock | 1 | 12.90 | In stock | https://www.bastelgarage.ch/gravity-ina219-i2c-digitales-wattmeter |
+| IRF520 MOSFET module | Dock | 1 | 3.90 | In stock | https://www.bastelgarage.ch/irf520-mosfet-treiber-modul |
+| USB-C soldering iron 60 W, Yihua 928D-IV | Bench | 1 | 34.90 | In stock | https://www.bastelgarage.ch/yihua-928d-iv-usb-c-lotkolben-60w |
+| Solder 0.5 mm lead-free, 50 g | Bench | 1 | 14.90 | In stock | https://www.bastelgarage.ch/atten-lotzinn-bleifrei-0-5mm-50g |
+| USB-C data cable 1 m | Bench | 1 | 8.90 | In stock | https://www.bastelgarage.ch/usb-3-0-typ-c-kabel-1m-schwarz |
 
-Nothing has been printed, soldered or flown. The masses, the slide in the funnel, the
-contact resistance, the charger temperature and the camera mount angle are design
-values until measured on the bench. The carrier Gerbers must be regenerated before the
-PCB order. The dock controller firmware is not written; the dock's electronics are a
-wiring plan with a status API specified in `docs/docking.md`.
+### Distrelec, about CHF 38
+
+| Item | Part of | Qty | CHF | Stock | Link |
+| --- | --- | ---: | ---: | --- | --- |
+| C1 470 µF 10 V, Panasonic EEUEB1A471, pack of 5 | Aircraft | 1 | 3.68 | 195 | https://www.distrelec.ch/en/p/30429110 |
+| C2 47 µF 16 V, Panasonic EEUFC1C470, pack of 5 | Aircraft | 1 | 1.83 | 1190 | https://www.distrelec.ch/en/p/30429714 |
+| 100 nF 50 V leaded ceramic, KEMET C320C104M5U5TA7301 | Aircraft | 10 | 0.41 | 12916 | https://www.distrelec.ch/en/p/16572671 |
+| Spring contact PTR 1060/G-A6X-3.0N-AU-3.0C | Dock | 1 | 6.49 | 23 | https://www.distrelec.ch/en/p/30019746 |
+| NTC 10 kΩ, Vishay NTCLE413E2103F520L, pack of 25 | Dock | 1 | 25.81 | 4125 | https://www.distrelec.ch/en/p/30438838 |
+
+### Galaxus, about CHF 130
+
+| Item | Part of | Qty | CHF | Stock | Link |
+| --- | --- | ---: | ---: | --- | --- |
+| InLine USB-C PD supply 65 W, 3 ports | Bench and dock | 2 | 53.00 | 8 | https://www.galaxus.ch/de/s1/product/inline-usb-pd-netzteil-65-w-usb-ladegeraet-37345173 |
+| Purecrea MH-500 precision scale 0.01 g | Bench | 1 | 25.90 | In stock | https://www.galaxus.ch/en/s12/product/purecrea-mh-500-precision-scales-54993706 |
+| Uni-T UT139C multimeter | Bench | 1 | 45.50 | 9 | https://www.galaxus.ch/de/s4/product/uni-t-ut139c-cat-iii-600v-hand-multimeter-multimeter-34370475 |
+| Velcro cable ties 200 mm, 6 pcs | Aircraft | 1 | 5.25 | 5 | https://www.galaxus.ch/de/s4/product/velcro-brand-klettband-klettkabelbinder-200-mm-6-stk-kabelbinder-14958774 |
+
+### fpvracing.ch, about CHF 42, flat CHF 5 shipping
+
+| Item | Part of | Qty | CHF | Stock | Link |
+| --- | --- | ---: | ---: | --- | --- |
+| BETAFPV Lava II 480 mAh 1S 95C BT2.0, 4-pack | Aircraft | 1 | 28.90 | In stock | https://fpvracing.ch/en/1s/4197-betafpv-lava-ii-480mah-1s-95c-bt20-4-pcs.html |
+| BT2.0 U-pigtails, 6 pcs | Aircraft | 1 | 7.90 | In stock | https://fpvracing.ch/en/connectivity/4261-bt20-u-pigtail.html |
+
+### fpvframe.ch, the charger, order first
+
+| Item | Part of | Qty | CHF | Stock | Link |
+| --- | --- | ---: | ---: | --- | --- |
+| VIFLY WhoopStor 3 charger, BT2.0, 4.20 V | Bench | 1 | 28 to 32 | 1 left | https://fpvframe.ch/product/vifly-whoopstor-3/ |
+| Alternative: FlyingTech UK, GBP 27.90, in stock | | | | | https://www.flyingtech.co.uk/product/vifly-whoopstor-v3-1s-lipo-battery-charger-discharger-ph2-bt2-0/ |
+
+### Abroad, because no Swiss shop has them
+
+| Shop | Item | Qty | Price | Stock | Link |
+| --- | --- | ---: | ---: | --- | --- |
+| DigiKey.ch | XIAO ESP32-S3 Sense, Seeed 113991115 | 1 | CHF 12.44 | 3117 | https://www.digikey.ch/en/products/detail/seeed-technology-co-ltd/113991115/18724504 |
+| Unmanned Tech UK | 8520 coreless motors, 2 CW + 2 CCW, 1.0 mm shaft | 1 pack | GBP 6.49 | Available | https://www.unmannedtechshop.co.uk/products/8520-coreless-brushed-motor-pack-2-x-cw-2-x-ccw |
+| RaceDayQuads US | Gemfan 65 mm bi-blade props, 1.0 mm shaft, 8-pack, grey | 2 | USD 3.49 each | Available | https://www.racedayquads.com/products/gemfan-65mm-bi-blade-2-5-prop-8-pack-1mm-shaft-choose-your-color |
+| JLCPCB | Carrier PCB prototype B, assembled | 5 | about CHF 60 | After step 2 | https://jlcpcb.com/ |
+| AprilRobotics | AprilTags tag36h11, 40, 40 and 60 mm, printed on paper | 3 | 0 | Print | https://github.com/AprilRobotics/apriltag-imgs/tree/master/tag36h11 |
+| Seeed Studio, optional | ESP-FLY bench kit | 1 | USD 59.99 | Not verified, bot check | https://www.seeedstudio.com/ESP-FLY-co-create-p-6744.html |
+
+### Totals
+
+| | CHF |
+| --- | ---: |
+| Aircraft, first unit: parts, filament, tape, heat-shrink and the five-board PCB run | about 215 |
+| Dock A, first unit, with its supply | about 90 |
+| Bench, with its supply and the charger | about 185 |
+| One aircraft, one dock and the bench | about 490 |
+| Optional ESP-FLY kit | about 55 |
+| Each further aircraft | about 65 |
+| Each further dock | about 60 |
+
+The CSV sums to CHF 476.56 for the CHF-priced lines, GBP 6.49 and USD 66.97 including the optional kit.
+
+## 8. What is not yet verified
+
+Nothing has been printed, soldered or flown. Masses, the slide in the funnel, contact
+resistance, charger temperature and the camera mount angle are design values until measured.
+The carrier Gerbers must be regenerated before the PCB order. The dock controller firmware is
+not written; the dock's electronics are a wiring plan with a status API specified in
+`docs/docking.md`. Seeed Studio could not be re-read for stock.

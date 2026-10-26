@@ -218,3 +218,10 @@ flight commands → onboard flight controller. The rapid stabilization loop belo
 on the drone, and the language models inspect images and propose mission actions
 on the computer. The prototype firmware/host path now has software tests and
 board builds; physical mission navigation remains disabled pending measurements.
+
+## Dock
+
+`dock/` holds dock A: a printed funnel base with contact charging and a tag stand, so
+the Scout lands, recharges and takes off again without a battery swap. Geometry, wiring,
+Swiss parts and the aircraft-side changes are in `dock/README.md`,
+`procurement-ch.md` and `assembly.md`; the flight procedure is `docs/docking.md`.

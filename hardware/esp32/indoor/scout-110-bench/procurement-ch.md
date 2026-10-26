@@ -56,3 +56,23 @@ Propellers, the BT2.0 battery and pigtail, the charger and every SMD component.
 Galaxus lists the resistors and ceramic capacitors only as full reels at over
 CHF 100 each. fpvracing.ch (Swiss warehouse, CHF 5 flat shipping) covers the
 battery and pigtail; the carrier is best ordered assembled from JLCPCB.
+## Dock A parts — buy links, checked 25 October 2026
+
+One dock per aircraft. Geometry and wiring are in `dock/README.md`.
+
+| Part | Qty | Buy | Price | Stock on 25 Oct | Note |
+| --- | ---: | --- | ---: | --- | --- |
+| Dock controller, XIAO ESP32-C3 | 1 | [Bastelgarage](https://www.bastelgarage.ch/seeed-studio-xiao-esp32-c3) | 9.90 | In stock | [XIAO ESP32-S3](https://www.bastelgarage.ch/seeed-studio-xiao-esp32-s3) 11.90 also in stock if one board type is preferred |
+| USB-C socket breakout with CC pull-downs | 1 | [Bastelgarage](https://www.bastelgarage.ch/usb-typ-c-buchse-breakout-board) | 4.90 | In stock | Not the 4-pin version; a PD supply needs the 5.1 kΩ CC resistors |
+| INA219 current and voltage sensor | 1 | [Bastelgarage, DFRobot Gravity](https://www.bastelgarage.ch/gravity-ina219-i2c-digitales-wattmeter) | 12.90 | In stock | Charge current and 5 V telemetry |
+| Spring contact pin | 1 | [Distrelec, PTR 5110/S-D-1.2N-AU-2.3C, 10 A, 15.2 mm](https://www.distrelec.ch/en/p/14022290) | 3.59 | To order | In stock alternative: [PTR 1060/G-A6X-3.0N-AU-3.0C](https://www.distrelec.ch/en/p/30019746) 6.50, 28.5 mm; set `pin_d` in `generate_dock.py` to the barrel diameter |
+| Copper tape 20 mm, 10 m | 1 | [Bastelgarage](https://www.bastelgarage.ch/20mm-kupferklebeband-10m) | 14.90 | In stock | Foot strips, cradle disc and foot caps for every dock and aircraft |
+| NTC 10 kΩ, insulated leads, pack of 25 | 1 | [Distrelec, Vishay NTCLE413E2103F520L](https://www.distrelec.ch/en/p/30438838) | 25.81 | 4125 in stock | One per dock; the pack lasts |
+| Logic-level P-MOSFET, 5 V switch | 1 | Any AO3401A or IRLML6402 from the same JLCPCB run, or a Bastelgarage MOSFET module | about 2 | — | — |
+| PETG, 1 kg | 1 | Bastelgarage eSun was out of stock in all colours on 25 Oct; any PETG | about 14 | — | About 150 g per dock at 15 % infill plus about 60 g for the stand |
+| AprilTags | 3 | Print from [apriltag-imgs, tag36h11](https://github.com/AprilRobotics/apriltag-imgs/tree/master/tag36h11) at 40, 40 and 80 mm | 0 | — | ids 3k, 3k+1, 3k+2 for dock k |
+| 5 V supply | 1 | The 45 W or 65 W PD supply from the bench list | — | — | One per dock |
+| Version 2 only: Qi transmitter and receiver pair, 5 V 1 A | 1 | [Bastelgarage Wireless Charging Modul](https://www.bastelgarage.ch/wireless-charging-modul-5v-1a) | 10.90 | In stock | Receiver coil under the battery cradle feeds the same J18 / J19 pads; adds about 5 g to the aircraft |
+
+Dock total: about CHF 75 in parts per dock plus a share of the thermistor pack and the tape roll; about CHF 90 for the first one.
+

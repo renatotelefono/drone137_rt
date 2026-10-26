@@ -152,3 +152,28 @@ build → connect/record → propeller-free motor checks → measured sensor/pow
 checks → restrained tuning → independently reviewed short hover. Real
 position/height feedback and its failure behavior must be established before
 room navigation. All physical measurements remain outstanding until parts arrive.
+
+## Prototype B: dock charge path
+
+`generate_carrier.py` revision prototype-b adds a 5 V charge input for dock A
+(`dock/README.md`). The committed `carrier/` outputs are still prototype A; run the
+KiCad 10 toolchain (generate, ERC, DRC, `check_carrier.py`, provenance) before ordering.
+
+| Ref | Part | Role |
+| --- | --- | --- |
+| J18 `CHG+` | wire pad | +5 V from the copper disc under the cradle, pressed by the dock's spring pin |
+| J19 `CHG-` | wire pad | GND from the copper caps on the feet at x = +14 (both feet, one wire each) |
+| F1 | PTC 0.5 A, 1206 | Limits a shorted or mis-seated contact |
+| C5 | 4.7 µF 10 V, 0805 | Input decoupling for U1 |
+| U1 | MCP73831T-2ACI/OT, SOT-23-5 | 1S charger, 4.20 V termination, 500 mA with thermal fold-back |
+| R11 | 2.0 kΩ 1 %, 0805 | PROG: 1000 / R kΩ = 500 mA |
+| C6 | 4.7 µF 10 V, 0805 | VBAT decoupling at U1 |
+| J20 `D2 STAT` | wire pad | Open-drain STAT to XIAO D2 / GPIO3 with the internal pull-up: low while charging, high-Z when complete or without 5 V |
+
+Wiring on the airframe: a 10 mm copper-tape disc on the cradle underside at (0, +9),
+forward of the strap slot, soldered to 30 AWG wire up to J18. Copper tape wrapped
+around the lower 3 mm of each foot at x = +14, soldered to 30 AWG wire up to J19.
+Route both wires with the motor leads, away from the IMU tray. Never connect the dock
+5 V to the XIAO's own 5V pin; the only path into the battery is through U1. Expect the
+SOT-23-5 to fold back toward 300 to 400 mA when warm; a full charge from empty takes
+about 1.5 h.

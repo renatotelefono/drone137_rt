@@ -3,7 +3,49 @@
   "scope": "Nominal geometry only; print fit, flex, actual mass, wire routing and material properties unmeasured",
   "models": [
     {
-      "file": "battery-cradle-a.stl",
+      "file": "dock/dock-backboard-a.stl",
+      "sha256": "8269867722eb21c09becb414d1768f8dea7d2082ebcc94b319dd55965b085cd3",
+      "triangles": 28,
+      "nonmanifold_edges": 0,
+      "connected_components": 1,
+      "bounds_mm": [
+        [
+          -70.0,
+          103.0,
+          0.0
+        ],
+        [
+          70.0,
+          206.0,
+          240.0
+        ]
+      ],
+      "solid_volume_mm3": 142800.0,
+      "solid_PETG_mass_g_estimate": 181.35600000000002
+    },
+    {
+      "file": "dock/dock-body-a.stl",
+      "sha256": "115954e403121a156ec0f74bb386946a553d989e7435994e4326d6f40bc8cec4",
+      "triangles": 1280,
+      "nonmanifold_edges": 0,
+      "connected_components": 1,
+      "bounds_mm": [
+        [
+          -103.0,
+          -103.0,
+          0.0
+        ],
+        [
+          103.0,
+          103.0,
+          39.4338
+        ]
+      ],
+      "solid_volume_mm3": 348549.3524552534,
+      "solid_PETG_mass_g_estimate": 442.6576776181719
+    },
+    {
+      "file": "mechanics/battery-cradle-a.stl",
       "sha256": "3fd2c6acc83012f3315158f518375f7876a01f99101ffc17adf84074b8573994",
       "triangles": 132,
       "nonmanifold_edges": 0,
@@ -24,7 +66,7 @@
       "solid_PETG_mass_g_estimate": 2.073656
     },
     {
-      "file": "camera-cradle-a.stl",
+      "file": "mechanics/camera-cradle-a.stl",
       "sha256": "0cc0cd76c8ef3bc500dd118b3c1b252faedeb86da34d94dc8d3c6a603a2e7849",
       "triangles": 372,
       "nonmanifold_edges": 0,
@@ -45,7 +87,7 @@
       "solid_PETG_mass_g_estimate": 1.8400671309288628
     },
     {
-      "file": "electronics-bridge-a.stl",
+      "file": "mechanics/electronics-bridge-a.stl",
       "sha256": "63db37cc158bab8d147a2c72c6f4428cc86423c09cae2b2a42236cb12bb060c4",
       "triangles": 1692,
       "nonmanifold_edges": 0,
@@ -66,7 +108,7 @@
       "solid_PETG_mass_g_estimate": 2.8750557034478548
     },
     {
-      "file": "imu-tray-a.stl",
+      "file": "mechanics/imu-tray-a.stl",
       "sha256": "2b886d55cb15357a67704193c450975ed3dc25022b10fa5a874aacc1cba0c652",
       "triangles": 68,
       "nonmanifold_edges": 0,
@@ -87,7 +129,7 @@
       "solid_PETG_mass_g_estimate": 0.7452360000000001
     },
     {
-      "file": "scout-frame-a.stl",
+      "file": "mechanics/scout-frame-a.stl",
       "sha256": "67e647d71189075bae0fb6ff40af7a919ee95c5a36635d8e4c3ff773e51504e5",
       "triangles": 5524,
       "nonmanifold_edges": 0,
@@ -108,5 +150,5 @@
       "solid_PETG_mass_g_estimate": 17.57174650397098
     }
   ],
-  "total_solid_PETG_mass_g_estimate": 25.105761338347698
+  "total_solid_PETG_mass_g_estimate": 649.1194389565196
 }

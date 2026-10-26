@@ -86,3 +86,10 @@ can be registered and docked, but this is sequential dispatch, not swarm flight.
 - Any physical flight at all until the commissioning sequence in
   [pre-hardware preparation](pre-hardware-six.md) has produced measured mass,
   thrust, current, calibration and timing for a specific airframe.
+
+## Optional: a dock
+
+An aircraft may carry two charge contacts, a disc under the battery cradle and
+conductive feet, wired to a 5 V charge input on its carrier, so it can land on dock A
+and recharge unattended. Nothing in the control contract changes; the dock is a
+separate registered site object with its own pinned link. See `docs/docking.md`.

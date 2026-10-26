@@ -1,0 +1,198 @@
+solid dock_backboard_a
+  facet normal -1.000000 0.000000 0.000000
+    outer loop
+      vertex -70.0000 103.0000 0.0000
+      vertex -70.0000 203.0000 3.0000
+      vertex -70.0000 203.0000 0.0000
+    endloop
+  endfacet
+  facet normal 1.000000 0.000000 0.000000
+    outer loop
+      vertex 70.0000 103.0000 0.0000
+      vertex 70.0000 203.0000 0.0000
+      vertex 70.0000 203.0000 3.0000
+    endloop
+  endfacet
+  facet normal -1.000000 0.000000 0.000000
+    outer loop
+      vertex -70.0000 103.0000 0.0000
+      vertex -70.0000 103.0000 3.0000
+      vertex -70.0000 203.0000 3.0000
+    endloop
+  endfacet
+  facet normal 1.000000 0.000000 0.000000
+    outer loop
+      vertex 70.0000 103.0000 0.0000
+      vertex 70.0000 203.0000 3.0000
+      vertex 70.0000 103.0000 3.0000
+    endloop
+  endfacet
+  facet normal -1.000000 0.000000 0.000000
+    outer loop
+      vertex -70.0000 203.0000 0.0000
+      vertex -70.0000 206.0000 3.0000
+      vertex -70.0000 206.0000 0.0000
+    endloop
+  endfacet
+  facet normal 1.000000 0.000000 0.000000
+    outer loop
+      vertex 70.0000 203.0000 0.0000
+      vertex 70.0000 206.0000 0.0000
+      vertex 70.0000 206.0000 3.0000
+    endloop
+  endfacet
+  facet normal -1.000000 0.000000 0.000000
+    outer loop
+      vertex -70.0000 203.0000 0.0000
+      vertex -70.0000 203.0000 3.0000
+      vertex -70.0000 206.0000 3.0000
+    endloop
+  endfacet
+  facet normal 1.000000 0.000000 0.000000
+    outer loop
+      vertex 70.0000 203.0000 0.0000
+      vertex 70.0000 206.0000 3.0000
+      vertex 70.0000 203.0000 3.0000
+    endloop
+  endfacet
+  facet normal -1.000000 0.000000 0.000000
+    outer loop
+      vertex -70.0000 203.0000 3.0000
+      vertex -70.0000 206.0000 240.0000
+      vertex -70.0000 206.0000 3.0000
+    endloop
+  endfacet
+  facet normal 1.000000 0.000000 0.000000
+    outer loop
+      vertex 70.0000 203.0000 3.0000
+      vertex 70.0000 206.0000 3.0000
+      vertex 70.0000 206.0000 240.0000
+    endloop
+  endfacet
+  facet normal -1.000000 0.000000 0.000000
+    outer loop
+      vertex -70.0000 203.0000 3.0000
+      vertex -70.0000 203.0000 240.0000
+      vertex -70.0000 206.0000 240.0000
+    endloop
+  endfacet
+  facet normal 1.000000 0.000000 0.000000
+    outer loop
+      vertex 70.0000 203.0000 3.0000
+      vertex 70.0000 206.0000 240.0000
+      vertex 70.0000 203.0000 240.0000
+    endloop
+  endfacet
+  facet normal 0.000000 0.000000 -1.000000
+    outer loop
+      vertex -70.0000 103.0000 0.0000
+      vertex -70.0000 203.0000 0.0000
+      vertex 70.0000 203.0000 0.0000
+    endloop
+  endfacet
+  facet normal 0.000000 0.000000 -1.000000
+    outer loop
+      vertex -70.0000 103.0000 0.0000
+      vertex 70.0000 203.0000 0.0000
+      vertex 70.0000 103.0000 0.0000
+    endloop
+  endfacet
+  facet normal 0.000000 0.000000 -1.000000
+    outer loop
+      vertex -70.0000 203.0000 0.0000
+      vertex -70.0000 206.0000 0.0000
+      vertex 70.0000 206.0000 0.0000
+    endloop
+  endfacet
+  facet normal 0.000000 0.000000 -1.000000
+    outer loop
+      vertex -70.0000 203.0000 0.0000
+      vertex 70.0000 206.0000 0.0000
+      vertex 70.0000 203.0000 0.0000
+    endloop
+  endfacet
+  facet normal 0.000000 1.000000 0.000000
+    outer loop
+      vertex -70.0000 206.0000 0.0000
+      vertex -70.0000 206.0000 3.0000
+      vertex 70.0000 206.0000 3.0000
+    endloop
+  endfacet
+  facet normal 0.000000 1.000000 0.000000
+    outer loop
+      vertex -70.0000 206.0000 0.0000
+      vertex 70.0000 206.0000 3.0000
+      vertex 70.0000 206.0000 0.0000
+    endloop
+  endfacet
+  facet normal 0.000000 1.000000 0.000000
+    outer loop
+      vertex -70.0000 206.0000 3.0000
+      vertex -70.0000 206.0000 240.0000
+      vertex 70.0000 206.0000 240.0000
+    endloop
+  endfacet
+  facet normal 0.000000 1.000000 0.000000
+    outer loop
+      vertex -70.0000 206.0000 3.0000
+      vertex 70.0000 206.0000 240.0000
+      vertex 70.0000 206.0000 3.0000
+    endloop
+  endfacet
+  facet normal 0.000000 0.000000 1.000000
+    outer loop
+      vertex -70.0000 206.0000 240.0000
+      vertex -70.0000 203.0000 240.0000
+      vertex 70.0000 203.0000 240.0000
+    endloop
+  endfacet
+  facet normal -0.000000 0.000000 1.000000
+    outer loop
+      vertex -70.0000 206.0000 240.0000
+      vertex 70.0000 203.0000 240.0000
+      vertex 70.0000 206.0000 240.0000
+    endloop
+  endfacet
+  facet normal 0.000000 -1.000000 0.000000
+    outer loop
+      vertex -70.0000 203.0000 240.0000
+      vertex -70.0000 203.0000 3.0000
+      vertex 70.0000 203.0000 3.0000
+    endloop
+  endfacet
+  facet normal 0.000000 -1.000000 0.000000
+    outer loop
+      vertex -70.0000 203.0000 240.0000
+      vertex 70.0000 203.0000 3.0000
+      vertex 70.0000 203.0000 240.0000
+    endloop
+  endfacet
+  facet normal 0.000000 0.000000 1.000000
+    outer loop
+      vertex -70.0000 203.0000 3.0000
+      vertex -70.0000 103.0000 3.0000
+      vertex 70.0000 103.0000 3.0000
+    endloop
+  endfacet
+  facet normal -0.000000 0.000000 1.000000
+    outer loop
+      vertex -70.0000 203.0000 3.0000
+      vertex 70.0000 103.0000 3.0000
+      vertex 70.0000 203.0000 3.0000
+    endloop
+  endfacet
+  facet normal 0.000000 -1.000000 0.000000
+    outer loop
+      vertex -70.0000 103.0000 3.0000
+      vertex -70.0000 103.0000 0.0000
+      vertex 70.0000 103.0000 0.0000
+    endloop
+  endfacet
+  facet normal 0.000000 -1.000000 0.000000
+    outer loop
+      vertex -70.0000 103.0000 3.0000
+      vertex 70.0000 103.0000 0.0000
+      vertex 70.0000 103.0000 3.0000
+    endloop
+  endfacet
+endsolid dock_backboard_a

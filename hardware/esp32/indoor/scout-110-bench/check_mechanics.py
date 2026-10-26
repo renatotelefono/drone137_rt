@@ -5,7 +5,7 @@ import hashlib,json,struct
 import numpy as np
 
 root=Path(__file__).parent/'mechanics';results=[]
-for p in sorted(root.glob('*.stl')):
+for p in sorted(list(root.glob('*.stl'))+list((root.parent/'dock').glob('*.stl'))):
  raw=p.read_bytes()
  if raw.startswith(b'solid'):
   vertices=[list(map(float,line.split()[1:])) for line in raw.decode().splitlines() if line.strip().startswith('vertex ')]
@@ -23,6 +23,6 @@ for p in sorted(root.glob('*.stl')):
     if q in remaining:remaining.remove(q);stack.append(q)
  volume=abs(float(np.einsum('ij,ij->i',faces[:,0],np.cross(faces[:,1],faces[:,2])).sum()/6))
  bad=sum(n!=2 for n in edges.values());assert bad==0 and components==1,(p.name,bad,components)
- results.append(dict(file=p.name,sha256=hashlib.sha256(raw).hexdigest(),triangles=len(faces),nonmanifold_edges=bad,connected_components=components,bounds_mm=[faces.min(axis=(0,1)).tolist(),faces.max(axis=(0,1)).tolist()],solid_volume_mm3=volume,solid_PETG_mass_g_estimate=volume/1000*1.27))
+ results.append(dict(file=str(p.relative_to(root.parent)),sha256=hashlib.sha256(raw).hexdigest(),triangles=len(faces),nonmanifold_edges=bad,connected_components=components,bounds_mm=[faces.min(axis=(0,1)).tolist(),faces.max(axis=(0,1)).tolist()],solid_volume_mm3=volume,solid_PETG_mass_g_estimate=volume/1000*1.27))
 report=dict(status='mesh_checks_passed',scope='Nominal geometry only; print fit, flex, actual mass, wire routing and material properties unmeasured',models=results,total_solid_PETG_mass_g_estimate=sum(r['solid_PETG_mass_g_estimate'] for r in results))
 (root/'mesh-checks.json').write_text(json.dumps(report,indent=2));print(json.dumps(report,indent=2))

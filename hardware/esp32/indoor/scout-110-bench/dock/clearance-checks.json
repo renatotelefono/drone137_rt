@@ -1,0 +1,113 @@
+{
+  "parameters_mm": {
+    "pocket": 150.0,
+    "run": 25.0,
+    "slope_deg": 30.0,
+    "wall": 3.0,
+    "floor_z": 25.0,
+    "floor_t": 3.0,
+    "boss_d": 8.0,
+    "boss_h": 4.0,
+    "pin_d": 2.0,
+    "pin_y": 9.0,
+    "pin_travel": 2.5,
+    "board_w": 140.0,
+    "board_t": 3.0,
+    "board_h": 240.0,
+    "board_foot": 100.0,
+    "tags": [
+      [
+        40.0,
+        82.0
+      ],
+      [
+        40.0,
+        142.0
+      ],
+      [
+        80.0,
+        195.0
+      ]
+    ],
+    "camera_z": 82.0,
+    "camera_y": 12.0,
+    "strip_x": 14.0,
+    "strip_w": 6.0,
+    "strip_l": 28.0,
+    "top": 39.43375672974064,
+    "opening": 200.0,
+    "outer": 206.0
+  },
+  "scout_offset_z_mm": 42.0,
+  "pocket_clearance_per_side_mm": 0.9090999999999951,
+  "cradle_underside_above_floor_mm": 5.0,
+  "boss_top_below_cradle_mm": 1.0,
+  "pin_compression_mm": 1.5,
+  "foot_strip_margin_mm": {
+    "x": 3.0,
+    "y": 5.0
+  },
+  "body_solid_volume_cm3": 348.5488513468985,
+  "backboard_solid_volume_cm3": 142.8,
+  "body_footprint_mm": [
+    206.0,
+    206.0,
+    39.43375672974064
+  ],
+  "backboard_footprint_mm": [
+    140.0,
+    103.0,
+    240.0
+  ],
+  "tag_column": {
+    "family": "tag36h11",
+    "tags_size_and_centre_above_table_mm": [
+      [
+        40.0,
+        82.0
+      ],
+      [
+        40.0,
+        142.0
+      ],
+      [
+        80.0,
+        195.0
+      ]
+    ],
+    "plane_y_from_dock_centre_mm": 203.0
+  },
+  "tag_view": {
+    "tag_plane_from_camera_mm": 191.0,
+    "fully_visible_centre_offset_mm": {
+      "40": 49.47501562863257,
+      "80": 29.131002953854686
+    },
+    "camera_height_covered_mm": [
+      66.20343768668423,
+      257.8094562691715
+    ],
+    "coverage_gaps_mm": [],
+    "camera_height_docked_mm": 82.0,
+    "descent_covered_above_docked_mm": 175.8094562691715,
+    "docked_height_covered": true,
+    "camera": {
+      "width": 960,
+      "height": 540,
+      "fx": 722.1478033602424,
+      "fy": 722.1478033602424,
+      "pitch_deg": -10.0,
+      "source": "config/airframes.json:light-quad"
+    },
+    "fov_deg": {
+      "vertical": 41.0,
+      "horizontal": 67.22269098636984
+    },
+    "axis_drop_at_tag_plane_mm": 33.67845331531681,
+    "tag_width_px_at_1m": {
+      "40": 28.885912134409697,
+      "80": 57.771824268819394
+    }
+  },
+  "scope": "Nominal geometry from the STL files; print fit, slide friction and contact wear unmeasured"
+}

@@ -300,3 +300,6 @@ Next acceptance work:
 
 The runnable patrol sandbox and one legacy native flight test do not close these
 acceptance gates. Hardware remains disabled.
+5. Docking (`docs/docking.md`): tag detector and pose, the `dock` mission phase in the
+   emulator with dock A's geometry, dock registry and controller API, the Watch cluster's
+   sortie schedule. Gate: 20 of 20 simulated dockings inside ±20 mm before contact.

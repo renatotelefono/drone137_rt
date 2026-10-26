@@ -1,6 +1,6 @@
 {
   "name": "D137 Scout 110-B bench prototype",
-  "date": "2026-10-22",
+  "date": "2026-10-25",
   "configuration": "scout-110-bench-b@1",
   "physical_enabled": false,
   "status": "Camera/electrical/mechanical bench development; flight firmware and hardware qualification pending",
@@ -17,7 +17,7 @@
     },
     {
       "id": "imu",
-      "part": "Qkits GY-521 MPU-6050 module, SKU MPU-6050, 3\u20135 V input",
+      "part": "Qkits GY-521 MPU-6050 module, SKU MPU-6050, 3–5 V input",
       "quantity": 1,
       "unit_usd": 4.95,
       "subtotal_usd": 4.95,
@@ -98,7 +98,7 @@
     },
     {
       "id": "capacitors",
-      "part": "4 \u00d7 100 nF across motors; 470 uF >=6.3 V motor supply, 47 uF and 100 nF electronics decoupling",
+      "part": "4 × 100 nF across motors; 470 uF >=6.3 V motor supply, 47 uF and 100 nF electronics decoupling",
       "quantity": 1,
       "unit_usd": 0.7,
       "subtotal_usd": 0.7,
@@ -107,7 +107,7 @@
     },
     {
       "id": "battery_sense",
-      "part": "2 \u00d7 100 kohm resistors and 100 nF ADC filter",
+      "part": "2 × 100 kohm resistors and 100 nF ADC filter",
       "quantity": 1,
       "unit_usd": 0.1,
       "subtotal_usd": 0.1,
@@ -131,9 +131,18 @@
       "subtotal_usd": 1.5,
       "basis": "unquoted allowance",
       "source": null
+    },
+    {
+      "id": "charge-path",
+      "part": "Dock charge path on carrier prototype B: MCP73831T-2ACI/OT, 1206 PTC 0.5 A, two 4.7 uF 0805, 2.0 kOhm 0805; JLCPCB library parts",
+      "quantity": 1,
+      "unit_usd": 1.5,
+      "subtotal_usd": 1.5,
+      "basis": "JLCPCB assembly allowance",
+      "source": "https://jlcpcb.com/"
     }
   ],
-  "total_parts_allowance_usd": 45.09,
+  "total_parts_allowance_usd": 46.59,
   "purchase_warning": "Per-aircraft consumed parts allowance, not a delivered checkout total. Battery minimum purchase is four packs for $14.99; motor price is GBP. Shipping, tax and minimum-order surplus can exceed $50.",
   "exclusions": [
     "ground PC and Wi-Fi access point",

@@ -2,6 +2,12 @@
 
 Two-layer 42 x 40 mm hand-assembled prototype, 1.0 mm FR4, 2 oz copper.
 The XIAO and GY-521 are wired modules; this board is not their footprint.
+
+Prototype B adds the dock charge path: 5 V from the dock contacts (J18 cradle pin,
+J19 foot strips) through a 0.5 A PTC into an MCP73831-2 1S charger onto VBAT, with
+STAT brought out to J20 for the XIAO (D2 / GPIO3, pull-up: low while charging).
+Regenerate with KiCad 10 after any edit: this file, generate_schematic.py, kicad-cli
+ERC/DRC, check_carrier.py, then refresh carrier/provenance.json.
 """
 import argparse
 import json
@@ -27,6 +33,17 @@ def generate(library):
         return nets[name]
     def xy(p):return k.VECTOR2I(k.FromMM(p[0]),k.FromMM(p[1]))
     def point(p):return (k.ToMM(p.x),k.ToMM(p.y))
+    def pads_of(package,pos,angle):
+        lib,name=package.split(':')
+        f=k.FootprintLoad(str(Path(library)/(lib+'.pretty')),name)
+        if not f:raise RuntimeError('Missing '+package)
+        f.SetOrientationDegrees(angle);f.SetPosition(xy(pos))
+        return {pad.GetNumber():point(pad.GetPosition()) for pad in f.Pads()}
+    def oriented(ref,value,package,pos,connections,angles,want):
+        """Place with the first angle whose pad layout satisfies want(pads), so routing never depends on a library convention."""
+        for angle in angles:
+            if want(pads_of(package,pos,angle)):return fp(ref,value,package,pos,connections,angle)
+        raise RuntimeError(f'{ref}: no angle in {angles} gives the expected pad layout')
     def fp(ref,value,package,pos,connections,angle=0):
         lib,name=package.split(':')
         local=footprints/(lib+'.pretty');local.mkdir(exist_ok=True)
@@ -111,6 +128,28 @@ def generate(library):
     trace('VBAT',(20,6),top['1'],width=.4)
     trace('VBAT_ADC',top['2'],low['1']);trace('VBAT_ADC',(33,6),(33,9),filt['1'])
     trace('VBAT_ADC',(33,9),(33,12),adc);via('GND',low['2']);via('GND',filt['2'])
+    # Dock charge path (prototype B). 5 V enters at J18 from the pogo pin under the cradle
+    # contact; the foot strips return to GND at J19. F1 limits a shorted contact; U1 charges
+    # VBAT at up to 500 mA (R11 = 2k0) with thermal fold-back; STAT goes to the XIAO on J20.
+    left_first=lambda pads:pads['1'][0]<pads['2'][0]
+    chg_in=terminal('J18','CHG+',(23,22),'CHG_IN')
+    terminal('J19','CHG-',(31,9),'GND')
+    fuse=oriented('F1','PTC 0.5A','Fuse:Fuse_1206_3216Metric',(27.5,22),{'1':'CHG_IN','2':'CHG5V'},(0,180),left_first)
+    trace('CHG_IN',chg_in,fuse['1'],width=.8)
+    cin=oriented('C5','4.7uF 10V','Capacitor_SMD:C_0805_2012Metric',(29.5,19.5),{'1':'CHG5V','2':'GND'},(0,180),left_first)
+    trace('CHG5V',fuse['2'],cin['1'],width=.8);via('GND',cin['2'])
+    charger=oriented('U1','MCP73831-2','Package_TO_SOT_SMD:SOT-23-5',(27.5,14),
+                     {'1':'STAT','2':'GND','3':'VBAT','4':'CHG5V','5':'PROG'},(180,0),
+                     lambda pads:pads['4'][1]>pads['1'][1] and pads['3'][0]<pads['2'][0]<pads['1'][0] and pads['4'][0]<pads['5'][0])
+    trace('CHG5V',cin['1'],(charger['4'][0],19.5),charger['4'],width=.8)
+    rprog=oriented('R11','2k0 1%','Resistor_SMD:R_0805_2012Metric',(30,16.5),{'1':'PROG','2':'GND'},(90,270),lambda pads:pads['1'][1]<pads['2'][1])
+    trace('PROG',charger['5'],rprog['1']);via('GND',rprog['2'])
+    cvb=oriented('C6','4.7uF 10V','Capacitor_SMD:C_0805_2012Metric',(24,18),{'1':'VBAT','2':'GND'},(0,180),left_first)
+    trace('VBAT',(20,18),cvb['1'],width=.8);via('GND',cvb['2'])
+    trace('VBAT',cvb['1'],(cvb['1'][0],charger['3'][1]),charger['3'],width=.8)
+    stat=terminal('J20','D2 STAT',(31,11.5),'STAT',1.6,.8)
+    trace('STAT',charger['1'],stat)
+    trace('GND',charger['2'],(charger['2'][0],11.2));via('GND',(charger['2'][0],11.2))
     for i,p in enumerate(((3,2.5),(39,2.5),(3,37),(39,37)),1):
         fp(f'H{i}','M2','MountingHole:MountingHole_2.2mm_M2',p,{})
     for a,b in zip(((0,0),(42,0),(42,40),(0,40)),((42,0),(42,40),(0,40),(0,0))):
@@ -122,7 +161,7 @@ def generate(library):
     board.SetFileName(str(out/'scout-carrier.kicad_pcb'))
     k.ZONE_FILLER(board).Fill(board.Zones())
     k.SaveBoard(str(out/'scout-carrier.kicad_pcb'),board)
-    (out/'netlist.json').write_text(json.dumps({'revision':'prototype-a','board_mm':[42,40,1.0],'copper_oz':2,'parts':parts},indent=2))
+    (out/'netlist.json').write_text(json.dumps({'revision':'prototype-b','board_mm':[42,40,1.0],'copper_oz':2,'parts':parts},indent=2))
     libraries=sorted(p.name[:-7] for p in footprints.glob('*.pretty'))
     (out/'fp-lib-table').write_text('(fp_lib_table (version 7)\n'+''.join(
         f'(lib (name "{name}")(type "KiCad")(uri "${{KIPRJMOD}}/footprints/{name}.pretty")(options "")(descr "Pinned prototype footprints"))\n'
@@ -133,6 +172,8 @@ def generate(library):
     for i in range(1,5):
         assert next(p for p in parts if p['ref']==f'Q{i}')['nets']=={'1':f'GATE{i}','2':'GND','3':f'MOTOR{i}-'}
         assert next(p for p in parts if p['ref']==f'D{i}')['nets']=={'1':'VBAT','2':f'MOTOR{i}-'}
+    assert next(p for p in parts if p['ref']=='U1')['nets']=={'1':'STAT','2':'GND','3':'VBAT','4':'CHG5V','5':'PROG'}
+    assert next(p for p in parts if p['ref']=='F1')['nets']=={'1':'CHG_IN','2':'CHG5V'}
     return board,out,parts
 
 

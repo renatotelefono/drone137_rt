@@ -43,8 +43,8 @@ All of these are parameters at the top of `generate_dock.py`; the checks in
 ## Electrical
 
 ```
-PD supply 5 V ──USB-C socket──┬── INA219 (charge current, voltage) ── MOSFET switch ── spring pin (+5 V)
-                              │                                                       foot strips (GND)
+PD supply 5 V ──USB-C socket──┬── INA219 (charge current, voltage) ── spring pin (+5 V)
+                              │                       foot strips ── MOSFET switch (IRF520 module, low side) ── GND
                               └── XIAO ESP32-C3: switch, INA219, pad NTC, status API
 ```
 
@@ -52,7 +52,8 @@ PD supply 5 V ──USB-C socket──┬── INA219 (charge current, voltage)
   PTC 0.5 A, MCP73831-2 at up to 500 mA with thermal fold-back, STAT to the XIAO).
   Any 5 V source works, so the Qi receiver of version 2 plugs into the same two pads.
 - The controller measures current and voltage with the INA219, reads an NTC under the
-  pocket floor, and switches the 5 V with a logic-level P-MOSFET. It cuts the 5 V at
+  pocket floor, and switches the charge circuit with a MOSFET: an IRF520 module in the
+  return from the foot strips (low side), or a logic-level P-MOSFET in the 5 V line. It cuts the 5 V at
   more than 0.7 A, above 45 °C on the pad, or after 3 h of charging, and serves the
   status API described in `docs/docking.md`.
 - The pin and strips cannot be connected the wrong way round: the strips are at x = ±14

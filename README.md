@@ -24,6 +24,8 @@ under-$50 parts budget are not qualified by this physics benchmark.
 
 **Watch from the dock:** a docked aircraft keeps its camera on; motion and change are detected on every frame, the local model says what an event was from a before-and-after picture, and the console raises the alert with the evidence; whether a thing was added, taken away or moved is read from the pixels, a person is a dedicated detector's call, the model names the thing. Gated on staged synthetic events and on rendered workshop scenarios from a docked camera, the event category at 90 % on both; real clips can be recorded and played through the same gate. See [watch.md](docs/watch.md).
 
+**Shared airspace:** several aircraft fly at once on one airspace that keeps them 1.5 m apart, gives right of way by number, holds everyone when a link goes quiet, and backs a holding aircraft out of a doorway; three aircraft gated through the benchmark room's one doorway within the 8 GB machine's budget. See [airspace.md](docs/airspace.md).
+
 **Memory before a flight:** every plan shows what it will need against this machine, a measured preflight checks it in seconds, and the memory watch stops a mission that exceeds its budget. See [mission-control.md](docs/mission-control.md).
 
 **Fly by hand:** a console panel for keyboard or gamepad control over the paired link, inside a reduced envelope, with release-to-level and land-on-silence; for commissioning, never for missions.

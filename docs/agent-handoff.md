@@ -244,6 +244,15 @@ Spec and limits: `docs/watch.md`. Two docks in one place: `scripts/qualify_docki
 (`sim/dock_world.py` draws every dock's column; the registry refuses a second dock with the same
 tags in a place); results in `docs/docking-validation-two-docks-*.json`, test in `tests/test_docking.py`.
 
+## Shared airspace — 27 October 2026
+
+`app/airspace.py` (separation, right of way by number, lost-link hold, corridors, give way),
+`app/airspace_api.py` (`GET /api/airspace`, the runtime's flight reported at 5 Hz),
+`sim/swarm_world.py` (three aircraft through the benchmark room's doorway, kinematic and Rapier
+plants, a 2 s report blackout per run), `scripts/qualify_swarm.py` (every check at 90 %, memory
+peak and the three-flight deployment estimate within 3.5 GiB; `docs/swarm-validation-*.json`).
+Tests: `tests/test_airspace.py`, `tests/test_swarm.py`. Spec and limits: `docs/airspace.md`.
+
 ## Pre-flight memory — 26 October 2026
 
 `app/memory_budget.py`: estimate per component from the GGUF header, the allocated grids and

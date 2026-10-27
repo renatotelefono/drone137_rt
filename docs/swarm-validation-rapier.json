@@ -1,0 +1,1576 @@
+{
+ "date": "2026-10-27",
+ "vehicle": "rapier",
+ "runs": 10,
+ "passed": 10,
+ "gate": {
+  "min_separation_m": 1.2,
+  "home_error_m": 0.3,
+  "reaction_s": 2.5,
+  "run_limit_s": 180.0,
+  "pass_rate": 0.9,
+  "small_budget_gib": 3.5
+ },
+ "pass_rates": {
+  "separation_kept": 1.0,
+  "all_goals_reached": 1.0,
+  "all_landed_home": 1.0,
+  "link_loss_hold": 1.0,
+  "no_envelope_violation": 1.0,
+  "within_time": 1.0
+ },
+ "all_pass_rate": 1.0,
+ "memory": {
+  "peak_gib": 1.18,
+  "samples": 2517,
+  "within_small_budget": true,
+  "deployment_estimate": {
+   "model_gib": 1.71,
+   "console_gib": 0.2,
+   "per_aircraft_gib": 0.5,
+   "aircraft": 3,
+   "total_gib": 3.41,
+   "verifier_off_gib": 1.47,
+   "fits_small_budget": true
+  }
+ },
+ "summary": {
+  "min_separation_m": 2.2356899977110296,
+  "max_reaction_s": 1.9119308692253778,
+  "mean_duration_s": 130.26144199989213,
+  "max_duration_s": 131.77053724997677,
+  "holds_per_run": 9.5,
+  "give_way_total": 0,
+  "blackout_aircraft": {
+   "scout-01": 4,
+   "scout-02": 2,
+   "scout-03": 4
+  }
+ },
+ "wall_time_s": 1302.849242925644,
+ "logs": "/Users/klauskopper/.codex/worktrees/9a64/drone137/.local/validation/swarm-rapier",
+ "runs_detail": [
+  {
+   "seed": 3000,
+   "vehicle": "rapier",
+   "min_separation_m": 2.2358687570767524,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 24.154038290987955,
+   "blackout": {
+    "aircraft": "scout-03",
+    "t0": 8.317249541472082,
+    "duration_s": 2.0,
+    "reaction_s": 0.04904216652070481,
+    "others_in_the_air": 2
+   },
+   "samples": 1123,
+   "duration_s": 129.4166974159889,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 2.42,
+     "gave_way": 0,
+     "final": [
+      3.0121006965637207,
+      5.001384735107422,
+      0.02496323548257351
+     ],
+     "home_error_m": 0.012179669480120087,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.9007696007131635
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 30.73,
+     "gave_way": 0,
+     "final": [
+      8.510848045349121,
+      5.502037525177002,
+      0.02496323361992836
+     ],
+     "home_error_m": 0.011037735127439172,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.6191170007958547
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 8,
+     "held_s": 53.19,
+     "gave_way": 0,
+     "final": [
+      4.51249885559082,
+      7.499699592590332,
+      0.02496323548257351
+     ],
+     "home_error_m": 0.01250246518459314,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.5874176015351878
+    }
+   },
+   "events": [
+    {
+     "t": 7.101734124997165,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 7.889308374986285,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 9.40575966599863,
+     "aircraft": "scout-02",
+     "text": "holding: link lost on scout-03"
+    },
+    {
+     "t": 9.456801207998069,
+     "aircraft": "scout-01",
+     "text": "holding: link lost on scout-03"
+    },
+    {
+     "t": 10.411390749999555,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 11.877293458004715,
+     "aircraft": "scout-01",
+     "text": "proceeding"
+    },
+    {
+     "t": 38.620561874995474,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 42.02423170799739,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 45.243380333005916,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 58.90286166599253,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 68.17196974999388,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 71.51282012500451,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 120.25682804099051,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 10,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3001,
+   "vehicle": "rapier",
+   "min_separation_m": 2.238298321718176,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 23.80831299998681,
+   "blackout": {
+    "aircraft": "scout-01",
+    "t0": 18.027387740279288,
+    "duration_s": 2.0,
+    "reaction_s": 0.09468680071623936,
+    "others_in_the_air": 2
+   },
+   "samples": 1136,
+   "duration_s": 129.7935015000112,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 1.92,
+     "gave_way": 0,
+     "final": [
+      3.012068033218384,
+      5.001526832580566,
+      0.02496323361992836
+     ],
+     "home_error_m": 0.01216423624766856,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.9011732346832106
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 29.8,
+     "gave_way": 0,
+     "final": [
+      8.51767349243164,
+      5.503800868988037,
+      0.024963228031992912
+     ],
+     "home_error_m": 0.01807758113784808,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.6192540487549516
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 8,
+     "held_s": 53.32,
+     "gave_way": 0,
+     "final": [
+      4.5175347328186035,
+      7.501389026641846,
+      0.02496321313083172
+     ],
+     "home_error_m": 0.017589663158559015,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.5881354062357925
+    }
+   },
+   "events": [
+    {
+     "t": 8.179734750010539,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 8.499872415995924,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 19.168815624987474,
+     "aircraft": "scout-03",
+     "text": "holding: link lost on scout-01"
+    },
+    {
+     "t": 19.168831874994794,
+     "aircraft": "scout-02",
+     "text": "holding: link lost on scout-01"
+    },
+    {
+     "t": 20.175362000009045,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 20.175397707993397,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 38.302202165999915,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 41.71136129100341,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 45.146004165988415,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 58.25208958299481,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 68.91972899998655,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 72.25129258300876,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 120.72456870801398,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 10,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3002,
+   "vehicle": "rapier",
+   "min_separation_m": 2.2393163031772523,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 20.224167082982603,
+   "blackout": {
+    "aircraft": "scout-02",
+    "t0": 19.720393548844072,
+    "duration_s": 2.0,
+    "reaction_s": 0.00027257613612619025,
+    "others_in_the_air": 2
+   },
+   "samples": 1136,
+   "duration_s": 129.25318516598782,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 2.22,
+     "gave_way": 0,
+     "final": [
+      3.0189342498779297,
+      5.00202751159668,
+      0.02496323548257351
+     ],
+     "home_error_m": 0.019042495154641657,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.8979164768019924
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 30.57,
+     "gave_way": 0,
+     "final": [
+      8.513286590576172,
+      5.5027570724487305,
+      0.024963224306702614
+     ],
+     "home_error_m": 0.013569632921577795,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.6192826156998035
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 6,
+     "held_s": 55.29,
+     "gave_way": 0,
+     "final": [
+      4.514060974121094,
+      7.500555515289307,
+      0.02496322989463806
+     ],
+     "home_error_m": 0.014071943379317641,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.5876858053991255
+    }
+   },
+   "events": [
+    {
+     "t": 7.377466415986419,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 7.885901290981565,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 20.72843470799853,
+     "aircraft": "scout-01",
+     "text": "holding: link lost on scout-02"
+    },
+    {
+     "t": 20.771396041003754,
+     "aircraft": "scout-03",
+     "text": "holding: link lost on scout-02"
+    },
+    {
+     "t": 21.77731770797982,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 22.952721749985358,
+     "aircraft": "scout-01",
+     "text": "proceeding"
+    },
+    {
+     "t": 38.459770957997534,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 41.781026290991576,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 45.9055218329886,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 55.45168845800799,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 68.14323029099614,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 71.41670162498485,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 120.07483195798704,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 8,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3003,
+   "vehicle": "rapier",
+   "min_separation_m": 2.236413751048607,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 25.655855874996632,
+   "blackout": {
+    "aircraft": "scout-03",
+    "t0": 16.82432147839724,
+    "duration_s": 2.0,
+    "reaction_s": 1.624545646602865,
+    "others_in_the_air": 2
+   },
+   "samples": 1142,
+   "duration_s": 131.28502449998632,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 2.42,
+     "gave_way": 0,
+     "final": [
+      3.0201728343963623,
+      5.0039873123168945,
+      0.024963222444057465
+     ],
+     "home_error_m": 0.020563120072000673,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.8975248547420321
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 32.56,
+     "gave_way": 0,
+     "final": [
+      8.517151832580566,
+      5.503398418426514,
+      0.024963226169347763
+     ],
+     "home_error_m": 0.017485268332898037,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.6181922891191015
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 8,
+     "held_s": 54.16,
+     "gave_way": 0,
+     "final": [
+      4.522888660430908,
+      7.502378463745117,
+      0.024963224306702614
+     ],
+     "home_error_m": 0.023011907050660963,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.5899986839656138
+    }
+   },
+   "events": [
+    {
+     "t": 7.79077145899646,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 8.126526291976916,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 17.776893499976723,
+     "aircraft": "scout-01",
+     "text": "holding: link lost on scout-03"
+    },
+    {
+     "t": 17.777552624989767,
+     "aircraft": "scout-02",
+     "text": "holding: link lost on scout-03"
+    },
+    {
+     "t": 18.98474287497811,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 20.19683524998254,
+     "aircraft": "scout-01",
+     "text": "proceeding"
+    },
+    {
+     "t": 40.34869191699545,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 43.58820916697732,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 47.0012914169929,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 60.74101141697611,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 70.20141320899711,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 73.56999833398731,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 122.20280541697866,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 10,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3004,
+   "vehicle": "rapier",
+   "min_separation_m": 2.237485639560819,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 26.560650583007373,
+   "blackout": {
+    "aircraft": "scout-01",
+    "t0": 15.411094324164242,
+    "duration_s": 2.0,
+    "reaction_s": 0.06521525883426804,
+    "others_in_the_air": 2
+   },
+   "samples": 1147,
+   "duration_s": 131.62323754199315,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 2.64,
+     "gave_way": 0,
+     "final": [
+      3.025742292404175,
+      5.003875732421875,
+      0.02496321126818657
+     ],
+     "home_error_m": 0.026032420556452465,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.8973079986468732
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 33.47,
+     "gave_way": 0,
+     "final": [
+      8.516106605529785,
+      5.5031914710998535,
+      0.024963226169347763
+     ],
+     "home_error_m": 0.016419751200103673,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.61766450311484
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 8,
+     "held_s": 55.0,
+     "gave_way": 0,
+     "final": [
+      4.5224409103393555,
+      7.50228214263916,
+      0.024963228031992912
+     ],
+     "home_error_m": 0.02255665382729593,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.5902344190543682
+    }
+   },
+   "events": [
+    {
+     "t": 7.500232958002016,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 7.90610612501041,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 16.48095016699517,
+     "aircraft": "scout-02",
+     "text": "holding: link lost on scout-01"
+    },
+    {
+     "t": 16.481014874996617,
+     "aircraft": "scout-03",
+     "text": "holding: link lost on scout-01"
+    },
+    {
+     "t": 17.68922037500306,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 17.689354083006037,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 40.973453375016106,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 44.188627916999394,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 47.41165754199028,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 61.060086000012234,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 70.72764304201701,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 73.99069441700703,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 122.45701020801789,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 10,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3005,
+   "vehicle": "rapier",
+   "min_separation_m": 2.236234826627791,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 25.964382749982178,
+   "blackout": {
+    "aircraft": "scout-02",
+    "t0": 11.017366385099567,
+    "duration_s": 2.0,
+    "reaction_s": 1.8274371978937687,
+    "others_in_the_air": 2
+   },
+   "samples": 1147,
+   "duration_s": 131.77053724997677,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 2.54,
+     "gave_way": 0,
+     "final": [
+      3.0221753120422363,
+      5.004127502441406,
+      0.02496320754289627
+     ],
+     "home_error_m": 0.022556168570357114,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.8973311932788922
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 33.25,
+     "gave_way": 0,
+     "final": [
+      8.517583847045898,
+      5.503747940063477,
+      0.024963241070508957
+     ],
+     "home_error_m": 0.01797884122108441,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.618028049147349
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 8,
+     "held_s": 54.24,
+     "gave_way": 0,
+     "final": [
+      4.5218095779418945,
+      7.5033040046691895,
+      0.024963226169347763
+     ],
+     "home_error_m": 0.022058425529887626,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.5904570483454538
+    }
+   },
+   "events": [
+    {
+     "t": 7.315454290976049,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 8.282348790991819,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 12.016696790989954,
+     "aircraft": "scout-03",
+     "text": "holding: link lost on scout-02"
+    },
+    {
+     "t": 12.112221499992302,
+     "aircraft": "scout-01",
+     "text": "holding: link lost on scout-02"
+    },
+    {
+     "t": 13.22478599997703,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 14.647406249976484,
+     "aircraft": "scout-01",
+     "text": "proceeding"
+    },
+    {
+     "t": 40.570371790992795,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 43.89703150000423,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 47.2162299999909,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 61.000386874977266,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 70.47484033298679,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 73.7429379579844,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 122.6999402079964,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 10,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3006,
+   "vehicle": "rapier",
+   "min_separation_m": 2.2376274229561264,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 23.2228381659952,
+   "blackout": {
+    "aircraft": "scout-01",
+    "t0": 15.992648652809699,
+    "duration_s": 2.0,
+    "reaction_s": 0.01517497218770103,
+    "others_in_the_air": 2
+   },
+   "samples": 1114,
+   "duration_s": 128.32395633298438,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 2.02,
+     "gave_way": 0,
+     "final": [
+      3.01772403717041,
+      5.00206184387207,
+      0.024963228031992912
+     ],
+     "home_error_m": 0.017843561689608798,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.9023609188857502
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 29.74,
+     "gave_way": 0,
+     "final": [
+      8.507362365722656,
+      5.5010294914245605,
+      0.024963222444057465
+     ],
+     "home_error_m": 0.007433994997804841,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.6192210017336187
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 8,
+     "held_s": 52.2,
+     "gave_way": 0,
+     "final": [
+      4.509949684143066,
+      7.500458240509033,
+      0.02496322989463806
+     ],
+     "home_error_m": 0.009960230866345725,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.587388060175419
+    }
+   },
+   "events": [
+    {
+     "t": 7.19982979100314,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 8.144412207999267,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 16.91742158299894,
+     "aircraft": "scout-02",
+     "text": "holding: link lost on scout-01"
+    },
+    {
+     "t": 16.97741666599177,
+     "aircraft": "scout-03",
+     "text": "holding: link lost on scout-01"
+    },
+    {
+     "t": 18.12652079097461,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 18.188161999976728,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 37.882412457984174,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 41.088770125003066,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 44.3051625409862,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 57.99701845800155,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 67.26314841597923,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 70.52160937499139,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 119.15003883300233,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 10,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3007,
+   "vehicle": "rapier",
+   "min_separation_m": 2.239404095466905,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 26.014031875005458,
+   "blackout": {
+    "aircraft": "scout-03",
+    "t0": 12.741502588781097,
+    "duration_s": 2.0,
+    "reaction_s": 1.9119308692253778,
+    "others_in_the_air": 2
+   },
+   "samples": 1157,
+   "duration_s": 131.09332541699405,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 2.64,
+     "gave_way": 0,
+     "final": [
+      3.022435188293457,
+      5.004157066345215,
+      0.02496320568025112
+     ],
+     "home_error_m": 0.022817074184947318,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.8972649491841255
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 31.76,
+     "gave_way": 0,
+     "final": [
+      8.51857852935791,
+      5.503925323486328,
+      0.02496323175728321
+     ],
+     "home_error_m": 0.018988678668486882,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.6180554664967493
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 7,
+     "held_s": 56.37,
+     "gave_way": 0,
+     "final": [
+      4.522848129272461,
+      7.502055644989014,
+      0.02496323175728321
+     ],
+     "home_error_m": 0.022940416028745934,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.5896462978168681
+    }
+   },
+   "events": [
+    {
+     "t": 8.063913292018697,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 8.875280458014458,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 13.813818833004916,
+     "aircraft": "scout-02",
+     "text": "holding: link lost on scout-03"
+    },
+    {
+     "t": 13.884756458021002,
+     "aircraft": "scout-01",
+     "text": "holding: link lost on scout-03"
+    },
+    {
+     "t": 14.822210875019664,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 16.52398933301447,
+     "aircraft": "scout-01",
+     "text": "proceeding"
+    },
+    {
+     "t": 40.63742529202136,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 43.971311250003055,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 47.888753917010035,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 58.324636375007685,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 70.19774200001848,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 73.34438500000397,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 122.01739379201899,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 9,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3008,
+   "vehicle": "rapier",
+   "min_separation_m": 2.2356899977110296,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 25.933932999992976,
+   "blackout": {
+    "aircraft": "scout-03",
+    "t0": 11.37783282741885,
+    "duration_s": 2.0,
+    "reaction_s": 1.8632465475834508,
+    "others_in_the_air": 2
+   },
+   "samples": 1141,
+   "duration_s": 131.05391537499963,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 2.52,
+     "gave_way": 0,
+     "final": [
+      3.021967887878418,
+      5.00409460067749,
+      0.02496320940554142
+     ],
+     "home_error_m": 0.02234622680782701,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.8972913576439407
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 33.46,
+     "gave_way": 0,
+     "final": [
+      8.517794609069824,
+      5.5035881996154785,
+      0.02496323175728321
+     ],
+     "home_error_m": 0.018152776328385432,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.618034138528493
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 8,
+     "held_s": 53.85,
+     "gave_way": 0,
+     "final": [
+      4.522730350494385,
+      7.502334117889404,
+      0.02496323175728321
+     ],
+     "home_error_m": 0.022849878334888676,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.589722582638649
+    }
+   },
+   "events": [
+    {
+     "t": 7.05681608300074,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 8.4116257080168,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 12.409978333016625,
+     "aircraft": "scout-02",
+     "text": "holding: link lost on scout-03"
+    },
+    {
+     "t": 12.478904250019696,
+     "aircraft": "scout-01",
+     "text": "holding: link lost on scout-03"
+    },
+    {
+     "t": 13.62011600000551,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 14.999776125012431,
+     "aircraft": "scout-01",
+     "text": "proceeding"
+    },
+    {
+     "t": 40.52076825001859,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 43.867884958017385,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 47.158398208004655,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 60.86734774999786,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 70.12881770799868,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 73.39096595800947,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 121.89445383299608,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 10,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  },
+  {
+   "seed": 3009,
+   "vehicle": "rapier",
+   "min_separation_m": 2.236091314818997,
+   "min_separation_pair": [
+    "scout-01",
+    "scout-02"
+   ],
+   "min_separation_t": 21.03927991600358,
+   "blackout": {
+    "aircraft": "scout-01",
+    "t0": 17.781053227138838,
+    "duration_s": 2.0,
+    "reaction_s": 0.005540313869349944,
+    "others_in_the_air": 2
+   },
+   "samples": 1139,
+   "duration_s": 129.00103949999902,
+   "flights": {
+    "scout-01": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 2.12,
+     "gave_way": 0,
+     "final": [
+      3.0109052658081055,
+      5.0018310546875,
+      0.02496323548257351
+     ],
+     "home_error_m": 0.011057919497538855,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.9014561413382692
+    },
+    "scout-02": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 1,
+     "held_s": 29.92,
+     "gave_way": 0,
+     "final": [
+      8.513472557067871,
+      5.503035068511963,
+      0.024963216856122017
+     ],
+     "home_error_m": 0.013810193149241324,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.6192916467386398
+    },
+    "scout-03": {
+     "goals_reached": 2,
+     "goals": 2,
+     "finished": true,
+     "error": null,
+     "holds": 6,
+     "held_s": 56.95,
+     "gave_way": 0,
+     "final": [
+      4.512965679168701,
+      7.500152111053467,
+      0.024963226169347763
+     ],
+     "home_error_m": 0.012966571407981305,
+     "envelope_violations": 0,
+     "contacts": 0,
+     "minimum_clearance_m": 0.5875200692700817
+    }
+   },
+   "events": [
+    {
+     "t": 6.2200334160006605,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 8.435236375022214,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 18.81725500000175,
+     "aircraft": "scout-03",
+     "text": "holding: link lost on scout-01"
+    },
+    {
+     "t": 18.817350375000387,
+     "aircraft": "scout-02",
+     "text": "holding: link lost on scout-01"
+    },
+    {
+     "t": 19.823744541005,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 19.82382858300116,
+     "aircraft": "scout-02",
+     "text": "holding: scout-01 has right of way across this leg"
+    },
+    {
+     "t": 38.36008720801328,
+     "aircraft": "scout-02",
+     "text": "proceeding"
+    },
+    {
+     "t": 41.69087874999968,
+     "aircraft": "scout-01",
+     "text": "landed"
+    },
+    {
+     "t": 46.01022720802575,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 55.02455033300794,
+     "aircraft": "scout-03",
+     "text": "holding: scout-02 has right of way across this leg"
+    },
+    {
+     "t": 68.12314633300412,
+     "aircraft": "scout-03",
+     "text": "proceeding"
+    },
+    {
+     "t": 71.38384100000258,
+     "aircraft": "scout-02",
+     "text": "landed"
+    },
+    {
+     "t": 119.82886812501238,
+     "aircraft": "scout-03",
+     "text": "landed"
+    }
+   ],
+   "holds_total": 8,
+   "checks": {
+    "separation_kept": true,
+    "all_goals_reached": true,
+    "all_landed_home": true,
+    "link_loss_hold": true,
+    "no_envelope_violation": true,
+    "within_time": true
+   },
+   "passed": true
+  }
+ ],
+ "scope": "Three aircraft on the shared airspace in the benchmark room, flying through its one doorway; positions reported as estimates, separation scored on the truth. The plant does not model aircraft-to-aircraft collision; separation is the measure. Not a hardware qualification.",
+ "accepted": true
+}

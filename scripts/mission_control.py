@@ -54,6 +54,8 @@ async def serve(args):
     install_places(app, ROOT/'.local/data/places.sqlite3', model)
     from app.dock_api import install as install_docks
     install_docks(app, runtime.docks, clients=runtime.dock_clients, runtime=runtime, current_pose=runtime.current_pose)
+    from app.airspace_api import install as install_airspace
+    install_airspace(app, runtime)
     async def dashboard(request):
         return web.FileResponse(ROOT/'app/ui/mission-console.html')
     app.router.add_get('/control', dashboard)

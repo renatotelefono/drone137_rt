@@ -19,7 +19,7 @@
     "model-server": {"basis": "formula", "note": "resident whenever the console runs; a mapping flight does not call it"},
     "flight": {"gib": 0.35, "basis": "measured 25 Oct exploration flight: Python flight processes plus grids and frames"},
     "vio": {"gib": 0.15, "basis": "idle footprint 5 MB measured 26 Oct; in-flight allowance with features and clones, not yet measured"},
-    "console": {"gib": 0.10, "basis": "measured 26 Oct, 0.04 GiB idle"},
+    "console": {"gib": 0.20, "basis": "measured 26 Oct, 0.04 GiB idle; the perched watch's person detector (Apple Vision) adds about 0.10 GiB on first use, measured 27 Oct"},
     "verifier": {"gib": 1.47, "basis": "measured 26 Oct: Florence worker footprint after a 3.5 s load"},
     "renderer": {"gib": 0.94, "basis": "measured 25 Oct exploration flight: Chromium and its helpers"},
     "physics": {"gib": 0.75, "basis": "measured 25 Oct exploration flight: two Node processes"},

@@ -235,8 +235,10 @@ is the gate (`docs/watch-validation.json`); the emulator plays scripted frames w
 poses (perch clearance and line of sight checked); `scripts/record_watch_clip.py` records real
 clips with labels; the gate plays either with `--set <folder>`. `app/watch_classify.py` decides
 added, taken away or moved from the pixels (surround and move tests); the model names the thing
-and says person; the event category is gated at 90 % on every set. Tests: `tests/test_watch.py`,
-`tests/test_watch_classify.py`, `tests/test_watch_emulator.py`, `tests/test_watch_render.py`.
+and says person; `app/person_detector.py` (Apple Vision on macOS, `pyobjc-framework-Vision` in
+the vision env) makes a person the detector's call and skips the model; the event category is
+gated at 90 % on every set. Tests: `tests/test_watch.py`, `tests/test_watch_classify.py`,
+`tests/test_person_detector.py`, `tests/test_watch_emulator.py`, `tests/test_watch_render.py`.
 Spec and limits: `docs/watch.md`.
 
 ## Pre-flight memory — 26 October 2026

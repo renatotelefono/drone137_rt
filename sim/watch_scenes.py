@@ -10,7 +10,9 @@ import numpy as np
 ROOT = Path(__file__).resolve().parents[1]
 FIXTURE = ROOT/'sim/assets/fixture-01.jpg'
 RATE = 2.5
-CATEGORIES = ('object_removed', 'object_added', 'object_moved', 'person', 'lighting')
+CATEGORIES = ('object_removed', 'object_added', 'object_moved', 'person', 'person_photo', 'lighting')
+PERSON_PHOTO = ROOT/'tests/fixtures/person-public-domain.jpg'   # a public-domain portrait: a real person for the person detector
+TRUTH_CATEGORY = {'person_photo': 'person'}
 
 
 def room():
@@ -33,6 +35,22 @@ def draw_figure(image, x, y, h):
     cv2.rectangle(image, (x - w//2, y - int(h*.4)), (x - 2, y), (40, 40, 50), -1); cv2.rectangle(image, (x + 2, y - int(h*.4)), (x + w//2, y), (40, 40, 50), -1)
 
 
+def person_photo(height):
+    photo = cv2.imread(str(PERSON_PHOTO)); scale = height/photo.shape[0]
+    return cv2.resize(photo, (int(photo.shape[1]*scale), height), interpolation=cv2.INTER_AREA)
+
+
+def paste(image, patch, x, y_bottom):
+    """The patch with its bottom centre at (x, y_bottom), clipped to the image."""
+    h, w = image.shape[:2]; ph, pw = patch.shape[:2]
+    x0, y0 = x - pw//2, y_bottom - ph
+    sx0, sy0 = max(0, -x0), max(0, -y0); dx0, dy0 = max(0, x0), max(0, y0)
+    cw, ch = min(pw - sx0, w - dx0), min(ph - sy0, h - dy0)
+    if cw > 0 and ch > 0:
+        image[dy0:dy0 + ch, dx0:dx0 + cw] = patch[sy0:sy0 + ch, sx0:sx0 + cw]
+    return (dx0, dy0, cw, ch)
+
+
 def sensor(image, rng, gain=1.):
     noisy = image.astype(np.float32)*gain + rng.normal(0, 2.5, image.shape)
     return np.clip(noisy, 0, 255).astype(np.uint8)
@@ -49,7 +67,9 @@ def scenario(category, seed, *, duration_s=30., event_at_s=12.):
     frames = []; n = int(duration_s*RATE)
     figure_h = int(rng.integers(200, 320)); figure_dir = rng.choice([-1, 1]); figure_y = int(rng.integers(h-60, h-10))
     walk_s = 4.
-    truth = {'category': category, 'at': event_at_s, 'kind': {'person': 'motion', 'lighting': 'lighting'}.get(category, 'change')}
+    truth = {'category': TRUTH_CATEGORY.get(category, category), 'scenario': category, 'at': event_at_s,
+             'kind': {'person': 'motion', 'person_photo': 'motion', 'lighting': 'lighting'}.get(category, 'change')}
+    photo = person_photo(int(h*.5)) if category == 'person_photo' else None; mid_walk = None
     for i in range(n):
         t = i/RATE; image = base.copy()
         flicker = 1 + .01*math.sin(t*1.3) + rng.normal(0, .003)
@@ -65,13 +85,18 @@ def scenario(category, seed, *, duration_s=30., event_at_s=12.):
             draw_object(image, ox, oy, kind, rng); truth['bbox'] = obj_bbox
         else:
             truth['bbox'] = obj_bbox
-        if category == 'person' and event_at_s <= t < event_at_s + walk_s:
+        if category in ('person', 'person_photo') and event_at_s <= t < event_at_s + walk_s:
             progress = (t - event_at_s)/walk_s
             x = int(w*(progress if figure_dir > 0 else 1-progress))
-            draw_figure(image, x, figure_y, figure_h)
+            if photo is None:
+                draw_figure(image, x, figure_y, figure_h); box = (x-int(figure_h*.18), figure_y-figure_h, int(figure_h*.36), figure_h)
+            else:
+                box = paste(image, photo, x, figure_y)
             if abs(progress-.5) < .06:
-                truth['bbox'] = (x-int(figure_h*.18), figure_y-figure_h, int(figure_h*.36), figure_h)   # the figure at mid-walk
+                mid_walk = box   # the figure at mid-walk
         frames.append((t, sensor(image, rng, gain)))
+    if category in ('person', 'person_photo'):
+        truth['bbox'] = mid_walk
     if category == 'lighting':
         truth['bbox'] = (0, 0, w, h)
     return frames, truth

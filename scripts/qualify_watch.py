@@ -49,11 +49,11 @@ async def staged(category, seed, model, folder, store):
     early = [e for e in events if e['at'] < truth['at'] - .5]
     hits = [e for e in events if e['at'] >= truth['at'] - .5 and e['kind'] == truth['kind']]
     hit = hits[-1] if hits else None   # the earliest in time; the list is newest first
-    result = {'category': category, 'seed': seed, 'detected': hit is not None, 'early_events': len(early),
+    result = {'scenario': category, 'category': truth['category'], 'seed': seed, 'detected': hit is not None, 'early_events': len(early),
               'latency_s': None if hit is None else hit['at'] - truth['at'],
               'iou': None if hit is None else iou(tuple(hit['bbox']), truth['bbox']), 'events': len(events)}
     if hit is not None and model is not None:
-        result['model'] = scored_answer(hit, category)
+        result['model'] = scored_answer(hit, truth['category']); result['person_seen'] = result['model']['person_seen']
     ok = result['detected'] and result['early_events'] == 0 and result['latency_s'] <= GATE['max_latency_s'] and (truth['kind'] != 'change' or result['iou'] >= GATE['min_iou_change'])
     result['passed'] = bool(ok)
     return result
@@ -64,6 +64,7 @@ def scored_answer(hit, truth_category):
     evidence = hit.get('evidence', {})
     return {'category': hit['category'], 'matters': hit['matters'], 'summary': hit['summary'], 'latency_s': hit['latency_s'],
             'detector_category': evidence.get('detector_category'), 'model_category': evidence.get('model_category'),
+            'person_seen': bool(evidence.get('person_detector', {}).get('seen')),
             'category_correct': hit['category'] == truth_category, 'model_label_correct': evidence.get('model_category') == truth_category,
             'matters_correct': hit['matters'] == (truth_category in MATTERS)}
 
@@ -157,8 +158,9 @@ async def main(args):
               'accepted': passed == len(results) and detected/len(results) >= GATE['detection'] and all(n['passed'] for n in nights)
                           and all(v['passed'] == v['scenarios'] - v['skipped'] for v in sets.values())
                           and (model is None or all(v['category_accuracy'] >= GATE['category_accuracy'] for v in sets.values())),
-              'per_category': {c: {'detected': sum(r['detected'] for r in results if r['category'] == c), 'of': args.seeds,
-                                   'median_latency_s': sorted((99. if r['latency_s'] is None else r['latency_s']) for r in results if r['category'] == c)[args.seeds//2]} for c in CATEGORIES},
+              'per_category': {c: {'detected': sum(r['detected'] for r in results if r['category'] == c), 'of': sum(1 for r in results if r['category'] == c),
+                                   'median_latency_s': sorted((99. if r['latency_s'] is None else r['latency_s']) for r in results if r['category'] == c)[sum(1 for r in results if r['category'] == c)//2]}
+                               for c in sorted({r['category'] for r in results})},
               'results': results, 'sets': sets, 'wall_time_s': time.time() - started, 'frame_rate_hz': RATE,
               'scope': 'Synthetic staged events drawn on a real photo with sensor noise and lamp flicker, plus rendered or recorded sets; the detector gate is deterministic. With the model, the event category is gated at 90 % on every set.'}
     if model is not None:
@@ -170,7 +172,9 @@ async def main(args):
                            'mean_latency_s': sum(m['latency_s'] or 0 for m in scored)/max(1, len(scored)),
                            'per_category': {c: {'correct': sum(r['model']['category_correct'] for r in results if r['category'] == c and 'model' in r),
                                                 'answers': [r['model']['category'] for r in results if r['category'] == c and 'model' in r],
-                                                'model_labels': [r['model']['model_category'] for r in results if r['category'] == c and 'model' in r]} for c in CATEGORIES}}
+                                                'model_labels': [r['model']['model_category'] for r in results if r['category'] == c and 'model' in r],
+                                                'person_detector_sightings': sum(1 for r in results if r['category'] == c and r.get('person_seen'))}
+                                            for c in sorted({r['category'] for r in results})}}
         report['accepted'] = report['accepted'] and report['model']['category_accuracy'] >= GATE['category_accuracy']
     Path(args.output).write_text(json.dumps(report, indent=1, default=float) + '\n')
     print(json.dumps({k: report[k] for k in ('accepted', 'detection_rate', 'passed', 'staged_events', 'false_alerts_total', 'max_latency_s')}

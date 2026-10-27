@@ -26,7 +26,17 @@ event was, keeps the evidence, and raises an alert in the console. Nothing leave
    one box losing a thing while another gains one in the same frame is a move too. When neither
    settles it, the answer is left to the model. A 2B model reads a revealed wall as a new object
    and misses a shift; the pixels do not.
-3. **One fixed question to the model, only on events** (`app/watch_events.py`). The event's
+3. **A person is the person detector's call** (`app/person_detector.py`). On every motion or
+   change event the frame goes to a detector made for people and nothing else: Apple's Vision
+   framework on macOS, on the machine, no weights of ours, about 20 ms and 0.1 GiB. A sighting
+   that overlaps the event's box makes the event a person, the alert is raised at once with the
+   fixed words "A person is in view", and the model is not asked. Nothing identifies anyone: a
+   box and a confidence, never a face or a name. Where the framework is not available the watch
+   says so in its status and the model's word decides, as below. The framework sees real people
+   and not drawn ones: the gate's walking silhouette goes through the model's path, and a real
+   person's photo carried through the room goes through the detector's. A person under about
+   150 px tall in the frame is missed by it and left to the model.
+4. **One fixed question to the model, only on events** (`app/watch_events.py`). The event's
    before-and-after picture, two panels labelled BEFORE and NOW cropped around the box and
    scaled so a small thing is legible, the box drawn in both, goes to the local model with a
    fixed schema: a one-sentence summary of at most 20 words first, then the category, then
@@ -41,35 +51,38 @@ event was, keeps the evidence, and raises an alert in the console. Nothing leave
    event's category is the model's word when it says person, otherwise the pixel verdict,
    otherwise the model's word. Lighting events skip the model. If the model fails, the event is recorded as an unreviewed
    alert; the detector decides that something happened, the model only says what.
-4. **The event record** (`.local/data/watch.sqlite3`, evidence under `.local/data/watch/`): time,
+5. **The event record** (`.local/data/watch.sqlite3`, evidence under `.local/data/watch/`): time,
    aircraft, kind, category, matters, summary, box, before, after and composite pictures, the
-   model's latency, the pixel verdict with its reason and the model's own label, and when it was
-   acknowledged. One event per kind per 30 s cooldown; a reported change becomes the new normal
-   so it is reported once.
-5. **Alerts in the console.** The Watch panel lists events with their pictures; unacknowledged
+   model's latency, the pixel verdict with its reason, the person detector's sighting and the
+   model's own label, and when it was acknowledged. One event per kind per 30 s cooldown; a
+   reported change becomes the new normal so it is reported once.
+6. **Alerts in the console.** The Watch panel lists events with their pictures; unacknowledged
    events that matter show a red banner and a tone; one button acknowledges. Delivery beyond
    the console is the site's own channel, not a cloud of ours.
 
 ## Gate
 
 `scripts/qualify_watch.py` stages events on a real photo with sensor noise and lamp flicker:
-an object removed, added or moved, a figure walking through, a light change, twelve seeds
-each, and quiet nights of eight hours at 2.5 Hz with no events. The detector gate: every staged
-event raises an event of the right kind within 4 s with its box overlapping the truth, no event
+an object removed, added or moved, a drawn figure walking through, a real person's photo
+(public domain, `tests/fixtures/person-public-domain.jpg`) carried through, a light change,
+twelve seeds each, and quiet nights of eight hours at 2.5 Hz with no events. The detector
+gate: every staged event raises an event of the right kind within 4 s with its box
+overlapping the truth, no event
 before the staged time, and at most one alert per quiet night. With `--model` the event's
 category (pixel verdict and model together) is gated at 90 % on the synthetic set and on every
 `--set`, and the model's own label and its "matters" answer are reported beside it. Results:
 `docs/watch-validation.json`.
 
-Run on 26 October 2026, with the pixel verdict, the labelled panels, the person definition
-and the detector's smaller minimum region: 60 of 60 staged events detected and passed, worst
-latency 1.2 s (a light change at once, a walking figure in 0.4 s, an object change in 1.2 s),
-no event before its time, and 0 false alerts over two eight-hour quiet nights of 72,000 frames
-each, with no candidate region at all. The event's category was right on 60 of 60 and the
-"matters" answer on 60 of 60. The model's own label was right on 45 of the 48 events it saw
-(it called three moved objects added; the pixels overruled it). The same gate scored the
-category at 58 % before these changes, when the model's word alone was the category. Mean
-model latency 2.3 s per event.
+Run on 27 October 2026, with the person detector, the pixel verdict, the labelled panels and
+the detector's smaller minimum region: 72 of 72 staged events detected and passed (the twelve
+real-person photo walks included), worst latency 1.2 s (a light change at once, a walking
+figure in 0.4 s, an object change in 1.2 s), no event before its time, and 0 false alerts over
+two eight-hour quiet nights of 72,000 frames each, with no candidate region at all. The event's
+category was right on 72 of 72 and "matters" on 72 of 72. The twelve photo walks were the
+person detector's call every time, raised at 0.4 s without a model call; the twelve drawn
+figures went through the model, which called them person every time. The model's own label was
+right on 45 of the 48 events it saw (three moved objects it called added; the pixels overruled
+it). Mean model latency 2.0 s per event.
 
 **Rendered set.** `sim/watch_render.py` renders staged events in the CC0 workshop through the
 service's own mission camera from a fixed dock pose: a paint tin, canister, bin, case, cone or
@@ -94,7 +107,8 @@ Rendered set, same run: 20 of 20 scenarios detected and passed, an object change
 the cart's motion in 0.4 to 2.4 s, a light change at once, no event before its time. The
 event's category was right on 18 of 20 (90 %, the gate's bar) and "matters" on 20 of 20: the
 four added objects, the four light changes, the four cart runs, three of the four moved
-objects and three of the four removals. The pixels settled ten of the twelve still changes,
+objects and three of the four removals. The person detector saw no person in any of the
+twenty, the cart and the chair included. The pixels settled ten of the twelve still changes,
 all correctly; the two they left to the model, an office chair moved 0.9 m within one dark
 region and a 32 cm bin taken off a rack 2.9 m away, the model called added (it read the plant
 the chair had hidden and the wall behind the bin as new things). The model's own label was
@@ -121,7 +135,9 @@ instead of its fixture, so the whole chain from camera to alert runs without a f
 
 The dock's tag stand sits in a perched camera's view; a sentinel dock needs the tag column
 moved off the camera's axis. Person detection is a moving figure and the model's word for it,
-never an identity, and no real clip of a person has been through the gate yet. The category
+never an identity. A real person has been through the detector only as a photo carried
+through the synthetic room; no clip of a person walking through a real room has been through
+the gate yet, and the drawn figure still relies on the model's word. The category
 is at the gate's bar, not above it: a thing moved within one region, or a thing that does not
 stand out from the rack it sits on, is left to the model, which reads uncovered background as
 a new object. The alert is right in those cases; the word is not. Change detection between sorties (the Watch cluster on flown images) is a

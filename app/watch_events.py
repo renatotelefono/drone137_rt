@@ -15,6 +15,7 @@ import uuid
 import cv2
 import numpy as np
 
+from app.person_detector import PersonDetector, person_in
 from app.watch_classify import classify_change, union_box
 from app.watch_detector import ChangeDetector, KINDS
 
@@ -160,10 +161,12 @@ class EventStore:
 
 class PerchedWatch:
     """One watched camera. frames: () -> (jpeg, sequence, capture_time_s) or None. model: .image(jpeg, prompt, schema, ...) or None."""
-    def __init__(self, aircraft, frames, store, folder, model=None, *, clock=time.time, cooldown_s=30., period_s=.4, detector=None, question=True):
+    def __init__(self, aircraft, frames, store, folder, model=None, *, clock=time.time, cooldown_s=30., period_s=.4, detector=None, question=True,
+                 people=None):
         self.aircraft, self.frames, self.store, self.folder, self.model = aircraft, frames, store, Path(folder), model
         self.clock, self.cooldown_s, self.period_s, self.question = clock, cooldown_s, period_s, question
         self.detector = detector or ChangeDetector()
+        self.people = people or PersonDetector()
         self.state = 'idle'; self.error = None; self.task = None
         self.frames_seen = self.candidates = self.events = self.suppressed = 0
         self.last_sequence = None; self.last_event = None; self.last_frame = None
@@ -173,6 +176,7 @@ class PerchedWatch:
     def status(self):
         return {'aircraft': self.aircraft, 'state': self.state, 'error': self.error, 'frames': self.frames_seen, 'candidates': self.candidates,
                 'events': self.events, 'suppressed': self.suppressed, 'reference_ready': self.detector.reference is not None,
+                'person_detector': self.people.backend,
                 'last_event': self.last_event, 'started': self.started, 'cooldown_s': self.cooldown_s}
 
     async def start(self):
@@ -248,7 +252,11 @@ class PerchedWatch:
                     'detector_category': verdict['category'] if verdict else None, 'reason': verdict['reason'] if verdict else None, 'model_category': None}
         (folder/'before.jpg').write_bytes(encode(before_bgr)); (folder/'after.jpg').write_bytes(encode(after)); (folder/'composite.jpg').write_bytes(encode(pair))
         answer, latency, model_name = None, None, None
-        if self.model is not None and self.question and kind != 'lighting':
+        # A person is the detector's call, made for that and nothing else; the model is not asked then.
+        person = person_in(self.people.detect(after), candidate['bbox']) if kind != 'lighting' else None
+        evidence['person_detector'] = {'backend': self.people.backend, 'seen': person is not None,
+                                       **({'confidence': person['confidence'], 'bbox': list(person['bbox'])} if person else {})}
+        if person is None and self.model is not None and self.question and kind != 'lighting':
             began = time.monotonic()
             try:
                 raw = await self.model.image(encode(pair, 85), PROMPT + hint(candidate, after.shape, verdict),
@@ -261,14 +269,16 @@ class PerchedWatch:
         if answer is not None and model_category != 'person' and says_person(answer['summary']):
             model_category = 'person'; evidence['model_says_person'] = True
         detector_category = verdict['category'] if verdict else None
-        # The model's word for a person wins; the pixels decide added, taken away or moved; the model fills the rest.
+        # The person detector's sighting wins, then the model's word for a person; the pixels decide added, taken away or moved; the model fills the rest.
         if kind == 'lighting':
             category = 'lighting'
-        elif model_category == 'person':
+        elif person is not None or model_category == 'person':
             category = 'person'
         else:
             category = detector_category or model_category
-        if answer is not None and category == model_category:
+        if person is not None:
+            matters, summary = True, 'A person is in view'          # never who
+        elif answer is not None and category == model_category:
             matters, summary = bool(answer['matters']) and category in MATTERS, answer['summary']
         elif answer is not None:
             matters, summary = category in MATTERS, answer['summary']

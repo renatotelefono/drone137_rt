@@ -127,7 +127,9 @@ class Pipeline(unittest.IsolatedAsyncioTestCase):
         model = FakeModel(fail=True)
         watch, truth = await self.run_scenario('object_added', model)
         e = self.store.list()[0]
-        self.assertIsNone(e['category']); self.assertTrue(e['matters']); self.assertIn('unreviewed', e['summary']); self.assertIn('model', watch.error)
+        # The pixels still say what kind of change it was; the model's failure leaves the summary unreviewed.
+        self.assertEqual(e['category'], 'object_added'); self.assertIsNone(e['evidence']['model_category'])
+        self.assertTrue(e['matters']); self.assertIn('unreviewed', e['summary']); self.assertIn('model', watch.error)
 
     async def test_parse_and_composite(self):
         self.assertEqual(parse(json.dumps({'category': 'person', 'matters': True, 'summary': 'x'}))['category'], 'person')

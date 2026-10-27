@@ -14,20 +14,39 @@ event was, keeps the evidence, and raises an alert in the console. Nothing leave
    moved); a difference over most of the image, or a brightness shift in one direction over
    70 % of it, is `lighting`, which a dim room needs because its dark parts move by less than
    the object threshold. About 10 ms per VGA frame.
-2. **One fixed question to the model, only on events** (`app/watch_events.py`). The event's
-   before-and-after picture, the two panels labelled BEFORE and NOW with the changed region
-   boxed in both, goes to the local model with a fixed schema: a one-sentence summary of what
-   differs first, then the category (person, object added, removed, moved, lighting, nothing),
-   then whether it matters, and the instruction never to describe who a person is. The prompt
-   defines a person as any walking or standing human shape, and the detector adds what it knows
-   in words: whether the region moved across the frame or appeared and stayed still, how much of
-   the picture it covers, and whether it is taller than wide. Lighting events skip the model. If the model fails, the event is recorded as an unreviewed
+2. **The kind of object change, from the pixels** (`app/watch_classify.py`). The still regions
+   of one frame are one event (a moved thing leaves one box and fills another). Two tests on the
+   reference and the frame at the detector's working size decide what kind of change it is. The
+   surround test: how far a box's pixels are, on average, from the nearest colour in the band
+   around the box; a thing standing in front of its surroundings scores several levels, the
+   background it hid scores near zero, so one side standing out and the other not settles added
+   or removed. The move test: a thing that stands out on one side is searched for in the other
+   picture inside the event's boxes, and a strong match at a different changed place where it
+   stands out as well means it moved; a look-alike in unchanged surroundings does not count, and
+   one box losing a thing while another gains one in the same frame is a move too. When neither
+   settles it, the answer is left to the model. A 2B model reads a revealed wall as a new object
+   and misses a shift; the pixels do not.
+3. **One fixed question to the model, only on events** (`app/watch_events.py`). The event's
+   before-and-after picture, two panels labelled BEFORE and NOW cropped around the box and
+   scaled so a small thing is legible, the box drawn in both, goes to the local model with a
+   fixed schema: a one-sentence summary of at most 20 words first, then the category, then
+   whether it matters, and the instruction never to describe who a person is. A region that
+   moved across the frame can only be a person, a moving object or nothing; a still region can
+   be any category. The prompt defines a person as any walking or standing human shape and says
+   a cart, trolley, box, machine or piece of furniture is not one, and that a thing gone from
+   BEFORE is removed even when the wall or floor it uncovered looks new; the detector adds what
+   it knows in words: moved or stayed, how much of the picture, taller than wide, and the pixel
+   verdict with its reason. The model's own sentence is read as well: when it names a person,
+   the answer is person, since its free text proved more reliable than its category pick. The
+   event's category is the model's word when it says person, otherwise the pixel verdict,
+   otherwise the model's word. Lighting events skip the model. If the model fails, the event is recorded as an unreviewed
    alert; the detector decides that something happened, the model only says what.
-3. **The event record** (`.local/data/watch.sqlite3`, evidence under `.local/data/watch/`): time,
+4. **The event record** (`.local/data/watch.sqlite3`, evidence under `.local/data/watch/`): time,
    aircraft, kind, category, matters, summary, box, before, after and composite pictures, the
-   model's latency, and when it was acknowledged. One event per kind per 30 s cooldown; a
-   reported change becomes the new normal so it is reported once.
-4. **Alerts in the console.** The Watch panel lists events with their pictures; unacknowledged
+   model's latency, the pixel verdict with its reason and the model's own label, and when it was
+   acknowledged. One event per kind per 30 s cooldown; a reported change becomes the new normal
+   so it is reported once.
+5. **Alerts in the console.** The Watch panel lists events with their pictures; unacknowledged
    events that matter show a red banner and a tone; one button acknowledges. Delivery beyond
    the console is the site's own channel, not a cloud of ours.
 
@@ -37,20 +56,20 @@ event was, keeps the evidence, and raises an alert in the console. Nothing leave
 an object removed, added or moved, a figure walking through, a light change, twelve seeds
 each, and quiet nights of eight hours at 2.5 Hz with no events. The detector gate: every staged
 event raises an event of the right kind within 4 s with its box overlapping the truth, no event
-before the staged time, and at most one alert per quiet night. With `--model` the local model's
-category and "matters" answers are scored and reported, not gated, because the pictures are
-synthetic. Results: `docs/watch-validation.json`.
+before the staged time, and at most one alert per quiet night. With `--model` the event's
+category (pixel verdict and model together) is gated at 90 % on the synthetic set and on every
+`--set`, and the model's own label and its "matters" answer are reported beside it. Results:
+`docs/watch-validation.json`.
 
-Run on 26 October 2026, after the labelled panels, the person definition, the detector note
+Run on 26 October 2026, with the pixel verdict, the labelled panels, the person definition
 and the detector's smaller minimum region: 60 of 60 staged events detected and passed, worst
 latency 1.2 s (a light change at once, a walking figure in 0.4 s, an object change in 1.2 s),
 no event before its time, and 0 false alerts over two eight-hour quiet nights of 72,000 frames
-each, with no candidate region at all. The local model's "matters" answer was right on 100 %
-of the 60 events, which is the answer that raises the alert; its category label was right on
-85 %: a removed object 12 of 12, an added object 12 of 12, light changes 12 of 12, the walking
-figure 11 of 12, a moved object 4 of 12 (it says added or removed; a 90 px shift on a photo
-rarely reads as the same thing in a new place). The same gate before these changes scored the
-category at 58 %. Mean model latency 2.2 s per event with the longer answer.
+each, with no candidate region at all. The event's category was right on 60 of 60 and the
+"matters" answer on 60 of 60. The model's own label was right on 45 of the 48 events it saw
+(it called three moved objects added; the pixels overruled it). The same gate scored the
+category at 58 % before these changes, when the model's word alone was the category. Mean
+model latency 2.3 s per event.
 
 **Rendered set.** `sim/watch_render.py` renders staged events in the CC0 workshop through the
 service's own mission camera from a fixed dock pose: a paint tin, canister, bin, case, cone or
@@ -73,13 +92,16 @@ gate as another `--set`. A person event can only come from a real clip; none is 
 
 Rendered set, same run: 20 of 20 scenarios detected and passed, an object change in 1.2 s,
 the cart's motion in 0.4 to 2.4 s, a light change at once, no event before its time. The
-model's "matters" answer was right on all 16 events it saw (lighting skips it); its category
-label on 7 of 16: an added object 4 of 4 (the crate, the canister), a removed object 2 of 4,
-a moved object 1 of 8 (the rolling cart and the moved tin, cones, canister and chair it mostly
-calls added or removed). Mean model latency 2.5 s. The two smallest removals, a 40 cm tin at
-2.1 m and a 32 cm bin at 2.9 m, are a quarter to a third of a percent of the frame and set
-the detector's minimum region; the light change in the dim workshop set its brightness-shift
-rule. Both sets' results are in `docs/watch-validation.json`.
+event's category was right on 18 of 20 (90 %, the gate's bar) and "matters" on 20 of 20: the
+four added objects, the four light changes, the four cart runs, three of the four moved
+objects and three of the four removals. The pixels settled ten of the twelve still changes,
+all correctly; the two they left to the model, an office chair moved 0.9 m within one dark
+region and a 32 cm bin taken off a rack 2.9 m away, the model called added (it read the plant
+the chair had hidden and the wall behind the bin as new things). The model's own label was
+right on 13 of the 20; mean model latency 2.7 s. The two smallest removals, a 40 cm tin at
+2.1 m and the bin, are a quarter to a third of a percent of the frame and set the detector's
+minimum region; the light change in the dim workshop set its brightness-shift rule. Both
+sets' results are in `docs/watch-validation.json`.
 
 `hardware/esp32/link_emulator.py --frames <folder>` plays a folder of JPEG frames at 2.5 Hz
 instead of its fixture, so the whole chain from camera to alert runs without a flight
@@ -99,7 +121,9 @@ instead of its fixture, so the whole chain from camera to alert runs without a f
 
 The dock's tag stand sits in a perched camera's view; a sentinel dock needs the tag column
 moved off the camera's axis. Person detection is a moving figure and the model's word for it,
-never an identity, and no real clip of a person has been through the gate yet. The moved-object
-label is the model's weak point on both sets: the alert is right, the word is not. Change detection between sorties (the Watch cluster on flown images) is a
+never an identity, and no real clip of a person has been through the gate yet. The category
+is at the gate's bar, not above it: a thing moved within one region, or a thing that does not
+stand out from the rack it sits on, is left to the model, which reads uncovered background as
+a new object. The alert is right in those cases; the word is not. Change detection between sorties (the Watch cluster on flown images) is a
 separate piece, as is the site page that draws rooms green, amber or red. Retention and who
 sees the evidence are product decisions still to be written down.

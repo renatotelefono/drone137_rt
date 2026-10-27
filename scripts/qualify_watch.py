@@ -23,7 +23,7 @@ from app.watch_detector import ChangeDetector, iou
 from app.watch_events import EventStore, MATTERS, PerchedWatch
 from sim.watch_scenes import CATEGORIES, RATE, jpeg, quiet, scenario
 
-GATE = {'detection': .95, 'max_latency_s': 4., 'min_iou_change': .15, 'false_alerts_per_night': 1}
+GATE = {'detection': .95, 'max_latency_s': 4., 'min_iou_change': .15, 'false_alerts_per_night': 1, 'category_accuracy': .9}
 
 
 class Clock:
@@ -53,11 +53,19 @@ async def staged(category, seed, model, folder, store):
               'latency_s': None if hit is None else hit['at'] - truth['at'],
               'iou': None if hit is None else iou(tuple(hit['bbox']), truth['bbox']), 'events': len(events)}
     if hit is not None and model is not None:
-        result['model'] = {'category': hit['category'], 'matters': hit['matters'], 'summary': hit['summary'], 'latency_s': hit['latency_s'],
-                           'category_correct': hit['category'] == category, 'matters_correct': hit['matters'] == (category in MATTERS)}
+        result['model'] = scored_answer(hit, category)
     ok = result['detected'] and result['early_events'] == 0 and result['latency_s'] <= GATE['max_latency_s'] and (truth['kind'] != 'change' or result['iou'] >= GATE['min_iou_change'])
     result['passed'] = bool(ok)
     return result
+
+
+def scored_answer(hit, truth_category):
+    """The event's category (pixels decide the kind of object change, the model names it and says person) and the model's own label."""
+    evidence = hit.get('evidence', {})
+    return {'category': hit['category'], 'matters': hit['matters'], 'summary': hit['summary'], 'latency_s': hit['latency_s'],
+            'detector_category': evidence.get('detector_category'), 'model_category': evidence.get('model_category'),
+            'category_correct': hit['category'] == truth_category, 'model_label_correct': evidence.get('model_category') == truth_category,
+            'matters_correct': hit['matters'] == (truth_category in MATTERS)}
 
 
 async def played(folder, model, store, work):
@@ -85,8 +93,7 @@ async def played(folder, model, store, work):
               'latency_s': None if hit is None else hit['at'] - truth['at'], 'events': len(events), 'frames': len(frames),
               'object': truth.get('object'), 'perch_height_m': truth.get('perch_height_m')}
     if hit is not None and model is not None:
-        result['model'] = {'category': hit['category'], 'matters': hit['matters'], 'summary': hit['summary'], 'latency_s': hit['latency_s'],
-                           'category_correct': hit['category'] == truth['category'], 'matters_correct': hit['matters'] == (truth['category'] in MATTERS)}
+        result['model'] = scored_answer(hit, truth['category'])
     result['passed'] = bool(result['detected'] and result['early_events'] == 0 and result['latency_s'] <= GATE['max_latency_s'])
     return result
 
@@ -132,9 +139,13 @@ async def main(args):
             r = await played(f, model, store, folder/'played')
             rows.append(r); print(json.dumps({k: (round(v, 2) if isinstance(v, float) else v) for k, v in r.items() if k != 'model'} | ({'model': r['model']['category'], 'ok': r['model']['category_correct']} if 'model' in r else {})), flush=True)
         scored = [r for r in rows if 'skipped' not in r]
+        with_model = [r for r in scored if 'model' in r]
         sets[str(directory)] = {'scenarios': len(rows), 'skipped': len(rows) - len(scored), 'detected': sum(r['detected'] for r in scored), 'passed': sum(r['passed'] for r in scored),
-                                'model_category_accuracy': (sum(r['model']['category_correct'] for r in scored if 'model' in r)/max(1, sum('model' in r for r in scored))) if model else None,
-                                'model_matters_accuracy': (sum(r['model']['matters_correct'] for r in scored if 'model' in r)/max(1, sum('model' in r for r in scored))) if model else None,
+                                'category_accuracy': (sum(r['model']['category_correct'] for r in with_model)/max(1, len(with_model))) if model else None,
+                                'model_label_accuracy': (sum(r['model']['model_label_correct'] for r in with_model)/max(1, len(with_model))) if model else None,
+                                'matters_accuracy': (sum(r['model']['matters_correct'] for r in with_model)/max(1, len(with_model))) if model else None,
+                                'per_category': {c: {'correct': sum(r['model']['category_correct'] for r in with_model if r['category'] == c),
+                                                     'of': sum(1 for r in with_model if r['category'] == c)} for c in sorted({r['category'] for r in with_model})},
                                 'results': rows}
     nights = [night(500 + i, args.hours) for i in range(args.nights)]
     for n in nights:
@@ -144,22 +155,27 @@ async def main(args):
               'detection_rate': detected/len(results), 'max_latency_s': max((r['latency_s'] or 0) for r in results),
               'nights': nights, 'false_alerts_total': sum(n['alerts'] for n in nights), 'night_hours': args.hours,
               'accepted': passed == len(results) and detected/len(results) >= GATE['detection'] and all(n['passed'] for n in nights)
-                          and all(v['passed'] == v['scenarios'] - v['skipped'] for v in sets.values()),
+                          and all(v['passed'] == v['scenarios'] - v['skipped'] for v in sets.values())
+                          and (model is None or all(v['category_accuracy'] >= GATE['category_accuracy'] for v in sets.values())),
               'per_category': {c: {'detected': sum(r['detected'] for r in results if r['category'] == c), 'of': args.seeds,
                                    'median_latency_s': sorted((99. if r['latency_s'] is None else r['latency_s']) for r in results if r['category'] == c)[args.seeds//2]} for c in CATEGORIES},
               'results': results, 'sets': sets, 'wall_time_s': time.time() - started, 'frame_rate_hz': RATE,
-              'scope': 'Synthetic staged events drawn on a real photo with sensor noise and lamp flicker; the detector gate is deterministic. Model scores are reported, not gated.'}
+              'scope': 'Synthetic staged events drawn on a real photo with sensor noise and lamp flicker, plus rendered or recorded sets; the detector gate is deterministic. With the model, the event category is gated at 90 % on every set.'}
     if model is not None:
         scored = [r['model'] for r in results if 'model' in r]
         report['model'] = {'name': 'local Qwen 2B', 'events_scored': len(scored),
                            'category_accuracy': sum(m['category_correct'] for m in scored)/max(1, len(scored)),
+                           'model_label_accuracy': sum(m['model_label_correct'] for m in scored)/max(1, len(scored)),
                            'matters_accuracy': sum(m['matters_correct'] for m in scored)/max(1, len(scored)),
                            'mean_latency_s': sum(m['latency_s'] or 0 for m in scored)/max(1, len(scored)),
                            'per_category': {c: {'correct': sum(r['model']['category_correct'] for r in results if r['category'] == c and 'model' in r),
-                                                'answers': [r['model']['category'] for r in results if r['category'] == c and 'model' in r]} for c in CATEGORIES}}
+                                                'answers': [r['model']['category'] for r in results if r['category'] == c and 'model' in r],
+                                                'model_labels': [r['model']['model_category'] for r in results if r['category'] == c and 'model' in r]} for c in CATEGORIES}}
+        report['accepted'] = report['accepted'] and report['model']['category_accuracy'] >= GATE['category_accuracy']
     Path(args.output).write_text(json.dumps(report, indent=1, default=float) + '\n')
-    print(json.dumps({k: report[k] for k in ('accepted', 'detection_rate', 'passed', 'staged_events', 'false_alerts_total', 'max_latency_s')} | ({'model': report['model']['category_accuracy']} if 'model' in report else {})
-                     | {'sets': {k: {kk: v[kk] for kk in ('scenarios', 'detected', 'passed', 'model_category_accuracy', 'model_matters_accuracy')} for k, v in sets.items()}}, default=float), flush=True)
+    print(json.dumps({k: report[k] for k in ('accepted', 'detection_rate', 'passed', 'staged_events', 'false_alerts_total', 'max_latency_s')}
+                     | ({'category_accuracy': report['model']['category_accuracy'], 'model_label_accuracy': report['model']['model_label_accuracy']} if 'model' in report else {})
+                     | {'sets': {k: {kk: v[kk] for kk in ('scenarios', 'detected', 'passed', 'category_accuracy', 'model_label_accuracy', 'matters_accuracy')} for k, v in sets.items()}}, default=float), flush=True)
     temp.cleanup()
     return 0 if report['accepted'] else 1
 

@@ -233,8 +233,11 @@ Watch panel; `sim/watch_scenes.py` stages events on a real photo; `scripts/quali
 is the gate (`docs/watch-validation.json`); the emulator plays scripted frames with `--frames`.
 `sim/watch_render.py` renders staged object events in the CC0 workshop from table-height dock
 poses (perch clearance and line of sight checked); `scripts/record_watch_clip.py` records real
-clips with labels; the gate plays either with `--set <folder>`. Tests: `tests/test_watch.py`,
-`tests/test_watch_emulator.py`, `tests/test_watch_render.py`. Spec and limits: `docs/watch.md`.
+clips with labels; the gate plays either with `--set <folder>`. `app/watch_classify.py` decides
+added, taken away or moved from the pixels (surround and move tests); the model names the thing
+and says person; the event category is gated at 90 % on every set. Tests: `tests/test_watch.py`,
+`tests/test_watch_classify.py`, `tests/test_watch_emulator.py`, `tests/test_watch_render.py`.
+Spec and limits: `docs/watch.md`.
 
 ## Pre-flight memory — 26 October 2026
 

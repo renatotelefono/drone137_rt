@@ -33,6 +33,31 @@ contact, mean 25 s from the return gate to contact, estimate re-anchored within
 16 mm short of the centre on each of six runs (`.local/validation/docking-rapier-before-integral.log`
 on the development Mac).
 
+Two docks in one place (`scripts/qualify_docking.py --docks 2`): dock 1 stands 0.6 m to the
+left of dock 0, facing the same way, with its own three tags (ids 3 to 5 against 0 to 2); the
+camera draws both columns, farthest first, and both stands are solid. The commanded dock
+alternates with the seed and the aircraft starts on the other dock's side, so the other
+column is in the first frame. First-order vehicle, 27 October 2026
+(`docs/docking-validation-two-docks-kinematic.json`): 20 of 20 landed on the commanded
+dock, ten on each, worst touchdown 5.3 mm and 0.26°, no stand contact, never
+closer than 0.60 m to the other dock's centre, mean 31 s. Rapier plant
+(`docs/docking-validation-two-docks-rapier.json`): the benchmark room decides where two docks
+can stand. Beside the home dock there is no room for a second one: 0.6 m toward the south wall
+or toward the bottle table, the flight's 0.35 m separation envelope tripped during the
+approach or the align, on the wall once in six runs and on the table at the second run. The
+pair therefore stands in the bay along the south wall between the table and the partition,
+1.5 m of clear width, dock 0 at x 4.45 and dock 1 0.6 m beside it, both facing the wall, the
+flight going round the table and the mission's last waypoint drawn within 0.3 m sideways, as
+a planner would in a bay that wide.
+10 of 10 landed on the commanded dock at the first attempt, five on each, worst
+touchdown 11.9 mm and 0.17°, no stand contact, never closer than 0.59 m to the other
+dock's centre, estimate re-anchored within 8 mm, mean 23 s from the return gate to
+contact. The controller only ever sees its own
+dock's ids; the other dock's tags are detected and dropped by the tag detector. Placement
+rule that follows: docks 0.6 m apart centre to centre, and 0.75 m of free floor either side
+of each dock's approach line and 0.4 m beyond its pocket, so the return gate's error and the
+envelope fit.
+
 Not done: the dock controller firmware and the carrier STAT input are hardware work;
 the Three.js mission renderer does not draw the tag column (the dock phase in simulation
 renders its own frames from the plant's pose); the Watch cluster's sortie scheduler is
@@ -86,6 +111,10 @@ docks(id, place_id, revision, pose_place {x, y, yaw}, tag_ids [3], tag_sizes_m [
   pose. From then on every landing on the dock closes the loop: when the dock reports
   contact, the VIO pose is reset to the dock pose, and the dock pose is the origin of
   the place map for later visits.
+- **Several docks in one place** carry distinct tags: a dock's three ids follow its index
+  (3n, 3n+1, 3n+2), and the registry refuses a second dock with the same index in the same
+  place. A mission names the dock it ends on; the tag detector of that landing ignores every
+  other id.
 - The dock controller is reached like an aircraft: pinned HTTPS on the private network,
   one certificate and pairing credential per dock, local only. Addresses and
   credentials never reach the model, as for aircraft.

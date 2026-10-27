@@ -1,4 +1,5 @@
 """Perched-watch routes: start and stop a watch on a connected aircraft, read events, acknowledge, fetch evidence."""
+import asyncio
 import re
 
 from aiohttp import web
@@ -10,6 +11,7 @@ def install(app, connections, *, model=None, store=None, folder=None):
     store = store or EventStore()
     folder = folder or DATA/'watch'
     watches = {}
+    model_lock = asyncio.Lock()   # one local model, one question at a time; watches queue on it
 
     def frames_for(identity):
         def frames():
@@ -34,7 +36,7 @@ def install(app, connections, *, model=None, store=None, folder=None):
         watch = watches.get(identity)
         if watch and watch.state == 'watching':
             raise RuntimeError('Already watching this aircraft')
-        watch = watches[identity] = PerchedWatch(identity, frames_for(identity), store, folder/identity, model)
+        watch = watches[identity] = PerchedWatch(identity, frames_for(identity), store, folder/identity, model, model_lock=model_lock)
         await watch.start()
         return web.json_response(watch.status())
 

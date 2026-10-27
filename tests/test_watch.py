@@ -191,6 +191,50 @@ class Api(unittest.IsolatedAsyncioTestCase):
         self.assertEqual((await r.json())['state'], 'stopped')
         r = await self.client.get('/api/watch/events/zzz/composite.jpg'); self.assertEqual(r.status, 404)
 
+    async def test_two_watches_run_at_once_and_share_the_model(self):
+        class SharedModel:
+            name = 'shared'
+
+            def __init__(self):
+                self.calls = 0; self.in_flight = 0; self.max_in_flight = 0; self.aircraft = []
+
+            async def image(self, jpeg, prompt, schema, timeout=12, max_tokens=120):
+                self.calls += 1; self.in_flight += 1; self.max_in_flight = max(self.max_in_flight, self.in_flight)
+                try:
+                    await asyncio.sleep(.2)   # a slow model: the other watch keeps stepping meanwhile
+                    return json.dumps({'category': 'object_added', 'matters': True, 'summary': 'Something changed on the shelf.'})
+                finally:
+                    self.in_flight -= 1
+
+        model = SharedModel(); temp = tempfile.TemporaryDirectory()
+        added, _ = scenario('object_added', 7); removed, _ = scenario('object_removed', 8)
+        connections = {'em-1': Connection(added), 'em-2': Connection(removed)}
+        app = web.Application(middlewares=[local_only])
+        watches, store = install(app, connections, model=model, store=EventStore(Path(temp.name)/'w.sqlite3'), folder=Path(temp.name)/'watch')
+        client = TestClient(TestServer(app)); await client.start_server()
+        try:
+            for identity in ('em-1', 'em-2'):
+                r = await client.post(f'/api/watch/{identity}/start', json={}, headers=self.headers)
+                self.assertEqual(r.status, 200); watches[identity].period_s = 0.
+            async with asyncio.timeout(30):
+                while any(w.events < 1 for w in watches.values()):
+                    await asyncio.sleep(.05)
+            body = await (await client.get('/api/watch')).json()
+            self.assertEqual(sorted(w['aircraft'] for w in body['watches']), ['em-1', 'em-2'])
+            self.assertTrue(all(w['state'] == 'watching' for w in body['watches']))
+            events = {e['aircraft']: e for e in store.list()}
+            self.assertEqual(set(events), {'em-1', 'em-2'})
+            self.assertEqual(events['em-1']['category'], 'object_added'); self.assertEqual(events['em-2']['category'], 'object_removed')   # the pixels decide each
+            self.assertTrue(all(e['matters'] for e in events.values()))
+            for e in events.values():
+                self.assertTrue((Path(temp.name)/'watch'/e['aircraft']/e['id']/'composite.jpg').is_file())
+            self.assertEqual(model.calls, 2); self.assertEqual(model.max_in_flight, 1)   # both asked the one model; the second queued, never collided
+            self.assertTrue(any(e['evidence'].get('model_wait_s', 0) > .1 for e in events.values()))
+            for identity in ('em-1', 'em-2'):
+                self.assertEqual((await (await client.post(f'/api/watch/{identity}/stop', json={}, headers=self.headers)).json())['state'], 'stopped')
+        finally:
+            await client.close(); temp.cleanup()
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -180,11 +180,16 @@ class TagRenderer:
             return None
         return cv2.projectPoints(np.asarray(points, float), cv2.Rodrigues(R_cd)[0], t, self.K, None)[0].reshape(-1, 2)
 
-    def render(self, R_cd, t, jpeg_quality=None):
-        g = self.geometry; w, h = self.optics['width'], self.optics['height']
+    def blank(self):
+        w, h = self.optics['width'], self.optics['height']
         canvas = np.empty((h, w, 3), np.uint8)
         canvas[:] = (58, 60, 62)
         canvas[h//2:] = (74, 76, 78)
+        return canvas
+
+    def draw(self, canvas, R_cd, t):
+        """This dock's pocket, stand plate and tags onto the canvas, from camera pose (R_cd, t) in this dock's frame."""
+        g = self.geometry; w, h = self.optics['width'], self.optics['height']
         ph = g['pocket_half_m']
         pocket = self.project([[-ph, ph, 0], [ph, ph, 0], [ph, -ph, 0], [-ph, -ph, 0]], R_cd, t)
         if pocket is not None:
@@ -206,6 +211,11 @@ class TagRenderer:
                 warped = cv2.warpPerspective(marker, H, (w, h), flags=cv2.INTER_LINEAR, borderValue=(0, 0, 0))
                 mask = cv2.warpPerspective(np.full((200, 200), 255, np.uint8), H, (w, h), flags=cv2.INTER_NEAREST)
                 canvas[mask > 0] = warped[mask > 0]
+        return canvas
+
+    def finish(self, canvas, jpeg_quality=None):
+        """Lens distortion, blur, vignette, noise and JPEG, as the benchmark camera does."""
+        w, h = self.optics['width'], self.optics['height']
         image = cv2.remap(canvas, self.map_x, self.map_y, cv2.INTER_LINEAR, borderMode=cv2.BORDER_REPLICATE)
         e = self.effects
         if e['blur'] > 0:
@@ -219,3 +229,6 @@ class TagRenderer:
             ok, data = cv2.imencode('.jpg', image, [cv2.IMWRITE_JPEG_QUALITY, int(round(jpeg_quality*100))])
             return data.tobytes()
         return image
+
+    def render(self, R_cd, t, jpeg_quality=None):
+        return self.finish(self.draw(self.blank(), R_cd, t), jpeg_quality)

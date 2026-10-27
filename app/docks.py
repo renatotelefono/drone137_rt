@@ -1,7 +1,8 @@
 """Dock registry: versioned site objects a mission can end on, plus the dock controller client.
 
 A dock record pins where dock A stands in a place (pose in the place frame), which tag ids
-it carries, and how to reach its controller. Credentials stay in the local database and
+it carries (three per dock, from its index; two docks in one place must differ), and how to
+reach its controller. Credentials stay in the local database and
 never leave this process; listings strip them.
 """
 import copy
@@ -101,6 +102,11 @@ class Docks:
         r = validate(record, self.geometry)
         if type(expected_revision) is not int or expected_revision < 0:
             raise ValueError('expected_revision required')
+        for other in self.list():
+            d = other['dock']
+            if d['id'] != r['id'] and d.get('place_id') == r['place_id'] and d['index'] == r['index']:
+                raise ValueError(f"Dock index {r['index']} (tags {r['tag_ids']}) is already used by dock '{d['id']}' in this place; "
+                                 "two docks in one place need distinct tags")
         content = encoded(r); digest = hashlib.sha256(content.encode()).hexdigest()
         with self.connection() as db:
             db.execute('BEGIN IMMEDIATE')

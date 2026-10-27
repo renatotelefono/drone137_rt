@@ -3,6 +3,7 @@ question to the model, cooldowns and an alert flag. The detector decides that so
 happened; the model only says what it was, from a before-and-after picture, in a fixed schema.
 """
 import asyncio
+import contextlib
 from contextlib import contextmanager
 import json
 import os
@@ -162,8 +163,10 @@ class EventStore:
 class PerchedWatch:
     """One watched camera. frames: () -> (jpeg, sequence, capture_time_s) or None. model: .image(jpeg, prompt, schema, ...) or None."""
     def __init__(self, aircraft, frames, store, folder, model=None, *, clock=time.time, cooldown_s=30., period_s=.4, detector=None, question=True,
-                 people=None):
+                 people=None, model_lock=None):
+        """model_lock: shared by every watch on one model, which answers one question at a time; the others queue."""
         self.aircraft, self.frames, self.store, self.folder, self.model = aircraft, frames, store, Path(folder), model
+        self.model_lock = model_lock
         self.clock, self.cooldown_s, self.period_s, self.question = clock, cooldown_s, period_s, question
         self.detector = detector or ChangeDetector()
         self.people = people or PersonDetector()
@@ -259,8 +262,10 @@ class PerchedWatch:
         if person is None and self.model is not None and self.question and kind != 'lighting':
             began = time.monotonic()
             try:
-                raw = await self.model.image(encode(pair, 85), PROMPT + hint(candidate, after.shape, verdict),
-                                             SCHEMA_MOTION if kind == 'motion' else SCHEMA, timeout=12, max_tokens=160)
+                async with (self.model_lock if self.model_lock is not None else contextlib.nullcontext()):
+                    evidence['model_wait_s'] = round(time.monotonic() - began, 3)   # queued behind another watch's question
+                    raw = await self.model.image(encode(pair, 85), PROMPT + hint(candidate, after.shape, verdict),
+                                                 SCHEMA_MOTION if kind == 'motion' else SCHEMA, timeout=12, max_tokens=160)
                 answer = parse(raw); model_name = getattr(self.model, 'name', 'local')
             except Exception as exc:
                 answer = None; self.error = f'model: {type(exc).__name__}: {exc}'[:160]

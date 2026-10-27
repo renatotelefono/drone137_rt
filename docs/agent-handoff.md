@@ -237,9 +237,12 @@ clips with labels; the gate plays either with `--set <folder>`. `app/watch_class
 added, taken away or moved from the pixels (surround and move tests); the model names the thing
 and says person; `app/person_detector.py` (Apple Vision on macOS, `pyobjc-framework-Vision` in
 the vision env) makes a person the detector's call and skips the model; the event category is
-gated at 90 % on every set. Tests: `tests/test_watch.py`, `tests/test_watch_classify.py`,
+gated at 90 % on every set; several watches queue on one model lock (`--parallel N --only-sets`
+plays a set as N watches at once). Tests: `tests/test_watch.py`, `tests/test_watch_classify.py`,
 `tests/test_person_detector.py`, `tests/test_watch_emulator.py`, `tests/test_watch_render.py`.
-Spec and limits: `docs/watch.md`.
+Spec and limits: `docs/watch.md`. Two docks in one place: `scripts/qualify_docking.py --docks 2`
+(`sim/dock_world.py` draws every dock's column; the registry refuses a second dock with the same
+tags in a place); results in `docs/docking-validation-two-docks-*.json`, test in `tests/test_docking.py`.
 
 ## Pre-flight memory — 26 October 2026
 

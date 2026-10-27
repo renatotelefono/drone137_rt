@@ -2,10 +2,11 @@ import asyncio
 import math
 import unittest
 
+import cv2
 import numpy as np
 
-from app.dock_tags import load_geometry
-from sim.dock_world import DockSimulation, DockWorld, Estimator, KinematicDockVehicle, kinematic_docking, return_gate_start
+from app.dock_tags import load_geometry, tag_ids
+from sim.dock_world import DockSimulation, DockWorld, Estimator, KinematicDockVehicle, beside, kinematic_docking, return_gate_start
 
 CAMERA = {'width': 960, 'height': 540, 'vertical_fov': 41, 'effects': {'distortion': -.025, 'blur': .6, 'noise': .018},
           'jpeg_quality': .72, 'latency_ms': 120, 'drop_every_n': 9}
@@ -33,6 +34,31 @@ class KinematicDocking(unittest.TestCase):
             est_p, est_yaw = sim.vehicle.estimate()
             self.assertLess(np.linalg.norm(est_p - sim.vehicle.position), .02)
             self.assertLess(result['duration_s'], 120)
+
+    def test_two_docks_side_by_side_land_on_the_commanded_one(self):
+        """Dock 1 stands 0.6 m to the left of dock 0 with its own tags; both are in the picture, the aircraft lands on the one it was sent to."""
+        detector = cv2.aruco.ArucoDetector(cv2.aruco.getPredefinedDictionary(cv2.aruco.DICT_APRILTAG_36h11))
+        dock0 = DockWorld(self.g, 0, (1.25, 1.25, 0.), 0.)
+        origin1, yaw1, _ = beside(dock0)
+        docks = {0: ((1.25, 1.25, 0.), 0.), 1: (origin1, yaw1)}
+        for commanded in (0, 1):
+            for seed in (0, 1):
+                origin, yaw = docks[commanded]; other = (*docks[1 - commanded], 1 - commanded)
+                side = 1. if commanded == 0 else -1.   # start on the other dock's side, so it is in view from the first frame
+                sim, error = kinematic_docking(seed, self.g, CAMERA, origin=origin, yaw=yaw, index=commanded, others=[other], start_d=(-1.6, side*.6, .9))
+                position, heading = sim.vehicle.truth()
+                first = cv2.imdecode(np.frombuffer(sim.camera.render(position, heading), np.uint8), cv2.IMREAD_COLOR)
+                _, ids, _ = detector.detectMarkers(cv2.cvtColor(first, cv2.COLOR_BGR2GRAY))
+                seen = set(ids.reshape(-1).tolist()) if ids is not None else set()
+                self.assertTrue(seen & set(tag_ids(1 - commanded)), (commanded, seed, seen))
+                self.assertTrue(seen & set(tag_ids(commanded)), (commanded, seed, seen))
+                result = run(sim.phase().run()); truth = sim.truth()
+                self.assertEqual(result['outcome'], 'docked', (commanded, seed, result['states'], result.get('error')))
+                self.assertLess(abs(truth['f_m']), .02); self.assertLess(abs(truth['l_m']), .02); self.assertLess(abs(truth['yaw_deg']), 5)
+                self.assertTrue(truth['landed']); self.assertEqual(truth['stand_contacts'], 0)
+                self.assertEqual(truth['other_docks'][0]['index'], 1 - commanded)
+                self.assertGreater(truth['other_docks'][0]['distance_m'], .5)
+                self.assertTrue(result['dock_status']['contact'])
 
     def test_return_gate_draw_stays_inside_the_gate(self):
         rng = np.random.default_rng(3)

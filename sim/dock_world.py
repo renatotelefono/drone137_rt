@@ -9,7 +9,7 @@ import time
 
 import numpy as np
 
-from app.dock_tags import TagRenderer, body_rotation, extrinsics, optics_from_scene_camera
+from app.dock_tags import TagRenderer, body_rotation, extrinsics, optics_from_scene_camera, rot_z
 
 
 def wrap(a):
@@ -115,22 +115,35 @@ class SimulatedDockClient:
 
 
 class DockCamera:
-    """Renders the tag column from the true aircraft pose with the scene camera's optics, latency and drops."""
-    def __init__(self, world, scene_camera, seed=0):
+    """Renders the tag column from the true aircraft pose with the scene camera's optics, latency and drops.
+    Other docks in the room are drawn too, farthest first, with their own tags: the controller must ignore them."""
+    def __init__(self, world, scene_camera, seed=0, others=()):
         self.world = world
         self.optics = optics_from_scene_camera(scene_camera)
         self.renderer = TagRenderer(world.geometry, world.index, self.optics, scene_camera.get('effects'), seed)
+        self.others = [(other, TagRenderer(other.geometry, other.index, self.optics, scene_camera.get('effects'), seed + 1 + i))
+                       for i, other in enumerate(others)]
         self.jpeg_quality = scene_camera.get('jpeg_quality', .72)
         self.latency_s = scene_camera.get('latency_ms', 0)/1000
         self.drop_every_n = scene_camera.get('drop_every_n', 0)
         self.sequence = 0
         self.period_s = world.geometry['procedure']['frame_period_s']
 
-    def render(self, position, yaw, quaternion_rotation=None):
+    def views(self, position, yaw, quaternion_rotation=None):
+        """(renderer, R_cd, t) for this dock and the others, farthest first."""
         p, yaw_d = self.world.to_dock(position, yaw)
         R_db = quaternion_rotation if quaternion_rotation is not None else body_rotation(yaw_d)
-        R_cd, t = extrinsics(p, R_db, self.world.geometry['aircraft'])
-        return self.renderer.render(R_cd, t, jpeg_quality=self.jpeg_quality)
+        views = [(self.renderer, *extrinsics(p, R_db, self.world.geometry['aircraft']))]
+        for other, renderer in self.others:
+            p2, _ = other.to_dock(position, yaw)
+            views.append((renderer, *extrinsics(p2, rot_z(self.world.yaw - other.yaw) @ R_db, other.geometry['aircraft'])))
+        return sorted(views, key=lambda v: -float(np.linalg.norm(v[2])))
+
+    def render(self, position, yaw, quaternion_rotation=None):
+        canvas = self.renderer.blank()
+        for renderer, R_cd, t in self.views(position, yaw, quaternion_rotation):
+            renderer.draw(canvas, R_cd, t)
+        return self.renderer.finish(canvas, jpeg_quality=self.jpeg_quality)
 
     def capture(self, history, now):
         """One frame from the pose latency_s ago; every nth frame is dropped, as the benchmark camera does."""
@@ -230,7 +243,7 @@ class KinematicDockVehicle:
                         self.landed = True
                 turn = wrap(self.goal[3] - self.yaw)
                 self.yaw = wrap(self.yaw + max(-self.max_yaw_rate*dt, min(self.max_yaw_rate*dt, turn)))
-        if self.world.stand_contact(self.position):
+        if any(w.stand_contact(self.position) for w in (self.world, *getattr(self, 'obstacles', ()))):
             self.stand_contacts += 1
         self.history.append((self.t, self.position.copy(), self.yaw))
         if len(self.history) > 200:
@@ -291,7 +304,7 @@ class RapierDockVehicle:
             self.history.append((self.now(), position, yaw))
             if len(self.history) > 200:
                 self.history.pop(0)
-            if self.world.stand_contact(position):
+            if any(w.stand_contact(position) for w in (self.world, *getattr(self, 'obstacles', ()))):
                 self.stand_contacts += 1
             remaining = end - time.monotonic()
             if remaining <= 0:
@@ -310,13 +323,16 @@ class RapierDockVehicle:
 
 class DockSimulation:
     """Wires a dock, its camera and electronics to a vehicle; hands the controller only what it may see."""
-    def __init__(self, geometry, scene_camera, vehicle_factory, estimator, *, origin=(1.25, 1.25, 0.), yaw=0., index=0, seed=0):
+    def __init__(self, geometry, scene_camera, vehicle_factory, estimator, *, origin=(1.25, 1.25, 0.), yaw=0., index=0, seed=0, others=()):
+        """others: (origin, yaw, index) of the room's other docks; they show in the camera with their own tags and their stands are solid."""
         self.geometry = geometry
         self.world = DockWorld(geometry, index, origin, yaw)
+        self.others = [DockWorld(geometry, i, o, y) for o, y, i in others]
         self.controller = DockController(self.world, geometry['charge_policy'])
-        self.camera = DockCamera(self.world, scene_camera, seed)
+        self.camera = DockCamera(self.world, scene_camera, seed, self.others)
         self.estimator = estimator
         self.vehicle = vehicle_factory(self.world, estimator)
+        self.vehicle.obstacles = self.others
         simulation = self
 
         class Client(SimulatedDockClient):
@@ -343,8 +359,12 @@ class DockSimulation:
         """Privileged summary for scoring: where the aircraft really is relative to the dock."""
         position, yaw = self.vehicle.truth()
         p, yaw_d = self.world.to_dock(position, yaw)
+        others = []
+        for w in self.others:
+            q, _ = w.to_dock(position, yaw)
+            others.append({'index': w.index, 'f_m': float(q[0]), 'l_m': float(q[1]), 'distance_m': float(math.hypot(q[0], q[1]))})
         return {'f_m': float(p[0]), 'l_m': float(p[1]), 'u_m': float(p[2]), 'yaw_deg': math.degrees(yaw_d), 'landed': bool(self.vehicle.landed),
-                'centred': self.controller.centred, 'stand_contacts': self.vehicle.stand_contacts}
+                'centred': self.controller.centred, 'stand_contacts': self.vehicle.stand_contacts, 'other_docks': others}
 
 
 def return_gate_start(rng, geometry, max_error_m=.4, max_yaw_error_deg=15.):
@@ -353,12 +373,18 @@ def return_gate_start(rng, geometry, max_error_m=.4, max_yaw_error_deg=15.):
     return np.array([r*math.cos(a), r*math.sin(a), rng.uniform(-.08, .08), math.radians(rng.uniform(-max_yaw_error_deg, max_yaw_error_deg))])
 
 
-def kinematic_docking(seed, geometry, scene_camera, *, origin=(1.25, 1.25, 0.), yaw=0., start_d=(-1.6, .6, .9), **vehicle_options):
+def kinematic_docking(seed, geometry, scene_camera, *, origin=(1.25, 1.25, 0.), yaw=0., start_d=(-1.6, .6, .9), index=0, others=(), **vehicle_options):
     """One docking of the first-order vehicle, starting away from the dock with a drawn navigation error."""
     rng = np.random.default_rng(seed)
     error = return_gate_start(rng, geometry)
     estimator = Estimator(offset=(error[0], error[1], error[2], error[3]), seed=seed)
-    world = DockWorld(geometry, 0, origin, yaw)
+    world = DockWorld(geometry, index, origin, yaw)
     start_w, start_yaw = world.to_world(start_d, 0.)
     factory = lambda w, e: KinematicDockVehicle(w, [*start_w, start_yaw], e, **vehicle_options)
-    return DockSimulation(geometry, scene_camera, factory, estimator, origin=origin, yaw=yaw, seed=seed), error
+    return DockSimulation(geometry, scene_camera, factory, estimator, origin=origin, yaw=yaw, index=index, seed=seed, others=others), error
+
+
+def beside(world, left_m=.6, index=None):
+    """(origin, yaw, index) of a second dock standing left_m to the left of this one, facing the same way."""
+    origin, yaw = world.to_world((0., left_m, 0.), 0.)
+    return tuple(float(v) for v in origin), float(yaw), (1 - world.index) if index is None else index

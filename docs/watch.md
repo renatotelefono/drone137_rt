@@ -98,6 +98,13 @@ geometry). `scripts/qualify_watch.py --set <folder>` plays each scenario through
 scores it by kind and timing, no box truth, and the gate requires every one to pass. Nothing
 rendered is a person.
 
+**Several watches on one model.** Each docked aircraft has its own watch; the local model
+answers one question at a time, so the watches queue on one lock and the record keeps the
+time each question waited (`model_wait_s`). The person alert never waits: the detector raises
+it before any question is asked. `scripts/qualify_watch.py --parallel 2 --only-sets` plays
+the rendered set as two watches at once on the one model (`docs/watch-validation-paired.json`):
+20 of 20 detected and passed, category 18 of 20 and "matters" 20 of 20, the same as one watch at a time; the model answered one question at a time (never two in flight), no question failed, the second watch's question waited up to 4.3 s, and the sentence arrived 6.0 s after the event on average (8.3 s at worst) against 2.8 s (4.3 s) alone. The detector's alert itself was not delayed: worst event latency 2.4 s in both runs. Before the queue, two watches reaching the model together made the adapter refuse the second question outright; that run is why the queue exists.
+
 **Real clips.** `scripts/record_watch_clip.py --source 0 --category person --output <folder>`
 records a webcam, a video file or an aircraft's frame URL at 2.5 Hz with a `truth.json` beside
 the frames; Enter marks the moment the event happens. A parent folder of such clips goes to the

@@ -43,6 +43,19 @@ class Registry(unittest.TestCase):
         self.assertEqual(self.docks.landings('hall-dock')[0]['detail'], {'touchdown_mm': 7})
         self.assertEqual([e['dock']['id'] for e in self.docks.list()], ['hall-dock'])
 
+    def test_two_docks_in_one_place_need_distinct_tags(self):
+        a = self.docks.save({'id': 'dock-a', 'name': 'A', 'pose': POSE, 'index': 0, 'place_id': 'hall'})
+        b = self.docks.save({'id': 'dock-b', 'name': 'B', 'pose': {**POSE, 'y': 1.85}, 'index': 1, 'place_id': 'hall'})
+        self.assertEqual((a['dock']['tag_ids'], b['dock']['tag_ids']), ([0, 1, 2], [3, 4, 5]))
+        with self.assertRaises(ValueError) as caught:
+            self.docks.save({'id': 'dock-c', 'name': 'C', 'pose': POSE, 'index': 1, 'place_id': 'hall'})
+        self.assertIn('distinct tags', str(caught.exception))
+        with self.assertRaises(ValueError):
+            self.docks.register('dock-c', 'C', POSE, place_id='hall', index=0)
+        self.docks.save({'id': 'dock-c', 'name': 'C', 'pose': POSE, 'index': 1, 'place_id': 'yard'})       # another place may reuse the tags
+        self.assertEqual(self.docks.save({'id': 'dock-b', 'name': 'B again', 'pose': POSE, 'index': 1, 'place_id': 'hall'}, expected_revision=1)['revision'], 2)
+        self.assertEqual(sorted(e['dock']['id'] for e in self.docks.list()), ['dock-a', 'dock-b', 'dock-c'])
+
     def test_credentials_never_leave_in_listings(self):
         link = {'endpoint': 'https://10.0.0.5:8443', 'fingerprint': 'a'*64, 'credential': 'secret-credential-x'}
         entry = self.docks.save({'id': 'hall-dock', 'name': 'Hall', 'pose': POSE, 'link': link})

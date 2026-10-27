@@ -1,6 +1,8 @@
 """Run mission control against an already installed, local llama-server."""
 import argparse
 import asyncio
+
+from app.portability import install_stop_handlers
 import signal
 import time
 from aiohttp import web
@@ -65,8 +67,7 @@ async def serve(args):
     await web.TCPSite(runner, '127.0.0.1', args.port).start()
     print(f'Drone137 mission control: http://127.0.0.1:{args.port}/control', flush=True)
     done = asyncio.Event()
-    for sig in (signal.SIGINT, signal.SIGTERM):
-        asyncio.get_running_loop().add_signal_handler(sig, done.set)
+    install_stop_handlers(asyncio.get_running_loop(), done.set)
     try:
         await done.wait()
     finally:

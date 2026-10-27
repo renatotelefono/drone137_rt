@@ -5,7 +5,7 @@ const output='.local/validation/mission-control-live.json';
 const result={real_inference:true,real_flight_dynamics:false,concurrent_flight:false,errors:[],intent_checks:[]};
 let browser,page;
 (async()=>{
- browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true,args:['--no-sandbox']});
+ browser=await chromium.launch({executablePath:require('./browser-path.cjs').browserPath(),headless:true,args:['--no-sandbox']});
  result.browser=await browser.version();page=await browser.newPage({viewport:{width:1560,height:1100}});
  page.on('pageerror',e=>result.errors.push(e.message));
  const status=()=>page.evaluate(async()=>(await fetch('/api/fleet/status')).json());

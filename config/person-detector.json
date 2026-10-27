@@ -1,0 +1,15 @@
+{
+  "note": "A person detector that runs wherever OpenCV runs: MobileNet-SSD (Caffe, VOC classes, MIT licence, chuanqi305/MobileNet-SSD). macOS uses Apple's Vision framework instead. Files are verified by size and by the git blob SHA-1 GitHub publishes for them; scripts/fetch_person_model.py records the SHA-256 of a verified download as well.",
+  "backend": "opencv-ssd",
+  "licence": "MIT",
+  "source": "https://github.com/chuanqi305/MobileNet-SSD",
+  "files": [
+    {"name": "deploy.prototxt", "url": "https://raw.githubusercontent.com/chuanqi305/MobileNet-SSD/master/deploy.prototxt", "size": 44667, "git_blob_sha1": "88021a94bca5c22753a23664d388d4922b2186bb", "sha256": null},
+    {"name": "mobilenet_iter_73000.caffemodel", "url": "https://raw.githubusercontent.com/chuanqi305/MobileNet-SSD/master/mobilenet_iter_73000.caffemodel", "size": 23306119, "git_blob_sha1": "253e5012dd6a17666fd7ae16cfa14a6860280ff7", "sha256": null}
+  ],
+  "input_size": 300,
+  "scale": 0.007843,
+  "mean": 127.5,
+  "person_class": 15,
+  "min_confidence": 0.5
+}

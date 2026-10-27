@@ -164,6 +164,21 @@ installed files are preserved for inspection; they are never silently used.
 Keep 10 GiB free **in addition** to remaining model downloads or the 4 GiB runtime
 build allowance. Actual combined resource use still needs measurement on the Mac.
 
+## Start on Windows
+
+Ported, not yet run on Windows: see [windows.md](docs/windows.md) for the hand-over. On a
+Windows 11 x64 machine with a GPU, clone the repo and double-click `Start drone137.bat`, or in
+PowerShell:
+
+```
+powershell -ExecutionPolicy Bypass -File scripts\bootstrap-windows.ps1 --minimal
+scripts\run-local.ps1 --mode recon --open-browser
+```
+
+The console's "Install runtime" unpacks a pinned llama.cpp release (Vulkan by default, CUDA or
+CPU with `DRONE137_RUNTIME_BACKEND`); the person detector comes from
+`python -m scripts.fetch_person_model`.
+
 ## What the virtual product does
 
 - Generates repeatable random rooms, warehouse aisles and connected rooms.

@@ -1,8 +1,9 @@
 import asyncio
 import os
-import signal
 import json
 from pathlib import Path
+
+from app.portability import kill_tree, spawn_kwargs, terminate_tree
 
 
 class ProcessSupervisor:
@@ -34,7 +35,7 @@ class ProcessSupervisor:
             process = await asyncio.create_subprocess_exec(
                 *argv, cwd=cwd, env=env, stdout=asyncio.subprocess.PIPE,
                 stderr=asyncio.subprocess.STDOUT,
-                start_new_session=True)
+                **spawn_kwargs())
         except BaseException:
             handle.close()
             raise
@@ -64,19 +65,13 @@ class ProcessSupervisor:
 
     async def stop(self, name):
         process = self.processes.pop(name)
-        try:
-            os.killpg(process.pid, signal.SIGTERM)
-        except ProcessLookupError:
-            pass
+        terminate_tree(process.pid)
         try:
             await asyncio.wait_for(process.wait(), 3)
         except TimeoutError:
             pass
         # A group may still contain children even if its parent exited.
-        try:
-            os.killpg(process.pid, signal.SIGKILL)
-        except ProcessLookupError:
-            pass
+        kill_tree(process.pid)
         await process.wait()
         self._publish()
 

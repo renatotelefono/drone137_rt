@@ -4,7 +4,7 @@ const readline=require('node:readline'),fs=require('node:fs'),crypto=require('no
 let browser,page;
 async function command(c){
  if(c.op==='open'){
-  browser=await chromium.launch({executablePath:'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+  browser=await chromium.launch({executablePath:require('./browser-path.cjs').browserPath(),headless:true});
   page=await browser.newPage({viewport:{width:1280,height:1000}});
   const errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto(c.url);await page.waitForFunction(()=>window.flight?.capture);

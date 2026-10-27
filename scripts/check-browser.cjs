@@ -4,7 +4,7 @@ const { chromium } = require('../.local/browser-test/node_modules/playwright');
 const fs = require('node:fs');
 let browser;
 (async()=>{
- browser = await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/usr/bin/chromium',headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
+ browser = await chromium.launch({executablePath:require('./browser-path.cjs').browserPath(),headless:true,args:['--no-sandbox','--use-gl=angle','--use-angle=swiftshader','--enable-unsafe-swiftshader']});
  const page = await browser.newPage({viewport:{width:1440,height:1100}});
  const errors=[];page.on('pageerror',e=>errors.push(e.message));
  await page.goto('http://127.0.0.1:8137');

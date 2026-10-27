@@ -3,7 +3,7 @@ const fs=require('node:fs');
 const assert=require('node:assert/strict');
 const folder='.local/validation/component-ui';fs.mkdirSync(folder,{recursive:true});
 (async()=>{
- const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true,args:['--no-sandbox']});
+ const browser=await chromium.launch({executablePath:require('./browser-path.cjs').browserPath(),headless:true,args:['--no-sandbox']});
  try{
   const page=await browser.newPage({viewport:{width:1440,height:1100}}),errors=[];page.on('pageerror',e=>errors.push(e.message));
   await page.goto('http://127.0.0.1:8152/components');await page.waitForFunction(()=>window.componentLab&&document.querySelector('#state').textContent==='Ready');

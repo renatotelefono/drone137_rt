@@ -1,6 +1,8 @@
 import asyncio
 import json
 import platform
+
+from app.portability import runtime_binary
 import shutil
 import sys
 import time
@@ -10,7 +12,15 @@ import os
 from adapters.llama import LlamaBackend, DECISION_SCHEMA
 from app.model_store import ModelStore
 from app.native import unused_port
-from scripts.tools import DATA, BUILD, ROOT
+from scripts.tools import runtime_plan, DATA, BUILD, ROOT
+
+
+def runtime_plan_or_none():
+    try:
+        plan = runtime_plan()
+        return {k: plan[k] for k in ("method", "backend", "gpu_layers")}
+    except Exception as exc:
+        return {"error": str(exc)}
 
 
 class ModelManager:
@@ -24,7 +34,7 @@ class ModelManager:
         self.job_name = None
         self.error = None
         self.check_result = None
-        self.binary = BUILD / "llama.cpp/build/bin/llama-server"
+        self.binary = runtime_binary(BUILD)
 
     @property
     def ready(self):
@@ -42,6 +52,7 @@ class ModelManager:
             "runtime_installed": self.binary.is_file(),
             "host": {"os": platform.system(), "architecture": platform.machine(),
                      "native_metal_candidate": platform.system() == "Darwin" and platform.machine() == "arm64",
+                     "runtime_plan": runtime_plan_or_none(),
                      "cmake": bool(shutil.which("cmake")), "compiler": bool(shutil.which("clang"))},
             "vision_check": self.check_result, "acceptance": "unverified",
             "app_pid":os.getpid(),"model_pid":process.pid if process and process.returncode is None else None,
@@ -66,8 +77,7 @@ class ModelManager:
             elif name == "reset-partials":
                 self.store.reset_partials()
             elif name == "install-runtime":
-                if platform.system() != "Darwin" or platform.machine() != "arm64":
-                    raise RuntimeError("Automatic native runtime installation currently requires an Apple Silicon Mac")
+                runtime_plan()   # raises where no plan exists (Intel macOS)
                 process = await self.owned.spawn("runtime-build",
                     [sys.executable, "-m", "scripts.tools", "install-runtime"],
                     DATA / "logs/runtime-build.log", cwd=ROOT)
@@ -99,14 +109,14 @@ class ModelManager:
             raise RuntimeError("Install the native runtime first")
         unused_port(8081)
         self.state = "starting"
-        metal = platform.system() == "Darwin" and platform.machine() == "arm64"
+        gpu_layers = self.gpu_layers()
         await self.owned.spawn("llama", [
             str(self.binary), "-m", str(model), "--mmproj", str(projector),
             "--host", "127.0.0.1", "--port", "8081", "-c", "2048", "-np", "1",
             # The server otherwise retains idle prompt states in an 8 GiB cache,
             # even though our requests disable prompt reuse. Inspections are stateless.
             "--cache-ram", "0", "--no-cache-prompt",
-            "-ngl", "99" if metal else "0", "--threads", "2",
+            "-ngl", str(gpu_layers), "--threads", "2",
         ], DATA / "logs/llama.log")
         self.backend = LlamaBackend(timeout=6)
         async with asyncio.timeout(120):
@@ -119,6 +129,17 @@ class ModelManager:
                 except Exception:
                     await asyncio.sleep(.5)
         self.state = "ready"
+
+    def gpu_layers(self):
+        """How many layers the installed runtime puts on the GPU: all for Metal, CUDA and Vulkan, none for a CPU build."""
+        record = DATA / "installed/llama.json"
+        try:
+            installed = json.loads(record.read_text())
+            if "gpu_layers" in installed:
+                return int(installed["gpu_layers"])
+        except (OSError, ValueError):
+            pass
+        return runtime_plan()["gpu_layers"]
 
     async def stop(self):
         if self.backend:

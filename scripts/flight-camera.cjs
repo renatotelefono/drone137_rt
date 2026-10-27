@@ -4,7 +4,7 @@ let browser,page,folder,frames=0,liveTimer,liveBusy=false;
 function event(stage,details={}){if(folder)fs.appendFileSync(path.join(folder,'camera-lifecycle.jsonl'),JSON.stringify({time:Date.now()/1000,stage,...details})+'\n');}
 async function command(c){
  if(c.op==='open'){
-  folder=path.resolve(c.folder);browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+  folder=path.resolve(c.folder);browser=await chromium.launch({executablePath:require('./browser-path.cjs').browserPath(),headless:true});
   page=await browser.newPage({viewport:{width:1280,height:1000}});page.on('pageerror',e=>process.stderr.write(e.message+'\n'));
   const origin=new URL(c.url).origin;
   await page.route('**/*',route=>{const u=new URL(route.request().url());

@@ -21,7 +21,7 @@ if(generated.status) throw new Error(generated.stderr);
 const cases = JSON.parse(generated.stdout);
 (async()=>{
  fs.mkdirSync(folder,{recursive:true});
- const browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+ const browser=await chromium.launch({executablePath:require('./browser-path.cjs').browserPath(),headless:true});
  try{
   const page=await browser.newPage();
   const original=await (await page.request.get('http://127.0.0.1:8137/api/status')).json();

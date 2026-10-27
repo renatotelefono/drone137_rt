@@ -244,6 +244,17 @@ Spec and limits: `docs/watch.md`. Two docks in one place: `scripts/qualify_docki
 (`sim/dock_world.py` draws every dock's column; the registry refuses a second dock with the same
 tags in a place); results in `docs/docking-validation-two-docks-*.json`, test in `tests/test_docking.py`.
 
+## Windows port — 27 October 2026
+
+`app/portability.py` answers every platform question (process trees, stop handlers, browser,
+runtime binary); `scripts/launch.py` has a loopback control channel for Windows;
+`config/runtime-windows.json` pins llama.cpp release b11763 by digest and `scripts/tools.py`
+unpacks it (`runtime-plan` prints the plan); `app/person_detector.py` gains the OpenCV
+MobileNet-SSD backend (`scripts/fetch_person_model.py`, `config/person-detector.json`);
+`scripts/browser-path.cjs` finds Chrome, Edge or Chromium; `Start drone137.bat`,
+`scripts/bootstrap-windows.ps1`, `scripts/run-local.ps1`. Nothing has run on Windows: the
+hand-over list is `docs/windows.md`. Tests: `tests/test_portability.py`.
+
 ## Shared airspace — 27 October 2026
 
 `app/airspace.py` (separation, right of way by number, lost-link hold, corridors, give way),

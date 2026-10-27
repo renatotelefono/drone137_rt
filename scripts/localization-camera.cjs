@@ -5,7 +5,7 @@ let browser,page,state,folder,currentScene,frames=0;
 async function command(c){
  if(c.op==='open'){
   folder=path.resolve(c.folder);fs.mkdirSync(folder,{recursive:true});
-  browser=await chromium.launch({executablePath:process.env.CHROMIUM_PATH||'/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',headless:true});
+  browser=await chromium.launch({executablePath:require('./browser-path.cjs').browserPath(),headless:true});
   page=await browser.newPage({viewport:{width:1280,height:860}});
   page.on('pageerror',e=>process.stderr.write(e.message+'\n'));
   const original=await(await page.request.get('http://127.0.0.1:8137/api/status')).json();

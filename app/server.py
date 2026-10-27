@@ -1,5 +1,7 @@
 import argparse
 import asyncio
+
+from app.portability import install_stop_handlers
 import json
 import os
 import re
@@ -91,8 +93,7 @@ async def serve(args):
                 import webbrowser
                 webbrowser.open(f"http://127.0.0.1:{args.port}/control")
             done = asyncio.Event()
-            for sig in (signal.SIGINT, signal.SIGTERM):
-                asyncio.get_running_loop().add_signal_handler(sig, done.set)
+            install_stop_handlers(asyncio.get_running_loop(), done.set)
             await done.wait()
             return
         if args.mode == "fixture":
@@ -143,8 +144,7 @@ async def serve(args):
         print(json.dumps({"event": "app_listening", "port": args.port, **provenance}), flush=True)
         done = asyncio.Event()
         loop = asyncio.get_running_loop()
-        for sig in (signal.SIGINT, signal.SIGTERM):
-            loop.add_signal_handler(sig, done.set)
+        install_stop_handlers(loop, done.set)
         await done.wait()
     finally:
         try:

@@ -1,0 +1,16 @@
+{
+  "note": "llama.cpp release b11763 is the commit the macOS build is pinned to (b38960f5 is b11763 plus one CI-only commit). Hashes are the release assets' sha256 digests as published by the GitHub release API on 27 October 2026; the installer refuses a file that does not match.",
+  "release": "b11763",
+  "base_url": "https://github.com/ggml-org/llama.cpp/releases/download/b11763/",
+  "binary": "llama-server.exe",
+  "default_backend": "vulkan",
+  "backends": {
+    "cpu": {"assets": [{"name": "llama-b11763-bin-win-cpu-x64.zip", "size": 23958528, "sha256": "a24504506cd03a352f4990c5f3cbff347eff3a2cf7ec15038835aa690b73d0ad"}],
+            "gpu_layers": 0, "note": "any x64 PC; a 2B vision model answers in tens of seconds on the CPU"},
+    "vulkan": {"assets": [{"name": "llama-b11763-bin-win-vulkan-x64.zip", "size": 36750686, "sha256": "85ceb9106fdc9e2b43bce7b7da1c0c155ad706a53bb83eec8306e49fca7f5271"}],
+               "gpu_layers": 99, "note": "NVIDIA, AMD and Intel GPUs with a Vulkan driver"},
+    "cuda": {"assets": [{"name": "llama-b11763-bin-win-cuda-12.4-x64.zip", "size": 271950284, "sha256": "c21366dbefaf98e5bff1b03c08b96741dc0dceaab0fee6535a7199aba1bbdc05"},
+                        {"name": "cudart-llama-bin-win-cuda-12.4-x64.zip", "size": 391443627, "sha256": "8c79a9b226de4b3cacfd1f83d24f962d0773be79f1e7b75c6af4ded7e32ae1d6"}],
+             "gpu_layers": 99, "note": "NVIDIA GPUs; the second archive carries the CUDA 12.4 runtime DLLs"}
+  }
+}

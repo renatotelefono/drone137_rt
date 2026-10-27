@@ -62,7 +62,7 @@ def pinned_checkout(component, destination):
         raise RuntimeError(f"{destination}: preserve local changes before reusing this build")
 
 
-def installed_record(name, path):
+def installed_record(name, path, **extra):
     directory = DATA / "installed"
     directory.mkdir(parents=True, exist_ok=True)
     record = {
@@ -70,7 +70,7 @@ def installed_record(name, path):
         "os": platform.platform(), "created": time.time(), "path": str(path),
         "size_bytes": sum(p.stat().st_size for p in path.rglob("*") if p.is_file()),
         "versions": json.loads((ROOT / "docs/versions.json").read_text()),
-        "acceptance": "unverified",
+        "acceptance": "unverified", **extra,
     }
     if (path / ".git").exists():
         record["submodules"] = subprocess.check_output(
@@ -78,19 +78,81 @@ def installed_record(name, path):
     (directory / f"{name}.json").write_text(json.dumps(record, indent=2))
 
 
-def install_runtime():
-    native_mac()
+def runtime_plan(system=None, machine=None, backend=None):
+    """How the local model runtime is installed on this platform, without doing it."""
+    system = system or platform.system(); machine = machine or platform.machine()
+    if system == "Darwin" and machine == "arm64":
+        return {"method": "build", "backend": "metal", "gpu_layers": 99, "needs": ["git", "cmake", "clang"]}
+    if system == "Windows":
+        pins = json.loads((ROOT / "config/runtime-windows.json").read_text())
+        backend = backend or os.environ.get("DRONE137_RUNTIME_BACKEND") or pins["default_backend"]
+        if backend not in pins["backends"]:
+            raise RuntimeError(f"Unknown Windows runtime backend {backend!r}; one of {sorted(pins['backends'])}")
+        chosen = pins["backends"][backend]
+        return {"method": "release", "backend": backend, "gpu_layers": chosen["gpu_layers"], "release": pins["release"],
+                "assets": chosen["assets"], "base_url": pins["base_url"], "binary": pins["binary"], "needs": []}
+    if system == "Linux":
+        return {"method": "build", "backend": "cpu", "gpu_layers": 0, "needs": ["git", "cmake"]}
+    raise RuntimeError(f"No runtime plan for {system}/{machine}; Intel macOS needs its own validation")
+
+
+def fetch_verified(url, destination, sha256, size=None):
+    """Download to destination and refuse anything whose digest is not the pinned one."""
+    destination.parent.mkdir(parents=True, exist_ok=True)
+    partial = destination.with_suffix(destination.suffix + ".partial")
+    with urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "drone137"}), timeout=60) as response, partial.open("wb") as out:
+        shutil.copyfileobj(response, out, 1024*1024)
+    actual = digest(partial)
+    if actual != sha256 or (size is not None and partial.stat().st_size != size):
+        partial.unlink(missing_ok=True)
+        raise RuntimeError(f"{destination.name}: downloaded digest {actual} does not match the pinned {sha256}; refusing it")
+    partial.replace(destination)
+    return destination
+
+
+def install_runtime_release(plan):
+    """Windows: unpack the pinned llama.cpp release into .local/build/llama.cpp/bin; every archive is digest-checked first."""
+    import zipfile
+    space_guard(BUILD, 2)
+    target = BUILD / "llama.cpp/bin"; downloads = BUILD / "llama.cpp/downloads"
+    target.mkdir(parents=True, exist_ok=True)
+    for asset in plan["assets"]:
+        archive = downloads / asset["name"]
+        if not archive.is_file() or digest(archive) != asset["sha256"]:
+            fetch_verified(plan["base_url"] + asset["name"], archive, asset["sha256"], asset["size"])
+        with zipfile.ZipFile(archive) as z:
+            for member in z.infolist():
+                if member.is_dir():
+                    continue
+                name = Path(member.filename).name          # the archives are flat or have one top folder; either way the files land in bin
+                with z.open(member) as src, (target / name).open("wb") as dst:
+                    shutil.copyfileobj(src, dst)
+    binary = target / plan["binary"]
+    if not binary.is_file():
+        raise RuntimeError(f"{plan['binary']} not found in the release archives")
+    run([binary, "--version"])
+    record = {"host": platform.node(), "architecture": platform.machine(), "os": platform.platform(), "created": time.time(), "path": str(target),
+              "release": plan["release"], "backend": plan["backend"], "gpu_layers": plan["gpu_layers"], "assets": plan["assets"],
+              "binary": str(binary), "acceptance": "unverified"}
+    directory = DATA / "installed"; directory.mkdir(parents=True, exist_ok=True)
+    (directory / "llama.json").write_text(json.dumps(record, indent=2))
+
+
+def install_runtime(backend=None):
+    plan = runtime_plan(backend=backend)
+    if plan["method"] == "release":
+        return install_runtime_release(plan)
     space_guard(BUILD, 4)
-    for command in ("git", "cmake", "clang"):
+    for command in plan["needs"]:
         if not shutil.which(command):
-            raise RuntimeError(f"Missing {command}; install native Xcode command-line tools/CMake first")
+            raise RuntimeError(f"Missing {command}; install the native build tools first (Xcode command-line tools and CMake on macOS, build-essential and cmake on Linux)")
     BUILD.mkdir(parents=True, exist_ok=True)
     path = BUILD / "llama.cpp"
     pinned_checkout("llama_cpp", path)
-    run(["cmake", "-S", path, "-B", path / "build", "-DGGML_METAL=ON", "-DLLAMA_CURL=OFF"])
+    run(["cmake", "-S", path, "-B", path / "build", "-DGGML_METAL=ON" if plan["backend"] == "metal" else "-DGGML_METAL=OFF", "-DLLAMA_CURL=OFF"])
     run(["cmake", "--build", path / "build", "--config", "Release", "--target", "llama-server", "-j", "2"])
     run([path / "build/bin/llama-server", "--version"])
-    installed_record("llama", path)
+    installed_record("llama", path, backend=plan["backend"], gpu_layers=plan["gpu_layers"])
 
 
 def install_sim():
@@ -196,11 +258,13 @@ def export():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("command", choices=["doctor", "export", "install-runtime", "install-sim", "download-model"])
+    parser.add_argument("command", choices=["doctor", "export", "install-runtime", "install-sim", "download-model", "runtime-plan"])
+    parser.add_argument("--backend", default=None, help="install-runtime on Windows: cpu, vulkan or cuda (default from config/runtime-windows.json)")
     parser.add_argument("--profile", choices=["lean-8gb", "cloud-dev"], default="lean-8gb")
     args = parser.parse_args()
     operations = {"doctor": lambda: doctor(args.profile), "export": export,
-                  "install-runtime": install_runtime, "install-sim": install_sim,
+                  "install-runtime": lambda: install_runtime(args.backend), "install-sim": install_sim,
+                  "runtime-plan": lambda: print(json.dumps(runtime_plan(backend=args.backend), indent=2)),
                   "download-model": download_model}
     try:
         operations[args.command]()

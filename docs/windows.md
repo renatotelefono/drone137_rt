@@ -44,7 +44,9 @@ hash). They run on macOS against the same code the Windows branches use.
 6. **Memory.** The baselines in `config/memory-baselines.json` were measured on a Mac. Run the
    measured preflight from the console and let it learn the Windows figures; then re-read the
    8 GB arithmetic in `docs/airspace.md` against them.
-7. **Signals.** Ctrl-C in the console window and `scripts\run-local.ps1 --stop` must both leave no
+7. **The test suite.** `.venv\Scripts\python.exe -m unittest discover -s tests` must pass with the Apple
+   tests skipped. Record the count and any failure here with its cause.
+8. **Signals.** Ctrl-C in the console window and `scripts\run-local.ps1 --stop` must both leave no
    `node.exe` or `llama-server.exe` behind. That is the process-tree stop in
    `app/portability.py`; check Task Manager after each.
 
